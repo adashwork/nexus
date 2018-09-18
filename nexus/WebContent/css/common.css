@@ -1,0 +1,150 @@
+*, h1, h2, ol, ul, dl, p {
+  padding:0;
+  margin:0;
+}
+li {
+  list-style: none;
+}
+
+body{
+  font-family: 'M PLUS 1p', "Helvetica Neue", "Segoe UI","Noto Sans Japanese","ヒラギノ角ゴ ProN W3", Meiryo, sans-serif;
+  background: #f6f6f6;
+}
+
+main{
+  width:980px;
+  padding:50px 0;
+  margin:0 auto;
+}
+
+h2{
+  font-size:1.8rem;
+  color:#329bcf;
+  margin-bottom:50px;
+}
+
+h3 {
+	float:left;
+	font-size:1.5rem;
+	margin-top:20px;
+	margin-bottom:20px;
+	color:#004d91;
+	clear: both;
+}
+
+/*　テーブルサイズ仮定　*/
+table {
+	width: 100%;
+	margin-top: 20px;
+	margin-right: 5px;
+	margin-bottom: 20px;
+	margin-left: 5px;
+    padding: 10px;
+	text-align:center;
+	}
+
+/*　テーブル見出しの背景　*/
+table th {
+	height: 3rem;
+	font-size:0.9rem;
+	background-color: #329bcf;
+	color: #FFF;
+	letter-spacing: 0.6em;
+}
+
+/*　テーブルの背景　*/
+
+table td {
+<<<<<<< HEAD
+	height: 3rem;
+	font-size:1rem;
+	padding: 10px;
+}
+
+
+/*　テーブルタグの背景色を交互に変更する　*/
+table tr:nth-child(2n) {
+ background-color: #fff;
+}
+table tr:nth-child(2n+1) {
+ background-color: #ddd;
+}
+
+/*ボタンのデザイン*/
+
+.main-b{
+	float: right;
+	font-size: 1rem;
+	border-style: none;
+	background-color: #f03c97 ;
+	color: #fff;
+	height: 40px;
+	padding-left: 10px;
+	margin-left:5px;
+	margin-right:5px;
+	letter-spacing: 0.5rem;
+	font-weight: bold;
+}
+
+
+#box{
+	float: left;
+	padding-top:0;
+	padding-left:10px;
+	padding-right:10px;
+	padding-bottom:10px;
+	display: inline;
+	margin: 0;
+	clear:both;
+
+=======
+	height: 3rem; 
+	font-size:1rem;
+	padding: 10px;
+}
+
+
+/*　テーブルタグの背景色を交互に変更する　*/
+table tr:nth-child(2n) {
+ background-color: #fff;
+}
+table tr:nth-child(2n+1) {
+ background-color: #ddd;
+}
+
+/*ボタンのデザイン*/
+
+.main-b{
+	float: right;
+	font-size: 1rem;
+	border-style: none;
+	background-color: #f03c97 ;
+	color: #fff;
+	height: 40px;
+	padding-left: 10px;
+	margin-left:5px;
+	margin-right:5px;
+	letter-spacing: 0.5rem;
+	font-weight: bold;
+}
+
+
+#box{
+	float: left;
+	padding-top:0;
+	padding-left:10px;
+	padding-right:10px;
+	padding-bottom:10px;
+	display: inline;
+	margin: 0;
+	clear:both;
+	
+>>>>>>> refs/remotes/origin/#23
+}
+
+.return{
+	float:left;
+}
+
+
+

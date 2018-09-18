@@ -1,0 +1,10 @@
+/*　staffpage */
+.staff-table{
+	float: left;
+	width :300px;
+}
+
+.clear .main-b{
+	clear:both;
+	margin-bottom:5px;
+	}

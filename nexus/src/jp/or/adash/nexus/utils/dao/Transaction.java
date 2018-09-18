@@ -30,10 +30,11 @@ public class Transaction {
 				InitialContext context = new InitialContext();
 				DataSource dataSource = (DataSource) context.lookup("java:comp/env/jdbc/nexus");
 				connection = dataSource.getConnection();
-/*
-				// 接続文字列を生成する
+
+				/*
+				//0接続文字列を生成する
 				StringBuffer connStrBuffer = new StringBuffer();
-				connStrBuffer.append("jdbc:mysql://172.20.76.252:3306/kawasaki");
+				connStrBuffer.append("jdbc:mysql://172.20.76.252:3306/tomonari");
 				connStrBuffer.append("?");
 				connStrBuffer.append("useUnicode=true");
 				connStrBuffer.append("&amp;characterEncoding=utf8");
@@ -43,8 +44,9 @@ public class Transaction {
 
 				// データベース接続を開始する
 				connection = DriverManager.getConnection(
-						connStrBuffer.toString(), "kawasaki", "pgJav@1807");
-*/
+						connStrBuffer.toString(), "tomonari", "pgJav@1807");
+			*/
+
 			} catch (SQLException|NamingException e) {
 				throw new TransactionException(e);
 			}

@@ -8,13 +8,12 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebFilter;
 
 /**
  * サーブレットを呼び出す際の共通の初期処理を行うサーブレットフィルター
  * @author T.Kawasaki
  */
-@WebFilter("/*")
+//@WebFilter("/*")
 public class CommonFilter implements Filter {
 
     /**

@@ -1,0 +1,140 @@
+header {
+  position:sticky;
+  top:0;
+}
+header > section {
+  background:#004d91;
+  display:flex;
+  justify-content:flex-start;
+  align-items:center;
+}
+
+/* .logo */
+.logo {
+  margin:0 20px;
+}
+
+/* .mainnavi */
+.mainnavi {
+  display:flex;
+  font-size:1.3rem;
+}
+.mainnavi > li {
+  color:white;
+  height:70px;
+}
+.mainnavi > li:hover {
+  transition:all 0.2s ease;
+  background:#329bcf;
+}
+.mainnavi > li a {
+  color:white;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:0 15px;
+  height:70px;
+  text-decoration:none;
+  width:190px;
+}
+.mainnavi > li a:hover, .user__name a:hover {
+  text-decoration:none;
+}
+.mainnavi > li:first-child {
+  background:#329bcf;
+}
+.mainnavi > li i {
+  margin-right:10px;
+}
+.mainnavi li .drop-menu {
+  position:absolute;
+  transition:all .2s ease;
+  opacity:0;
+  visibility:hidden;
+  font-size:1.2rem;
+}
+.mainnavi li:hover .drop-menu {
+  opacity:1;
+  visibility:visible;
+  background:white;
+}
+.mainnavi li .drop-menu li {
+  position:relative;
+}
+.mainnavi li .drop-menu li a {
+  color:#004d91;
+  height:70px;
+  font-size:1.1rem;
+}
+.mainnavi li .drop-menu li a:hover {
+  color:#329bcf;
+}
+.mainnavi li .drop-menu li a i {
+  position:absolute;
+  right:5px;
+}
+
+/* .user */
+.user {
+  margin-left:auto;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:white;
+}
+.user .user__wrapper:hover {
+  background:#216fb5;
+}
+.user .user__notice {
+  font-size:1.5rem;
+  margin-right:20px;
+}
+.user .user__notice a {
+  color:white;
+}
+.user .user__wrapper .user__name {
+  width:200px;
+  position:relative;
+}
+.user .user__wrapper .user__name > a {
+  color:white;
+  height:70px;
+  display:flex;
+  align-items:center;
+  margin-left:20px;
+}
+.user .user__wrapper .user__name i {
+  font-size:1.3rem;
+  position:absolute;
+  right:20px;
+}
+.user .user__wrapper .user__name .drop-menu {
+  position:absolute;
+  width:100%;
+  transition:all .2s ease;
+  opacity:0;
+  visibility:hidden;
+}
+.user .user__wrapper:hover .user__name .drop-menu {
+  opacity:1;
+  visibility:visible;
+}
+.user .user__wrapper .user__name .drop-menu li {
+  background:white;
+  position:relative;
+}
+.user .user__wrapper .user__name .drop-menu li a {
+  padding:15px 0 15px 20px;
+  color:#004d91;
+  text-decoration:none;
+  width:100%;
+  display:flex;
+  align-items:center;
+}
+.user .user__wrapper .user__name .drop-menu li a:hover {
+  color:#329bcf;
+}
+.user .user__wrapper .user__name .drop-menu li i {
+  position:absolute;
+  right:20px;
+}

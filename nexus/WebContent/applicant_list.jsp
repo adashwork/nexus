@@ -93,7 +93,10 @@
 		</tr>
 		<c:forEach var="jobseeker" items="${ list }">
         <tr>
-			<td><button class="mini_b mini_b_applilist">詳細</button><c:out value="${ applicant_list.jsp }" /></td>
+        <form action="./jobseekermaininfoservlet" method="post">
+			<td><button class="mini_b mini_b_applilist"name="js_id" value="<c:out value="${ jobseeker.id }" />">詳細</button>
+		</form>
+<!--		<c:out value="${ applicant_list.jsp }" /></td>  -->
 			<td><c:out value="${ jobseeker.id }" /></td>
 			<td><c:out value="${ jobseeker.js_name }" /></td>
             <td><c:out value="${ jobseeker.age }" /></td>

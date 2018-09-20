@@ -1,4 +1,4 @@
-package jp.or.adash.nexus.utils.dao;
+package jp.or.adash.nexus.dao;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jp.or.adash.nexus.entity.JobSeeker;
+import jp.or.adash.nexus.utils.dao.Transaction;
 
 
 
@@ -256,7 +257,7 @@ public class JobSeekerDao {
 
 		// SQL文を生成する
 		StringBuffer sql = new StringBuffer();
-		sql.append("update jobseeker get");
+		sql.append("update jobseeker set");
 		sql.append(" name = ?,");
 		sql.append(" kana = ?,");
 		sql.append(" birthdt = ?,");
@@ -323,7 +324,7 @@ public class JobSeekerDao {
 			ps.setString(31, seeker.getTantoustaffid());
 			ps.setString(32, seeker.getPassword());
 			ps.setString(1, seeker.getId());
-			
+
 			// SQL文を実行する
 			count = ps.executeUpdate();
 		} catch(SQLException e) {

@@ -428,4 +428,11 @@ public class JobSeeker {
 		return deleteflag;
 	}
 
+	/**
+	 * 求職者IDをセットする
+	 * @param id id
+	 */
+	public void setId(String id) {
+		this.id = id;
+	}
 }

@@ -4,11 +4,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import jp.or.adash.nexus.dao.JobSeekerDao;
+import jp.or.adash.nexus.dao.JobSeeker_dao;
+import jp.or.adash.nexus.dao.SaibanDao;
 import jp.or.adash.nexus.entity.JobSeeker;
 import jp.or.adash.nexus.entity.Jobseeker_simple_entity;
 import jp.or.adash.nexus.utils.common.MessageCommons;
-import jp.or.adash.nexus.utils.dao.JobSeekerDao;
-import jp.or.adash.nexus.utils.dao.JobSeeker_dao;
 import jp.or.adash.nexus.utils.dao.Transaction;
 
 
@@ -32,35 +33,11 @@ public class JobSeekerService {
 		transaction = new Transaction();
 		messages = new ArrayList<String>();
 	}
-	/**
-	 * 求職者idを元に絞込み、求職者情報を取得する
-	 * @param id 求職者id
-	 * @return idで絞り込んだ求職者情報
-	 */
-	public Jobseeker_simple_entity getJobseeker(int js_id) {
-		Jobseeker_simple_entity jobseeker = null;
-
-		try {
-			// データベース接続を開始する
-			transaction.open();
-
-			// 商品単価を取得する
-			JobSeeker_dao dao = new JobSeeker_dao(transaction);
-			jobseeker = dao.selectItem(js_id);
-
-		} catch(IOException e) {
-			// エラーメッセージをセットする
-		} finally {
-			// データベース接続をを終了する
-			transaction.close();
-		}
-
-		return jobseeker;
-	}
 
 	/**
 	 * 求職者情報一覧を取得する
-	 * @return 商品リスト
+	 * @return 求職者情報一覧
+     *@aihara
 	 */
 public List<Jobseeker_simple_entity> getJobSeekerList(){
 	List<Jobseeker_simple_entity> jobseekerList = new ArrayList<Jobseeker_simple_entity>();
@@ -82,7 +59,58 @@ public List<Jobseeker_simple_entity> getJobSeekerList(){
 
 	return jobseekerList;
 	}
+	/**
+	 * 求職者idを元に絞込み、求職者情報を取得する
+	 * @param id 求職者id
+	 * @return idで絞り込んだ求職者情報
+     *@aihara
+	 */
+public Jobseeker_simple_entity getJobseeker(int js_id) {
+	Jobseeker_simple_entity jobseeker = null;
 
+	try {
+		// データベース接続を開始する
+		transaction.open();
+
+		// 商品単価を取得する
+		JobSeeker_dao dao = new JobSeeker_dao(transaction);
+		jobseeker = dao.selectItem(js_id);
+
+	} catch(IOException e) {
+		// エラーメッセージをセットする
+	} finally {
+		// データベース接続をを終了する
+		transaction.close();
+	}
+
+	return jobseeker;
+}
+
+	/*
+	 * 求職者情報の詳細情報を取得する
+	 * @return 求職者情報の詳細情報
+     *@aihara
+	 */
+public JobSeeker getJobseekermaininfo(String js_id) {
+	JobSeeker jobseeker = null;
+
+	try {
+		// データベース接続を開始する
+		transaction.open();
+
+		// 商品単価を取得する
+		JobSeeker_dao dao = new JobSeeker_dao(transaction);
+		jobseeker = dao.selectItem(js_id);
+
+	} catch(IOException e) {
+		// エラーメッセージをセットする
+	} finally {
+		// データベース接続をを終了する
+		transaction.close();
+	}
+
+	return jobseeker;
+}
 	/**
 	 * 求職者IDを元に、求職者情報を取得する
 	 * @param id 求職者ID
@@ -112,18 +140,164 @@ public List<Jobseeker_simple_entity> getJobSeekerList(){
 
 
 	/**
-	 * 商品データの内容をチェックする
-	 * @param item 商品データ
+	 * 求職者情報の内容をチェックする
+	 * @param seeker 求職者情報
 	 * @return 処理結果（true:成功、false:失敗）
 	 */
 	public boolean check(JobSeeker seeker) {
 		boolean result = true;		// チェック結果
+/**
 
-		// 商品コードの値が正しいか
-		if (seeker.getId() == null) {
-			messages.add("IDが入力されていません。");
-			result = false;
-		}
+		// 求職者IDの値が入力されているか
+				if (seeker.getName() == "") {
+					messages.add("名前が入力されていません。");
+					result = false;
+				}
+
+				// ふりがなの値が入力されているか
+				if (seeker.getKana() == "") {
+					messages.add("ふりがなが入力されていません。");
+					result = false;
+				}
+
+				// 生年月日の値が入力されているか
+				if (seeker.getBirthdt() == null) {
+					messages.add("生年月日が入力されていません。");
+					result = false;
+				}
+
+				// 性別の値が入力されているか
+				if (seeker.getSex() == "") {
+					messages.add("性別が入力されていません。");
+					result = false;
+				}
+
+				// 年齢の値が入力されているか
+				if (seeker.getAge() == -1) {
+					messages.add("年齢が入力されていません。");
+					result = false;
+				}
+
+				// 郵便番号の値が入力されているか
+				if (seeker.getPostal() == "") {
+					messages.add("郵便番号が入力されていません。");
+					result = false;
+				}
+
+				// 住所の値が入力されているか
+				if (seeker.getAddress() == "") {
+					messages.add("住所が入力されていません。");
+					result = false;
+				}
+
+				// 最寄り駅の値が入力されているか
+				if (seeker.getNearstation() == "") {
+					messages.add("最寄り駅が入力されていません。");
+					result = false;
+				}
+
+				// 配偶者の値が入力されているか
+				if (seeker.getPartner() == "") {
+					messages.add("配偶者の有無が入力されていません。");
+					result = false;
+				}
+
+				// 扶養家族の値が入力されているか
+				if (seeker.getHuyou() == -1) {
+					messages.add("扶養家族が入力されていません。");
+					result = false;
+				}
+
+				// 学歴の値が入力されているか
+				if (seeker.getEducation() == "") {
+					messages.add("学歴が入力されていません。");
+					result = false;
+				}
+
+				// 希望職種1の値が入力されているか
+				if (seeker.getHopejob1() == "") {
+					messages.add("希望職種1が入力されていません。");
+					result = false;
+				}
+
+				// 希望職種2の値が入力されているか
+				if (seeker.getHopejob2() == "") {
+					messages.add("希望職種2が入力されていません。");
+					result = false;
+				}
+
+				// 希望職種3の値が入力されているか
+				if (seeker.getHopejob3() == "") {
+					messages.add("希望職種3が入力されていません。");
+					result = false;
+				}
+
+				// 希望業種の値が入力されているか
+				if (seeker.getHopejobcategory() == "") {
+					messages.add("希望業種が入力されていません。");
+					result = false;
+				}
+
+				// 希望勤務地の値が入力されているか
+				if (seeker.getHopeworkplace() == "") {
+					messages.add("希望勤務地が入力されていません。");
+					result = false;
+				}
+
+				// 雇用形態の値が入力されているか
+				if (seeker.getHopekoyoukeitai() == "") {
+					messages.add("雇用形態が入力されていません。");
+					result = false;
+				}
+
+				// 希望勤務日時の値が入力されているか
+				if (seeker.getHopeworkingDate() == -1) {
+					messages.add("希望勤務日時が入力されていません。");
+					result = false;
+				}
+
+				// 希望勤務時間（開始）の値が入力されているか
+				if (seeker.getHopebegintime() == -1) {
+					messages.add("希望勤務時間（開始）が入力されていません。");
+					result = false;
+				}
+
+				// 希望勤務時間（終了）の値が入力されているか
+				if (seeker.getHopeendtime() == -1) {
+					messages.add("希望勤務時間（終了）が入力されていません。");
+					result = false;
+				}
+
+				// 希望月給の値が入力されているか
+				if (seeker.getHopesalary() == -1) {
+					messages.add("希望月給が入力されていません。");
+					result = false;
+				}
+
+				// 希望時間給の値が入力されているか
+				if (seeker.getHopejikyu() == -1) {
+					messages.add("希望時間給が入力されていません。");
+					result = false;
+				}
+
+				// 自動車免許の値が入力されているか
+				if (seeker.getDriverlicense() == "") {
+					messages.add("自動車免許が入力されていません。");
+					result = false;
+				}
+
+				// 担当職業紹介者IDの値が入力されているか
+				if (seeker.getTantoustaffid() == "") {
+					messages.add("担当職業紹介者IDが入力されていません。");
+					result = false;
+				}
+
+				// パスワードの値が入力されているか
+				if (seeker.getPassword() == "") {
+					messages.add("パスワードが入力されていません。");
+					result = false;
+				}
+*/
 /*
 		// 商品名の長さが適切か
 		DataCommons commons = new DataCommons();
@@ -179,7 +353,15 @@ public List<Jobseeker_simple_entity> getJobSeekerList(){
 			// トランザクションを開始する
 			transaction.beginTrans();
 
-			// 商品単価を取得する
+			//采番マスタよりデータ取得
+			SaibanDao saidao = new SaibanDao(transaction);
+			int saiban = saidao.getseeker();
+
+			//とってきた番号を加工し、Kyujin.noにデータ格納
+			String str = String.format("%08d", saiban);
+			seeker.setId(str);
+
+			// DBに求職者情報を取得する
 			JobSeekerDao dao = new JobSeekerDao(transaction);
 			int count = dao.insert(seeker);
 

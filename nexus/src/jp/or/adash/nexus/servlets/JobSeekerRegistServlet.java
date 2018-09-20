@@ -38,7 +38,7 @@ public class JobSeekerRegistServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//入力された情報を登録する
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
 		String id = request.getParameter("id");
 		String name = request.getParameter("name");
@@ -50,14 +50,24 @@ public class JobSeekerRegistServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		String sex = request.getParameter("sex");
-		int age = Integer.parseInt(request.getParameter("age"));
+		int age = -1;
+		if (!"".equals(request.getParameter("age"))
+				&& request.getParameter("age") != null) {
+			age = Integer.parseInt(request.getParameter("age"));
+		}
+//		int age = Integer.parseInt(request.getParameter("age"));
 		String postal = request.getParameter("postal");
 		String address = request.getParameter("address");
 		String nearstation = request.getParameter("nearstation");
 		String phone = request.getParameter("phone");
 		String mobile = request.getParameter("mobile");
 		String partner = request.getParameter("partner");
-		int huyou = Integer.parseInt(request.getParameter("huyou"));
+		int huyou = -1;
+		if (!"".equals(request.getParameter("huyou"))
+				&& request.getParameter("huyou") != null) {
+			huyou = Integer.parseInt(request.getParameter("huyou"));
+		}
+//		int huyou = Integer.parseInt(request.getParameter("huyou"));
 		String education = request.getParameter("education");
 		String hopejob1 = request.getParameter("hopejob1");
 		String hopejob2 = request.getParameter("hopejob2");
@@ -65,11 +75,36 @@ public class JobSeekerRegistServlet extends HttpServlet {
 		String hopejobcategory = request.getParameter("hopejobcategory");
 		String hopeworkplace = request.getParameter("hopeworkplace");
 		String hopekoyoukeitai = request.getParameter("hopekoyoukeitai");
-		int hopeworkingDate = Integer.parseInt(request.getParameter("hopeworkingdate"));
-		int hopebegintime = Integer.parseInt(request.getParameter("hopebegintime"));
-		int hopeendtime = Integer.parseInt(request.getParameter("hopeendtime"));
-		int hopesalary = Integer.parseInt(request.getParameter("hopesalary"));
-		int hopejikyu = Integer.parseInt(request.getParameter("hopejikyu"));
+		int hopeworkingDate = -1;
+		if (!"".equals(request.getParameter("hopeworkingDate"))
+				&& request.getParameter("hopeworkingDate") != null) {
+			hopeworkingDate = Integer.parseInt(request.getParameter("hopeworkingDate"));
+		}
+//		int hopeworkingDate = Integer.parseInt(request.getParameter("hopeworkingdate"));
+		int hopebegintime = -1;
+		if (!"".equals(request.getParameter("hopebegintime"))
+				&& request.getParameter("hopebegintime") != null) {
+			hopebegintime = Integer.parseInt(request.getParameter("hopebegintime"));
+		}
+//		int hopebegintime = Integer.parseInt(request.getParameter("hopebegintime"));
+		int hopeendtime = -1;
+		if (!"".equals(request.getParameter("hopeendtime"))
+				&& request.getParameter("hopeendtime") != null) {
+			hopeendtime = Integer.parseInt(request.getParameter("hopeendtime"));
+		}
+//		int hopeendtime = Integer.parseInt(request.getParameter("hopeendtime"));
+		int hopesalary = -1;
+		if (!"".equals(request.getParameter("hopesalary"))
+				&& request.getParameter("hopesalary") != null) {
+			hopesalary = Integer.parseInt(request.getParameter("hopesalary"));
+		}
+//		int hopesalary = Integer.parseInt(request.getParameter("hopesalary"));
+		int hopejikyu = -1;
+		if (!"".equals(request.getParameter("hopejikyu"))
+				&& request.getParameter("hopejikyu") != null) {
+			hopejikyu = Integer.parseInt(request.getParameter("hopejikyu"));
+		}
+//		int hopejikyu = Integer.parseInt(request.getParameter("hopejikyu"));
 		String hopeetc = request.getParameter("hopeetc");
 		String driverlicense = request.getParameter("driverlicense");
 		String licenseetc = request.getParameter("licensetc");

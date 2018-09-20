@@ -15,12 +15,14 @@ public class Kyujin {
 	* perioddt 求人有効年月日
 	* companyno 事業所番号
 	* addresscd 就業場所コード
+	* job 職種
 	* jobsmallcd１ 職種小分類コード１
 	* jobsmallcd２ 職種小分類コード２
 	* jobsmallcd３ 職種小分類コード３
 	* joblargecd１ 職業大分類コード１
 	* joblargecd２ 職業大分類コード２
 	* joblargecd３ 職業大分類コード３
+	* jobcategory業種名
 	* jobcategorysmallcd 産業小分類コード
 	* jobcategorylargecd 産業大分類コード
 	* jobcategory 産業分類名
@@ -32,7 +34,6 @@ public class Kyujin {
 	* postal 就業場所郵便番号
 	* address 就業場所
 	* nearstation 最寄り駅
-	* job 職種
 	* hakencd 派遣／請負コード
 	* detail 仕事の内容
 	* koyoukeitaicd 雇用形態コード
@@ -73,12 +74,14 @@ public class Kyujin {
 	private Date perioddt;
 	private String companyno;
 	private String addresscd;
+	private String job;
 	private String jobsmallcd1;
 	private String jobsmallcd2;
 	private String jobsmallcd3;
 	private String joblargecd1;
 	private String joblargecd2;
 	private String joblargecd3;
+	private String jobcategory;
 	private String jobcategorysmallcd;
 	private String jobcategorylargecd;
 	private String companykana;
@@ -89,7 +92,6 @@ public class Kyujin {
 	private String postal;
 	private String address;
 	private String nearstation;
-	private String job;
 	private String hakencd;
 	private String detail;
 	private String koyoukeitaicd;
@@ -125,11 +127,14 @@ public class Kyujin {
 	private String upDateuserid;
 	private String deleteflag;
 
-	public Kyujin(String no, Date receptiondt, Date perioddt, String companyno, String addresscd, String jobsmallcd1,
-			String jobsmallcd2, String jobsmallcd3, String joblargecd1, String joblargecd2, String joblargecd3,
+	//空のコンストラクタ
+	public Kyujin() {
+	}
+	public Kyujin(String no, Date receptiondt, Date perioddt, String companyno, String addresscd,  String job, String jobsmallcd1,
+			String jobsmallcd2, String jobsmallcd3, String joblargecd1, String joblargecd2, String joblargecd3,String jobcategory,
 			String jobcategorysmallcd, String jobcategorylargecd, String companykana,
 			String companyname, String companypostal, String companyplace, String companyurl, String postal,
-			String address, String nearstation, String job, String hakencd, String detail, String koyoukeitaicd,
+			String address, String nearstation,String hakencd, String detail, String koyoukeitaicd,
 			String koyoukikan, Date koyoukikankaishi, Date koyoukikanowari, String education, String experience,
 			String license, int agemin, int agemax, int salarymin, int salarymax, String salaryformcd, int begintime,
 			int endtime, int establishdt, long capital, String companyfeature, String tantouyakushoku,
@@ -142,12 +147,14 @@ public class Kyujin {
 		this.perioddt = perioddt;
 		this.companyno = companyno;
 		this.addresscd = addresscd;
+		this.job = job;
 		this.jobsmallcd1 = jobsmallcd1;
 		this.jobsmallcd2 = jobsmallcd2;
 		this.jobsmallcd3 = jobsmallcd3;
 		this.joblargecd1 = joblargecd1;
 		this.joblargecd2 = joblargecd2;
 		this.joblargecd3 = joblargecd3;
+		this.jobcategory = jobcategory;
 		this.jobcategorysmallcd = jobcategorysmallcd;
 		this.jobcategorylargecd = jobcategorylargecd;
 		this.companykana = companykana;
@@ -158,7 +165,6 @@ public class Kyujin {
 		this.postal = postal;
 		this.address = address;
 		this.nearstation = nearstation;
-		this.job = job;
 		this.hakencd = hakencd;
 		this.detail = detail;
 		this.koyoukeitaicd = koyoukeitaicd;
@@ -236,6 +242,14 @@ public class Kyujin {
 	}
 
 	/**
+	 * 職種を返す
+	 * @return job
+	 */
+	public String getJob() {
+		return job;
+	}
+
+	/**
 	 * 職種小分類コード１を返す
 	 * @return jobsmallcd1
 	 */
@@ -281,6 +295,14 @@ public class Kyujin {
 	 */
 	public String getJoblargecd3() {
 		return joblargecd3;
+	}
+
+	/**
+	 * 産業小分類コードを返す
+	 * @return jobcategorysmallcd
+	 */
+	public String getJobcategory() {
+		return jobcategory;
 	}
 
 	/**
@@ -361,14 +383,6 @@ public class Kyujin {
 	 */
 	public String getNearstation() {
 		return nearstation;
-	}
-
-	/**
-	 * 職種を返す
-	 * @return job
-	 */
-	public String getJob() {
-		return job;
 	}
 
 	/**

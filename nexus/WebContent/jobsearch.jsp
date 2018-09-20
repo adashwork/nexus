@@ -93,9 +93,9 @@
 			</div>
 			<div class="listbox1">
 				<h4>給料</h4>
-				<input name="salarymin" type="number" maxlength="2" tabindex="5"
+				<input name="salarymin" type="number" maxlength="2" tabindex="5" min="0"
 					style="width: 90px;" /> 万円～ <input name="salarymax" type="number"
-					maxlength="2" tabindex="6" style="width: 90px;" /> 万円
+					maxlength="2" tabindex="6" min="0" style="width: 90px;" /> 万円
 			</div>
 			<div class="listbox1">
 				<h4>勤務地</h4>
@@ -135,13 +135,12 @@
 	</div>
 	<div id="job_search_list">
 		<h3>求人一覧表示</h3>
-
 		<table width="" border="0">
 			<tbody id="">
 				<tr>
 					<th scope="col">&nbsp;</th>
 					<th scope="col">求人No.</th>
-					<th scope="col">事業署名</th>
+					<th scope="col">事業所名</th>
 					<th scope="col">就業場所</th>
 					<th scope="col">最寄り駅</th>
 					<th scope="col">職種</th>
@@ -149,19 +148,19 @@
 					<th scope="col">年齢制限</th>
 					<th scope="col">基本給</th>
 				</tr>
-				<c:forEach var="JobSearchServlet" items="${ kyujin }">
+				<c:forEach var="SimpleKyujin" items="${ kyujin }">
 					<tr>
 						<td><button type="button"
-								onclick="location.href='job_info.html'">詳細</button></td>
+								onclick="location.href='./jobinfo.jsp'">詳細</button></td>
 						<td><c:out value="${ SimpleKyujin.no }" /></td>
 						<td><c:out value="${ SimpleKyujin.companyname }" /></td>
 						<td><c:out value="${ SimpleKyujin.adress }" /></td>
 						<td><c:out value="${ SimpleKyujin.nearstation }" /></td>
 						<td><c:out value="${ SimpleKyujin.job }" /></td>
 						<td><c:out value="${ SimpleKyujin.koyoukeitaicd }" /></td>
-						<td><c:out value="${ SimpleKyujin.agemin }" />～<c:out value="${ SimpleKyujin.agemax }" /></td>
-						<td><c:out value="${ SimpleKyujin.salarymin }" />～<c:out
-								value="${ SimpleKyujin.salarymax }" /></td>
+						<td><c:out value="${ SimpleKyujin.agemin }" />歳 ～ <c:out value="${ SimpleKyujin.agemax }" />歳</td>
+						<td><c:out value="${ SimpleKyujin.salarymin }" />円 ～ <c:out
+								value="${ SimpleKyujin.salarymax }" />円</td>
 					</tr>
 				</c:forEach>
 			</tbody>

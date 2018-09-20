@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import jp.or.adash.nexus.entity.SimpleKyujin;
-import jp.or.adash.nexus.services.JobSerarchService;
+import jp.or.adash.nexus.services.JobSearchService;
 
 /**
  * Servlet implementation class KyujinServlet
@@ -33,70 +33,39 @@ public class JobSearchServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// 1.1 リクエストから職種を取得
+		// 1.1 リクエストから職種名を取得
 		String job = null;
 		job = request.getParameter("job");
-
-		// 1.2 職業小分類コード1を取得
-		String jobsmallcd1 = null;
-		jobsmallcd1 = request.getParameter("jobsmallcd1");
-
-		// 1.3  職業小分類コード2を取得
-		String jobsmallcd2 = null;
-		jobsmallcd2 = request.getParameter("jobsmallcd2");
-
-		// 1.4  職業小分類コード3を取得
-		String jobsmallcd3 = null;
-		jobsmallcd3 = request.getParameter("jobsmallcd3");
-
-		// 1.5 職業大分類コード1を取得
-		String joblargecd1 = null;
-		joblargecd1 = request.getParameter("joblargecd1");
-
-		// 1.6 職業大分類コード2を取得
-		String joblargecd2 = null;
-		joblargecd2 = request.getParameter("joblargecd2");
-
-		// 1.7 職業大分類コード3を取得
-		String joblargecd3 = null;
-		joblargecd3 = request.getParameter("joblargecd3");
-
-		// 1.8基本給下限を取得
+		// 1.2 リクエストから業種名を取得
+		String jobcategory = null;
+		jobcategory = request.getParameter("jobcategory");
+		// 1.3　就業場所コードを取得
+		String addresscd = null;
+			addresscd = request.getParameter("addresscd");
+		// 1.4基本給下限を取得
 		int salarymin = -1;
 		if (!"".equals(request.getParameter("salarymin"))
 				&& request.getParameter("salarymin") != null) {
 			salarymin = Integer.parseInt(request.getParameter("salarymin"));
 		}
-		// 1.9 基本給上限を取得
+		// 1.5 基本給上限を取得
 		int salarymax = -1;
 		if (!"".equals(request.getParameter("salarymax"))
 				&& request.getParameter("salarymax") != null) {
 			salarymax = Integer.parseInt(request.getParameter("salarymax"));
 		}
-
-		// 1.10　就業場所コードを取得
-		String addresscd = null;
-			addresscd = request.getParameter("addresscd");
-
-
 		// 1.11 雇用形態コードを取得
-		int koyoukeitaicd = -1;
-		if (!"".equals(request.getParameter("koyoukeitaicd"))
-				&& request.getParameter("koyoukeitaicd") != null) {
-			koyoukeitaicd = Integer.parseInt(request.getParameter("koyoukeitaicd"));
-		}
-
+		String koyoukeitaicd = null;
+		koyoukeitaicd = request.getParameter("koyoukeitaicd");
 
 		// 2.求人票の取得
-		List<SimpleKyujin> kj = new ArrayList<SimpleKyujin>();
-		if (salarymin >= 0 && salarymax >= 0  && koyoukeitaicd >= 0) {
-			JobSerarchService service = new JobSerarchService();
-			kj = service.getKyujin(job, addresscd,jobsmallcd1, jobsmallcd2, jobsmallcd3, joblargecd1, joblargecd2, joblargecd3,
+		List<SimpleKyujin> kyujinlist = new ArrayList<SimpleKyujin>();
+			JobSearchService service = new JobSearchService();
+			kyujinlist = service.getKyujin(job, jobcategory,addresscd,
 					salarymin, salarymax ,koyoukeitaicd);
-		}
 
 		// 1.3 リクエストに求人票情報をセットする
-		request.setAttribute("kyujin", kj);
+		request.setAttribute("kyujin", kyujinlist);
 
 		// 1.4 JSPにフォワードする
 		request.getRequestDispatcher("/jobsearch.jsp")

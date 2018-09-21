@@ -125,6 +125,8 @@ public class Kyujin {
 	private String upDateuserid;
 	private String deleteflag;
 
+	public Kyujin() {};
+
 	public Kyujin(String no, Date receptiondt, Date perioddt, String companyno, String addresscd, String jobsmallcd1,
 			String jobsmallcd2, String jobsmallcd3, String joblargecd1, String joblargecd2, String joblargecd3,
 			String jobcategorysmallcd, String jobcategorylargecd, String companykana,

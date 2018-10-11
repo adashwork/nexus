@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jp.or.adash.nexus.dao.MatchingDao;
+import jp.or.adash.nexus.dao.SaibanDao;
 import jp.or.adash.nexus.entity.JobSeekerMain;
 import jp.or.adash.nexus.entity.Kyujin;
 import jp.or.adash.nexus.entity.MatchingCase;
@@ -15,6 +16,7 @@ import jp.or.adash.nexus.utils.dao.Transaction;
 /**
  * マッチング登録に関する処理を定義するクラス
  * @author ji
+ * @author pgjavaAT
  *
  */
 public class MatchingService {
@@ -134,7 +136,11 @@ public class MatchingService {
 			// 1トランザクションを開始する
 			transaction.beginTrans();
 
-			// 1商品単価を取得する
+			SaibanDao sdao = new SaibanDao(transaction);
+			int id = sdao.getMatching();
+			matching.setId(id);
+
+			// マッチング事例をDBに登録する
 			MatchingDao dao = new MatchingDao(transaction);
 			int count = dao.insert(matching);
 

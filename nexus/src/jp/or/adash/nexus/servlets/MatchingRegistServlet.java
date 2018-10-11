@@ -43,8 +43,8 @@ public class MatchingRegistServlet extends HttpServlet {
 		MatchingService service = new MatchingService();
 
 		//idが入力されていた場合、そのidのマッチング事例を表示する。
-		if(request.getParameter("id") != null) {
-			int id = Integer.parseInt(request.getParameter("id"));
+		if(request.getParameter("id") != null && request.getParameter("id") != "") {
+			Integer id = Integer.parseInt(request.getParameter("id"));
 
 			matching = service.getMatching(id);
 			//処理結果メッセージをリクエストに格納する

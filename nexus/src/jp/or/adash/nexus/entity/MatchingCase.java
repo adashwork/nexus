@@ -149,4 +149,12 @@ public class MatchingCase {
 		return updateuserid;
 	}
 
+	/**
+	 * マッチングIDにidをセットする
+	 * @param id
+	 */
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
 }

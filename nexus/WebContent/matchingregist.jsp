@@ -105,12 +105,11 @@
 			<tr>
 				<th><font size="5">項目名</font></th>
 				<th><font size="5">結果</font></th>
-
 			</tr>
 			<tr>
 				<td><font size="5">マッチングNo</font>
 				<td><input type="hidden" name="no" value="<c:out value="${ matching.id }" />">
-				<c:out value="${ matching.id }" />
+				<fmt:formatNumber value="${ matching.id }" pattern="00000000"/>
 				</td>
 			</tr>
 			<tr>
@@ -154,8 +153,8 @@
 			<tr>
 				<td><font size="5">職業紹介者ID</font></td>
 				<td><input type="text" name="staffid" size="4"
-					<c:if test="${ matching.staffid == null }">value="<c:out value="${ Staff.id }" />"</c:if>
-					<c:if test="${ matching.staffid != null }">value="<c:out value="${ matching.staffid }" />"</c:if>>
+					<c:if test="${ matching.staffid == null }">value="<fmt:formatNumber value="${ Staff.id }" pattern="0000"/>" />"</c:if>
+					<c:if test="${ matching.staffid != null }">value="<fmt:formatNumber value="${ matchinig.staffid }" pattern="0000"/>" />"</c:if>>
 					</td>
 
 			</tr>

@@ -173,8 +173,6 @@
 			<c:if test="${ matching.id != null && matching.id != 0 }">
 				<button type="submit" id="match-update" class="main-b"
 					onclick="MovePages(this)">更新</button>
-				<button type="submit" id="match-delete" class="main-b2"
-					onclick="MovePages(this)">削除</button>
 			</c:if>
 	</form>
 

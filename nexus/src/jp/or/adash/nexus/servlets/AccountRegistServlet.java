@@ -50,7 +50,18 @@ public class AccountRegistServlet extends HttpServlet {
 		 */
 		protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+			//0セッション　Objectはいろんな型を入れておける　ユーザーIdとユーザー名
+			HttpSession session = request.getSession(true);
+			Staff staff = (Staff) session.getAttribute("UserData");
+			// 管理者以外の場合、staff-topに遷移
+			if(!staff.getAuthority().equals("1")) {
+				request.setAttribute("Staff", staff);
+				//0	フォワードする
+				request.getRequestDispatcher("/web/staff-top")
+				.forward(request, response);
 
+				return;
+			}
 			//入力された情報を登録する
 			String name = request.getParameter("name");
 			String kana = request.getParameter("kana");
@@ -58,22 +69,19 @@ public class AccountRegistServlet extends HttpServlet {
 			String password = request.getParameter("password");
 
 
-			//0セッション　Objectはいろんな型を入れておける　ユーザーIdとユーザー名
-			HttpSession session = request.getSession(true);
-			Staff sessionStaff = (Staff)session.getAttribute("UserData");
 
 			//staffのオブジェクトにデータをセット ログインした人と、今から登録する人２人分のStaffオブジェクトが必要
-			Staff staff = new Staff(null, name, kana, authority, password,
-				null, sessionStaff.getId(), null, sessionStaff.getId(), "0");
+			Staff acStaff = new Staff(null, name, kana, authority, password,
+				null, staff.getId(), null, staff.getId(), "0");
 
 			//serviceのregistAccountにstaffを渡す
 			AccountService accountservice = new AccountService();
 			//0		エラーチェック
 					AccountEditService service = new AccountEditService();
-					if (!service.errorsCheck(staff)) {
+					if (!service.errorsCheck(acStaff)) {
 
 						//0	アカウント情報をセット
-						request.setAttribute("staff", staff);
+						request.setAttribute("Staff",acStaff);
 						request.setAttribute("messages", service.getMessages());
 
 
@@ -82,18 +90,18 @@ public class AccountRegistServlet extends HttpServlet {
 						 //ここにjspを入力
 						return;
 					}
-			boolean result = accountservice.registAccount(staff);
+			boolean result = accountservice.registAccount(acStaff);
 
 
 
 			//0登録が完了したら、accountregistcompletion.jspへ飛ぶ
 			if(result == true) {
-				request.setAttribute("staff", staff);
+				request.setAttribute("Staff", acStaff);
 				request.getRequestDispatcher("/accountregistcompletion.jsp").forward(request, response);
 
 			//0データベースアクセスに失敗した場合
 			}else {
-				request.setAttribute("staff", staff);
+				request.setAttribute("Staff", acStaff);
 				request.setAttribute("messages", accountservice.getMessages());
 				request.getRequestDispatcher("/accountregist.jsp").forward(request, response);
 			}

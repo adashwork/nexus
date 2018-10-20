@@ -99,14 +99,14 @@ public class Kyujin {
 	private String education;
 	private String experience;
 	private String license;
-	private int agemin;
-	private int agemax;
-	private int salarymin;
-	private int salarymax;
+	private Integer agemin;
+	private Integer agemax;
+	private Integer salarymin;
+	private Integer salarymax;
 	private String salaryformcd;
-	private int begintime;
-	private int endtime;
-	private int establishdt;
+	private Integer begintime;
+	private Integer endtime;
+	private Integer establishdt;
 	private long capital;
 	private String companyfeature;
 	private String tantouyakushoku;
@@ -116,8 +116,8 @@ public class Kyujin {
 	private String applicationform;
 	private String background;
 	private String hiddensex;
-	private int hiddenagemin;
-	private int hiddenagemax;
+	private Integer hiddenagemin;
+	private Integer hiddenagemax;
 	private String hiddenetc;
 	private Date createdt;
 	private String createuserid;
@@ -135,10 +135,10 @@ public class Kyujin {
 			String companyname, String companypostal, String companyplace, String companyurl, String postal,
 			String address, String nearstation, String job, String hakencd, String detail, String koyoukeitaicd,
 			String koyoukikan, Date koyoukikankaishi, Date koyoukikanowari, String education, String experience,
-			String license, int agemin, int agemax, int salarymin, int salarymax, String salaryformcd, int begintime,
-			int endtime, int establishdt, long capital, String companyfeature, String tantouyakushoku,
+			String license, Integer agemin, Integer agemax, Integer salarymin, Integer salarymax, String salaryformcd, Integer begintime,
+			Integer endtime, Integer establishdt, long capital, String companyfeature, String tantouyakushoku,
 			String tantoukana, String tantou, String tantoustaff_id, String applicationform, String background,
-			String hiddensex, int hiddenagemin, int hiddenagemax, String hiddenetc, Date createdt,
+			String hiddensex, Integer hiddenagemin, Integer hiddenagemax, String hiddenetc, Date createdt,
 			String createuserid, Date updatedt, String updateuserid, String deleteflag) {
 		super();
 		this.no = no;
@@ -451,7 +451,7 @@ public class Kyujin {
 	 * 年齢制限・下限を返す
 	 * @return agemin
 	 */
-	public int getAgemin() {
+	public Integer getAgemin() {
 		return agemin;
 	}
 
@@ -459,7 +459,7 @@ public class Kyujin {
 	 * 年齢制限・上限を返す
 	 * @return agemax
 	 */
-	public int getAgemax() {
+	public Integer getAgemax() {
 		return agemax;
 	}
 
@@ -467,7 +467,7 @@ public class Kyujin {
 	 * 基本給下限を返す
 	 * @return salarymin
 	 */
-	public int getSalarymin() {
+	public Integer getSalarymin() {
 		return salarymin;
 	}
 
@@ -475,7 +475,7 @@ public class Kyujin {
 	 * 基本給上限を返す
 	 * @return salarymax
 	 */
-	public int getSalarymax() {
+	public Integer getSalarymax() {
 		return salarymax;
 	}
 
@@ -491,7 +491,7 @@ public class Kyujin {
 	 * 就業時間・始業を返す
 	 * @return begintime
 	 */
-	public int getBegintime() {
+	public Integer getBegintime() {
 		return begintime;
 	}
 
@@ -499,7 +499,7 @@ public class Kyujin {
 	 * 就業時間・終業を返す
 	 * @return endtime
 	 */
-	public int getEndtime() {
+	public Integer getEndtime() {
 		return endtime;
 	}
 
@@ -507,7 +507,7 @@ public class Kyujin {
 	 * 創業設立年を返す
 	 * @return establishdt
 	 */
-	public int getEstablishdt() {
+	public Integer getEstablishdt() {
 		return establishdt;
 	}
 
@@ -587,7 +587,7 @@ public class Kyujin {
 	 * 年齢下限（求職者に非公開）を返す
 	 * @return hiddenagemin
 	 */
-	public int getHiddenagemin() {
+	public Integer getHiddenagemin() {
 		return hiddenagemin;
 	}
 
@@ -595,7 +595,7 @@ public class Kyujin {
 	 * 年齢上限（求職者に非公開）を返す
 	 * @return hiddenagemax
 	 */
-	public int getHiddenagemax() {
+	public Integer getHiddenagemax() {
 		return hiddenagemax;
 	}
 

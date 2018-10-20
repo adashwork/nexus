@@ -12,13 +12,13 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet implementation class LoginAccountMessageServlet
  */
 @WebServlet("/login-message")
-public class LoginAccountMessageServlet extends HttpServlet {
+public class LoginMessageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginAccountMessageServlet() {
+    public LoginMessageServlet() {
         super();
     }
 

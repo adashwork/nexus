@@ -187,4 +187,55 @@ public class SaibanDao {
 
 	}
 
+	/**
+	 * マッチングidを取得する
+	 * @return getsaiban 現在の採番データに+1をして返す
+	 * @throws IOException
+	 */
+	public int getMatching() throws IOException {
+
+		// SQL文を生成する
+		StringBuffer sql = new StringBuffer();
+		sql.append("select matchingsaiban");
+		sql.append(" from saiban");
+		try (PreparedStatement ps = this.conn.prepareStatement(sql.toString())) {
+
+			int getsaiban = -1;
+			// SQL文を実行する
+			try (ResultSet rs = ps.executeQuery()) {
+				if(rs.next()) {
+					getsaiban = rs.getInt("matchingsaiban") + 1;
+					// 採番マスタの更新
+					updateMatching(getsaiban);
+				}
+				return getsaiban;
+
+			} catch (SQLException e) {
+				throw new IOException(e);
+			}
+		} catch (SQLException e) {
+			throw new IOException(e);
+		}
+	}
+
+	/**
+	 * マッチングidを更新する
+	 * @param accountId スタッフアカウントid
+	 * @throws IOException
+	 */
+	public void updateMatching(int matchingId) throws IOException {
+
+		// SQL文を生成する
+		StringBuffer sql = new StringBuffer();
+		sql.append("update saiban set matchingsaiban = ?");
+		//sql
+		try (PreparedStatement ps = this.conn.prepareStatement(sql.toString())) {
+			ps.setInt(1, matchingId);
+		// SQL文を実行する
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			throw new IOException(e);
+		}
+
+	}
 }

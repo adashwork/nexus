@@ -11,10 +11,10 @@ public class Character {
 	 * id 特性ID
   	* character 特性
 	 */
-	private int id;
+	private Integer id;
 	private String character;
 
-	public Character(int id, String character) {
+	public Character(Integer id, String character) {
 		this.id = id;
 		this.character = character;
 	}
@@ -23,7 +23,7 @@ public class Character {
 	 * 特性IDを返す
 	 * @return id
 	 */
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 

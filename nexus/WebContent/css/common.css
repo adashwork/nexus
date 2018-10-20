@@ -55,7 +55,7 @@ table th {
 /*　テーブルの背景　*/
 
 table td {
-	height: 3rem; 
+	height: 3rem;
 	font-size:1rem;
 	padding: 10px;
 }
@@ -84,7 +84,19 @@ table tr:nth-child(2n+1) {
 	letter-spacing: 0.5rem;
 	font-weight: bold;
 }
-
+.main-b2{
+	float: right;
+	font-size: 1rem;
+	border-style: none;
+	background-color: #808080 ;
+	color: #fff;
+	height: 40px;
+	padding-left: 10px;
+	margin-left:5px;
+	margin-right:5px;
+	letter-spacing: 0.5rem;
+	font-weight: bold;
+}
 
 #box{
 	float: left;
@@ -95,7 +107,7 @@ table tr:nth-child(2n+1) {
 	display: inline;
 	margin: 0;
 	clear:both;
-	
+
 }
 
 .return{
@@ -104,6 +116,9 @@ table tr:nth-child(2n+1) {
 
 .a h2{
 	margin-left;
-	margin-right;}
+	margin-right;
+}
 
-
+.user{
+	font-size: 1rem;
+}

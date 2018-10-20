@@ -11,6 +11,12 @@ import java.util.List;
 import jp.or.adash.nexus.entity.SimpleKyujin;
 import jp.or.adash.nexus.utils.dao.Transaction;
 
+/**
+ * 求人データアクセスクラス
+ * @author ???
+ * @author pgjavaAT
+ *
+ */
 public class JobSearchDao {
 /*
  * TODO 検索サーブレットの作成（今は初期表示サーブレットと兼用している）
@@ -33,9 +39,7 @@ public class JobSearchDao {
 	}
 
 	/**
-	 * 商品コードを元に、商品情報（1件）を取得する
-	 * @param itemNo 商品番号
-	 * @return 商品オブジェクト
+	 * 求人票の一覧を簡易版で取得する
 	 * @throws IOException
 	 */
 	public List<SimpleKyujin> selectKyujin(String job, String addresscd,
@@ -114,7 +118,7 @@ public class JobSearchDao {
 		}
 
 
-
+		// SQL文の作成
 		StringBuilder sqlSearchJob = new StringBuilder();
 		sqlSearchJob.append("select no, companyno,addresscd, jobsmallcd1,jobsmallcd2,jobsmallcd3,");
 		sqlSearchJob.append("joblargecd1,joblargecd2,joblargecd3,");

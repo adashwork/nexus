@@ -9,7 +9,8 @@
 	rel="stylesheet" type="text/css" />
 <link href="https://fonts.googleapis.com/css?family=M+PLUS+1p"
 	rel="stylesheet" type="text/css" />
-<link href="../css/bootstrap-reboot.css" rel="stylesheet" type="text/css" />
+<link href="../css/bootstrap-reboot.css" rel="stylesheet"
+	type="text/css" />
 <link href="../css/common.css" rel="stylesheet" type="text/css" />
 <link href="../css/header.css" rel="stylesheet" type="text/css" />
 <link href="../css/footer.css" rel="stylesheet" type="text/css" />
@@ -18,35 +19,41 @@
 </head>
 <body>
 	<!-- ヘッダー　-->
-<header>
-  <section>
-    <h1 class="logo"><a href="/nexus/web/staff-top">LOGO</a></h1>
-    <nav>
-      <ul class="mainnavi">
-        <li><a href="/nexus/web/job-search"><i class="fas fa-home"></i>検索</a></li>
-        <li>
-          <a href="/nexus/web/jobseeker-list"><i class="fas fa-search"></i>登録&amp;閲覧</a>
-          <ul class="drop-menu">
-            <li><a href="/nexus/web/kyujin-disp">求人情報<i class="fas fa-angle-right"></i></a></li>
-            <li><a href="/nexus/web/jobseeker-list">求職者情報<i class="fas fa-angle-right"></i></a></li>
-            <li><a href="/nexus/web/match-disp">マッチング登録<i class="fas fa-angle-right"></i></a></li>
-          </ul>
-        </li>
-        <li><a href="/nexus/web/account-list"><i class="far fa-bookmark"></i>管理</a></li>
-      </ul>
-    </nav>
-    <div class="user">
-      <div class="user__wrapper">
-        <div class="user__name">
-          <a href="#"><c:out value="${ Staff.name }" /><i class="fas fa-ellipsis-v"></i></a>
-          <ul class="drop-menu">
-            <li><a href="/nexus/web/logout">ログアウト<i class="fas fa-angle-right"></i></a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-</header>
+	<header> <section>
+	<h1 class="logo">
+		<a href="/nexus/web/staff-top"><img src="../css/TryNexus-Logo.png"
+			width="97" height="70" alt="TryNexus" /></a>
+	</h1>
+	<nav>
+	<ul class="mainnavi">
+		<li><a href="/nexus/web/job-search"><i class="fas fa-home"></i>検索</a></li>
+		<li><a href="/nexus/web/jobseeker-list"><i
+				class="fas fa-search"></i>登録&amp;閲覧</a>
+			<ul class="drop-menu">
+				<li><a href="/nexus/web/kyujin-disp">求人情報<i
+						class="fas fa-angle-right"></i></a></li>
+				<li><a href="/nexus/web/jobseeker-list">求職者情報<i
+						class="fas fa-angle-right"></i></a></li>
+				<li><a href="/nexus/web/match-disp">マッチング登録<i
+						class="fas fa-angle-right"></i></a></li>
+			</ul></li>
+		<c:if test="${Staff.authority == 1}"><li><a href="/nexus/web/account-list"><i
+				class="far fa-bookmark"></i>管理</a></li></c:if>
+	</ul>
+	</nav>
+	<div class="user">
+		<div class="user__wrapper">
+			<div class="user__name">
+				<a href="#"><c:out value="${ Staff.name }" /><i
+					class="fas fa-ellipsis-v"></i></a>
+				<ul class="drop-menu">
+					<li><a href="/nexus/web/logout">ログアウト<i
+							class="fas fa-angle-right"></i></a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	</section> </header>
 	<main> <!--　求人検索項目 -->
 	<div id="job_search">
 		<h3 style="float: none;">求人検索項目</h3>
@@ -64,12 +71,12 @@
 			</div>
 			<div class="listbox1">
 				<h4>勤務地</h4>
-<select name="addresscd">
-				<option value=""></option>
-			<c:forEach var="todouhuken" items="${ todouhukenlist }">
-				<option value="${ todouhuken.cd }">${ todouhuken.name }</option>
-			</c:forEach>
-</select>
+				<select name="addresscd">
+					<option value=""></option>
+					<c:forEach var="todouhuken" items="${ todouhukenlist }">
+						<option value="${ todouhuken.cd }">${ todouhuken.name }</option>
+					</c:forEach>
+				</select>
 			</div>
 			<div class="listbox1">
 				<h4>給料</h4>
@@ -91,7 +98,7 @@
 					<option value="7">無期派遣パート</option>
 				</select>
 			</div>
-						<div class="listbox1">
+			<div class="listbox1">
 				<h4>路線</h4>
 				<select name="rosen" tabindex="5">
 					<option value=""></option>
@@ -140,7 +147,8 @@
 						<td>
 							<form method="get" action="/nexus/web/kyujin-disp">
 								<input type="hidden" name="no" value="${ SimpleKyujin.no }">
-									<input type="submit" value="詳細"></form>
+									<input type="submit" value="詳細">
+							</form>
 						</td>
 						<td><c:out value="${ SimpleKyujin.no }" /></td>
 						<td><c:out value="${ SimpleKyujin.companyname }" /></td>

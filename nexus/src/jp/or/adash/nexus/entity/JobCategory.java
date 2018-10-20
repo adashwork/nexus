@@ -14,14 +14,14 @@ public class JobCategory {
 	* smallcd 小分類コード
 	* name 業種名
 	 */
-	private int id;
+	private Integer id;
 	private String largecd;
 	private String middlecd;
 	private String smallcd;
 	private String name;
 	public JobCategory(){
 	}
-	public JobCategory(int id, String largecd, String middlecd, String smallcd, String name) {
+	public JobCategory(Integer id, String largecd, String middlecd, String smallcd, String name) {
 		this.id = id;
 		this.largecd = largecd;
 		this.middlecd = middlecd;
@@ -38,7 +38,7 @@ public class JobCategory {
 	 * idを返す
 	 * @return id
 	 */
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 

@@ -49,6 +49,7 @@ public class jobseekermaininfoservlet extends HttpServlet {
 		// 1.求職者情報一覧を取得する
 		JobSeekerService service = new JobSeekerService();
 		JobSeekerMain js_info = service.getJobseekermaininfo(js_id);
+
 		// 1.都道府県リストを取得する
 		TodouhukenService Tservice = new TodouhukenService();
 		List<Todouhuken> Tlist = Tservice.getTodouhukenList();

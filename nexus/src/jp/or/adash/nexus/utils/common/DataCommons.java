@@ -6,13 +6,15 @@ package jp.or.adash.nexus.utils.common;
 import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
 import java.util.IllegalFormatException;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
  * データを扱う際に使える共通クラス
  * @author T.Kawasaki
- *
+ * @author y.koura
+ * @author pgjavaAT
  */
 public class DataCommons {
 
@@ -21,7 +23,7 @@ public class DataCommons {
 	 * @param str 文字列
 	 * @return 文字列のバイト数（取得エラーの場合は、マイナス値を返す）
 	 */
-	public int getBytes(String str) {
+	public static int getBytes(String str) {
 		if (str == null) {
 			return 0;
 		}
@@ -69,14 +71,16 @@ public class DataCommons {
 	 * @return string エラーメッセージ
 	 * @author y.Koura
 	 */
-	public static String chkInt(int i) {
+	public static String chkInt(String strInt) {
 		try {
+			if(!Objects.equals(strInt, null)) {
+				Integer.parseInt(strInt);
+			}
 			return null;
 		} catch (NumberFormatException e) {
 			return "数値ではない値が入力されています";
 		}
 	}
-
 	/**
 	 *【エラー】形式チェック（数値Long）
 	 * エラー発生条件：文字列
@@ -266,6 +270,16 @@ public class DataCommons {
 			return new java.sql.Date(utilDate.getTime());
 		} else {
 			return null;
+		}
+	}
+
+	public static String chkInteger(Integer i) {
+		try {
+			String str = i.toString();
+			Integer.parseInt(str);
+			return null;
+		} catch (NumberFormatException e) {
+			return "数値ではない値が入力されています";
 		}
 	}
 }

@@ -45,7 +45,6 @@ public class KyujinRegistDisplayServlet extends HttpServlet {
 		Staff staff = (Staff) session.getAttribute("UserData");
 
 		// 1.1 リクエストから求人コードを取得
-//		String no = "12457-44446666"; //仮の値
 		String no = null;
 
 		if (!"".equals(request.getParameter("no"))

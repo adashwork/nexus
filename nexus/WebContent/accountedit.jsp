@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -15,15 +16,19 @@
 <link href="../css/common.css" rel="stylesheet">
 <link href="../css/header.css" rel="stylesheet">
 <link href="../css/footer.css" rel="stylesheet">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script
+	src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
 <script type="text/javascript" src="../js/common.js"></script>
 </head>
 <body>
 	<header>
 		<section>
 			<h1 class="logo">
-				<a href="/nexus/web/staff-top">LOGO</a>
+				<a href="/nexus/web/staff-top"><img
+					src="../css/TryNexus-Logo.png" width="97" height="70" alt="TryNexus" /></a>
+			</h1>
 			</h1>
 			<nav>
 				<ul class="mainnavi">
@@ -73,8 +78,8 @@
 				<td>アカウントID</td>
 
 				<td><input type="hidden" name="id"
-					value="<c:out value="${ Staff.id }" />"> <c:out
-						value="${ Staff.id }" /></td>
+					value="<c:out value="${ Staff.id }" />"> <fmt:formatNumber
+					value="${ Staff.id }" pattern="0000"/></td>
 
 			</tr>
 			<tr>
@@ -104,16 +109,15 @@
 		<input class="main-b" type="submit" value="更新">
 	</form>
 
-	<form name="delete" action="/nexus/web/account-delete" method="GET" onsubmit="return kakunin()">
-		<input type="hidden" name="id" value="${ Staff.id }">
-		<input class="main-b" type="submit" value="削除"  >
+	<form name="delete" action="/nexus/web/account-delete" method="GET"
+		onsubmit="return kakunin()">
+		<input type="hidden" name="id" value="${ Staff.id }"> <input
+			class="main-b" type="submit" value="削除">
 	</form>
-<input class="main-b" type="button" value="戻る" onclick="location.href='/nexus/web/account-list'">
-	<!--   <input class="main-b" type="button"
+	<input class="main-b" type="button" value="戻る"
+		onclick="location.href='/nexus/web/account-list'"> <!--   <input class="main-b" type="button"
 		onclick="location.href='/nexus/web/account-list'" value="戻る">
-	-->
-
-	<!--  <form method="post" action="AccountEditCompletionServlet">
+	--> <!--  <form method="post" action="AccountEditCompletionServlet">
 					<input type="hidden" name="id" value="<c:out value="${ Staff.id }" />">
 					<input type="hidden" name="name" value="<c:out value="${ Staff.name }" />">
 					<input type="hidden" name="kana" value="<c:out value="${ Staff.kana }" />">

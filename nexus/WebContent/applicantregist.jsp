@@ -39,7 +39,9 @@
 	<header>
 		<section>
 			<h1 class="logo">
-				<a href="/nexus/web/staff-top">LOGO</a>
+				<a href="/nexus/web/staff-top"><img
+					src="../css/TryNexus-Logo.png" width="97" height="70" alt="TryNexus" /></a>
+			</h1>
 			</h1>
 			<nav>
 				<ul class="mainnavi">
@@ -54,8 +56,8 @@
 							<li><a href="/nexus/web/match-disp">マッチング登録<i
 									class="fas fa-angle-right"></i></a></li>
 						</ul></li>
-					<li><a href="/nexus/web/account-list"><i
-							class="far fa-bookmark"></i>管理</a></li>
+					<c:if test="${Staff.authority == 1}"><li><a href="/nexus/web/account-list"><i
+							class="far fa-bookmark"></i>管理</a></li></c:if>
 				</ul>
 			</nav>
 			<div class="user">
@@ -112,10 +114,17 @@
 				</tr>
 				<tr>
 					<th>年齢</th>
-					<td>
-        <select name="age"><% for(int i=0; i<=120; i++){ %>
-                <option value="<%= i %>"> <%= i %> </option><% } %>
-        </select>歳</td>
+					<td><select name="age">
+							<%
+								for (int i = 0; i <= 120; i++) {
+							%>
+							<option value="<%=i%>">
+								<%=i%>
+							</option>
+							<%
+								}
+							%>
+					</select>歳</td>
 				</tr>
 				<tr>
 					<th>郵便番号</th>
@@ -149,9 +158,17 @@
 				</tr>
 				<tr>
 					<th>扶養人数</th>
-					<td><select name="huyou"><% for(int i=0; i<=120; i++){ %>
-                <option value="<%= i %>"> <%= i %> </option><% } %>
-        </select>人</td>
+					<td><select name="huyou">
+							<%
+								for (int i = 0; i <= 120; i++) {
+							%>
+							<option value="<%=i%>">
+								<%=i%>
+							</option>
+							<%
+								}
+							%>
+					</select>人</td>
 				</tr>
 				<tr>
 					<th>学歴</th>
@@ -233,7 +250,7 @@
 				<tr>
 					<th>その他希望</th>
 					<td><textarea rows="4" cols="40" name="hopeetc"
-					<c:out value="${ seeker.hopeetc }" />></textarea></td>
+							<c:out value="${ seeker.hopeetc }" />></textarea></td>
 				</tr>
 				<tr>
 					<th>自動車免許</th>
@@ -248,23 +265,24 @@
 				<tr>
 					<th>その他免許</th>
 					<td><textarea rows="4" cols="40" name="licenseetc"
-<c:out value="${ seeker.licenseetc }" />>
+							<c:out value="${ seeker.licenseetc }" />>
 			</textarea></td>
 				</tr>
 				<tr>
 					<th>パソコンスキル</th>
 					<td><textarea rows="4" cols="40" name="pasokonskill"
-					<c:out value="${ seeker.pasokonskill }" />></textarea></td>
+							<c:out value="${ seeker.pasokonskill }" />></textarea></td>
 				</tr>
 				<tr>
 					<th>留意点</th>
-					<td><textarea rows="4" cols="40" name="caution" placeholder="身体上に注意することを書いてください。"
-					<c:out value="${ seeker.caution }" />></textarea></td>
+					<td><textarea rows="4" cols="40" name="caution"
+							placeholder="身体上に注意することを書いてください。"
+							<c:out value="${ seeker.caution }" />></textarea></td>
 				</tr>
 				<tr>
 					<th>担当職業者紹介者ID</th>
 					<td><input type="text" name="tantoustaffid"
-						value="<c:out value="${ seeker.tantoustaffid }" />"></td>
+						value="<c:out value="${ Staff.id }" />"></td>
 				</tr>
 				<tr>
 					<th>パスワード</th>

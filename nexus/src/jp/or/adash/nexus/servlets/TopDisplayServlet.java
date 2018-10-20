@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class TopDisplayServlet
  * ログイン画面のURLを/topにするためのサーブレット
- * @author a.taya
+ * @author pgjavaAT
  */
 @WebServlet("/top")
 public class TopDisplayServlet extends HttpServlet {

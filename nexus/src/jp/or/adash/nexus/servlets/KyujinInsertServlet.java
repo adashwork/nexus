@@ -29,7 +29,6 @@ public class KyujinInsertServlet extends HttpServlet {
 	 */
 	public KyujinInsertServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -49,14 +48,12 @@ public class KyujinInsertServlet extends HttpServlet {
 		try {
 			receptiondt = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("receptiondt"));
 		} catch (ParseException e) {
-			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
 		Date perioddt = null;
 		try {
 			perioddt =  new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("perioddt"));
 		} catch (ParseException e) {
-			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
 		String companyno = request.getParameter("companyno");
@@ -86,14 +83,12 @@ public class KyujinInsertServlet extends HttpServlet {
 		try {
 			koyoukikankaishi = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("koyoukikankaishi"));
 		} catch (ParseException e) {
-			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
 		Date koyoukikanowari = null;
 		try {
 			koyoukikanowari = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("koyoukikanowari"));
 		} catch (ParseException e) {
-			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
 		String education = request.getParameter("education");

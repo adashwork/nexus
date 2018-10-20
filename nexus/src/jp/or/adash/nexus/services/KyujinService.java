@@ -108,11 +108,9 @@ public class KyujinService {
 		String msg = null;
 		String stdate = null;
 
-		DataCommons commons = new DataCommons();
-
 		// 事業所番号の長さが適切か
 
-		int length = commons.getBytes(kyujin.getCompanyno());
+		int length = DataCommons.getBytes(kyujin.getCompanyno());
 		if (length <= 0 || length > 13) {
 			messages.add("事業所番号が不当です。");
 			result = false;
@@ -149,7 +147,7 @@ public class KyujinService {
 			}
 		}
 		// 事業署名（半角ｶﾅ）の長さが適切か
-		length = commons.getBytes(kyujin.getCompanykana());
+		length = DataCommons.getBytes(kyujin.getCompanykana());
 		if (length <= 0 || length > 54) {
 			messages.add("事業所名（半角ｶﾅ）が不当です。");
 			result = false;
@@ -163,14 +161,14 @@ public class KyujinService {
 			result = false;
 		}
 		// 事業署名の長さが適切か
-		length = commons.getBytes(kyujin.getCompanyname());
+		length = DataCommons.getBytes(kyujin.getCompanyname());
 		if (length <= 0 || length > 60) {
 			messages.add("事業所名が不当です。");
 			result = false;
 		}
 
 		// 事業所郵便番号の長さが適切か
-		length = commons.getBytes(kyujin.getCompanypostal());
+		length = DataCommons.getBytes(kyujin.getCompanypostal());
 		if (length > 8) {
 			messages.add("郵便番号が長すぎます。");
 			result = false;
@@ -183,21 +181,21 @@ public class KyujinService {
 		}
 
 		// 事業所所在地の長さが適切か
-		length = commons.getBytes(kyujin.getCompanyplace());
+		length = DataCommons.getBytes(kyujin.getCompanyplace());
 		if (length > 75) {
 			messages.add("事業所所在地が長すぎます。");
 			result = false;
 		}
 
 		// 事業所URLの長さが適切か
-		length = commons.getBytes(kyujin.getCompanyurl());
+		length = DataCommons.getBytes(kyujin.getCompanyurl());
 		if (length > 100) {
 			messages.add("事業所URLが長すぎます。");
 			result = false;
 		}
 
 		// 就業場所郵便番号の長さが適切か
-		length = commons.getBytes(kyujin.getPostal());
+		length = DataCommons.getBytes(kyujin.getPostal());
 		if (length > 8) {
 			messages.add("就業場所郵便番号が長すぎます。");
 			result = false;
@@ -211,28 +209,28 @@ public class KyujinService {
 		}
 
 		// 就業場所の長さが適切か
-		length = commons.getBytes(kyujin.getAddress());
+		length = DataCommons.getBytes(kyujin.getAddress());
 		if (length > 90) {
 			messages.add("就業場所が長すぎます。");
 			result = false;
 		}
 
 		// 最寄り駅の長さが適切か
-		length = commons.getBytes(kyujin.getNearstation());
+		length = DataCommons.getBytes(kyujin.getNearstation());
 		if (length > 30) {
 			messages.add("最寄り駅が長すぎます。");
 			result = false;
 		}
 
 		// 就業場所の長さが適切か
-		length = commons.getBytes(kyujin.getJob());
+		length = DataCommons.getBytes(kyujin.getJob());
 		if (length <= 0 || length > 28) {
 			messages.add("職種が不適切です。");
 			result = false;
 		}
 
 		// 仕事の内容の長さが適切か
-		length = commons.getBytes(kyujin.getDetail());
+		length = DataCommons.getBytes(kyujin.getDetail());
 		if (length > 297) {
 			messages.add("仕事の内容が長すぎます。");
 			result = false;
@@ -275,28 +273,28 @@ public class KyujinService {
 		}
 
 		// 学歴の内容の長さが適切か
-		length = commons.getBytes(kyujin.getEducation());
+		length = DataCommons.getBytes(kyujin.getEducation());
 		if (length > 64) {
 			messages.add("学歴が長すぎます。");
 			result = false;
 		}
 
 		// 必要な経験等の長さが適切か
-		length = commons.getBytes(kyujin.getExperience());
+		length = DataCommons.getBytes(kyujin.getExperience());
 		if (length > 84) {
 			messages.add("必要な経験等が長すぎます。");
 			result = false;
 		}
 
 		// 必要な免許・資格等の内容の長さが適切か
-		length = commons.getBytes(kyujin.getLicense());
+		length = DataCommons.getBytes(kyujin.getLicense());
 		if (length > 84) {
 			messages.add("必要な免許・資格等が長すぎます。");
 			result = false;
 		}
 
 		// 年齢の下限・上限の値が適切か
-		msg = DataCommons.chkInt(kyujin.getAgemin());
+		msg = DataCommons.chkInt(String.valueOf(kyujin.getAgemin().toString()));
 		if (msg != null) {
 			messages.add(msg);
 			result = false;
@@ -306,7 +304,7 @@ public class KyujinService {
 			messages.add(msg);
 			result = false;
 		}
-		msg = DataCommons.chkInt(kyujin.getAgemax());
+		msg = DataCommons.chkInt(String.valueOf(kyujin.getAgemax().toString()));
 		if (msg != null) {
 			messages.add(msg);
 			result = false;
@@ -322,7 +320,7 @@ public class KyujinService {
 		}
 
 		// 基本給の下限・上限の値が適切か
-		msg = DataCommons.chkInt(kyujin.getSalarymin());
+		msg = DataCommons.chkInt(String.valueOf(kyujin.getSalarymin().toString()));
 		if (msg != null) {
 			messages.add(msg);
 			result = false;
@@ -332,7 +330,7 @@ public class KyujinService {
 			messages.add(msg);
 			result = false;
 		}
-		msg = DataCommons.chkInt(kyujin.getSalarymax());
+		msg = DataCommons.chkInt(String.valueOf(kyujin.getSalarymax().toString()));
 		if (msg != null) {
 			messages.add(msg);
 			result = false;
@@ -398,7 +396,7 @@ public class KyujinService {
 				messages.add(msg);
 				result = false;
 			}
-			msg = DataCommons.chkInt(kyujin.getEstablishdt());
+			msg = DataCommons.chkInt(String.valueOf(kyujin.getEstablishdt().toString()));
 			if (msg != null) {
 				messages.add(msg);
 				result = false;
@@ -465,7 +463,7 @@ public class KyujinService {
 			result = false;
 		}
 		// （求職者非公開）年齢の下限・上限の値が適切か
-		msg = DataCommons.chkInt(kyujin.getHiddenagemin());
+		msg = DataCommons.chkInt(String.valueOf(kyujin.getHiddenagemin().toString()));
 		if (msg != null) {
 			messages.add(msg);
 			result = false;
@@ -475,7 +473,7 @@ public class KyujinService {
 			messages.add(msg);
 			result = false;
 		}
-		msg = DataCommons.chkInt(kyujin.getHiddenagemax());
+		msg = DataCommons.chkInt(String.valueOf(kyujin.getHiddenagemax().toString()));
 		if (msg != null) {
 			messages.add(msg);
 			result = false;

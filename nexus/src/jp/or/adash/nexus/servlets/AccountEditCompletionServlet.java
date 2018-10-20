@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import jp.or.adash.nexus.entity.Staff;
 import jp.or.adash.nexus.services.AccountEditService;
@@ -31,7 +32,17 @@ public class AccountEditCompletionServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		HttpSession session = request.getSession(true);
+		Staff staff = (Staff) session.getAttribute("UserData");
+		// 管理者以外の場合、staff-topに遷移
+		if(!staff.getAuthority().equals("1")) {
+			request.setAttribute("Staff", staff);
+			//0	フォワードする
+			request.getRequestDispatcher("/web/staff-top")
+			.forward(request, response);
 
+			return;
+		}
 		//0		アカウント更新情報を取得
 		String id = request.getParameter("id");
 		String name = request.getParameter("name");
@@ -42,17 +53,17 @@ public class AccountEditCompletionServlet extends HttpServlet {
 
 
 		//0		アカウント情報のオブジェクトを作成
-		Staff staff = new Staff(id, name, kana, authority, password,
+		Staff acStaff = new Staff(id, name, kana, authority, password,
 				null, null, null, null, null);
 
 
 
 		//0		エラーチェック
 		AccountEditService service = new AccountEditService();
-		if (!service.errorsCheck(staff)) {
-			staff = service.getStaffAccount(id);
+		if (!service.errorsCheck(acStaff)) {
+			acStaff = service.getStaffAccount(id);
 			//0	アカウント情報をセット
-			request.setAttribute("Staff", staff);
+			request.setAttribute("Staff", acStaff);
 			request.setAttribute("messages", service.getMessages());
 
 			//0	JSPにフォワード

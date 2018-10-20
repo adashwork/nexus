@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import jp.or.adash.nexus.entity.MatchingCase;
 import jp.or.adash.nexus.entity.Staff;
+import jp.or.adash.nexus.services.MatchingService;
 
 /**
  * Servlet implementation class MatchingDisServlet
@@ -25,7 +27,6 @@ public class MatchingDisServlet extends HttpServlet {
      */
     public MatchingDisServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -36,10 +37,29 @@ public class MatchingDisServlet extends HttpServlet {
 		HttpSession session = request.getSession(true);
 		Staff staff = (Staff) session.getAttribute("UserData");
 
+		String id = null;
+
+		if (!"".equals(request.getParameter("id"))
+				&& request.getParameter("id") != null) {
+			id = (request.getParameter("id"));
+		}
+
+		MatchingCase matching = null;
+		if (id != null) {
+			MatchingService service = new MatchingService();
+			matching = service.getMatching(Integer.parseInt(id));
+		}
+
 		request.setAttribute("Staff", staff);
+		request.setAttribute("matching", matching);
 
 		// JSPにフォワードする
 		request.getRequestDispatcher("/matchingregist.jsp").forward(request, response);
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
+	IOException {
+		doGet(request, response);
 	}
 
 }

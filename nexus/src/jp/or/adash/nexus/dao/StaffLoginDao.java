@@ -39,7 +39,7 @@ public class StaffLoginDao {
 
 		// SQL文を生成する
 		StringBuffer sql = new StringBuffer();
-		sql.append("select id,name");
+		sql.append("select id,name,authority");
 		sql.append(" from staff");
 		sql.append(" where id = ? and passWord = ?");
 		try (PreparedStatement ps = this.conn.prepareStatement(sql.toString())) {
@@ -56,7 +56,7 @@ public class StaffLoginDao {
 							rs.getString("id"),
 							rs.getString("name"),
 							null,
-							null,
+							rs.getString("authority"),
 							null,
 							null,
 							null,

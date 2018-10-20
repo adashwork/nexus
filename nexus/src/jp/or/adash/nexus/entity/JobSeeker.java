@@ -39,6 +39,7 @@ public class JobSeeker {
 	* licenseetc その他免許
 	* pasokonskill パソコンスキル
 	* caution 留意点
+	* tantoustaffname 担当職業紹介者名
 	* tantoustaffid 担当職業紹介者ID
 	* password パスワード
 	* createdt 新規登録日
@@ -52,14 +53,14 @@ public class JobSeeker {
 	private String kana;
 	private Date birthdt;
 	private String sex;
-	private int age;
+	private Integer age;
 	private String postal;
 	private String address;
 	private String nearstation;
 	private String phone;
 	private String mobile;
 	private String partner;
-	private int huyou;
+	private Integer huyou;
 	private String education;
 	private String hopejob1;
 	private String hopejob2;
@@ -67,16 +68,17 @@ public class JobSeeker {
 	private String hopejobcategory;
 	private String hopeworkplace;
 	private String hopekoyoukeitai;
-	private int hopeworkingDate;
-	private int hopebegintime;
-	private int hopeendtime;
-	private int hopesalary;
-	private int hopejikyu;
+	private Integer hopeworkingDate;
+	private Integer hopebegintime;
+	private Integer hopeendtime;
+	private Integer hopesalary;
+	private Integer hopejikyu;
 	private String hopeetc;
 	private String driverlicense;
 	private String licenseetc;
 	private String pasokonskill;
 	private String caution;
+	private String tantoustaffname;
 	private String tantoustaffid;
 	private String password;
 	private Date createdt;
@@ -85,12 +87,12 @@ public class JobSeeker {
 	private String upDateuserid;
 	private String deleteflag;
 
-	public JobSeeker(String id, String name, String kana, Date birthdt, String sex, int age, String postal,
-			String address, String nearstation, String phone, String mobile, String partner, int huyou,
+	public JobSeeker(String id, String name, String kana, Date birthdt, String sex, Integer age, String postal,
+			String address, String nearstation, String phone, String mobile, String partner, Integer huyou,
 			String education, String hopejob1, String hopejob2, String hopejob3, String hopejobcategory,
-			String hopeworkplace, String hopekoyoukeitai, int hopeworkingDate, int hopebegintime, int hopeendtime,
-			int hopesalary, int hopejikyu, String hopeetc, String driverlicense, String licenseetc, String pasokonskill,
-			String caution, String tantoustaffid, String password, Date createdt, String createuserid,
+			String hopeworkplace, String hopekoyoukeitai, Integer hopeworkingDate, Integer hopebegintime, Integer hopeendtime,
+			Integer hopesalary, Integer hopejikyu, String hopeetc, String driverlicense, String licenseetc, String pasokonskill,
+			String caution, String tantoustaffname, String tantoustaffid, String password, Date createdt, String createuserid,
 			Date upDatedt, String upDateuserid, String deleteflag) {
 
 		this.id = id;
@@ -123,6 +125,7 @@ public class JobSeeker {
 		this.licenseetc = licenseetc;
 		this.pasokonskill = pasokonskill;
 		this.caution = caution;
+		this.tantoustaffname = tantoustaffname;
 		this.tantoustaffid = tantoustaffid;
 		this.password = password;
 		this.createdt = createdt;
@@ -176,7 +179,7 @@ public class JobSeeker {
 	 * 年齢を返す
 	 * @return age
 	 */
-	public int getAge() {
+	public Integer getAge() {
 		return age;
 	}
 
@@ -232,7 +235,7 @@ public class JobSeeker {
 	 * 扶養家族を返す
 	 * @return huyou
 	 */
-	public int getHuyou() {
+	public Integer getHuyou() {
 		return huyou;
 	}
 
@@ -296,7 +299,7 @@ public class JobSeeker {
 	 * 希望勤務日時を返す
 	 * @return hopeworkingDate
 	 */
-	public int getHopeworkingDate() {
+	public Integer getHopeworkingDate() {
 		return hopeworkingDate;
 	}
 
@@ -304,7 +307,7 @@ public class JobSeeker {
 	 * 希望勤務時間（開始）を返す
 	 * @return hopebegintime
 	 */
-	public int getHopebegintime() {
+	public Integer getHopebegintime() {
 		return hopebegintime;
 	}
 
@@ -312,7 +315,7 @@ public class JobSeeker {
 	 * 希望勤務時間（終了）を返す
 	 * @return hopeendtime
 	 */
-	public int getHopeendtime() {
+	public Integer getHopeendtime() {
 		return hopeendtime;
 	}
 
@@ -320,7 +323,7 @@ public class JobSeeker {
 	 * 希望月給を返す
 	 * @return hopesalary
 	 */
-	public int getHopesalary() {
+	public Integer getHopesalary() {
 		return hopesalary;
 	}
 
@@ -328,7 +331,7 @@ public class JobSeeker {
 	 * 希望時間給を返す
 	 * @return hopejikyu
 	 */
-	public int getHopejikyu() {
+	public Integer getHopejikyu() {
 		return hopejikyu;
 	}
 
@@ -370,6 +373,14 @@ public class JobSeeker {
 	 */
 	public String getCaution() {
 		return caution;
+	}
+
+	/**
+	 * 担当職業紹介者名を返す
+	 * @return tantoustaffname
+	 */
+	public String getTantoustaffname() {
+		return tantoustaffname;
 	}
 
 	/**

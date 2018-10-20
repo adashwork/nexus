@@ -1,4 +1,4 @@
-package jp.or.adash.nexus.utils.dao;
+package jp.or.adash.nexus.dao;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import jp.or.adash.nexus.entity.Staff;
+import jp.or.adash.nexus.utils.dao.Transaction;
 
 
 public class AccountEditDao {

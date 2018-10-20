@@ -49,7 +49,7 @@ public class Staff {
 	 *探番idをセットする。
 	 *
 	 */
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = String.valueOf(id);
 	}
 

@@ -220,7 +220,7 @@ public class JobSeekerService {
 			messages.add("年齢が入力されていません。");
 			result = false;
 		}
-		errMsg = DataCommons.chkInt(seeker.getAge());
+		errMsg = DataCommons.chkInt(String.valueOf(seeker.getAge().toString()));
 		messages.add(errMsg);
 
 		errMsg = DataCommons.chkiDigits(seeker.getAge(), 3);
@@ -284,7 +284,7 @@ public class JobSeekerService {
 			result = false;
 		}
 
-		errMsg = DataCommons.chkInt(seeker.getHuyou());
+		errMsg = DataCommons.chkInt(String.valueOf(seeker.getHuyou().toString()));
 		messages.add(errMsg);
 
 		errMsg = DataCommons.chkiDigits(seeker.getHuyou(), 2);
@@ -388,7 +388,7 @@ public class JobSeekerService {
 		*/
 
 		// 希望月給の値が正しいか
-		errMsg = DataCommons.chkInt(seeker.getHopesalary());
+		errMsg = DataCommons.chkInt(String.valueOf(seeker.getHopesalary().toString()));
 		messages.add(errMsg);
 
 		/*
@@ -400,7 +400,7 @@ public class JobSeekerService {
 		*/
 
 		// 希望時間給が正しいか
-		errMsg = DataCommons.chkInt(seeker.getHopejikyu());
+		errMsg = DataCommons.chkInt(String.valueOf(seeker.getHopejikyu().toString()));
 		messages.add(errMsg);
 
 		//その他希望が入力されているかどうか
@@ -508,7 +508,7 @@ public class JobSeekerService {
 			messages.add("年齢が入力されていません。");
 			result = false;
 		}
-		errMsg = DataCommons.chkInt(seeker.getAge());
+		errMsg = DataCommons.chkInt(String.valueOf(seeker.getAge().toString()));
 		messages.add(errMsg);
 
 		errMsg = DataCommons.chkiDigits(seeker.getAge(), 3);
@@ -578,7 +578,7 @@ public class JobSeekerService {
 			result = false;
 		}
 
-		errMsg = DataCommons.chkInt(seeker.getHuyou());
+		errMsg = DataCommons.chkInt(String.valueOf(seeker.getHuyou().toString()));
 		messages.add(errMsg);
 
 		errMsg = DataCommons.chkiDigits(seeker.getHuyou(), 2);
@@ -688,7 +688,7 @@ public class JobSeekerService {
 		*/
 
 		// 希望月給の値が入力されているか
-		errMsg = DataCommons.chkInt(seeker.getHopesalary());
+		errMsg = DataCommons.chkInt(String.valueOf(seeker.getHopesalary().toString()));
 		messages.add(errMsg);
 
 		/*
@@ -699,7 +699,7 @@ public class JobSeekerService {
 		}
 		*/
 
-		errMsg = DataCommons.chkInt(seeker.getHopejikyu());
+		errMsg = DataCommons.chkInt(String.valueOf(seeker.getHopejikyu().toString()));
 		messages.add(errMsg);
 
 		//その他希望が入力されているかどうか

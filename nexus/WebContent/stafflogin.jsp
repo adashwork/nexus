@@ -23,8 +23,11 @@
 <body>
 <header>
   <section>
-    <h1 class="logo"><a href="/nexus/top">TryNexus</a></h1>
-    <div class="user">
+			<h1 class="logo">
+				<a href="/nexus/top"><img src="./css/TryNexus-Logo.png"
+					width="97" height="70" alt="TryNexus" /></a>
+			</h1>
+			<div class="user">
       <div class="user__wrapper">
         <!-- <div class="user__image"></div> -->
         <div class="user__name">

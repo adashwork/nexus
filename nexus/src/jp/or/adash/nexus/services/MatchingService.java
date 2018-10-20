@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jp.or.adash.nexus.dao.MatchingDao;
+import jp.or.adash.nexus.dao.SaibanDao;
 import jp.or.adash.nexus.entity.JobSeekerMain;
 import jp.or.adash.nexus.entity.Kyujin;
 import jp.or.adash.nexus.entity.MatchingCase;
@@ -15,6 +16,7 @@ import jp.or.adash.nexus.utils.dao.Transaction;
 /**
  * マッチング登録に関する処理を定義するクラス
  * @author ji
+ * @author pgjavaAT
  *
  */
 public class MatchingService {
@@ -60,11 +62,11 @@ public class MatchingService {
 	private String jobseekerid;
 	JobSeekerMain jobseekermain = jobseekerService.getJobseekermaininfo(jobseekerid);
 
-	     /**
-		 * マッチング情報の入力内容をチェックする（エラーチェック）
-		 * @param matching マッチング情報
-		 * @return 処理結果（true:成功、false:失敗）
-		 */
+	/**
+	* マッチング情報の入力内容をチェックする（エラーチェック）
+	* @param matching マッチング情報
+	* @return 処理結果（true:成功、false:失敗）
+	*/
 	public boolean check(MatchingCase matching) {
 		boolean result = true; // チェック結果
 
@@ -124,8 +126,7 @@ public class MatchingService {
 	 * @param matching マッチング情報
 	 * @return マッシング情報を登録する。
 	 */
-
-	public boolean insertMatchingCases(MatchingCase matching) {
+	public boolean insertMatchingCase(MatchingCase matching) {
 		boolean result = false; //1処理結果
 
 		try {
@@ -135,17 +136,21 @@ public class MatchingService {
 			// 1トランザクションを開始する
 			transaction.beginTrans();
 
-			// 1商品単価を取得する
+			SaibanDao sdao = new SaibanDao(transaction);
+			int id = sdao.getMatching();
+			matching.setId(id);
+
+			// マッチング事例をDBに登録する
 			MatchingDao dao = new MatchingDao(transaction);
 			int count = dao.insert(matching);
 
 			if (count > 0) {
 				// 1完了メッセージをセットする
-				messages.add(MSG_MATCHING_REGIST_COMPLETE);
+				messages.add(MessageCommons.MSG_REGIST_COMPLETE);
 				result = true;
 			} else {
 				// 1エラーメッセージをセットする
-				messages.add(MSG_MATCHING_REGIST_FAILURE);
+				messages.add(MessageCommons.MSG_REGIST_FAILURE);
 				result = false;
 			}
 
@@ -166,11 +171,76 @@ public class MatchingService {
 		return result;
 	}
 
-	/* 1登録完了メッセージ
+	/**
+	 * マッチング情報の更新
+	 * @param matching
+	 * @return
 	 */
-	private static final String MSG_MATCHING_REGIST_COMPLETE = "マッチング登録が完了しました。";
+	public boolean updateMatchingCase(MatchingCase matching) {
+		boolean result = false;
 
-	/* 1登録完了メッセージ
+		try {
+			// 1データベース接続を開始する
+			transaction.open();
+
+			// 1トランザクションを開始する
+			transaction.beginTrans();
+
+			// 1商品単価を取得する
+			MatchingDao dao = new MatchingDao(transaction);
+			int count = dao.update(matching);
+
+			if (count > 0) {
+				// 1完了メッセージをセットする
+				messages.add(MessageCommons.MSG_UPDATE_COMPLETE);
+				result = true;
+			} else {
+				// 1エラーメッセージをセットする
+				messages.add(MessageCommons.MSG_UPDATE_FAILURE);
+				result = false;
+			}
+
+			//1 トランザクションをコミットする
+			transaction.commit();
+
+		} catch (IOException e) {
+			// 1トランザクションをロールバックする
+			transaction.rollback();
+
+			// 1エラーメッセージをセットする
+			messages.add(MessageCommons.ERR_DB_CONNECT);
+		} finally {
+			//1 データベース接続をを終了する
+			transaction.close();
+		}
+
+		return result;
+	}
+
+	/**
+	 * idを元にマッチング事例を取得
+	 * @param id
+	 * @return
 	 */
-	private static final String MSG_MATCHING_REGIST_FAILURE = "マッチング登録が失敗しました。";
+	public MatchingCase getMatching(int id) {
+		MatchingCase matching = null;
+
+		try {
+			// データベース接続を開始する
+			transaction.open();
+
+			// idを元にマッチング事例を取得
+			MatchingDao dao = new MatchingDao(transaction);
+			matching = dao.select(id);
+
+		} catch (IOException e) {
+			// エラーメッセージをセットする
+		} finally {
+			// データベース接続を終了する
+			transaction.close();
+		}
+
+		return matching;
+	}
+
 }

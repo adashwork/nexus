@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import jp.or.adash.nexus.entity.JobSeeker;
 import jp.or.adash.nexus.entity.Staff;
+import jp.or.adash.nexus.services.CommonsService;
 import jp.or.adash.nexus.services.JobSeekerService;
 
 
@@ -44,11 +45,7 @@ public class JobSeekerRegistServlet extends HttpServlet {
 		HttpSession session = request.getSession(true);
 		Staff staff = (Staff) session.getAttribute("UserData");
 
-		request.setAttribute("Staff", staff);
-		/*
-		request.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=UTF-8");
-		*/
+		CommonsService cservice = new CommonsService();
 		//入力された情報を登録する
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -87,31 +84,31 @@ public class JobSeekerRegistServlet extends HttpServlet {
 		String hopejobcategory = request.getParameter("hopejobcategory");
 		String hopeworkplace = request.getParameter("hopeworkplace");
 		String hopekoyoukeitai = request.getParameter("hopekoyoukeitai");
-		int hopeworkingDate = -1;
+		Integer hopeworkingDate = null;
 		if (!"".equals(request.getParameter("hopeworkingDate"))
 				&& request.getParameter("hopeworkingDate") != null) {
 			hopeworkingDate = Integer.parseInt(request.getParameter("hopeworkingDate"));
 		}
 //		int hopeworkingDate = Integer.parseInt(request.getParameter("hopeworkingdate"));
-		int hopebegintime = -1;
+		Integer hopebegintime = null;
 		if (!"".equals(request.getParameter("hopebegintime"))
 				&& request.getParameter("hopebegintime") != null) {
 			hopebegintime = Integer.parseInt(request.getParameter("hopebegintime"));
 		}
 //		int hopebegintime = Integer.parseInt(request.getParameter("hopebegintime"));
-		int hopeendtime = -1;
+		Integer hopeendtime = null;
 		if (!"".equals(request.getParameter("hopeendtime"))
 				&& request.getParameter("hopeendtime") != null) {
 			hopeendtime = Integer.parseInt(request.getParameter("hopeendtime"));
 		}
 //		int hopeendtime = Integer.parseInt(request.getParameter("hopeendtime"));
-		int hopesalary = -1;
+		Integer hopesalary = null;
 		if (!"".equals(request.getParameter("hopesalary"))
 				&& request.getParameter("hopesalary") != null) {
 			hopesalary = Integer.parseInt(request.getParameter("hopesalary"));
 		}
 //		int hopesalary = Integer.parseInt(request.getParameter("hopesalary"));
-		int hopejikyu = -1;
+		Integer hopejikyu = null;
 		if (!"".equals(request.getParameter("hopejikyu"))
 				&& request.getParameter("hopejikyu") != null) {
 			hopejikyu = Integer.parseInt(request.getParameter("hopejikyu"));
@@ -125,11 +122,13 @@ public class JobSeekerRegistServlet extends HttpServlet {
 		String tantoustaffid = request.getParameter("tantoustaffid");
 		String password = request.getParameter("password");
 		Date createdt = null;
-		String createuserid = request.getParameter("createuserid");
+		String createuserid = staff.getId();
 		Date upDatedt = null;
-		String upDateuserid = request.getParameter("upDateuerid");
+		String upDateuserid = staff.getId();
 		String deleteflag = request.getParameter("deleteflag");
 
+		// 担当職業紹介者IDから担当職業紹介者の名前を取得する
+		String tantoustaffname = cservice.checkStaffName(tantoustaffid);
 
 		//求人情報のオブジェクトを作成
 		JobSeeker seeker = new JobSeeker(id, name, kana, birthdt, sex, age, postal,
@@ -137,7 +136,7 @@ public class JobSeekerRegistServlet extends HttpServlet {
 				education, hopejob1, hopejob2, hopejob3, hopejobcategory,
 				hopeworkplace, hopekoyoukeitai, hopeworkingDate, hopebegintime, hopeendtime,
 				hopesalary, hopejikyu, hopeetc, driverlicense, licenseetc, pasokonskill,
-				caution,  tantoustaffid,  password, createdt, createuserid,
+				caution,  tantoustaffname, tantoustaffid,  password, createdt, createuserid,
 				upDatedt,  upDateuserid,  deleteflag);
 
 
@@ -149,16 +148,14 @@ public class JobSeekerRegistServlet extends HttpServlet {
 				request.setAttribute("messages", service.getMessages());
 
 				//JSPにフォワード
-				request.getRequestDispatcher("/applicantregist.jsp") //ここにjspを入力
+				request.getRequestDispatcher("/applicantregist.jsp")
 					.forward(request, response);
 
 				return;
 			}
 
-
 				//求人者idが使用されてない場合情報を登録する
 				service.insertJobSeeker(seeker);
-
 
 			//処理結果メッセージをリクエストに格納する
 
@@ -166,8 +163,8 @@ public class JobSeekerRegistServlet extends HttpServlet {
 			request.setAttribute("info", seeker);
 			request.setAttribute("messages", service.getMessages());
 
-			// 1.8 JSPにフォワード
-			request.getRequestDispatcher("/applicant_maininfo.jsp") //ここにjspを入力
+			// JSPにフォワード
+			request.getRequestDispatcher("/applicant_maininfo.jsp")
 				.forward(request, response);
 	}
 

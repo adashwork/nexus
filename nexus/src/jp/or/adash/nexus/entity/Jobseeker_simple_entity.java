@@ -3,14 +3,14 @@ package jp.or.adash.nexus.entity;
 public class Jobseeker_simple_entity {
 	private String id;
 	private String js_name;
-	private int age;
+	private Integer age;
 	private String sex;
 	private String hopejobcategory;
 	private String hopejob1;
 	private String hopeworkplace;
 	private String st_name;
 
-	public Jobseeker_simple_entity(String id, String js_name,int age,
+	public Jobseeker_simple_entity(String id, String js_name,Integer age,
 			String sex,String hopejobcategory,
 			String hopejob1,String hopeworkplace,String st_name) {
 		this.id = id;
@@ -31,7 +31,7 @@ public class Jobseeker_simple_entity {
 		return js_name;
 	}
 
-	public int getAge() {
+	public Integer getAge() {
 		return age;
 	}
 

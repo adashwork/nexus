@@ -1,3 +1,7 @@
+<!-- @author ??? & pgjavaAT
+	18/09/30 閉じるボタンをトップへ戻るに変更
+ -->
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -36,7 +40,9 @@
 	<header>
 		<section>
 			<h1 class="logo">
-				<a href="/nexus/web/staff-top">LOGO</a>
+				<a href="/nexus/web/staff-top"><img
+					src="../css/TryNexus-Logo.png" width="97" height="70" alt="TryNexus" /></a>
+			</h1>
 			</h1>
 			<nav>
 				<ul class="mainnavi">
@@ -51,8 +57,8 @@
 							<li><a href="/nexus/web/match-disp">マッチング登録<i
 									class="fas fa-angle-right"></i></a></li>
 						</ul></li>
-					<li><a href="/nexus/web/account-list"><i
-							class="far fa-bookmark"></i>管理</a></li>
+					<c:if test="${Staff.authority == 1}"><li><a href="/nexus/web/account-list"><i
+							class="far fa-bookmark"></i>管理</a></li></c:if>
 				</ul>
 			</nav>
 			<div class="user">
@@ -89,10 +95,8 @@
 			<table>
 				<tr>
 					<th>求人No.</th>
-					<td><input type="text" name="no"
-						value="<c:out value="${  kyujin.no }" />" size="20" maxlength="14"
-						tabindex="1" placeholder="記入不要です" readonly>
-						</td>
+					<td><input type="hidden" name="no"
+						value="<c:out value="${ kyujin.no }" />"><c:out value="${ kyujin.no }" /></td>
 				</tr>
 				<tr>
 					<th>受付年月日</th>
@@ -113,7 +117,8 @@
 						maxlength="13" tabindex="4"></td>
 				</tr>
 
-			<!-- 1やりたかったメモ：一行テキストボックスはenter押すとすぐに登録なのでsubmit変更かjsとかで制御、日本語入力オン-に-->
+				<!-- 1やりたかったメモ：一行テキストボックスはenter押すとすぐに登録なので
+			submit変更かjsとかで制御、日本語入力オン-に-->
 
 				<tr>
 					<th>産業大分類コード</th>
@@ -387,7 +392,8 @@
 						<c:if test="${5 == kyujin.salaryformcd}">checked="checked"</c:if>
 						tabindex="45"> 年棒 <input type="radio" name="salaryformcd"
 						value="6"
-						<c:if test="${1 != kyujin.salaryformcd && 3 != kyujin.salaryformcd && 4 != kyujin.salaryformcd && 5 != kyujin.salaryformcd}">checked="checked"</c:if>
+						<c:if test="${1 != kyujin.salaryformcd && 3 != kyujin.salaryformcd &&
+						 4 != kyujin.salaryformcd && 5 != kyujin.salaryformcd}">checked="checked"</c:if>
 						tabindex="46"> その他</td>
 				</tr>
 				<tr>
@@ -468,36 +474,46 @@
 				</tr>
 				<tr>
 					<th>新規登録日</th>
-					<td><c:out value="${ kyujin.createdt }" /></td>
+					<td><input type="hidden" name="createdt"
+						value="<fmt:formatDate value="${ kyujin.createdt }"
+					pattern="yyyy-MM-dd"/>">
+						<fmt:formatDate value="${ kyujin.createdt }"
+					pattern="yyyy-MM-dd"/></td>
 				</tr>
 				<tr>
 					<th>新規登録ユーザ</th>
-					<td><c:out value="${ kyujin.createuserid }" /></td>
+					<td><input type="hidden" name="createuserid"
+						value="<c:out value="${ kyujin.createuserid }" />">
+						<c:out value="${ kyujin.createuserid }" /></td>
 				<tr>
 					<th>最終更新日</th>
-					<td><c:out value="${ kyujin.updatedt }" /></td>
+					<td><input type="hidden" name="updatedt"
+						value="<fmt:formatDate value="${ kyujin.updatedt }"
+					pattern="yyyy-MM-dd"/>">
+						<fmt:formatDate value="${ kyujin.updatedt }"
+					pattern="yyyy-MM-dd"/></td>
 				</tr>
 				<tr>
 					<th>最終更新ユーザ</th>
-					<td><c:out value="${ kyujin.updateuserid }" /></td>
+					<td><input type="hidden" name="updateuserid"
+						value="<c:out value="${ kyujin.updateuserid }" />">
+						<c:out value="${ kyujin.updateuserid }" /></td>
 				</tr>
 
 			</table>
 
 
-			<!-- 2やるべきメモ：別ウインドウで開いていないため閉じてしまうと再度立ち上げになるので戻る制御にしてください -->
-			<button type="button" class="main-b" onClick="window.CloseWindow();"
-				tabindex="62">閉じる</button>
+			<button type="button" class="main-b"
+				onClick="location.href='./job-search'" tabindex="62">求人一覧に戻る</button>
 
-			<!-- 3やりたかったメモ：押し間違えやすいので削除と戻るボタングレー等に色変えか位置変え検討-->
-				<c:if test="${ kyujin.no == null }">
+			<c:if test="${ kyujin.no == null }">
 				<button type="submit" id="kyujin-insert" class="main-b"
 					onclick="MovePages(this)" tabindex="61">登録</button>
 			</c:if>
 			<c:if test="${ kyujin.no != null }">
-					<button type="submit" id="kyujin-update" class="main-b"
+				<button type="submit" id="kyujin-update" class="main-b"
 					onclick="MovePages(this)" tabindex="61">更新</button>
-					<button type="submit" id="kyujin-delete" class="main-b"
+				<button type="submit" id="kyujin-delete" class="main-b2"
 					onclick="MovePages(this)" tabindex="63">削除</button>
 			</c:if>
 		</div>

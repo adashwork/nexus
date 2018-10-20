@@ -2,11 +2,12 @@
  * Javascriptの機能を一つにまとめたファイル
  * カレンダーの表示、アカウント削除の確認、
  * ウィンドウのクローズ、IDごとにURL遷移先の変更
- * @author a.taya
+ * @author pgjavaAT
  */
 
 
-// カレンダー
+
+// カレンダー classタグに「datepiker」を設定すればカレンダーが表示される
 $(function() {
 	  $('.datepicker').datepicker({
 	      dateFormat: 'yy-mm-dd',
@@ -31,7 +32,8 @@ function CloseWindow(){
 	window.open('about:blank','_self').close();
 }
 
-//IDを取得してそれを元にURL遷移
+//ele.idを元に、formタグのactionのURLを再設定する
+//type="submit"のみ使用可 formにid="form"を設定して使用
 function MovePages(ele){
 	var page_id = ele.id;
 	var loc = location.pathname;

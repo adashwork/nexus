@@ -50,10 +50,10 @@ public class SimpleKyujin {
 	private String nearstation;
 	private String job;
 	private String koyoukeitaicd;
-	private int agemin;
-	private int agemax;
-	private int salarymin;
-	private int salarymax;
+	private Integer agemin;
+	private Integer agemax;
+	private Integer salarymin;
+	private Integer salarymax;
 	private String deleteflag;
 
 	public SimpleKyujin() {
@@ -64,7 +64,7 @@ public class SimpleKyujin {
 			String jobcategorysmallcd, String jobcategorylargecd,
 			String companyname, String address, String addresscd, String nearstation,
 			String job, String koyoukeitaicd,
-			int agemin, int agemax, int salarymin, int salarymax, String deleteflag) {
+			Integer agemin, Integer agemax, Integer salarymin, Integer salarymax, String deleteflag) {
 		this.no = no;
 		this.companyno = companyno;
 		this.jobsmallcd1 = jobsmallcd1;
@@ -155,19 +155,19 @@ public class SimpleKyujin {
 		return koyoukeitaicd;
 	}
 
-	public int getAgemin() {
+	public Integer getAgemin() {
 		return agemin;
 	}
 
-	public int getAgemax() {
+	public Integer getAgemax() {
 		return agemax;
 	}
 
-	public int getSalarymin() {
+	public Integer getSalarymin() {
 		return salarymin;
 	}
 
-	public int getSalarymax() {
+	public Integer getSalarymax() {
 		return salarymax;
 	}
 

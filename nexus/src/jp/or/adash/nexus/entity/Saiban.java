@@ -15,16 +15,18 @@ public class Saiban {
 	 *
 	 */
 
-	private int jobseekersaiban;
-	private int kyujinsaiban;
-	private int companysaiban;
-	private int staffsaiban;
+	private Integer jobseekersaiban;
+	private Integer kyujinsaiban;
+	private Integer companysaiban;
+	private Integer staffsaiban;
+	private Integer matchingsaiban;
 
-	public Saiban(int staffsaiban, int jobseekersaiban, int kyujinsaiban, int companysaiban) {
+	public Saiban(Integer staffsaiban, Integer jobseekersaiban, Integer kyujinsaiban, Integer companysaiban, Integer matchingsaiban) {
 		this.staffsaiban =staffsaiban;
 		this.jobseekersaiban = jobseekersaiban;
 		this.kyujinsaiban = kyujinsaiban;
 		this.companysaiban = companysaiban;
+		this.matchingsaiban = matchingsaiban;
 	}
 
 
@@ -33,7 +35,7 @@ public class Saiban {
 	 * 求職者ID採番を返す
 	 * @return jobseekersaiban
 	 */
-	public int getJobseekersaiban() {
+	public Integer getJobseekersaiban() {
 		return jobseekersaiban;
 	}
 
@@ -41,7 +43,7 @@ public class Saiban {
 	 * 求人NO採番を返す
 	 * @return kyujinsaiban
 	 */
-	public int getKyujinsaiban() {
+	public Integer getKyujinsaiban() {
 		return kyujinsaiban;
 	}
 
@@ -49,7 +51,7 @@ public class Saiban {
 	 * 事業所番号採番を返す
 	 * @return companysaiban
 	 */
-	public int getCompanysaiban() {
+	public Integer getCompanysaiban() {
 		return companysaiban;
 	}
 
@@ -57,7 +59,15 @@ public class Saiban {
 	 *職業紹介者ID採番を返す
 	 * @return staffsaiban
 	 */
-	public int getStaffsaiban() {
+	public Integer getStaffsaiban() {
 		return staffsaiban;
+	}
+
+	/**
+	 * マッチング事例ID採番を返す
+	 * @return
+	 */
+	public Integer getMatchingsaiban() {
+		return matchingsaiban;
 	}
 }

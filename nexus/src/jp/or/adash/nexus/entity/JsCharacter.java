@@ -12,9 +12,9 @@ public class JsCharacter {
 	* characterid 特性ID
 	 */
 	private char jobseekerid;
-	private int characterid;
+	private Integer characterid;
 
-	public JsCharacter(char jobseekerid, int characterid) {
+	public JsCharacter(char jobseekerid, Integer characterid) {
 		this.jobseekerid = jobseekerid;
 		this.characterid = characterid;
 	}
@@ -31,7 +31,7 @@ public class JsCharacter {
 	 * 特性IDを返す
 	 * @return characterid
 	 */
-	public int getCharacterid() {
+	public Integer getCharacterid() {
 		return characterid;
 	}
 

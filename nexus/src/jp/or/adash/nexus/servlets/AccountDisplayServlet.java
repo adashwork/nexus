@@ -37,7 +37,15 @@ public class AccountDisplayServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(true);
 		Staff staff = (Staff) session.getAttribute("UserData");
+		// 管理者以外の場合、staff-topに遷移
+		if(!staff.getAuthority().equals("1")) {
+			request.setAttribute("Staff", staff);
+			//0	フォワードする
+			request.getRequestDispatcher("/web/staff-top")
+			.forward(request, response);
 
+			return;
+		}
 		request.setAttribute("Staff", staff);
 		//0	フォワードする
 		request.getRequestDispatcher("/accountregist.jsp")

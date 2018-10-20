@@ -13,6 +13,7 @@ import jp.or.adash.nexus.utils.dao.Transaction;
 
 /**
  * 求人データアクセスクラス
+ * @author ??
  * @author pgjavaAT
  *
  */
@@ -46,11 +47,18 @@ public class KyujinDao {
 		StringBuffer sql = new StringBuffer();
 		sql.append("insert into kyujin(");
 		sql.append(
-		        "no, receptiondt, perioddt, companyno, addresscd, jobsmallcd1, jobsmallcd2, jobsmallcd3, joblargecd1, joblargecd2, joblargecd3, jobcategorysmallcd, jobcategorylargecd, companykana, companyname, companypostal, companyplace, companyurl, postal, address, nearstation, job, hakencd, detail, koyoukeitaicd, koyoukikan, koyoukikankaishi, koyoukikanowari, education, experience, license, agemin, agemax, salarymin, salarymax, salaryformcd, begintime, endtime, establishdt, capital, companyfeature, tantouyakushoku, tantoukana, tantou, tantoustaff_id, applicationform, background, hiddensex, hiddenagemin, hiddenagemax, hiddenetc,  createuserid,  upDateuserid, deleteflag");
-
+		        "no, receptiondt, perioddt, companyno, addresscd, jobsmallcd1, jobsmallcd2, jobsmallcd3, "
+		        + "joblargecd1, joblargecd2, joblargecd3, jobcategorysmallcd, jobcategorylargecd, companykana, "
+		        + "companyname, companypostal, companyplace, companyurl, postal, address, nearstation, job, "
+		        + "hakencd, detail, koyoukeitaicd, koyoukikan, koyoukikankaishi, koyoukikanowari, education, "
+		        + "experience, license, agemin, agemax, salarymin, salarymax, salaryformcd, begintime, endtime,"
+		        + " establishdt, capital, companyfeature, tantouyakushoku, tantoukana, tantou, tantoustaff_id, "
+		        + "applicationform, background, hiddensex, hiddenagemin, hiddenagemax, hiddenetc,  createuserid, "
+		        + "upDateuserid, deleteflag");
 		sql.append(") values (");
 		sql.append(
-				"?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,  ?, ?, ?");
+				"?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, "
+				+ "?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,  ?, ?, ?");
 		sql.append(")");
 		try (PreparedStatement ps = this.conn.prepareStatement(sql.toString())) {
 			ps.setString(1, kyujin.getNo());
@@ -79,9 +87,7 @@ public class KyujinDao {
 			ps.setString(24, kyujin.getDetail());
 			ps.setString(25, kyujin.getKoyoukeitaicd());
 			ps.setString(26, kyujin.getKoyoukikan());
-
 			ps.setDate(27, DataCommons.convertToSqlDate(kyujin.getKoyoukikankaishi()));
-
 			ps.setDate(28, DataCommons.convertToSqlDate(kyujin.getKoyoukikanowari()));
 			ps.setString(29, kyujin.getEducation());
 			ps.setString(30, kyujin.getExperience());
@@ -133,7 +139,14 @@ public class KyujinDao {
 		// SQL文を生成する
 		StringBuffer sql = new StringBuffer();
 		sql.append(
-				"select no, receptiondt, perioddt, companyno, addresscd, jobsmallcd1, jobsmallcd2, jobsmallcd3, joblargecd1, joblargecd2, joblargecd3, jobcategorysmallcd, jobcategorylargecd, companykana, companyname, companypostal, companyplace, companyurl, postal, address, nearstation, job, hakencd, detail, koyoukeitaicd, koyoukikan, koyoukikankaishi, koyoukikanowari, education, experience, license, agemin, agemax, salarymin, salarymax, salaryformcd, begintime, endtime, establishdt, capital, companyfeature, tantouyakushoku, tantoukana, tantou, tantoustaff_id, applicationform, background, hiddensex, hiddenagemin, hiddenagemax, hiddenetc, createdt, createuserid, updatedt, updateuserid, deleteflag");
+				"select no, receptiondt, perioddt, companyno, addresscd, jobsmallcd1, jobsmallcd2, jobsmallcd3, "
+				+ "joblargecd1, joblargecd2, joblargecd3, jobcategorysmallcd, jobcategorylargecd, companykana, "
+				+ "companyname, companypostal, companyplace, companyurl, postal, address, nearstation, job, "
+				+ "hakencd, detail, koyoukeitaicd, koyoukikan, koyoukikankaishi, koyoukikanowari, education, "
+				+ "experience, license, agemin, agemax, salarymin, salarymax, salaryformcd, begintime, endtime, "
+				+ "establishdt, capital, companyfeature, tantouyakushoku, tantoukana, tantou, tantoustaff_id, "
+				+ "applicationform, background, hiddensex, hiddenagemin, hiddenagemax, hiddenetc, createdt, "
+				+ "createuserid, updatedt, updateuserid, deleteflag");
 		sql.append(" from kyujin");
 		sql.append(" where no = ?");
 		try (PreparedStatement ps = this.conn.prepareStatement(sql.toString())) {
@@ -221,7 +234,14 @@ public class KyujinDao {
 		// SQL文を生成する
 		StringBuffer sql = new StringBuffer();
 		sql.append(
-				"select no, receptiondt, perioddt, companyno, addresscd, jobsmallcd1, jobsmallcd2, jobsmallcd3, joblargecd1, joblargecd2, joblargecd3, jobcategorysmallcd, jobcategorylargecd, companykana, companyname, companypostal, companyplace, companyurl, postal, address, nearstation, job, hakencd, detail, koyoukeitaicd, koyoukikan, koyoukikankaishi, koyoukikanowari, education, experience, license, agemin, agemax, salarymin, salarymax, salaryformcd, begintime, endtime, establishdt, capital, companyfeature, tantouyakushoku, tantoukana, tantou, tantoustaff_id, applicationform, background, hiddensex, hiddenagemin, hiddenagemax, hiddenetc, createdt, createuserid, updatedt, updateuserid, deleteflag");
+				"select no, receptiondt, perioddt, companyno, addresscd, jobsmallcd1, jobsmallcd2, jobsmallcd3, "
+				+ "joblargecd1, joblargecd2, joblargecd3, jobcategorysmallcd, jobcategorylargecd, companykana, "
+				+ "companyname, companypostal, companyplace, companyurl, postal, address, nearstation, job, "
+				+ "hakencd, detail, koyoukeitaicd, koyoukikan, koyoukikankaishi, koyoukikanowari, education, "
+				+ "experience, license, agemin, agemax, salarymin, salarymax, salaryformcd, begintime, endtime, "
+				+ "establishdt, capital, companyfeature, tantouyakushoku, tantoukana, tantou, tantoustaff_id, "
+				+ "applicationform, background, hiddensex, hiddenagemin, hiddenagemax, hiddenetc, createdt, "
+				+ "createuserid, updatedt, updateuserid, deleteflag");
 		sql.append(" from kyujin");
 		sql.append(" order by no");
 		try (PreparedStatement ps = this.conn.prepareStatement(sql.toString())) {
@@ -280,9 +300,9 @@ public class KyujinDao {
 							rs.getInt("hiddenagemin"),
 							rs.getInt("hiddenagemax"),
 							rs.getString("hiddenetc"),
-							rs.getTimestamp("createdt"),
+							rs.getDate("createdt"),
 							rs.getString("createuserid"),
-							rs.getTimestamp("updatedt"),
+							rs.getDate("updatedt"),
 							rs.getString("updateuserid"),
 							rs.getString("deleteflag")));
 				}
@@ -430,7 +450,7 @@ public class KyujinDao {
 	}
 
 	/**
-	 * 求人データ二削除フラグを立てる
+	 * 求人データに削除フラグを立てる
 	 * @param kyujin 求人データ
 	 * @return 更新件数
 	 * @throws IOException

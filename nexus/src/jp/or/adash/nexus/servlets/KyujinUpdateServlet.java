@@ -1,4 +1,5 @@
 package jp.or.adash.nexus.servlets;
+
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -14,7 +15,6 @@ import javax.servlet.http.HttpSession;
 import jp.or.adash.nexus.entity.Kyujin;
 import jp.or.adash.nexus.entity.Staff;
 import jp.or.adash.nexus.services.KyujinService;
-
 
 /**
  * Servlet implementation class KyujinUpdateServlet
@@ -41,23 +41,19 @@ public class KyujinUpdateServlet extends HttpServlet {
 		HttpSession session = request.getSession(true);
 		Staff staff = (Staff) session.getAttribute("UserData");
 
-
-
 		String no = request.getParameter("no");
 		//		String hiddenno = request.getParameter("hiddenno");
 		Date receptiondt = null;
 		try {
 			receptiondt = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("receptiondt"));
-
 		} catch (ParseException e) {
-			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
 
 		Date perioddt = null;
 		try {
-			perioddt = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("perioddt"));		} catch (ParseException e) {
-			// TODO 自動生成された catch ブロック
+			perioddt = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("perioddt"));
+		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 		String companyno = request.getParameter("companyno");
@@ -97,37 +93,43 @@ public class KyujinUpdateServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 
-
-
 		String education = request.getParameter("education");
 		String experience = request.getParameter("experience");
 		String license = request.getParameter("license");
 		// 空データでparseIntをするとエラーになるので、空データ以外はチェック。空データは０をセット
 		int agemin = 0;
 		if (!request.getParameter("agemin").equals("")) {
-		       agemin = Integer.parseInt(request.getParameter("agemin"));}
+			agemin = Integer.parseInt(request.getParameter("agemin"));
+		}
 		int agemax = 0;
 		if (!request.getParameter("agemax").equals("")) {
-		    agemax = Integer.parseInt(request.getParameter("agemax"));}
+			agemax = Integer.parseInt(request.getParameter("agemax"));
+		}
 		int salarymin = 0;
 		if (!request.getParameter("salarymin").equals("")) {
-			salarymin = Integer.parseInt(request.getParameter("salarymin"));}
+			salarymin = Integer.parseInt(request.getParameter("salarymin"));
+		}
 		int salarymax = 0;
-		if  (!request.getParameter("salarymax").equals("")) {
-			salarymax = Integer.parseInt(request.getParameter("salarymax"));}
+		if (!request.getParameter("salarymax").equals("")) {
+			salarymax = Integer.parseInt(request.getParameter("salarymax"));
+		}
 		String salaryformcd = request.getParameter("salaryformcd");
 		int begintime = 0;
 		if (!request.getParameter("begintime").equals("")) {
-		    begintime = Integer.parseInt(request.getParameter("begintime"));}
+			begintime = Integer.parseInt(request.getParameter("begintime"));
+		}
 		int endtime = 0;
 		if (!request.getParameter("endtime").equals("")) {
-		    endtime = Integer.parseInt(request.getParameter("endtime"));}
+			endtime = Integer.parseInt(request.getParameter("endtime"));
+		}
 		int establishdt = 0;
 		if (!request.getParameter("establishdt").equals("")) {
-		    establishdt = Integer.parseInt(request.getParameter("establishdt"));}
+			establishdt = Integer.parseInt(request.getParameter("establishdt"));
+		}
 		long capital = 0;
 		if (!request.getParameter("capital").equals("")) {
-		    capital = Long.parseLong(request.getParameter("capital"));}
+			capital = Long.parseLong(request.getParameter("capital"));
+		}
 		String companyfeature = request.getParameter("companyfeature");
 		String tantouyakushoku = request.getParameter("tantouyakushoku");
 		String tantoukana = request.getParameter("tantoukana");
@@ -138,22 +140,29 @@ public class KyujinUpdateServlet extends HttpServlet {
 		String hiddensex = request.getParameter("hiddensex");
 		int hiddenagemin = 0;
 		if (!request.getParameter("hiddenagemin").equals("")) {
-		    hiddenagemin = Integer.parseInt(request.getParameter("hiddenagemin"));}
+			hiddenagemin = Integer.parseInt(request.getParameter("hiddenagemin"));
+		}
 		int hiddenagemax = 0;
 		if (!request.getParameter("hiddenagemax").equals("")) {
-		    hiddenagemax = Integer.parseInt(request.getParameter("hiddenagemax"));}
+			hiddenagemax = Integer.parseInt(request.getParameter("hiddenagemax"));
+		}
 		String hiddenetc = request.getParameter("hiddenetc");
 
-
-
-		Date createdt= null;
+		Date createdt = null;
+		try {
+			createdt = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("createdt"));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 
 		String createuserid = request.getParameter("createuserid");
 
 		Date updatedt = null;
-
-
-
+		try {
+			updatedt = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("updatedt"));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 
 		String updateuserid = staff.getId();
 
@@ -162,23 +171,23 @@ public class KyujinUpdateServlet extends HttpServlet {
 		// 1.2求人票オブジェクトを作成
 
 		Kyujin kyujin = new Kyujin(
-				         no, receptiondt, perioddt,  companyno,  addresscd, jobsmallcd1,
-						 jobsmallcd2,  jobsmallcd3,  joblargecd1,  joblargecd2,  joblargecd3,
-						 jobcategorysmallcd,  jobcategorylargecd,  companykana,
-						 companyname,  companypostal,  companyplace,  companyurl,  postal,
-						 address,  nearstation,  job,  hakencd,  detail,  koyoukeitaicd,
-						 koyoukikan,  koyoukikankaishi,  koyoukikanowari,  education, experience,
-						 license, agemin, agemax,  salarymin,  salarymax,  salaryformcd, begintime,
-						 endtime, establishdt,  capital,  companyfeature,  tantouyakushoku,
-						 tantoukana,  tantou,  tantoustaff_id,  applicationform,  background,
-						 hiddensex, hiddenagemin,  hiddenagemax,  hiddenetc,  createdt,
-						 createuserid, updatedt, updateuserid,  deleteflag);
+				no, receptiondt, perioddt, companyno, addresscd, jobsmallcd1,
+				jobsmallcd2, jobsmallcd3, joblargecd1, joblargecd2, joblargecd3,
+				jobcategorysmallcd, jobcategorylargecd, companykana,
+				companyname, companypostal, companyplace, companyurl, postal,
+				address, nearstation, job, hakencd, detail, koyoukeitaicd,
+				koyoukikan, koyoukikankaishi, koyoukikanowari, education, experience,
+				license, agemin, agemax, salarymin, salarymax, salaryformcd, begintime,
+				endtime, establishdt, capital, companyfeature, tantouyakushoku,
+				tantoukana, tantou, tantoustaff_id, applicationform, background,
+				hiddensex, hiddenagemin, hiddenagemax, hiddenetc, createdt,
+				createuserid, updatedt, updateuserid, deleteflag);
 		// 1.3 入力チェック
 		KyujinService service = new KyujinService();
 		if (!service.check(kyujin)) {
 			// 1.4 入力チェックでエラーがあった場合、エラーメッセージをセット
-//			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//			kyujin.setReceptiondt(sdf.format(kyujin.receptiondt()));
+			//			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			//			kyujin.setReceptiondt(sdf.format(kyujin.receptiondt()));
 			request.setAttribute("kyujin", kyujin);
 			request.setAttribute("messages", service.getMessages());
 
@@ -196,14 +205,16 @@ public class KyujinUpdateServlet extends HttpServlet {
 		// 処理結果メッセージをリクエストに格納する
 
 		request.setAttribute("Staff", staff);
-//		request.setAttribute("kyujin", kyujin);
+		// TODO 18/09/30 コメントアウトを解除
+		request.setAttribute("kyujin", kyujin);
 		request.setAttribute("messages", service.getMessages());
 
 		// 1.8 JSPにフォワード
 		request.getRequestDispatcher("/jobregist.jsp")
 				.forward(request, response);
 	}
-	public java.util.Date convertToUtilDate(java.sql.Date sqlDate){
-	    return sqlDate;
+
+	public java.util.Date convertToUtilDate(java.sql.Date sqlDate) {
+		return sqlDate;
 	}
 }

@@ -1,4 +1,4 @@
-package jp.or.adash.nexus.utils.dao;
+package jp.or.adash.nexus.dao;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jp.or.adash.nexus.entity.Staff;
+import jp.or.adash.nexus.utils.dao.Transaction;
 
 public class AccountListDao {
 	/**

@@ -22,7 +22,6 @@ public class JobSearchDao {
  * TODO 検索サーブレットの作成（今は初期表示サーブレットと兼用している）
  * TODO　検索項目のデータベース利用（業種マスタでjobnameを検索してコード取得、kyujinマスタを検索）
  * TODO　路線の選択
- * TODO　最小給与および最大給与をちゃんと検索できるようにする
  *
  */
 	/**
@@ -109,11 +108,11 @@ public class JobSearchDao {
 			setFlagKoyoukeitaicd = ++setFlag;
 		}
 		if (salarymin != 0) {
-			whereStr.add("salarymin => ?");
+			whereStr.add("salarymin >= ?");
 			setFlagSalarymin = ++setFlag;
 		}
-		if (salarymin != 0) {
-			whereStr.add("salarymax =< ?");
+		if (salarymax != 0) {
+			whereStr.add("salarymax <= ?");
 			setFlagSalarymax = ++setFlag;
 		}
 

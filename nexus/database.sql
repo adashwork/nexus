@@ -271,7 +271,6 @@ deleteflag char(1) not null,
 primary key(no)
 )charset =utf8;
 
-
 create table todouhuken(
 cd char(2) not null,
 name varchar(20) not null,
@@ -297,14 +296,33 @@ primary key(id)
 )charset =utf8;
 
 create table matchingcase(
-id int auto_increment not null , 
-kyujinno char(14) not null, 
-jobseekerid varchar(8) not null, 
-staffid char(4) not null, 
+id int auto_increment not null, 
+companyno char(13),
+kyujinno char(14), 
+jobseekerid varchar(8), 
+staffid char(4), 
 interviewdt date, 
 enterdt date, 
-assessment char(1) not null, 
+assessment char(1), 
 note varchar(200), 
+createdt timestamp not null default current_timestamp, 
+createuserid char(4) not null, 
+updatedt timestamp not null default current_timestamp, 
+updateuserid char(4) not null,
+primary key(id)
+)charset =utf8;
+
+create table comment(
+id int auto_increment not null, 
+companyno char(13),
+kyujinno char(14), 
+jobseekerid varchar(8), 
+staffid char(4), 
+matchid int,
+genre varchar(15), 
+important char(1), 
+title varchar(60), 
+note varchar(4000), 
 createdt timestamp not null default current_timestamp, 
 createuserid char(4) not null, 
 updatedt timestamp not null default current_timestamp, 

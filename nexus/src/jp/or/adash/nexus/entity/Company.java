@@ -1,5 +1,5 @@
 package jp.or.adash.nexus.entity;
 
-public class CompanyEntity {
+public class Company {
 
 }

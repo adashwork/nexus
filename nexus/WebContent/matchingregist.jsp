@@ -74,16 +74,7 @@
 			</c:forEach>
 		</ul>
 
- 		<form id="form" method="post" action="">
-
-		<div class="listbox2">
-
-			<h4 class="word">マッチング</h4>		<!-- TODO：結果・編集・登録に表示を変える -->
-
-			<input type="text" class="word" name="id" cols="60" rows="1" placeholder="マッチングNoを入力">
-			<input type="submit" value="検索" onclick="location.href='/nexus/web/match-search'">
-
- 		</div>
+ 		<form id="form" method="post" action="">	<!-- TODO:「action」未設定 -->
 
 <!-- テーブル部分　-->
 
@@ -131,8 +122,9 @@
 				</th>
 				<td>
 					<input type="text" name="staffid" size="4"
-					<c:if test="${ matching.staffid == null }">value="<fmt:formatNumber value="${ Staff.id }" pattern="0000"/>" />"</c:if>
-					<c:if test="${ matching.staffid != null }">value="<fmt:formatNumber value="${ matchinig.staffid }" pattern="0000"/>" />"</c:if>>
+						<c:if test="${ matching.staffid == null }">value="<fmt:formatNumber value="${ Staff.id }" pattern="0000" />"</c:if>
+						<c:if test='${ matching.staffid != null }'>value="<fmt:formatNumber value='${ matchinig.staffid }' pattern='0000' />"</c:if>
+					>
 				</td>
 			</tr>
 			<tr>
@@ -150,9 +142,9 @@
 				</th>
 				<td>
 					<input name="assessment" type="radio" value="1"
-					<c:if test="${ 1 == matching.assessment }">checked="checked"</c:if>> 成功
+					<c:if test="${ 1 == matching.assessment }">checked="checked"</c:if>> 採用
 					<input name="assessment" type="radio" value="2"
-					<c:if test="${ 2 == matching.assessment }">checked="checked"</c:if>> 失敗
+					<c:if test="${ 2 == matching.assessment }">checked="checked"</c:if>> 不採用
 					<input name="assessment" type="radio" value="3"
 					<c:if test="${ 1 != matching.assessment && 2 != matching.assessment }">checked="checked"</c:if>> 確認中
 				</td>
@@ -163,8 +155,8 @@
 				</th>
 			</tr>
 			<tr>
-				<td colspan="2" >
-					<textarea name="note" rows="7" cols="30" style="width:100%"></textarea>
+				<td colspan="2">
+					<textarea name="note" style="width:100%"></textarea>
 				</td>
 			</tr>
 

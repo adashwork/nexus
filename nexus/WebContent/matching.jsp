@@ -81,7 +81,8 @@
 			<tr>
 				<td>
 					<p>マッチングID</p>
-					<input type="hidden" size=10 name="no" value="<c:out value="${ matching.id }"/>">
+					<input type="text" name="no" value="">
+<!--  				<input type="hidden" size=10 name="nohidden" value="<c:out value="${ matching.id }"/>"> -->
 					<fmt:formatNumber value="${ matching.id }" pattern="00000000"/>
 				</td>
 				<td>

@@ -86,8 +86,11 @@
 					マッチングID
 				</th>
 				<td>
-					<input type="hidden" name="no" value="<c:out value="${ matching.id }" />">
-						<fmt:formatNumber value="${ matching.id }" pattern="00000000"/>
+					<input type="text" name="no" size="10" value="">
+<!--  	 			<input type="hidden" name="nohidden" value="<c:out value="${ matching.id }" />"> -->
+					<fmt:formatNumber value="${ matching.id }" pattern="00000000"/>
+				</td>
+				<td>
 				</td>
 			</tr>
 			<tr>
@@ -97,14 +100,18 @@
 				<td>
 					<!-- TODO: 処理未 -->
 				</td>
+				<td>
+				</td>
 			</tr>
 			<tr>
 				<th>
 					求人ID
 				</th>
 				<td>
-					<input type="text" name="kyujinno"  value="<c:out value="${ matching.kyujinno }" />">
+					<input type="text" name="kyujinno" size="10" value="<c:out value="${ matching.kyujinno }" />">
 					<input type="button" value="求人No一覧" onclick="window.open('/nexus/web/job-search')">
+				</td>
+				<td>
 				</td>
 			</tr>
 			<tr>
@@ -112,8 +119,10 @@
 					求職者ID
 				</th>
 				<td>
-					<input type="text" name="jobseekerid"  value="<c:out value="${ matching.jobseekerid }" />">
+					<input type="text" name="jobseekerid" size="10" value="<c:out value="${ matching.jobseekerid }" />">
 					<input type="button" value="求職者一覧" onclick="window.open('/nexus/web/jobseeker-list')">
+				</td>
+				<td>
 				</td>
 			</tr>
 			<tr>
@@ -126,19 +135,34 @@
 						<c:if test='${ matching.staffid != null }'>value="<fmt:formatNumber value='${ matchinig.staffid }' pattern='0000' />"</c:if>
 					>
 				</td>
+				<td>
+				</td>
+			</tr>
+			<tr>
+				<th>
+					履歴書送付日
+				</th>
+				<td>
+					<input type="text" class="datepicker" size="10" name="interviewdt"
+					value="<fmt:formatDate value="${ matching.interviewdt }" pattern="yyyy-MM-dd"/>">
+				</td>
+				<td>
+				</td>
 			</tr>
 			<tr>
 				<th>
 					面接日
 				</th>
 				<td>
-					<input type="text" class="datepicker" name="interviewdt"
+					<input type="text" class="datepicker" size="10" name="interviewdt"
 					value="<fmt:formatDate value="${ matching.interviewdt }" pattern="yyyy-MM-dd"/>">
+				</td>
+				<td>
 				</td>
 			</tr>
 			<tr>
 				<th>
-					評価						<!-- TODO：採用不採用に変換してOKか -->
+					選考結果						<!-- TODO：採用不採用に変換してOKか -->
 				</th>
 				<td>
 					<input name="assessment" type="radio" value="1"
@@ -148,14 +172,16 @@
 					<input name="assessment" type="radio" value="3"
 					<c:if test="${ 1 != matching.assessment && 2 != matching.assessment }">checked="checked"</c:if>> 確認中
 				</td>
+				<td>
+				</td>
 			</tr>
 			<tr>
-				<th colspan="2">
+				<th colspan="3">
 					フリーワード				<!-- TODO：入力後の処理、未 -->
 				</th>
 			</tr>
 			<tr>
-				<td colspan="2">
+				<td colspan="3">
 					<textarea name="note" style="width:100%"></textarea>
 				</td>
 			</tr>

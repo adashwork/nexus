@@ -56,6 +56,7 @@ public class MatchingRegistServlet extends HttpServlet {
 			request.getRequestDispatcher("/matchingregist.jsp")
 			.forward(request, response);
 		}
+		String companyno = request.getParameter("companyno");
 		String kyujinno = request.getParameter("kyujinno");
 		String jobseekerid = request.getParameter("jobseekerid");
 		String staffid = request.getParameter("staffid");
@@ -82,7 +83,7 @@ public class MatchingRegistServlet extends HttpServlet {
 		String upDateuserid = staff.getId();
 
 		//1.2 マッチング結果オブジェクトを作成
-		matching = new MatchingCase(0, kyujinno, jobseekerid, staffid, interviewdt, enterdt, assessment, note,
+		matching = new MatchingCase(0, companyno, kyujinno, jobseekerid, staffid, interviewdt, enterdt, assessment, note,
 				createdt,
 				createuserid, upDatedt, upDateuserid);
 

@@ -44,6 +44,7 @@ public class MatchingUpdateServlet extends HttpServlet {
 		if (request.getParameter("no") != null) {
 			id = Integer.parseInt(request.getParameter("no"));
 		}
+		String companyno = request.getParameter("companyno");
 		String kyujinno = request.getParameter("kyujinno");
 		String jobseekerid = request.getParameter("jobseekerid");
 		String staffid = request.getParameter("staffid");
@@ -67,7 +68,7 @@ public class MatchingUpdateServlet extends HttpServlet {
 		String updateuserid = staff.getId();
 
 
-		MatchingCase matching = new MatchingCase(id, kyujinno, jobseekerid, staffid, interviewdt, enterdt,
+		MatchingCase matching = new MatchingCase(id, companyno, kyujinno, jobseekerid, staffid, interviewdt, enterdt,
 				assessment, note, createdt, createuserid, updatedt, updateuserid);
 
 		MatchingService service = new MatchingService();

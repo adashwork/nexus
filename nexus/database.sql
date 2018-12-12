@@ -17,7 +17,7 @@ drop table if exists job;
 drop table if exists matchingcase;
 drop table if exists saiban;
 
-
+-- 職業紹介者・開拓者 --
 create table staff(
 id char(4) not null,
 name  varchar(100) not null,
@@ -32,6 +32,7 @@ deleteflag char(4) not null,
 primary key(id)
 ) charset =utf8;
 
+-- 求職者 --
 create table jobseeker(
 id varchar(8) not null,
 name varchar(100) not null,
@@ -78,19 +79,14 @@ deleteflag char(1) not null,
 primary key(id)
 )charset =utf8;
 
+-- 求職者の属性情報（将来的に個人情報と属性情報とを分離するときに使う） --
 create table zokuseijobseeker(
 id varchar(8) not null,
-name varchar(100) not null,
-kana varchar(100),
 birthdt date,
 sex char(1),
 age int,
 postal char(8),
-address varchar(50),
-seekermail varchar(50),
 nearstation varchar(50),
-phone char(20),
-mobile char(20),
 partner char(1),
 huyou int,
 education varchar(100),
@@ -124,18 +120,21 @@ deleteflag char(1) not null,
 primary key(id)
 )charset =utf8;
 
+-- 特性 --
 create table `character`(
 id int auto_increment not null,
 `character` varchar(20) not null,
 primary key(id)
 )charset =utf8;
 
+-- 求職者特性 --
 create table jscharacter(
 jobseekerid char(8) not null,
 characterid int not null,
 primary key(jobseekerid)
 )charset =utf8;
 
+-- 求職者職歴 --
 create table jscareer(
 jobseekerid char(8) not null,
 career varchar(200) not null,
@@ -144,6 +143,7 @@ taishokudt int,
 primary key(jobseekerid)
 )charset =utf8;
 
+-- 企業情報 --
 create table company(
 no char(14) not null,
 receptiondt date,
@@ -179,6 +179,7 @@ deleteflag char(1) not null,
 primary key(no)
 )charset =utf8;
 
+-- 求人情報 --
 create table kyujin(
 no char(14) not null,
 receptiondt date,
@@ -212,7 +213,7 @@ salaryformcd varchar(1),
 salarymin int,
 salarymax int,
 bouns varchar(10),
-koutuhi varchar(20),
+koutuhi varchar(30),
 teate varchar(30),
 begintime int,
 endtime int,
@@ -240,6 +241,7 @@ deleteflag char(1) not null,
 primary key(no)
 )charset =utf8;
 
+-- 備考コメント欄 --
 create table comment(
 id int auto_increment not null,
 companyno char(13),
@@ -258,6 +260,7 @@ updateuserid char(4) not null,
 primary key(id)
 )charset =utf8;
 
+-- 過去求人情報 --
 create table pastkyujin(
 no char(14) not null,
 receptiondt date,
@@ -291,7 +294,7 @@ salaryformcd varchar(1),
 salarymin int,
 salarymax int,
 bouns varchar(10),
-koutuhi varchar(20),
+koutuhi varchar(30),
 teate varchar(30),
 begintime int,
 endtime int,
@@ -319,16 +322,12 @@ deleteflag char(1) not null,
 primary key(no)
 )charset =utf8;
 
+-- ハローワーク求人票マスタ --
 create table hwkyujin(
 no char(14) not null,
 receptiondt date,
 perioddt date,
 companyno char(13),
-companykana varchar(54),
-postal char(8),
-address varchar(90),
-nearline varchar(30),
-nearstation varchar(30),
 addresscd char(2),
 jobsmallcd1 char(3),
 jobsmallcd2 char(3),
@@ -336,10 +335,20 @@ jobsmallcd3 char(3),
 joblargecd1 char(1),
 joblargecd2 char(1),
 joblargecd3 char(1),
+jobcategorysmallcd char(3),
+jobcategorylargecd char(1),
+companykana varchar(54),
+companyname varchar(60),
+companypostal char(8),
+companyplace varchar(75),
+companyurl varchar(100),
+postal char(8),
+address varchar(90),
+nearstation varchar(30),
 job varchar(28),
+hakencd char(1),
 detail varchar(297),
 koyoukeitaicd char(1),
-hakencd char(1),
 koyoukikan char(9),
 koyoukikankaishi date,
 koyoukikanowari date,
@@ -348,30 +357,24 @@ experience varchar(84),
 license varchar(84),
 agemin int,
 agemax int,
-salaryformcd varchar(1),
 salarymin int,
 salarymax int,
-bouns varchar(10),
-koutuhi varchar(20),
-teate varchar(30),
+salaryformcd varchar(1),
 begintime int,
 endtime int,
-shift varchar(60),
-flex varchar(60),
-jitan char(1),
-jikangai int(2),
-siyoukikan int(1),
-workdays int(1),
-nenkanholiday varchar(30),
+establishdt int(4),
+capital long,
+companyfeature varchar(90),
+tantouyakushoku varchar(28),
+tantoukana varchar(28),
+tantou varchar(14),
+tantoustaff_id char(4),
 applicationform varchar(500),
 background varchar(1000),
-bosyunumbers varchar(4),
 hiddensex char(1),
 hiddenagemin int,
 hiddenagemax int,
 hiddenetc varchar(1000),
-uketukedate date,
-kigendate date,
 createdt timestamp not null default current_timestamp,
 createuserid char(4) not null,
 updatedt timestamp not null default current_timestamp,
@@ -380,6 +383,24 @@ deleteflag char(1) not null,
 primary key(no)
 )charset =utf8;
 
+-- 都道府県マスタ --
+create table todouhuken(
+cd char(2) not null,
+name varchar(20) not null,
+primary key(cd)
+)charset =utf8;
+
+-- 業種(産業分類)マスタ --
+create table jobcategory(
+id int auto_increment,
+largecd char(1),
+middlecd char(2),
+smallcd char(3),
+name varchar(128),
+primary key(id)
+)charset =utf8;
+
+-- 職種マスタ --
 create table job(
 id int auto_increment,
 largecd char(1),
@@ -389,6 +410,7 @@ name varchar(128),
 primary key(id)
 )charset =utf8;
 
+-- マッチング事例 --
 create table matchingcase(
 id int auto_increment not null ,
 companyno char(13),
@@ -406,14 +428,12 @@ updateuserid char(4) not null,
 primary key(id)
 )charset =utf8;
 
+-- 採番 --
 create table saiban(
 jobseekersaiban int,
 kyujinsaiban int,
 companysaiban int,
 staffsaiban int
 )charset =utf8;
-
-
-
 
 

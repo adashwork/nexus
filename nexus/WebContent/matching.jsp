@@ -80,30 +80,27 @@
 		<table border="0">
 			<tr>
 				<td>
-					<p>マッチングID</p>
-					<input type="text" name="no" value="">
-<!--  				<input type="hidden" size=10 name="nohidden" value="<c:out value="${ matching.id }"/>"> -->
+					<span>マッチングID</span>
+					<input type="text" name="no" size=13  value="">
+<!--  				<input type="hidden" name="nohidden" value="<c:out value="${ matching.id }"/>"> -->
 					<fmt:formatNumber value="${ matching.id }" pattern="00000000"/>
 				</td>
 				<td>
-					<p>求人ID</p>
-					<input type="text" size=10 name="kyujinno" value="<c:out value="${ matching.kyujinno }" />">
+					<span>求人ID</span>
+					<input type="text" size=13 name="kyujinno" value="<c:out value="${ matching.kyujinno }" />">
 				</td>
 				<td>
-					<p>企業ID</p>
-						<input type="text" size=10 name="kigyou" value="">		<!-- TODO: 処理未 -->
+					<span>企業ID</span>
+						<input type="text" size=13 name="kigyou" value="">		<!-- TODO: 処理未 -->
 				</td>
 				<td>
-					<p>求職者ID</p>
-						<input type="text" size=10 name="jobseekerid" value="<c:out value="${ matching.jobseekerid }" />">
+					<span>求職者ID</span>
+					<input type="text" size=13 name="jobseekerid" value="<c:out value="${ matching.jobseekerid }" />">
 				</td>
-				<td><input type="submit" class="main-b" name="send" value="検索"></td>
 			</tr>
-		</table>
-		<table border="0">
 			<tr>
-				<td>
-					フリーワード検索 <textarea name="note" style="width:100%"></textarea>
+				<td colspan="3">
+					<span style="float:left">フリーワード検索</span> <textarea name="note" cols="30" rows="1"></textarea>
 				</td>
 				<td><input type="submit" class="main-b" name="send" value="検索"></td>
 			</tr>

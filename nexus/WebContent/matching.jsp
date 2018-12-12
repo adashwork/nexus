@@ -56,115 +56,101 @@
 				<div class="user__name">
 					<a href="#"><c:out value="${ Staff.name }" /><i class="fas fa-ellipsis-v"></i></a>
 					<ul class="drop-menu">
-		 <li><a href="/nexus/web/logout">ログアウト<i class="fas fa-angle-right"></i></a></li>
+						<li><a href="/nexus/web/logout">ログアウト<i class="fas fa-angle-right"></i></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</section>
+</header>
+
+	<main> 													<!-- body部分　-->
+
+		<h2>マッチング事例検索</h2>
+
+		<ul>												<!-- TODO：メッセージ要確認 -->
+			<c:forEach var="message" items="${ messages }">
+				<li><font color=#F00 size="7"><c:out value="${ message }" /></font></li>
+			</c:forEach>
 		</ul>
-	  </div>
-	 </div>
-	</div>
-  </section>
- </header>
 
- <main> <!-- body部分　-->
+ 		<form id="form" method="post" action="">
 
-  <h2>マッチング事例検索</h2>
+	<!-- テーブル部分　-->
+		<table border="0">
+			<tr>
+				<td>
+					<p>マッチングID</p>
+					<input type="hidden" size=10 name="no" value="<c:out value="${ matching.id }"/>">
+					<fmt:formatNumber value="${ matching.id }" pattern="00000000"/>
+				</td>
+				<td>
+					<p>求人ID</p>
+					<input type="text" size=10 name="kyujinno" value="<c:out value="${ matching.kyujinno }" />">
+				</td>
+				<td>
+					<p>企業ID</p>
+						<input type="text" size=10 name="kigyou" value="">		<!-- TODO: 処理未 -->
+				</td>
+				<td>
+					<p>求職者ID</p>
+						<input type="text" size=10 name="jobseekerid" value="<c:out value="${ matching.jobseekerid }" />">
+				</td>
+				<td><input type="submit" class="main-b" name="send" value="検索"></td>
+			</tr>
+		</table>
+		<table border="0">
+			<tr>
+				<td>
+					フリーワード検索 <textarea name="note" style="width:100%"></textarea>
+				</td>
+				<td><input type="submit" class="main-b" name="send" value="検索"></td>
+			</tr>
+		</table>
+		<table border="0">
 
-  <ul>
-   <c:forEach var="message" items="${ messages }">
-    <li><font color=#F00 size="7"><c:out value="${ message }" /></font></li>
-   </c:forEach>
-  </ul>
+			<tr>
+				<th></th>
+				<th>マッチングID</th>
+				<th>企業ID</th>
+				<th>求人者ID</th>
+				<th>合否</th>
+				<th>コメント</th>
+			</tr>
+			<tr>					<!-- TODO:for文など未 -->
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
 
+		</table>
 
-  <form id="form" method="post" action="">
+<div>
+	<!-- TODO: 検索結果の件数表示 -->
+	<p>(●●件の候補があります(●●/●●))</p>
+</div>
 
-   <div class="listbox2">
-	<h4 class="word">マッチング事例の検索</h4>
-	<input type="text" class="word" name="id" cols="60" rows="1" placeholder="マッチングNoを入力">
-	<input type="submit" value="検索" onclick="location.href='/nexus/web/match-search'">
-   </div>
+<div>
+	<!-- TODO: 検索結果の件数により、前のページ、次のページ -->
+	<p>前のページ　/　次のページ</p>
+</div>
 
-   <!-- テーブル部分　-->
-
-	<table border="0">
-
-		 <tr>
-		  <th colspan="2">
-		   マッチングID
-		  </th>
-		  <td colspan="4">
-		   <input type="hidden" name="no" value="<c:out value="${ matching.id }" />">
-		   <fmt:formatNumber value="${ matching.id }" pattern="00000000"/>
-		  </td>
-		 </tr>
-		 <tr>
-		  <th colspan="2">
-		   企業ID
-		  </th>
-		  <td colspan="4">
-		  				<!-- TODO: 処理未 -->
-		  </td>
-		 </tr>
-		 <tr>
-		  <th colspan="2">
-		   求人ID
-		  </th>
-		  <td colspan="4">
-		   <input type="text" name="kyujinno"  value="<c:out value="${ matching.kyujinno }" />">
-		   <input type="button" value="求人No一覧" onclick="window.open('/nexus/web/job-search')">
-		  </td>
-		 </tr>
-		 <tr>
-		  <th colspan="2">
-		   求職者ID
-		  </th>
-		  <td colspan="4">
-		   <input type="text" name="jobseekerid"  value="<c:out value="${ matching.jobseekerid }" />">
-		   <input type="button" value="求職者一覧" onclick="window.open('/nexus/web/jobseeker-list')">
-		  </td>
-		 </tr>
-		 <tr>
-		  <th colspan="2">
-		   職業紹介者ID
-		  </th>
-		  <td colspan="4">
-		   <input type="text" name="staffid" size="4"
-			<c:if test="${ matching.staffid == null }">value="<fmt:formatNumber value="${ Staff.id }" pattern="0000"/>" />"</c:if>
-			<c:if test="${ matching.staffid != null }">value="<fmt:formatNumber value="${ matchinig.staffid }" pattern="0000"/>" />"</c:if>>
-		  </td>
-		 </tr>
-		 <tr>
-			<th></th>
-			<th>マッチングID</th>
-			<th>企業ID</th>
-			<th>求人者ID</th>
-			<th>合否</th>
-			<th>コメント</th>
-		 </tr>
-		 <tr>					<!-- TODO:for文など未 -->
-			<td></td>
-			<td></td>
-		 </tr>
-
-	</table>
-
-<!-- TODO: 前のページ、次のページ -->
-
-			<button type="button" class="main-b"
-				onClick="location.href='./staff-top'">戻る</button>
-			<c:if test="${ matching.id == null }">
-				<button type="submit" id="match-regist" class="main-b"
-					onclick="MovePages(this)">登録</button>
-			</c:if>
-			<c:if test="${ matching.id != null && matching.id != 0 }">
-				<button type="submit" id="match-update" class="main-b"
-					onclick="MovePages(this)">更新</button>
-			</c:if>
+		<button type="button" class="main-b" onClick="location.href='./staff-top'">戻る</button>
+		<c:if test="${ matching.id == null }">
+			<button type="submit" id="match-regist" class="main-b" onclick="MovePages(this)">登録</button>
+		</c:if>
+		<c:if test="${ matching.id != null && matching.id != 0 }">
+			<button type="submit" id="match-update" class="main-b" onclick="MovePages(this)">更新</button>
+		</c:if>
 	</form>
 
-  </main>
-  <!-- フッター　-->
-  <footer>
-   <small>Copyright(C) 2009有限責任事業組合 大阪職業教育協働機構(A'ワーク創造館) All Rights Reserved.</small>
-  </footer>
- </body>
+	</main>
+<!-- フッター　-->
+	<footer>
+		<small>Copyright(C) 2009有限責任事業組合 大阪職業教育協働機構(A'ワーク創造館) All Rights Reserved.</small>
+	</footer>
+</body>
 </html>

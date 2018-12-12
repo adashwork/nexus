@@ -51,7 +51,6 @@ public class Company {
 	private String tantouStaffId;
 	private String salesRank;
 	private String salesNote;
-
 	public Company(String companyNo, String corporateNumber, String companyName, String companyKana,
 			String companyPostal, String companyPlace, String nearStation, String companyUrl, String jobCategorySmallCd,
 			String jobCategoryLargeCd, Integer capital, String employees, Integer establishDt, String tantouYakushoku,
@@ -85,6 +84,7 @@ public class Company {
 
 
 	/**
+	 * 事業所番号を取得する
 	 * @return companyNo
 	 */
 	public String getCompanyNo() {
@@ -92,6 +92,7 @@ public class Company {
 	}
 
 	/**
+	 * 法人番号を取得する
 	 * @return corporateNumber
 	 */
 	public String getCorporateNumber() {
@@ -99,6 +100,7 @@ public class Company {
 	}
 
 	/**
+	 * 事業所名を取得する
 	 * @return companyName
 	 */
 	public String getCompanyName() {
@@ -106,6 +108,7 @@ public class Company {
 	}
 
 	/**
+	 * 事業所名（カナ）を取得する
 	 * @return companyKana
 	 */
 	public String getCompanyKana() {
@@ -113,6 +116,7 @@ public class Company {
 	}
 
 	/**
+	 * 事業所郵便番号を取得する
 	 * @return companyPostal
 	 */
 	public String getCompanyPostal() {
@@ -120,6 +124,7 @@ public class Company {
 	}
 
 	/**
+	 * 事業所所在地を取得する
 	 * @return companyPlace
 	 */
 	public String getCompanyPlace() {
@@ -127,6 +132,7 @@ public class Company {
 	}
 
 	/**
+	 * 最寄駅を取得する
 	 * @return nearStation
 	 */
 	public String getNearStation() {
@@ -134,6 +140,7 @@ public class Company {
 	}
 
 	/**
+	 * 事業所URLを取得する
 	 * @return companyUrl
 	 */
 	public String getCompanyUrl() {
@@ -141,6 +148,7 @@ public class Company {
 	}
 
 	/**
+	 * 産業小分類コードを取得する
 	 * @return jobCategorySmallCd
 	 */
 	public String getJobCategorySmallCd() {
@@ -148,6 +156,7 @@ public class Company {
 	}
 
 	/**
+	 * 産業大分類コードを取得する
 	 * @return jobCategoryLargeCd
 	 */
 	public String getJobCategoryLargeCd() {
@@ -155,6 +164,7 @@ public class Company {
 	}
 
 	/**
+	 * 資本金を取得する
 	 * @return capital
 	 */
 	public Integer getCapital() {
@@ -162,6 +172,7 @@ public class Company {
 	}
 
 	/**
+	 * 従業員数を取得する
 	 * @return employees
 	 */
 	public String getEmployees() {
@@ -169,6 +180,7 @@ public class Company {
 	}
 
 	/**
+	 * 創業設立年を取得する
 	 * @return establishDt
 	 */
 	public Integer getEstablishDt() {
@@ -176,6 +188,7 @@ public class Company {
 	}
 
 	/**
+	 * 担当者課係名/役職名を取得する
 	 * @return tantouYakushoku
 	 */
 	public String getTantouYakushoku() {
@@ -183,6 +196,7 @@ public class Company {
 	}
 
 	/**
+	 * 担当者名を取得する
 	 * @return tantou
 	 */
 	public String getTantou() {
@@ -190,6 +204,7 @@ public class Company {
 	}
 
 	/**
+	 * 担当者名（かな）を取得する
 	 * @return tantouKana
 	 */
 	public String getTantouKana() {
@@ -197,6 +212,7 @@ public class Company {
 	}
 
 	/**
+	 * 担当者TELを取得する
 	 * @return tantouTel
 	 */
 	public String getTantouTel() {
@@ -204,6 +220,7 @@ public class Company {
 	}
 
 	/**
+	 * 担当者FAXを取得する
 	 * @return tantouFax
 	 */
 	public String getTantouFax() {
@@ -211,6 +228,7 @@ public class Company {
 	}
 
 	/**
+	 * 担当者emailを取得する
 	 * @return tantouEmail
 	 */
 	public String getTantouEmail() {
@@ -218,6 +236,7 @@ public class Company {
 	}
 
 	/**
+	 * 担当者備考を取得する
 	 * @return tantouNote
 	 */
 	public String getTantouNote() {
@@ -225,6 +244,7 @@ public class Company {
 	}
 
 	/**
+	 * 担当開拓者IDを取得する
 	 * @return tantouStaffId
 	 */
 	public String getTantouStaffId() {
@@ -232,6 +252,7 @@ public class Company {
 	}
 
 	/**
+	 * 営業評価ランクABCを取得する
 	 * @return salesRank
 	 */
 	public String getSalesRank() {
@@ -239,6 +260,7 @@ public class Company {
 	}
 
 	/**
+	 * 営業備考を取得する
 	 * @return salesNote
 	 */
 	public String getSalesNote() {

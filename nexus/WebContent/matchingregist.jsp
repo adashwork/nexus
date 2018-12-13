@@ -98,7 +98,8 @@
 					企業ID
 				</th>
 				<td>
-					<!-- TODO: 処理未 -->
+					<input type="text" name="" size="10" value="">		<!-- TODO:リンク先 -->
+					<input type="button" value="" onclick="">
 				</td>
 				<td>
 				</td>

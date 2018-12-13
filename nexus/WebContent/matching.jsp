@@ -98,9 +98,10 @@
 					<input type="text" size=13 name="jobseekerid" value="<c:out value="${ matching.jobseekerid }" />">
 				</td>
 			</tr>
-			<tr>
+			<tr class="m_tr">
 				<td colspan="3">
-					<span style="float:left">フリーワード検索</span> <textarea name="note" cols="30" rows="1"></textarea>
+					<span>フリーワード検索</span>
+					<textarea name="note" cose="100" rows="1"></textarea>
 				</td>
 				<td><input type="submit" class="main-b" name="send" value="検索"></td>
 			</tr>
@@ -116,7 +117,12 @@
 				<th>コメント</th>
 			</tr>
 			<tr>					<!-- TODO:for文など未 -->
-				<td></td>
+				<td>
+					<form action="/nexus/web/jobseeker-info" method="post">
+						<button class="mini_b mini_b_applilist" name="js_id"
+							value="<c:out value="${ jobseeker.id }" />">詳細</button>
+					</form>
+				</td>
 				<td></td>
 				<td></td>
 				<td></td>

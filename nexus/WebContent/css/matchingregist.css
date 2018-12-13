@@ -3,13 +3,14 @@
 
 .formbox{
     float: left;
-} 
+}
 
 .inner-button{
     float: left;
-     margin-left: 10px; 
+     margin-left: 10px;
 }
 
-span.m_span{
-	
+tr.m_tr {
+		background-color: #ddd;
+		text-align: left;
 }

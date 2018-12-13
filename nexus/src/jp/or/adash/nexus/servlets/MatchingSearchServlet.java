@@ -2,6 +2,8 @@ package jp.or.adash.nexus.servlets;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -36,7 +38,7 @@ public class MatchingSearchServlet extends HttpServlet {
 		HttpSession session = request.getSession(true);
 		Staff staff = (Staff) session.getAttribute("UserData");
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		MatchingCase matching = null;
+		List<MatchingCase> matching = new ArrayList<MatchingCase>();
 		MatchingService service = new MatchingService();
 		int id = 0;
 
@@ -46,7 +48,7 @@ public class MatchingSearchServlet extends HttpServlet {
 			}else {
 				id = 0;
 			}
-			matching = service.getMatching(id);
+			matching.add(service.getMatching(id));
 			//処理結果メッセージをリクエストに格納する
 			request.setAttribute("Staff", staff);
 			request.setAttribute("matching", matching);

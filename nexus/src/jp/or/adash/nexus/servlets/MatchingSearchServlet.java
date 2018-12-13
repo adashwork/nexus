@@ -46,7 +46,7 @@ public class MatchingSearchServlet extends HttpServlet {
 			}else {
 				id = 0;
 			}
-			matching = service.getMatchingtest(id);
+			matching = service.getMatching(id);
 			//処理結果メッセージをリクエストに格納する
 			request.setAttribute("Staff", staff);
 			request.setAttribute("matching", matching);

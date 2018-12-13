@@ -1,4 +1,5 @@
 use trynexus;
+-- ↑ローカルで試すときは自身のuser名に変更
 
 drop table if exists staff;
 drop table if exists jobseeker;
@@ -174,7 +175,7 @@ createuserid char(4) not null,
 updatedt timestamp not null default current_timestamp,
 updateuserid char(4) not null,
 deleteflag char(1) not null,
-primary key(no)
+primary key(companyno)
 )charset =utf8;
 
 -- 求人情報 --

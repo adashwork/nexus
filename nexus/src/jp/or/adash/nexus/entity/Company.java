@@ -1,5 +1,7 @@
 package jp.or.adash.nexus.entity;
 
+import java.util.Date;
+
 public class Company {
 
 	/***
@@ -26,6 +28,11 @@ public class Company {
 	* tantouStaffId	担当開拓者ID
 	* salesRank	営業評価ランクABC
 	* salesNote	営業備考
+	* createDt	新規登録日
+	* createuserId	新規登録ユーザー
+	* updateDt	最終更新日
+	* updateUserId	最終更新ユーザー
+	* deletefFag	削除フラグ
 	 */
 
 	private String companyNo;
@@ -51,13 +58,18 @@ public class Company {
 	private String tantouStaffId;
 	private String salesRank;
 	private String salesNote;
+	private Date createDt;
+	private String createuserId;
+	private Date updateDt;
+	private String updateUserId;
+	private String deletefFag;
 
 	public Company(String companyNo, String corporateNumber, String companyName, String companyKana,
 			String companyPostal, String companyPlace, String nearStation, String companyUrl, String jobCategorySmallCd,
 			String jobCategoryLargeCd, Integer capital, String employees, Integer establishDt, String tantouYakushoku,
 			String tantou, String tantouKana, String tantouTel, String tantouFax, String tantouEmail, String tantouNote,
-			String tantouStaffId, String salesRank, String salesNote) {
-
+			String tantouStaffId, String salesRank, String salesNote, Date createDt, String createuserId, Date updateDt,
+			String updateUserId, String deletefFag) {
 		this.companyNo = companyNo;
 		this.corporateNumber = corporateNumber;
 		this.companyName = companyName;
@@ -81,10 +93,16 @@ public class Company {
 		this.tantouStaffId = tantouStaffId;
 		this.salesRank = salesRank;
 		this.salesNote = salesNote;
+		this.createDt = createDt;
+		this.createuserId = createuserId;
+		this.updateDt = updateDt;
+		this.updateUserId = updateUserId;
+		this.deletefFag = deletefFag;
 	}
 
 
 	/**
+	 * 事業所番号を取得する
 	 * @return companyNo
 	 */
 	public String getCompanyNo() {
@@ -92,6 +110,7 @@ public class Company {
 	}
 
 	/**
+	 * 法人番号を取得する
 	 * @return corporateNumber
 	 */
 	public String getCorporateNumber() {
@@ -99,6 +118,7 @@ public class Company {
 	}
 
 	/**
+	 * 事業所名を取得する
 	 * @return companyName
 	 */
 	public String getCompanyName() {
@@ -106,6 +126,7 @@ public class Company {
 	}
 
 	/**
+	 * 事業所名（カナ）を取得する
 	 * @return companyKana
 	 */
 	public String getCompanyKana() {
@@ -113,6 +134,7 @@ public class Company {
 	}
 
 	/**
+	 * 事業所郵便番号を取得する
 	 * @return companyPostal
 	 */
 	public String getCompanyPostal() {
@@ -120,6 +142,7 @@ public class Company {
 	}
 
 	/**
+	 * 事業所所在地を取得する
 	 * @return companyPlace
 	 */
 	public String getCompanyPlace() {
@@ -127,6 +150,7 @@ public class Company {
 	}
 
 	/**
+	 * 最寄駅を取得する
 	 * @return nearStation
 	 */
 	public String getNearStation() {
@@ -134,6 +158,7 @@ public class Company {
 	}
 
 	/**
+	 * 事業所URLを取得する
 	 * @return companyUrl
 	 */
 	public String getCompanyUrl() {
@@ -141,6 +166,7 @@ public class Company {
 	}
 
 	/**
+	 * 産業小分類コードを取得する
 	 * @return jobCategorySmallCd
 	 */
 	public String getJobCategorySmallCd() {
@@ -148,6 +174,7 @@ public class Company {
 	}
 
 	/**
+	 * 産業大分類コードを取得する
 	 * @return jobCategoryLargeCd
 	 */
 	public String getJobCategoryLargeCd() {
@@ -155,6 +182,7 @@ public class Company {
 	}
 
 	/**
+	 * 資本金を取得する
 	 * @return capital
 	 */
 	public Integer getCapital() {
@@ -162,6 +190,7 @@ public class Company {
 	}
 
 	/**
+	 * 従業員数を取得する
 	 * @return employees
 	 */
 	public String getEmployees() {
@@ -169,6 +198,7 @@ public class Company {
 	}
 
 	/**
+	 * 創業設立年を取得する
 	 * @return establishDt
 	 */
 	public Integer getEstablishDt() {
@@ -176,6 +206,7 @@ public class Company {
 	}
 
 	/**
+	 * 担当者課係名/役職名を取得する
 	 * @return tantouYakushoku
 	 */
 	public String getTantouYakushoku() {
@@ -183,6 +214,7 @@ public class Company {
 	}
 
 	/**
+	 * 担当者名を取得する
 	 * @return tantou
 	 */
 	public String getTantou() {
@@ -190,6 +222,7 @@ public class Company {
 	}
 
 	/**
+	 * 担当者名（かな）を取得する
 	 * @return tantouKana
 	 */
 	public String getTantouKana() {
@@ -197,6 +230,7 @@ public class Company {
 	}
 
 	/**
+	 * 担当者TELを取得する
 	 * @return tantouTel
 	 */
 	public String getTantouTel() {
@@ -204,6 +238,7 @@ public class Company {
 	}
 
 	/**
+	 * 担当者FAXを取得する
 	 * @return tantouFax
 	 */
 	public String getTantouFax() {
@@ -211,6 +246,7 @@ public class Company {
 	}
 
 	/**
+	 * 担当者emailを取得する
 	 * @return tantouEmail
 	 */
 	public String getTantouEmail() {
@@ -218,6 +254,7 @@ public class Company {
 	}
 
 	/**
+	 * 担当者備考を取得する
 	 * @return tantouNote
 	 */
 	public String getTantouNote() {
@@ -225,6 +262,7 @@ public class Company {
 	}
 
 	/**
+	 * 担当開拓者IDを取得する
 	 * @return tantouStaffId
 	 */
 	public String getTantouStaffId() {
@@ -232,6 +270,7 @@ public class Company {
 	}
 
 	/**
+	 * 営業評価ランクABCを取得する
 	 * @return salesRank
 	 */
 	public String getSalesRank() {
@@ -239,10 +278,56 @@ public class Company {
 	}
 
 	/**
+	 * 営業備考を取得する
 	 * @return salesNote
 	 */
 	public String getSalesNote() {
 		return salesNote;
 	}
+
+	/**
+	 * 新規作成日を取得する
+	 * @return createDt
+	 */
+	public Date getCreateDt() {
+		return createDt;
+	}
+
+	/**
+	 *
+	 * 作成者のIDを取得する
+	 * @return createuserId
+	 */
+	public String getCreateuserId() {
+		return createuserId;
+	}
+
+	/**
+	 * 最終更新日を取得する
+	 * @return updateDt
+	 */
+	public Date getUpdateDt() {
+		return updateDt;
+	}
+
+	/**
+	 * 最終更新担当者IDを取得する
+	 * @return updateUserId
+	 */
+	public String getUpdateUserId() {
+		return updateUserId;
+	}
+
+	/**
+	 * 削除フラグを取得する
+	 * @return deletefFag
+	 */
+	public String getDeletefFag() {
+		return deletefFag;
+	}
+
+
+
+
 
 }

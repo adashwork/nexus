@@ -1,5 +1,7 @@
 package jp.or.adash.nexus.entity;
 
+import java.util.Date;
+
 public class Company {
 
 	/***
@@ -26,6 +28,11 @@ public class Company {
 	* tantouStaffId	担当開拓者ID
 	* salesRank	営業評価ランクABC
 	* salesNote	営業備考
+	* createDt	新規登録日
+	* createuserId	新規登録ユーザー
+	* updateDt	最終更新日
+	* updateUserId	最終更新ユーザー
+	* deletefFag	削除フラグ
 	 */
 
 	private String companyNo;
@@ -51,12 +58,18 @@ public class Company {
 	private String tantouStaffId;
 	private String salesRank;
 	private String salesNote;
+	private Date createDt;
+	private String createuserId;
+	private Date updateDt;
+	private String updateUserId;
+	private String deletefFag;
+
 	public Company(String companyNo, String corporateNumber, String companyName, String companyKana,
 			String companyPostal, String companyPlace, String nearStation, String companyUrl, String jobCategorySmallCd,
 			String jobCategoryLargeCd, Integer capital, String employees, Integer establishDt, String tantouYakushoku,
 			String tantou, String tantouKana, String tantouTel, String tantouFax, String tantouEmail, String tantouNote,
-			String tantouStaffId, String salesRank, String salesNote) {
-
+			String tantouStaffId, String salesRank, String salesNote, Date createDt, String createuserId, Date updateDt,
+			String updateUserId, String deletefFag) {
 		this.companyNo = companyNo;
 		this.corporateNumber = corporateNumber;
 		this.companyName = companyName;
@@ -80,6 +93,11 @@ public class Company {
 		this.tantouStaffId = tantouStaffId;
 		this.salesRank = salesRank;
 		this.salesNote = salesNote;
+		this.createDt = createDt;
+		this.createuserId = createuserId;
+		this.updateDt = updateDt;
+		this.updateUserId = updateUserId;
+		this.deletefFag = deletefFag;
 	}
 
 
@@ -266,5 +284,50 @@ public class Company {
 	public String getSalesNote() {
 		return salesNote;
 	}
+
+	/**
+	 * 新規作成日を取得する
+	 * @return createDt
+	 */
+	public Date getCreateDt() {
+		return createDt;
+	}
+
+	/**
+	 *
+	 * 作成者のIDを取得する
+	 * @return createuserId
+	 */
+	public String getCreateuserId() {
+		return createuserId;
+	}
+
+	/**
+	 * 最終更新日を取得する
+	 * @return updateDt
+	 */
+	public Date getUpdateDt() {
+		return updateDt;
+	}
+
+	/**
+	 * 最終更新担当者IDを取得する
+	 * @return updateUserId
+	 */
+	public String getUpdateUserId() {
+		return updateUserId;
+	}
+
+	/**
+	 * 削除フラグを取得する
+	 * @return deletefFag
+	 */
+	public String getDeletefFag() {
+		return deletefFag;
+	}
+
+
+
+
 
 }

@@ -19,7 +19,7 @@
 <link rel="stylesheet" href="../css/default.css">
 <link rel="stylesheet" href="../css/default.date.css">
 <!-- <link href="css/ootuka.css" rel="stylesheet"> -->
-<link href="../css/matchingregist.css" rel="stylesheet">
+<link href="../css/matching.css" rel="stylesheet">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -77,26 +77,25 @@
 
  		<form id="form" method="post" action="">
 
-	<!-- テーブル部分　-->
-		<table border="0">
-			<tr>
-				<td>
-					<span>マッチングID</span>
+			<div class="m_div">
+				<p class="m_p">
+					マッチングID<br/>
 					<input type="text" name="no" size=13  value="">
 <!--  				<input type="hidden" name="nohidden" value="<c:out value="${ matching.id }"/>"> -->
 					<fmt:formatNumber value="${ matching.id }" pattern="00000000"/>
-				</td>
-				<td>
-					<span>求人ID</span>
+				</p>
+				<p class="m_p">
+					求人ID<br/>
 					<input type="text" size=13 name="kyujinno" value="<c:out value="${ matching.kyujinno }" />">
-				</td>
-				<td>
-					<span>企業ID</span>
-						<input type="text" size=13 name="kigyou" value="">		<!-- TODO: 処理未 -->
-				</td>
-				<td>
-					<span>求職者ID</span>
+				</p>
+				<p class="m_p">
+					企業ID<br/>
+					<input type="text" size=13 name="kigyou" value="">		<!-- TODO: 処理未 -->
+				</p>
+				<p class="m_p">
+					求職者ID<br/>
 					<input type="text" size=13 name="jobseekerid" value="<c:out value="${ matching.jobseekerid }" />">
+<<<<<<< HEAD
 				</td>
 			</tr>
 			<tr class="m_tr">
@@ -109,7 +108,22 @@
 		</table>
 		</form>
 		<table border="0">
+=======
+				</p>
+			</div>
+			<div class="m_div">
+				<p class="m_p">
+					フリーワード検索<br/>
+					<textarea name="note" cose="500" rows="1"></textarea>
+				</p>
+				<p class="m_p_right">
+					<input type="submit" class="main-b" name="send" value="検索">
+				</p>
+			</div>
+>>>>>>> refs/remotes/origin/#196
 
+
+		<table class="m_table">
 			<tr>
 				<th></th>
 				<th>マッチングID</th>
@@ -118,6 +132,7 @@
 				<th>合否</th>
 				<th>コメント</th>
 			</tr>
+<<<<<<< HEAD
 
 			<!--  kitayama　2018/12/13 for文追加 -->
 			<form action="" method="get">
@@ -146,6 +161,21 @@
 					</tr>
 			</c:forEach>
 			</form>
+=======
+			<tr>					<!-- TODO:for文など未 -->
+				<td>
+					<form action="/nexus/web/matchingregist" method="post">
+						<button class="mini_b mini_b_applilist" name="m_id"
+							value="<c:out value="${ jobseeker.id }" />">詳細</button>
+					</form>
+				</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+>>>>>>> refs/remotes/origin/#196
 
 		</table>
 

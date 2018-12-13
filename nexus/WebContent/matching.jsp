@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="ja">
@@ -106,6 +107,7 @@
 				<td><input type="submit" class="main-b" name="send" value="検索"></td>
 			</tr>
 		</table>
+		</form>
 		<table border="0">
 
 			<tr>
@@ -116,19 +118,34 @@
 				<th>合否</th>
 				<th>コメント</th>
 			</tr>
-			<tr>					<!-- TODO:for文など未 -->
-				<td>
-					<form action="/nexus/web/jobseeker-info" method="post">
-						<button class="mini_b mini_b_applilist" name="js_id"
-							value="<c:out value="${ jobseeker.id }" />">詳細</button>
-					</form>
-				</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
+
+			<!--  kitayama　2018/12/13 for文追加 -->
+			<form action="" method="get">
+			<c:forEach var="matching" items="${ matching }">
+					<tr>
+						<td>
+							<button class="mini_b mini_b_applilist" name="js_id">詳細</button>
+						</td>
+						<td>
+							<c:out value="$( matching.id )" />
+							<input type="hidden" name="matchingid" value="<c:out value="${ matching.id }" />" >
+						</td>
+						<td><c:out value="${ matching.companyNo }" /></td>
+						<td><c:out value="${ matching.jobseekerid }" /></td>
+						<td><c:out value="${ matching.assessment }" /></td>
+						<td>
+							<c:choose>
+								<c:when test="${ fn:length(matching.note)  <= 15 }">
+									<c:out value="${ matching.note }" />
+								</c:when>
+								<c:otherwise>
+									<c:out value="${ fn:substring(matching.note, 0, 15) }" />
+								</c:otherwise>
+							</c:choose>
+						</td>
+					</tr>
+			</c:forEach>
+			</form>
 
 		</table>
 
@@ -149,7 +166,7 @@
 		<c:if test="${ matching.id != null && matching.id != 0 }">
 			<button type="submit" id="match-update" class="main-b" onclick="MovePages(this)">更新</button>
 		</c:if>
-	</form>
+
 
 	</main>
 <!-- フッター　-->

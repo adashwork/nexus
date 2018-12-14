@@ -43,30 +43,30 @@ public class CommonsService {
 		boolean result = false;
 
 		try {
-			// 1データベース接続を開始する
+			// データベース接続を開始する
 			transaction.open();
 
-			// 1トランザクションを開始する
+			// トランザクションを開始する
 			transaction.beginTrans();
 
-			// 1商品単価を取得する
+			// 商品単価を取得する
 			CommonsDao dao = new CommonsDao(transaction);
 			result = dao.selectKyujinno(no);
 
 			if(!result) {
 				messages.add(MessageCommons.MSG_KYUJIN_FAILURE);
 			}
-			//1 トランザクションをコミットする
+			// トランザクションをコミットする
 			transaction.commit();
 
 		} catch (IOException e) {
-			// 1トランザクションをロールバックする
+			// トランザクションをロールバックする
 			transaction.rollback();
 
-			// 1エラーメッセージをセットする
+			// エラーメッセージをセットする
 			messages.add(MessageCommons.ERR_DB_CONNECT);
 		} finally {
-			//1 データベース接続をを終了する
+			// データベース接続をを終了する
 			transaction.close();
 		}
 
@@ -82,30 +82,30 @@ public class CommonsService {
 		boolean result = false;
 
 		try {
-			// 1データベース接続を開始する
+			// データベース接続を開始する
 			transaction.open();
 
-			// 1トランザクションを開始する
+			// トランザクションを開始する
 			transaction.beginTrans();
 
-			// 1商品単価を取得する
+			// 商品単価を取得する
 			CommonsDao dao = new CommonsDao(transaction);
 			result = dao.selectJobseeker(id);
 
 			if(result == false){
 				messages.add(MessageCommons.MSG_JOBSEEKER_FAILURE);
 			}
-			//1 トランザクションをコミットする
+			// トランザクションをコミットする
 			transaction.commit();
 
 		} catch (IOException e) {
-			// 1トランザクションをロールバックする
+			// トランザクションをロールバックする
 			transaction.rollback();
 
-			// 1エラーメッセージをセットする
+			// エラーメッセージをセットする
 			messages.add(MessageCommons.ERR_DB_CONNECT);
 		} finally {
-			//1 データベース接続をを終了する
+			// データベース接続をを終了する
 			transaction.close();
 		}
 
@@ -116,30 +116,30 @@ public class CommonsService {
 		String staffName = null;
 
 		try {
-			// 1データベース接続を開始する
+			// データベース接続を開始する
 			transaction.open();
 
-			// 1トランザクションを開始する
+			// トランザクションを開始する
 			transaction.beginTrans();
 
-			// 1商品単価を取得する
+			// 商品単価を取得する
 			CommonsDao dao = new CommonsDao(transaction);
 			staffName = dao.getStaffName(id);
 
 			if(staffName == null){
 				messages.add(MessageCommons.MSG_STAFFNAME_FAILURE);
 			}
-			//1 トランザクションをコミットする
+			// トランザクションをコミットする
 			transaction.commit();
 
 		} catch (IOException e) {
-			// 1トランザクションをロールバックする
+			// トランザクションをロールバックする
 			transaction.rollback();
 
-			// 1エラーメッセージをセットする
+			// エラーメッセージをセットする
 			messages.add(MessageCommons.ERR_DB_CONNECT);
 		} finally {
-			//1 データベース接続をを終了する
+			// データベース接続をを終了する
 			transaction.close();
 		}
 

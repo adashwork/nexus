@@ -8,7 +8,7 @@ package jp.or.adash.nexus.entity;
 public class JobCategory {
 
 	/**
-	 * id 職種ID
+	 * id 業種ID
 	 * largecd 大分類コード
 	* middlecd 中分類コード
 	* smallcd 小分類コード

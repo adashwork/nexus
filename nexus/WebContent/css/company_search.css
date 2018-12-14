@@ -1,0 +1,119 @@
+@charset "utf-8";
+/* CSS Document */
+
+body {
+	background: #f6f6f6;
+	font-size: 14px;
+	margin: 0px;
+	padding: 0px;
+	text-align: left;
+}
+
+
+/*　ここよりcompany_search　*/
+
+/*　company_search　*/
+#company_search {
+	margin-top: 0;
+	margin-bottom: 50px;
+	margin-right: auto;
+	margin-left: auto;
+	clear: both;
+}
+
+/* セレクト項目見出し */
+h4 {
+	background-color: #329bcf;
+	width: 225px;
+	line-height: normal;
+	color: #FFF;
+	text-align: center;
+	margin: 0px;
+	font-size: 14px;
+	vertical-align: middle;
+	padding:5px;
+	letter-spacing: 1em;
+}
+/* セレクト項目見出し（大） */
+h4.word {
+	width:470px;
+	letter-spacing: 0.6em;
+}
+
+/* セル幅470px */
+.word {
+	width:470px;
+	letter-spacing: 0.6em;
+}
+
+
+/*セレクト項目*/
+select {
+	width: 225px;
+	height:100px:
+}
+/*セレクト項目（小）*/
+select.second {
+	width: 130px;
+}
+
+/*　ｈ3とセレクト項目の囲み範囲*/
+.listbox1 {
+	float: left;
+	height:60px;
+	margin: 5px;
+	padding: 5px;
+}
+.listbox2 {
+	margin: 5px;
+	padding: 5px;
+	float: left;
+}
+.listbox3 {
+	float: right;
+	margin: 5px;
+	padding: 5px;
+}
+textarea.word {
+	width:470px;
+}
+/*　送信ボタン　*/
+input.submit_button {
+	font-size: 1.2em;
+	border-style: none;
+	background-color: #f03c97 ;
+	color: #fff;
+	height: 60px;
+	padding-right: 40px;
+	padding-left: 40px;
+	letter-spacing: 1em;
+	font-weight: bold;
+}
+/*　リセットボタン　*/
+input.reset_button {
+	border-style: none;
+	background-color: #f03c97;
+	color: #fff;
+	height: 60px;
+	padding-right: 20px;
+	padding-left: 20px;
+}
+
+
+
+
+/*　ここよりcompany_search_list　*/
+
+
+/*　company_search_list　*/
+#company_search_list {
+
+	margin-top: 20px;
+	margin-bottom: 20px;
+	margin-right: auto;
+	margin-left: auto;
+	padding-top:20px;
+	clear: both;
+}
+
+

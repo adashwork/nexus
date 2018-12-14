@@ -12,6 +12,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import jp.or.adash.nexus.entity.Staff;
+/**
+ * 2018/12/14 kitayama
+ * URLの変更
+ * サーブレット名の変更
+ */
+
 
 /**
  * Servlet implementation class MatchingDisServlet

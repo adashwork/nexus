@@ -71,18 +71,24 @@
 					placeholder="事業所所在地・最寄り駅を入れてください。" tabindex="1"/>
 			</div>
 
-			<div class="listbox1"> <!--  CSSファイルなので跡で設定する -->
+			<div class="listbox1">
 				<h4>業種</h4>
 				<select name="jobcategory">
-					<option value=""> <!-- ajaxでプルダウンを入れる --></option>
-
+					<option value=""></option>
+					<c:forEach  var="jobcategory" items="${ jobcategorylist }">
+						<option value="<c:out value="${ jobcategory.largecd }" />"><c:out value="${ jobcategory.name }" /></option>
+					</c:forEach>
 				</select>
 			</div>
 
-			<div class="listbox1"> <!--  CSSファイルなので跡で設定する -->
+			<div class="listbox1">
 				<h4>A'担当者名</h4>
 				<select name="staffid">
-					<option value=""> <!-- ajaxでプルダウンを入れる --></option>
+					<option value=""></option>
+					<c:forEach  var="staff" items="${ stafflist }">
+						<option value="<c:out value="${ staff.id }" />"><c:out value="${ staff.name }" /></option>
+					</c:forEach>
+				</select>
 				</select>
 			</div>
 			<div class="listbox3">
@@ -98,7 +104,7 @@
 			<tbody id="">
 				<tr>
 					<th scope="col">&nbsp;</th>
-					<th scope="col">事業番号</th>
+					<th scope="col">事業所番号</th>
 					<th scope="col">事業所名</th>
 					<th scope="col">業種</th>
 					<th scope="col">住所</th>

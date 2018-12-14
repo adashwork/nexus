@@ -1,15 +1,10 @@
 package jp.or.adash.nexus.services;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.stream.events.Comment;
 
-import jp.or.adash.nexus.dao.CompanyDao;
 import jp.or.adash.nexus.entity.Company;
-import jp.or.adash.nexus.entity.CompanySearch;
-import jp.or.adash.nexus.utils.common.StringCommons;
 import jp.or.adash.nexus.utils.dao.Transaction;
 
 /**
@@ -112,6 +107,8 @@ public class CompanyService {
 	 * @return List<Company> companyList 該当した企業の一覧
 	 * @author mosco
 	 */
+
+	/*
 	public List<Company> getCompany(CompanySearch cse) {
 		List<Company> companyList = new ArrayList<>();
 
@@ -151,6 +148,6 @@ public class CompanyService {
 		return companyList;
 	}
 
-
+*/
 
 }

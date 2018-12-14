@@ -42,14 +42,14 @@ public class MatchingDao {
 		// SQL文を生成する
 		StringBuffer sql = new StringBuffer();
 		sql.append("insert into matchingcase ");
-		sql.append("(id,companyno,kyujinno,jobseekerid,staffid,interviewdt,enterdt,"
+		sql.append("(id,companyNo,kyujinno,jobseekerid,staffid,interviewdt,enterdt,"		// 追加・修正 2018/12/11.12 T.Ikeda
 				+ "assessment,note,createuserid,updateuserid");
 		sql.append(") values (");
 		sql.append("?,?,?,?,?,?,?,?,?,?,?");
 		sql.append(")");
 		try (PreparedStatement ps = this.conn.prepareStatement(sql.toString())) {
 			ps.setInt(1,matching.getId());
-			ps.setString(2,matching.getCompanyno());
+			ps.setString(2,matching.getCompanyNo());
 			ps.setString(3,matching.getKyujinno());
 			ps.setString(4,matching.getJobseekerid());
 			ps.setString(5,matching.getStaffid());
@@ -93,7 +93,7 @@ public class MatchingDao {
 				while(rs.next()) {
 					matching = new MatchingCase(
 							rs.getInt("id"),
-							rs.getString("companyno"),
+							rs.getString("companyNo"),		// 追加・修正 2018/12/11.12 T.Ikeda
 							rs.getString("kyujinno"),
 							rs.getString("jobseekerid"),
 							rs.getString("staffid"),
@@ -129,7 +129,7 @@ public class MatchingDao {
 		// SQL文を生成する
 		StringBuffer sql = new StringBuffer();
 		sql.append("update matchingcase set");
-		sql.append(" companyno = ?,");
+		sql.append(" companyNo = ?,");				// 追加・修正 2018/12/11.12 T.Ikeda
 		sql.append(" kyujinno = ?,");
 		sql.append(" jobseekerid = ?,");
 		sql.append(" staffid = ?,");
@@ -143,7 +143,7 @@ public class MatchingDao {
 		try (PreparedStatement ps = this.conn.prepareStatement(sql.toString())) {
 
 			ps.setString(1, matching.getKyujinno());
-			ps.setString(2, matching.getCompanyno());
+			ps.setString(2, matching.getCompanyNo());
 			ps.setString(3, matching.getJobseekerid());
 			ps.setString(4, matching.getStaffid());
 			ps.setDate(5, DataCommons.convertToSqlDate(matching.getInterviewdt()));

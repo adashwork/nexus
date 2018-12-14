@@ -9,6 +9,7 @@ import javax.xml.stream.events.Comment;
 import jp.or.adash.nexus.dao.CompanyDao;
 import jp.or.adash.nexus.entity.Company;
 import jp.or.adash.nexus.entity.CompanySearch;
+import jp.or.adash.nexus.utils.common.StringCommons;
 import jp.or.adash.nexus.utils.dao.Transaction;
 
 /**
@@ -114,6 +115,17 @@ public class CompanyService {
 	public List<Company> getCompany(CompanySearch cse) {
 		List<Company> companyList = new ArrayList<>();
 
+		// CompanySearchオブジェクトから検索条件の値を取り出す
+		String staffId = cse.getStaffId();						// A'担当者のID
+		String jobCategory = cse.getJobCategory();				// 産業大分類のコード
+		String companyNameSub = cse.getCompanyName();			// 企業名入力欄に入力された値
+		String companyPlaceSub = cse.getCompanyPlace();		// 所在地・最寄り駅の欄に入力された値
+
+		//  企業名入力欄に入力された値をスペースごとに単語に分割、配列に格納
+		String[] companyName = StringCommons.splitWords(companyNameSub);
+		// 所在地・最寄り駅の欄に入力された値も同様に
+		String[] companyPlace = StringCommons.splitWords(companyPlaceSub);
+
 		Transaction transaction = new Transaction();
 		CompanyDao dao;
 		try {
@@ -121,7 +133,7 @@ public class CompanyService {
 			transaction.open();
 			// DBから企業情報を取得し、Dao内のメソッドでListに詰め、そのListを返してもらう
 			dao = new CompanyDao(transaction);
-			companyList = dao.selectCompanyList(cse);
+			companyList = dao.selectCompanyList(staffId,jobCategory,companyName,companyPlace);
 
 		} catch(IOException e) {
 			// DB接続が失敗した場合、例外をキャッチする

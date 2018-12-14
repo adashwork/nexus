@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import jp.or.adash.nexus.entity.Comment;
 import jp.or.adash.nexus.entity.MatchingCase;
 import jp.or.adash.nexus.entity.Staff;
 import jp.or.adash.nexus.services.MatchingService;
@@ -40,6 +41,7 @@ public class MatchingRegistServlet extends HttpServlet {
 		Staff staff = (Staff) session.getAttribute("UserData");
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		MatchingCase matching = null;
+		Comment comment = null;								// 追加 2018/12/14 T.Ikead
 		MatchingService service = new MatchingService();
 
 		//idが入力されていた場合、そのidのマッチング事例を表示する。
@@ -101,7 +103,7 @@ public class MatchingRegistServlet extends HttpServlet {
 			return;
 		}
 
-		service.insertMatchingCase(matching);
+		service.insertMatchingCase(matching, comment);
 
 		//処理結果メッセージをリクエストに格納する
 		request.setAttribute("Staff", staff);

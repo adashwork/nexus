@@ -189,6 +189,7 @@
 
 		</table>
 
+		<button type="button" class="main-b" onClick="location.href='./matching-search'">検索画面に戻る</button>
 		<button type="button" class="main-b" onClick="location.href='./staff-top'">トップに戻る</button>
 		<c:if test="${ matching.id == null }">
 				<button type="submit" id="match-regist" class="main-b" onclick="MovePages(this)">登録</button>

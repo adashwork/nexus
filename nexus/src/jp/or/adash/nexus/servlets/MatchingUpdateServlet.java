@@ -20,7 +20,7 @@ import jp.or.adash.nexus.services.MatchingService;
  * マッチング情報更新のためのサーブレット
  * @author pgjavaAT
  */
-@WebServlet("/web/match-update")
+@WebServlet("/web/matching-update")
 public class MatchingUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

@@ -19,7 +19,7 @@ import jp.or.adash.nexus.services.MatchingService;
 /**
  * Servlet implementation class MatchingSearchServlet
  */
-@WebServlet("/web/match-search")
+@WebServlet("/web/matching-search")
 public class MatchingSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -43,11 +43,12 @@ public class MatchingSearchServlet extends HttpServlet {
 		int id = 0;
 
 		//idが入力されていた場合、そのidのマッチング事例を表示する。
-			if(!request.getParameter("no").equals("")) {
+			if("".equals(request.getParameter("no"))) {
 				id = Integer.parseInt(request.getParameter("no"));
 			}else {
 				id = 0;
 			}
+
 			matching.add(service.getMatching(id));
 			//処理結果メッセージをリクエストに格納する
 			request.setAttribute("Staff", staff);
@@ -55,10 +56,11 @@ public class MatchingSearchServlet extends HttpServlet {
 			request.setAttribute("messages", service.getMessages());
 
 			// JSPにフォワード
-			request.getRequestDispatcher("/matching.jsp")
+			request.getRequestDispatcher("/matchingsearch.jsp")
 					.forward(request, response);
 
 	}
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException{
 		doGet(request, response);

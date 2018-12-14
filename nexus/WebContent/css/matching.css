@@ -1,0 +1,29 @@
+@charset "utf-8";
+/* CSS Document */
+
+.formbox{
+    float: left;
+}
+
+.inner-button{
+    float: left;
+     margin-left: 10px;
+}
+
+.m_div {
+		font-size:1rem;
+		background-color: #ddd;
+		text-align: center;
+		height: 5rem;
+		padding:10px;
+		}
+
+/*　pタグ　*/
+.m_p{
+	float:left;
+	padding:5px 10px 5px 10px;
+	}
+
+.m_p_right{
+	float:right;
+}

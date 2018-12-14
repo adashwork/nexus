@@ -75,28 +75,34 @@
 			</c:forEach>
 		</ul>
 
- 		<form id="form" method="post" action="">
+		<!--  kitayama 2018/12/14 form methodをgetに変更
+										  actionを検索サーブレットに変更
+										  各検索項目に検索値を受け取れるよう変更 -->
+ 		<form id="form" method="get" action="./matching-search">
 
 			<!--  komukai　2018/12/13 検索欄テーブルタグからdivへ変更 -->
 			<div class="m_div">
+
 				<p class="m_p">
 					マッチングID<br/>
-				<input type="text" name="no" size=13  value="">
+				<!--  kitayama 2018/12/14 nameを変更 -->
+				<input type="text" name="matchingid" size=13  value="<c:out value="${ matchingid }" />" >
+				</p>
 
-				</p>
-				<p class="m_p">
-					求人ID<br/>
-					<input type="text" size=13 name="kyujinno">
-				</p>
 				<p class="m_p">
 					企業ID<br/>
-					<input type="text" size=13 name="kigyou" value="">		<!-- TODO: 処理未 -->
+					<input type="text" size=13 name="companyid" value="<c:out value="${ companyId }" />" >
 				</p>
 				<p class="m_p">
 					求職者ID<br/>
-					<input type="text" size=13 name="jobseekerid" value="">
+					<input type="text" size=13 name="jobseekerid" value="<c:out value="${ jobseekerid }" />" >>
 				</p>
-			</div>
+
+				<p class="m_p">
+				<!--  kitayama 2018/12/14 検索項目を職業紹介者IDに変更 -->
+					職業紹介者ID<br/>
+					<input type="text" size=13 name="staffid" value="<c:out value="${ staffid }" />" >
+				</p>			</div>
 			<div class="m_div">
 				<p class="m_p">
 					フリーワード検索<br/>
@@ -118,37 +124,37 @@
 				<th>合否</th>
 				<th>コメント</th>
 			</tr>
-<%--
+
 			<!--  kitayama　2018/12/13 for文追加 -->
-			<form action="/nexus/web/jobseeker-info" method="get">
-			<c:if test="${!empty matching }">
-			<c:forEach var="case" items="${ matching }">
+
+			<c:forEach var="matchingCase" items="${ matching }">
 					<tr>
 						<td>
-							<button class="mini_b mini_b_applilist" name="js_id">詳細</button>
+							<form action="./matching-registdisp" method="get">
+							<button class="mini_b mini_b_applilist" name="matchinginfo"
+										value="<c:out value="${ matchingCase.id }" />">詳細</button>
+							</form>
 						</td>
 						<td>
-							<c:out value="${ case.getId }" />
-							<input type="hidden" name="caseid" value="<c:out value="${ case.id }" />" >
+							<c:out value="${ matchingCase.id }" />
+							<input type="hidden" name="matchingid" value="<c:out value="${ matchingCase.id }" />" >
 						</td>
-						<td><c:out value="${ case.companyNo }" /></td>
-						<td><c:out value="${ case.jobseekerid }" /></td>
-						<td><c:out value="${ case.assessment }" /></td>
+						<td><c:out value="${ matchingCase.companyNo }" /></td>
+						<td><c:out value="${ matchingCase.jobseekerid }" /></td>
+						<td><c:out value="${ matchingCase.assessment }" /></td>
 						<td>
 							<c:choose>
-								<c:when test="${ fn:length(case.note)  <= 15 }">
-									<c:out value="${ case.note }" />
+								<c:when test="${ fn:length(matchingCase.note)  <= 15 }">
+									<c:out value="${ matchingCase.note }" />
 								</c:when>
 								<c:otherwise>
-									<c:out value="${ fn:substring(case.note, 0, 15) }" />
+									<c:out value="${ fn:substring(matchingCase.note, 0, 15) }" />
 								</c:otherwise>
 							</c:choose>
 						</td>
 					</tr>
 			</c:forEach>
-			</c:if>
-			</form>
- --%>
+
 		</table>
 
 <div>

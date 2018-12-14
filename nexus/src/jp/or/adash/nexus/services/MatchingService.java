@@ -260,6 +260,7 @@ public class MatchingService {
 	 */
 	public MatchingCase getMatching(int id) {
 		MatchingCase matching = null;
+//		Comment matchingComment = null;
 
 		try {
 			// データベース接続を開始する
@@ -268,6 +269,11 @@ public class MatchingService {
 			// idを元にマッチング事例を取得
 			MatchingDao dao = new MatchingDao(transaction);
 			matching = dao.select(id);
+
+//			// マッチングidを元にマッチングコメントを取得
+//			CommentDao cdao = new CommentDao(transaction);
+//			matchingComment = cdao.selectMatching(matchid);
+
 
 		} catch (IOException e) {
 			// エラーメッセージをセットする

@@ -11,7 +11,6 @@ import javax.servlet.http.HttpSession;
 
 import jp.or.adash.nexus.entity.Company;
 import jp.or.adash.nexus.entity.Staff;
-import jp.or.adash.nexus.services.CommonsService;
 import jp.or.adash.nexus.services.CompanyService;
 
 /**
@@ -37,14 +36,18 @@ public class CompanyRegistServlet extends HttpServlet {
 		HttpSession session = request.getSession(true);
 		Staff staff = (Staff) session.getAttribute("UserData");
 
-		//入力された情報を登録する
 
-		//共通データチェッククラス
-		CommonsService commonsService = new CommonsService();
+
 
 		//ここでデータを受け取る
 
+		//事業所番号の記入がなければ、独自の事業所番号を生成する
 		String companyNo = request.getParameter("companyNo");
+
+
+
+
+
 		String corporateNumber = request.getParameter("corporateNumber");
 		String companyName = request.getParameter("companyName");
 		String companyKana = request.getParameter("companyKana");
@@ -90,6 +93,11 @@ public class CompanyRegistServlet extends HttpServlet {
 			request.getRequestDispatcher("/companyregist.jsp")
 					.forward(request, response);
 			return;
+		}
+
+		//もし事業所番号が未記入なら、独自の事業所番号を発行する
+		if("".equals(company.getCompanyNo())) {
+			company.setCompanyNo(companyService.createUniqueCompanyNo());
 		}
 
 		//企業情報を登録する

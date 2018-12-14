@@ -327,6 +327,14 @@ public class Company {
 	}
 
 
+	/**
+	 * 事業所番号を登録する
+	 * @param companyNo 事業所番号
+	 */
+	public void setCompanyNo(String companyNo) {
+		this.companyNo = companyNo;
+	}
+
 
 
 

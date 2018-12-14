@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import jp.or.adash.nexus.entity.Comment;
 import jp.or.adash.nexus.entity.MatchingCase;
 import jp.or.adash.nexus.entity.Staff;
 import jp.or.adash.nexus.services.MatchingService;
@@ -49,6 +50,10 @@ public class MatchingUpdateServlet extends HttpServlet {
 		String jobseekerid = request.getParameter("jobseekerid");
 		String staffid = request.getParameter("staffid");
 		Date interviewdt = null;
+
+		// TODO 確認要
+		Comment comment = null;
+
 		try {
 			interviewdt = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("interviewdt"));
 		} catch (ParseException e) {
@@ -86,7 +91,7 @@ public class MatchingUpdateServlet extends HttpServlet {
 			return;
 		}
 
-		service.updateMatchingCase(matching);
+		service.updateMatchingCase(matching, comment);
 
 		//処理結果メッセージをリクエストに格納する
 		request.setAttribute("Staff", staff);

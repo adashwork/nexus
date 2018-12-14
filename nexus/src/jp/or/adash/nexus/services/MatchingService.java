@@ -4,8 +4,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import jp.or.adash.nexus.dao.CommentDao;
 import jp.or.adash.nexus.dao.MatchingDao;
 import jp.or.adash.nexus.dao.SaibanDao;
+import jp.or.adash.nexus.entity.Comment;
 import jp.or.adash.nexus.entity.JobSeekerMain;
 import jp.or.adash.nexus.entity.Kyujin;
 import jp.or.adash.nexus.entity.MatchingCase;
@@ -132,7 +134,7 @@ public class MatchingService {
 	 * @param matching マッチング情報
 	 * @return マッシング情報を登録する。
 	 */
-	public boolean insertMatchingCase(MatchingCase matching) {
+	public boolean insertMatchingCase(MatchingCase matching, Comment comment) {	// comment追加 2018/12/14 T.Ikeda
 		boolean result = false; //1処理結果
 
 		try {
@@ -151,6 +153,20 @@ public class MatchingService {
 			int count = dao.insert(matching);
 
 			if (count > 0) {
+				// 1完了メッセージをセットする
+				messages.add(MessageCommons.MSG_REGIST_COMPLETE);
+				result = true;
+			} else {
+				// 1エラーメッセージをセットする
+				messages.add(MessageCommons.MSG_REGIST_FAILURE);
+				result = false;
+			}
+
+			// コメントをDBに登録する　　　　　　　　　　　　　追加 2018/12/14T.Ikeda
+			CommentDao cdao = new CommentDao(transaction);
+			int countC = cdao.insert(comment);
+
+			if (countC > 0) {
 				// 1完了メッセージをセットする
 				messages.add(MessageCommons.MSG_REGIST_COMPLETE);
 				result = true;
@@ -182,7 +198,7 @@ public class MatchingService {
 	 * @param matching
 	 * @return
 	 */
-	public boolean updateMatchingCase(MatchingCase matching) {
+	public boolean updateMatchingCase(MatchingCase matching, Comment comment) {	// comment追加 2018/12/14 T.Ikeda
 		boolean result = false;
 
 		try {
@@ -192,11 +208,25 @@ public class MatchingService {
 			// 1トランザクションを開始する
 			transaction.beginTrans();
 
-			// 1商品単価を取得する
+			// 1マッチング情報を取得する
 			MatchingDao dao = new MatchingDao(transaction);
 			int count = dao.update(matching);
 
 			if (count > 0) {
+				// 1完了メッセージをセットする
+				messages.add(MessageCommons.MSG_UPDATE_COMPLETE);
+				result = true;
+			} else {
+				// 1エラーメッセージをセットする
+				messages.add(MessageCommons.MSG_UPDATE_FAILURE);
+				result = false;
+			}
+
+			// 1コメント情報を取得する　　　　　　　　　　　　　追加 2018/12/14T.Ikeda
+			CommentDao cdao = new CommentDao(transaction);
+			int countC = cdao.update(comment);
+
+			if (countC > 0) {
 				// 1完了メッセージをセットする
 				messages.add(MessageCommons.MSG_UPDATE_COMPLETE);
 				result = true;

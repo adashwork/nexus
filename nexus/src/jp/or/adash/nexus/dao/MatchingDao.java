@@ -42,7 +42,7 @@ public class MatchingDao {
 		// SQL文を生成する
 		StringBuffer sql = new StringBuffer();
 		sql.append("insert into matchingcase ");
-		sql.append("(id,companyNo,kyujinno,jobseekerid,staffid,interviewdt,enterdt,"		// 追加・修正 2018/12/11.12 T.Ikeda
+		sql.append("(id,companyno,kyujinno,jobseekerid,staffid,interviewdt,enterdt,"		// 追加・修正 2018/12/11,12,14 T.Ikeda
 				+ "assessment,note,createuserid,updateuserid");
 		sql.append(") values (");
 		sql.append("?,?,?,?,?,?,?,?,?,?,?");
@@ -93,7 +93,7 @@ public class MatchingDao {
 				while(rs.next()) {
 					matching = new MatchingCase(
 							rs.getInt("id"),
-							rs.getString("companyNo"),		// 追加・修正 2018/12/11.12 T.Ikeda
+							rs.getString("companyno"),		// 追加・修正 2018/12/11,12,14 T.Ikeda
 							rs.getString("kyujinno"),
 							rs.getString("jobseekerid"),
 							rs.getString("staffid"),
@@ -129,7 +129,7 @@ public class MatchingDao {
 		// SQL文を生成する
 		StringBuffer sql = new StringBuffer();
 		sql.append("update matchingcase set");
-		sql.append(" companyNo = ?,");				// 追加・修正 2018/12/11.12 T.Ikeda
+		sql.append(" companyno = ?,");				// 追加・修正 2018/12/11,12,14 T.Ikeda
 		sql.append(" kyujinno = ?,");
 		sql.append(" jobseekerid = ?,");
 		sql.append(" staffid = ?,");

@@ -66,7 +66,7 @@ public class CompanySearch {
 	}
 
 	/**
-	 * 選択された産業分類を取得する　！！！！！要確認
+	 * 選択された産業分類を取得する
 	 * @return jobCategory
 	 */
 

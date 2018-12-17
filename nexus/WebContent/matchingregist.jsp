@@ -70,14 +70,13 @@
 
 		<ul>
 			<c:forEach var="message" items="${ messages }">
-				<li><font color=#F00 size="7"><c:out value="${ message }" /></font></li>
+				<li><font color=#F00 size="5"><c:out value="${ message }" /></font></li>
 			</c:forEach>
 		</ul>
 
  		<form id="form" method="post" action="">	<!-- TODO:「action」未設定 -->
 
 <!-- テーブル部分　-->
-
 
 		<table border="0">
 
@@ -98,8 +97,9 @@
 					企業ID
 				</th>
 				<td>
-					<input type="text" name="" size="10" value="">		<!-- TODO:リンク先 -->
-					<input type="button" value="" onclick="">
+					<input type="text" name="" size="10" value="<c:out value="${ matching.companyid }" />">
+					<input type="button" value="企業ID検索"
+						onclick="window.open('/nexus/web/matching-id-search','','width=850,height=*,resizeable=yes')">
 				</td>
 				<td>
 				</td>
@@ -109,8 +109,9 @@
 					求人ID
 				</th>
 				<td>
-					<input type="text" name="kyujinno" size="10" value="<c:out value="${ matching.kyujinno }" />">
-					<input type="button" value="求人No一覧" onclick="window.open('/nexus/web/job-search')">
+					<input type="text" name="kyujinid" size="10" value="<c:out value="${ matching.kyujinid }" />">
+					<input type="button" value="求人ID検索"
+						onclick="window.open('/nexus/web/matching-id-search','','width=850,height=*,resizeable=yes')">
 				</td>
 				<td>
 				</td>
@@ -121,7 +122,8 @@
 				</th>
 				<td>
 					<input type="text" name="jobseekerid" size="10" value="<c:out value="${ matching.jobseekerid }" />">
-					<input type="button" value="求職者一覧" onclick="window.open('/nexus/web/jobseeker-list')">
+					<input type="button" value="求職者ID検索"
+						onclick="window.open('/nexus/web/matching-id-search','','width=850,height=*,resizeable=yes')">
 				</td>
 				<td>
 				</td>

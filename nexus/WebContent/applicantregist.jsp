@@ -257,7 +257,7 @@
 							<option value="49"
 								<c:if test="${ info.huyou == 49 }">selected</c:if>>49</option>
 					</select>人</td>
-				<tr>
+				</tr>
 				<tr>
 					<th>メールアドレス</th>
 					<td><input type="text" name="seekermail" value="${ info.seekermail }" /></td>
@@ -282,8 +282,8 @@
 					<th>最寄り駅</th>
 					<td><input type="text" name="nearstation" value="${ info.nearstation }" /></td>
 				</tr>
-				
-				
+
+
 				<tr>
 				<th>希望業種1</th>
 					<td><select name="hopejobcategory">

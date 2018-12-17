@@ -129,7 +129,7 @@
 					<td><input type="text" class="datepicker" name="birthdt"
 						value="<fmt:formatDate value="${ info.birthdt }" pattern="yyyy-MM-dd"/>"></td>
 				</tr>
-				<tr>
+				<!--<tr>
 					<th>年齢</th>
 					<td><select name="age">
 							<option value="">-</option>
@@ -324,7 +324,7 @@
 							<option value="99"
 								<c:if test="${ info.age == 99 }">selected</c:if>>99</option>
 					</select>歳</td>
-				</tr>
+				</tr>-->
 				<tr>
 					<th>郵便番号</th>
 					<td><input type="text" name="postal" value="${ info.postal }" /></td>

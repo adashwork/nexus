@@ -112,7 +112,7 @@
 					<td><input type="radio" name="sex" value="1" /> 男 <input
 						type="radio" name="sex" value="2" /> 女</td>
 				</tr>
-				<tr>
+				<!--<tr>
 					<th>年齢</th>
 					<td><select name="age">
 							<%
@@ -125,7 +125,7 @@
 								}
 							%>
 					</select>歳</td>
-				</tr>
+				</tr>-->
 				<tr>
 					<th>郵便番号</th>
 					<td><input type="text" name="postal"

@@ -9,6 +9,7 @@ import java.util.List;
  */
 public class MatchingSearchParameter {
 
+	// 2018/12/17 kitayama wordのデータ型をListからString配列に変更
 	/**
 	 * matchingid	マッチング事例ID
 	 * companyNo 	事業所番号
@@ -21,13 +22,13 @@ public class MatchingSearchParameter {
 	private String companyNo;
 	private String jobseekerid;
 	private String staffid;
-	private List<String> word;
+	private String[] word;
 
 	public MatchingSearchParameter(Integer matchingid
 								 , String companyNo
 								 , String jobseekerid
 								 , String staffid
-								 , List<String> word) {
+								 , String[] word) {
 		this.matchingid = matchingid;
 		this.companyNo = companyNo;
 		this.jobseekerid = jobseekerid;

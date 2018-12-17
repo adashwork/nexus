@@ -93,7 +93,7 @@
 		</section>
 	</header>
 	<main>
-	<h2>求職者詳細情報</h2>
+	<h2>求職者詳細情報1</h2>
 	<ul>
 		<c:forEach var="message" items="${ messages }">
 			<li><c:out value="${ message }" /></li>
@@ -282,6 +282,8 @@
 					<th>最寄り駅</th>
 					<td><input type="text" name="nearstation" value="${ info.nearstation }" /></td>
 				</tr>
+				
+				
 				<tr>
 				<th>希望業種1</th>
 					<td><select name="hopejobcategory">
@@ -420,7 +422,7 @@
 		<input class="main-b" type="button"
 			onclick="location.href='/nexus/web/jobseeker-list'" value="一覧に戻る">
 		<input class="main-b" type="button"
-			onclick="location.href='/nexus/web/jobseeker-list'" value="仮ボタン">
+			onclick="location.href='/nexus/web/jobseeker-list'" value="削除">
 	</div>
 	</main>
 	<!-- フッター　-->

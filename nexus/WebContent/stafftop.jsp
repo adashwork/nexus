@@ -31,10 +31,23 @@
 			</h1>
 			<nav>
 				<ul class="mainnavi">
-					<li><a href="/nexus/web/job-search"><i class="fas fa-home"></i>検索</a></li>
-					<li><a href="/nexus/web/jobseeker-list"><i
-							class="fas fa-search"></i>登録&amp;閲覧</a>
+					<li><a href="/nexus/web/job-search"><i class="fas fa-home"></i>検索</a>
+					<ul class="drop-menu">
+							<li><a href="/nexus/web/kyujin-disp">企業検索
+							<i class="fas fa-angle-right"></i></a></li>
+							<li><a href="/nexus/web/job-search">求人検索<i
+									class="fas fa-angle-right"></i></a></li>
+							<li><a href="/nexus/web/jobseeker-list">求職者情報<i
+									class="fas fa-angle-right"></i></a></li>
+							<li><a href="/nexus/web/match-disp">マッチング検索
+							<i class="fas fa-angle-right"></i></a></li>
+						</ul></li>
+
+
+					<li><a href="/nexus/web/jobseeker-list"><i class="fas fa-search"></i>登録&amp;閲覧</a>
 						<ul class="drop-menu">
+						<li><a href="/nexus/web/company-registdisp">企業登録<i
+									class="fas fa-angle-right"></i></a></li>
 							<li><a href="/nexus/web/kyujin-disp">求人登録<i
 									class="fas fa-angle-right"></i></a></li>
 							<li><a href="/nexus/web/jobseeker-list">求職者情報<i
@@ -75,6 +88,11 @@
 				</tr>
 				<tr>
 					<td><a href="/nexus/web/job-search">■求人検索</a></td>
+
+				</tr>
+				<tr>
+					<td><a href="/nexus/web/jobseeker-list">■求職者情報</a></td>
+
 				</tr>
 			</table>
 		</div>
@@ -83,6 +101,9 @@
 			<table class="staff-table">
 				<tr>
 					<th><label>登録＆閲覧</label></th>
+				</tr>
+				<tr>
+					<td><a href="/nexus/web/company-registdisp">■企業登録</a></td>
 				</tr>
 				<tr>
 					<td><a href="/nexus/web/kyujin-disp">■求人登録</a></td>

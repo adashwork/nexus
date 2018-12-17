@@ -11,6 +11,7 @@ import jp.or.adash.nexus.entity.Comment;
 import jp.or.adash.nexus.entity.JobSeekerMain;
 import jp.or.adash.nexus.entity.Kyujin;
 import jp.or.adash.nexus.entity.MatchingCase;
+import jp.or.adash.nexus.entity.MatchingSearchParameter;
 import jp.or.adash.nexus.utils.common.DataCommons;
 import jp.or.adash.nexus.utils.common.MessageCommons;
 import jp.or.adash.nexus.utils.dao.Transaction;
@@ -285,6 +286,32 @@ public class MatchingService {
 		return matching;
 	}
 
+	// 2018/12/17 kitayama 新規作成
+	/**
+	 * マッチング事例を取得する
+	 * @param msp 検索条件オブジェクト
+	 * @return マッチング事例のListオブジェクト
+	 */
+	public List<MatchingCase> getMatchingV2(MatchingSearchParameter msp) {
+		List<MatchingCase> matching = new ArrayList<MatchingCase>();
+
+		try {
+			// データベース接続を開始する
+			transaction.open();
+
+			// idを元にマッチング事例を取得
+			MatchingDao dao = new MatchingDao(transaction);
+			matching = dao.selectV2(msp);
+
+		} catch (IOException e) {
+			// エラーメッセージをセットする
+		} finally {
+			// データベース接続を終了する
+			transaction.close();
+		}
+
+		return matching;
+	}
 
 
 }

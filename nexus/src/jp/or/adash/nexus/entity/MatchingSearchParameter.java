@@ -1,7 +1,5 @@
 package jp.or.adash.nexus.entity;
 
-import java.util.List;
-
 /**
  * マッチング事例検索条件のエンティティ
  * @author kitayama
@@ -67,7 +65,7 @@ public class MatchingSearchParameter {
 	/**
 	 * @return word
 	 */
-	public List<String> getWord() {
+	public String[] getWord() {
 		return word;
 	}
 

@@ -19,12 +19,32 @@ public class StringCommons {
 	 *
 	 */
 	public static String[]  splitWords(String str){
-		// 受け取ったstr内に含まれる全角スペースを半角に置換
-		String str2 = str.replace("　"," ");
-		// 半角スペースごとに単語を区切り、配列に格納
-		String[] str3 = str2.split(" ",0);
 
-		return str3;
+		String[] str2 = {""};
+
+		if(str == null) {
+			return str2;
+		}
+
+
+		// 受け取ったstr内に含まれる全角スペースを半角に置換
+		str = str.replace("　"," ");
+		 //
+		str = str.trim();
+		// 間の半角スペースがいくつでもひとつにする
+		// スペースしかないときに""で返す
+		// 正規表現を使用しましたが書き手が理解していないので要注意　18/12/17 mosco
+		str = str.replaceAll("  +|   +|\t|\r|\n"," ");
+
+		if(str.equals(" ")) {
+			return str2;
+		}
+
+		// 半角スペースごとに単語を区切り、配列に格納
+		str2 = str.split(" ",0);
+
+
+		return str2;
 
 	}
 }

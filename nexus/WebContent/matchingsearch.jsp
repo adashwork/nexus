@@ -91,7 +91,7 @@
 
 				<p class="m_p">
 					企業ID<br/>
-					<input type="text" size=13 name="companyid" value="<c:out value="${ companyId }" />" >
+					<input type="text" size=13 name="companyno" value="<c:out value="${ companyId }" />" >
 				</p>
 				<p class="m_p">
 					求職者ID<br/>

@@ -110,11 +110,11 @@
 				<fmt:formatNumber value="${ info.id }" pattern="00000000"/></td>
 				</tr>
 				<tr>
-					<th>名前</th>
+					<th>氏名</th>
 					<td><input type="text" name="name" value="${ info.name }" /></td>
 				</tr>
 				<tr>
-					<th>ふりがな</th>
+					<th>氏名(かな)</th>
 					<td><input type="text" name="kana" value="${ info.kana }" /></td>
 				</tr>
 				<tr>
@@ -324,7 +324,7 @@
 							<option value="99"
 								<c:if test="${ info.age == 99 }">selected</c:if>>99</option>
 					</select>歳</td>
-				</tr>-->
+				</tr>
 				<tr>
 					<th>郵便番号</th>
 					<td><input type="text" name="postal" value="${ info.postal }" /></td>

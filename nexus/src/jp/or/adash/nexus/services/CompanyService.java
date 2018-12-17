@@ -1,10 +1,17 @@
 package jp.or.adash.nexus.services;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.stream.events.Comment;
 
+import jp.or.adash.nexus.dao.CompanyDao;
 import jp.or.adash.nexus.entity.Company;
+import jp.or.adash.nexus.entity.CompanySearch;
+import jp.or.adash.nexus.entity.CompanySearchResult;
+import jp.or.adash.nexus.utils.common.MessageCommons;
+import jp.or.adash.nexus.utils.common.StringCommons;
 import jp.or.adash.nexus.utils.dao.Transaction;
 
 /**
@@ -25,6 +32,14 @@ public class CompanyService {
 	 * 処理結果メッセージを格納するリスト
 	 */
 	private List<String> messages;
+
+	/**
+	 * コンストラクタ
+	 */
+
+	public CompanyService() {
+	messages = new ArrayList<String>();
+	}
 
 
 	/**
@@ -104,13 +119,13 @@ public class CompanyService {
 
 	/**
 	 * 企業情報を取得する（検索）
-	 * @return List<Company> companyList 該当した企業の一覧
+	 * @return List<CompanySearchResult> companyList 該当した企業の一覧
 	 * @author mosco
 	 */
 
-	/*
-	public List<Company> getCompany(CompanySearch cse) {
-		List<Company> companyList = new ArrayList<>();
+
+	public List<CompanySearchResult> getCompanyList(CompanySearch cse) {
+		List<CompanySearchResult> companyList = new ArrayList<>();
 
 		// CompanySearchオブジェクトから検索条件の値を取り出す
 		String staffId = cse.getStaffId();						// A'担当者のID
@@ -134,7 +149,7 @@ public class CompanyService {
 
 		} catch(IOException e) {
 			// DB接続が失敗した場合、例外をキャッチする
-			// TODO エラーメッセージの表示 リストorStringにエラーメッセージを格納し、検索画面で表示
+			messages.add(MessageCommons.ERR_DB_CONNECT);
 		} finally {
 			try {
 				// DB接続の終了
@@ -148,6 +163,6 @@ public class CompanyService {
 		return companyList;
 	}
 
-*/
+
 
 }

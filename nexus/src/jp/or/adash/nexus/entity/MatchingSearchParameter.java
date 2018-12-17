@@ -11,21 +11,25 @@ public class MatchingSearchParameter {
 
 	/**
 	 * matchingid	マッチング事例ID
+	 * companyNo 	事業所番号
 	 * jobseekerid	求職者ID
 	 * staffid		職業紹介者ID
 	 * word			フリーワード（複数持つことがある）
 	 */
 	//TODO 変数名とデータ型は要確認
 	private Integer matchingid;
+	private String companyNo;
 	private String jobseekerid;
 	private String staffid;
 	private List<String> word;
 
 	public MatchingSearchParameter(Integer matchingid
+								 , String companyNo
 								 , String jobseekerid
 								 , String staffid
 								 , List<String> word) {
 		this.matchingid = matchingid;
+		this.companyNo = companyNo;
 		this.jobseekerid = jobseekerid;
 		this.staffid = staffid;
 		this.word = word;
@@ -36,6 +40,13 @@ public class MatchingSearchParameter {
 	 */
 	public Integer getMatchingid() {
 		return matchingid;
+	}
+
+	/**
+	 * @return companyId
+	 */
+	public String getCompanyId() {
+		return companyNo;
 	}
 
 	/**

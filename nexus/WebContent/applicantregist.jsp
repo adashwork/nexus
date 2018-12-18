@@ -19,6 +19,7 @@
 <link href="../css/header.css" rel="stylesheet" type="text/css" />
 <link href="../css/footer.css" rel="stylesheet" type="text/css" />
 <link href="../css/job_seeker.css" rel="stylesheet" type="text/css" />
+<link href="../css/applicant_regist.css" rel="stylesheet" type="text/css" />
 
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css">
@@ -33,6 +34,7 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
 <script type="text/javascript" src="../js/common.js"></script>
+<!--  <script type="text/javascript" src="../js/applicantregist_tab.js"></script> -->
 <style>
 #job_seeker {
 	width: 980px;
@@ -50,6 +52,9 @@
 #job_seeker table td {
 	text-align: left;
 }
+
+
+
 </style>
 <title>求職者詳細情報</title>
 </head>
@@ -67,11 +72,13 @@
 					<li><a href="/nexus/web/jobseeker-list"><i
 							class="fas fa-search"></i>登録&amp;閲覧</a>
 						<ul class="drop-menu">
-							<li><a href="/nexus/web/kyujin-disp">求人情報<i
+							<li><a href="/nexus/web/company-registdisp">企業登録<i
 									class="fas fa-angle-right"></i></a></li>
-							<li><a href="/nexus/web/jobseeker-list">求職者情報<i
+							<li><a href="/nexus/web/kyujin-disp">求人登録<i
 									class="fas fa-angle-right"></i></a></li>
-							<li><a href="/nexus/web/match-disp">マッチング登録<i
+							<li><a href="/nexus/web/jobseeker-list">求職者登録<i
+									class="fas fa-angle-right"></i></a></li>
+							<li><a href="/nexus/web/matching-regist">マッチング登録<i
 									class="fas fa-angle-right"></i></a></li>
 						</ul></li>
 					<c:if test="${Staff.authority == 1}"><li><a href="/nexus/web/account-list"><i
@@ -93,7 +100,7 @@
 		</section>
 	</header>
 	<main>
-	<h2>求職者詳細情報1</h2>
+	<h2>求職者詳細情報</h2>
 	<ul>
 		<c:forEach var="message" items="${ messages }">
 			<li><c:out value="${ message }" /></li>
@@ -101,11 +108,20 @@
 	</ul>
 	<div id="job_seeker">
 		<form action="/nexus/web/jobseeker-edit" method="post">
-			<table border="0">
 
+		  <div id="tab-controll" class="tab-menu">
+		<ul>
+           <li><a href="#tab1">個人情報</a></li>
+           <li><a href="#tab2">希望業種</a></li>
+           <li><a href="#tab3">その他</a></li>
+        </ul>
+        </div>
+
+	    <div id="controll" class="menu">
+			<table id="tab1" class="page">
 				<tr>
-					<th width="20%">ID</th>
-					<td><input type="hidden" name="id"
+				<th width="20%">ID</th>
+				<td><input type="hidden" name="id"
 						value="<c:out value="${ info.id }" />">
 				<fmt:formatNumber value="${ info.id }" pattern="00000000"/></td>
 				</tr>
@@ -260,7 +276,7 @@
 				</tr>
 				<tr>
 					<th>メールアドレス</th>
-					<td><input type="text" name="seekermail" value="${ info.seekermail }" /></td>
+					<td><input type="text" name="seekermail" value="${ info.seekermail }"/></td>
 				</tr>
 				<tr>
 					<th>自宅電話番号</th>
@@ -272,18 +288,19 @@
 				</tr>
 				<tr>
 					<th>郵便番号</th>
-					<td><input type="text" name="postal" value="${ info.postal }" /></td>
+					<td><input type="text" name="zip21" class="form_text-small" size="3" maxlength="3"> - <input type="text" name="zip22" class="form_text-small" onKeyUp="AjaxZip3.zip2addr('zip21','zip22','addr21','addr21');" size="4" maxlength="4"></td>
 				</tr>
 				<tr>
 					<th>住所</th>
-					<td><input type="text" name="address" value="${ info.address }" /></td>
+					<td><input type="text" name="addr21" class="form_text"  value="${ info.address }" size="50"></td>
 				</tr>
 				<tr>
 					<th>最寄り駅</th>
-					<td><input type="text" name="nearstation" value="${ info.nearstation }" /></td>
+					<td><input type="text" name="nearstation" value="${ info.nearstation }" size="10"/>駅</td>
 				</tr>
+				</table>
 
-
+				<table id="tab2" class="page">
 				<tr>
 				<th>希望業種1</th>
 					<td><select name="hopejobcategory">
@@ -347,7 +364,7 @@
 				<tr>
 					<th>希望月給</th>
 					<td><input type="text" name="hopesalary"
-						value="${ info.hopesalary }" /></td>
+						value="${ info.hopesalary }" size="4" />万円</td>
 				</tr>
 				<tr>
 					<th>希望勤務地</th>
@@ -394,37 +411,40 @@
 					<td><input type="text" name="hopeendtime"
 						value="${ info.hopeendtime }" /></td>
 				</tr>
+				</table>
+
+				<table id="tab3" class="page">
 				<tr>
 					<th>その他免許</th>
-					<td><textarea rows="3" cols="90" name="licenseetc"><c:out
+					<td><textarea rows="3" cols="80" name="licenseetc"><c:out
 								value="${ info.licenseetc }" /></textarea></td>
 				</tr>
 				<tr>
 					<th>補足</th>
-					<td><textarea rows="3" cols="90" name="note"><c:out
+					<td><textarea rows="3" cols="80" name="note"><c:out
 								value="${ info.note }" /></textarea></td>
 				</tr>
 				<tr>
 					<th>職歴・経歴</th>
-					<td><textarea rows="3" cols="90" name="career"><c:out
+					<td><textarea rows="3" cols="80" name="career"><c:out
 								value="${ info.careea }" /></textarea></td>
 				</tr>
-
 				<tr>
 					<th>担当職業者紹介者ID</th>
 					<td><input type="hidden" name="tantoustaffid"
 						value="<c:out value="${ info.tantoustaffid }" />"> <c:out
 							value="${ info.tantoustaffid }" /></td>
 				</tr>
-			</table>
+				</table>
+
 			<input type="submit" value="更新" class="main-b">
 		</form>
 		<input class="main-b" type="button"
 			onclick="location.href='/nexus/web/jobseeker-list'" value="一覧に戻る">
 		<input class="main-b" type="button"
 			onclick="location.href='/nexus/web/jobseeker-list'" value="削除">
-	</div>
-	</main>
+</div>
+</main>
 	<!-- フッター　-->
 	<footer>
 		<small>Copyright(C) 2009有限責任事業組合 大阪職業教育協働機構(A'ワーク創造館) All
@@ -433,5 +453,7 @@
 
 	<script src="js/kalendae.standalone.js" type="text/javascript"
 		charset="utf-8"></script>
+	<script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
+
 </body>
 </html>

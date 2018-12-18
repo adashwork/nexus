@@ -84,7 +84,7 @@ insert into jscareer values('45759','製造業',201101, 201202);
 
 
 -- 採番のサンプルデータ
-insert into saiban values(00111,12457-44446666,1234-567890-1,0001,3,1);
+insert into saiban values(00111,0,0,0001,3,1);
 
 
 -- 職種マスタのサンプルデータ

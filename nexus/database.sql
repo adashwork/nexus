@@ -427,12 +427,12 @@ primary key(id)
 
 -- 採番 --
 create table saiban(
-jobseekersaiban int(14),
-kyujinsaiban int(14),
-companysaiban int(14),
-staffsaiban int(14),
-matchingsaiban int(14),
-commentsaiban int(14)
+jobseekersaiban int,
+kyujinsaiban int,
+companysaiban int,
+staffsaiban int,
+matchingsaiban int,
+commentsaiban int
 )charset =utf8;
 
 

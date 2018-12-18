@@ -59,14 +59,14 @@ public class MatchingRegistServlet extends HttpServlet {
 			.forward(request, response);
 		}
 		String companyNo = request.getParameter("companyNo");		// 追加・修正 2018/12/11.12 T.Ikeda
-		String kyujinno = request.getParameter("kyujinno");
-		String jobseekerid = request.getParameter("jobseekerid");
-		String staffid = request.getParameter("staffid");
-		Date interviewdt = null;
+		String kyujinNo = request.getParameter("kyujinno");
+		String jobSeekerId = request.getParameter("jobseekerid");
+		String staffId = request.getParameter("staffid");
+		Date interviewDt = null;
 		try {
-			interviewdt = sdf.parse(request.getParameter("interviewdt"));
+			interviewDt = sdf.parse(request.getParameter("interviewdt"));
 		} catch (ParseException e) {
-			interviewdt = null;
+			interviewDt = null;
 		}
 		//		request.getParameter("interviewdt");
 		Date enterdt = null;
@@ -78,17 +78,24 @@ public class MatchingRegistServlet extends HttpServlet {
 		//		request.getParameter("enterdt");
 		String assessment = request.getParameter("assessment");
 		String note = request.getParameter("note");
-		Date createdt = null;
-		Date upDatedt = null;
+		Date createDt = null;
+		Date updateDt = null;
 
-		String createuserid = staff.getId();
-		String upDateuserid = staff.getId();
+		String createUserId = staff.getId();
+		String updateUserId = staff.getId();
+		Integer matchId = 0;									// 追加 2018/12/18 T.Ikeda
+		String genre = null;									// 追加 2018/12/17 T.Ikeda
+		String important = null;								// 追加 2018/12/17 T.Ikeda
+		String title = null;									// 追加 2018/12/17 T.Ikeda
 
 		//1.2 マッチング結果オブジェクトを作成
-		matching = new MatchingCase(0, companyNo, kyujinno, jobseekerid, staffid, interviewdt, enterdt, assessment, note,
-				createdt,
-				createuserid, upDatedt, upDateuserid);    		// 追加・修正 2018/12/11.12 T.Ikeda
-
+		matching = new MatchingCase(0, companyNo, kyujinNo, jobSeekerId, staffId, interviewDt, enterdt, assessment, note,
+				createDt,
+				createUserId, updateDt, updateUserId);    		// 追加・修正 2018/12/11.12 T.Ikeda
+		// マッチングコメントオブジェクトを作成                 // 追加 2018/12/14 T.Ikeda
+		comment = new Comment(0, companyNo, kyujinNo, jobSeekerId, staffId, matchId,
+				genre, important, title, note, createDt, createUserId,
+				updateDt, updateUserId);
 
 		if (!service.check(matching)) {
 			//入力チェックでエラーがあった場合、エラーメッセージをセット

@@ -117,6 +117,14 @@ public class Comment {
 	}
 
 	/**
+	 * @param matchId セットする matchId
+	 * @author T.Ikeda 2018/12/18
+	 */
+	public void setMatchId(Integer matchId) {
+		this.matchId = matchId;
+	}
+
+	/**
 	 * @return genre
 	 */
 	public String getGenre() {

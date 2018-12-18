@@ -1,11 +1,24 @@
 package jp.or.adash.nexus.services;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.stream.events.Comment;
 
+import jp.or.adash.nexus.dao.CompanyDao;
 import jp.or.adash.nexus.entity.Company;
+import jp.or.adash.nexus.entity.CompanySearch;
+import jp.or.adash.nexus.entity.CompanySearchResult;
+import jp.or.adash.nexus.utils.common.MessageCommons;
+import jp.or.adash.nexus.utils.common.StringCommons;
 import jp.or.adash.nexus.utils.dao.Transaction;
+
+/**
+ * 企業情報の登録・更新・削除／検索に関連するServiceクラス
+ * @author
+ *
+ */
 
 public class CompanyService {
 
@@ -19,6 +32,14 @@ public class CompanyService {
 	 * 処理結果メッセージを格納するリスト
 	 */
 	private List<String> messages;
+
+	/**
+	 * コンストラクタ
+	 */
+
+	public CompanyService() {
+	messages = new ArrayList<String>();
+	}
 
 
 	/**
@@ -92,6 +113,55 @@ public class CompanyService {
 		return null;
 	}
 
+
+
+
+
+	/**
+	 * 企業情報を取得する（検索）
+	 * @return List<CompanySearchResult> companyList 該当した企業の一覧
+	 * @author mosco
+	 */
+
+
+	public List<CompanySearchResult> getCompanyList(CompanySearch cse) {
+		List<CompanySearchResult> companyList = new ArrayList<>();
+
+		// CompanySearchオブジェクトから検索条件の値を取り出す
+		String staffId = cse.getStaffId();						// A'担当者のID
+		String jobCategory = cse.getJobCategory();				// 産業大分類のコード
+		String companyNameSub = cse.getCompanyName();			// 企業名入力欄に入力された値
+		String companyPlaceSub = cse.getCompanyPlace();		// 所在地・最寄り駅の欄に入力された値
+
+		//  企業名入力欄に入力された値をスペースごとに単語に分割、配列に格納
+		String[] companyName = StringCommons.splitWords(companyNameSub);
+		// 所在地・最寄り駅の欄に入力された値も同様に
+		String[] companyPlace = StringCommons.splitWords(companyPlaceSub);
+
+		Transaction transaction = new Transaction();
+		CompanyDao dao;
+		try {
+			// データベース接続を開く
+			transaction.open();
+			// DBから企業情報を取得し、Dao内のメソッドでListに詰め、そのListを返してもらう
+			dao = new CompanyDao(transaction);
+			companyList = dao.selectCompanyList(staffId,jobCategory,companyName,companyPlace);
+
+		} catch(IOException e) {
+			// DB接続が失敗した場合、例外をキャッチする
+			messages.add(MessageCommons.ERR_DB_CONNECT);
+		} finally {
+			try {
+				// DB接続の終了
+				dao = null;
+				transaction.close();
+			} catch(Exception e) {
+				transaction = null;
+			}
+		}
+
+		return companyList;
+	}
 
 
 

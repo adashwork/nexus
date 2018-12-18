@@ -122,3 +122,7 @@ table tr:nth-child(2n+1) {
 .user{
 	font-size: 1rem;
 }
+
+.errormessage{
+	color:#DF0101;
+}

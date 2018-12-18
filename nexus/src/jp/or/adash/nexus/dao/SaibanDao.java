@@ -260,7 +260,7 @@ public class SaibanDao {
 				if(rs.next()) {
 					getsaiban = rs.getInt("companysaiban") + 1;
 					// 採番マスタの更新
-					updateMatching(getsaiban);
+					updateCompanySaiban(getsaiban);
 				}
 				return getsaiban;
 
@@ -270,6 +270,27 @@ public class SaibanDao {
 		} catch (SQLException e) {
 			throw new IOException(e);
 		}
+	}
+
+	/**
+	 * companysaibanを更新する
+	 * @param accountId companysaiban
+	 * @throws IOException
+	 */
+	public void updateCompanySaiban(int currentCompanySaiban) throws IOException {
+
+		// SQL文を生成する
+		StringBuffer sql = new StringBuffer();
+		sql.append("update saiban set companysaiban = ?");
+		//sql
+		try (PreparedStatement ps = this.conn.prepareStatement(sql.toString())) {
+			ps.setInt(1, currentCompanySaiban);
+		// SQL文を実行する
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			throw new IOException(e);
+		}
+
 	}
 
 

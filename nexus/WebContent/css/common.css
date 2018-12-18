@@ -23,8 +23,14 @@ h2{
   margin-bottom:50px;
 }
 
+/*
+	float:left
+　	必要性が不明な上にないほうがデザインしやすかったので一時的に無効化しています
+	20181217 mosco
+*/
+
 h3 {
-	float:left;
+	/*float:left;*/
 	font-size:1.5rem;
 	margin-top:20px;
 	margin-bottom:20px;
@@ -121,4 +127,8 @@ table tr:nth-child(2n+1) {
 
 .user{
 	font-size: 1rem;
+}
+
+.errormessage{
+	color:#DF0101;
 }

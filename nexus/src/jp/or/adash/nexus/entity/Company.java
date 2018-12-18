@@ -53,7 +53,7 @@ public class Company {
 	private String tantouKana;
 	private String tantouTel;
 	private String tantouFax;
-	private String tantouEmail;
+	private String tantouMail;
 	private String tantouNote;
 	private String tantouStaffId;
 	private String salesRank;
@@ -88,7 +88,7 @@ public class Company {
 		this.tantouKana = tantouKana;
 		this.tantouTel = tantouTel;
 		this.tantouFax = tantouFax;
-		this.tantouEmail = tantouEmail;
+		this.tantouMail = tantouEmail;
 		this.tantouNote = tantouNote;
 		this.tantouStaffId = tantouStaffId;
 		this.salesRank = salesRank;
@@ -249,8 +249,8 @@ public class Company {
 	 * 担当者emailを取得する
 	 * @return tantouEmail
 	 */
-	public String getTantouEmail() {
-		return tantouEmail;
+	public String getTantouMail() {
+		return tantouMail;
 	}
 
 	/**

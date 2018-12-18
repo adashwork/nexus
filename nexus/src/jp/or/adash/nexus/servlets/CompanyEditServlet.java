@@ -13,8 +13,10 @@ import javax.servlet.http.HttpSession;
 
 import jp.or.adash.nexus.entity.Comment;
 import jp.or.adash.nexus.entity.Company;
+import jp.or.adash.nexus.entity.JobCategory;
 import jp.or.adash.nexus.entity.Staff;
 import jp.or.adash.nexus.services.CompanyService;
+import jp.or.adash.nexus.services.JobCategoryService;
 import jp.or.adash.nexus.utils.common.DataCommons;
 
 /**
@@ -40,14 +42,20 @@ public class CompanyEditServlet extends HttpServlet {
 		HttpSession session = request.getSession(true);
 		Staff staff = (Staff) session.getAttribute("UserData");
 
-		//ここでデータを受け取る
+		// 1.業種大分類リストを取得する
+		JobCategoryService JCLservice = new JobCategoryService();
+		List<JobCategory> JCLlist = JCLservice.getLargeJobCategoryList();
+		// 2.業種大分類リストをリクエストに格納する
+		request.setAttribute("JCLargelist", JCLlist);
+
+
 
 		//事業所番号の記入がなければ、独自の事業所番号を生成する
 		String companyNo = request.getParameter("companyno");
 
 		String corporateNumber = request.getParameter("corporatenumber");
 		String companyName = request.getParameter("companyname");
-		String companyKana = request.getParameter("companynana");
+		String companyKana = request.getParameter("companykana");
 		String companyPostal = request.getParameter("companypostal");
 		String companyPlace = request.getParameter("companyplace");
 		String nearStation = request.getParameter("nearstation");
@@ -81,7 +89,7 @@ public class CompanyEditServlet extends HttpServlet {
 		CompanyService companyService = new CompanyService();
 
 		//エラーが発生しなかった場合のみ登録処理を行う
-		if (companyService.check(company)) {
+		if (companyService.check(company, false)) {
 
 			//もし事業所番号が未記入なら、独自の事業所番号を発行する
 			if ("".equals(company.getCompanyNo())) {
@@ -91,6 +99,7 @@ public class CompanyEditServlet extends HttpServlet {
 			//企業情報を更新する
 			boolean registResult = companyService.updateCompany(company);
 		}
+
 
 		List<Comment> commentList = companyService.getCompanyCommentList(companyNo);
 

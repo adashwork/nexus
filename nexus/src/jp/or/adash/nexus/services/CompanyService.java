@@ -47,9 +47,10 @@ public class CompanyService {
 	/**
 	 * Companyデータのバリデーション
 	 * @param company
+	 * @param 新規登録の場合true, 更新の場合はfalse
 	 * @return true:数値に異常がなければ  false:異常が１つでもあれば
 	 */
-	public boolean check(Company company) {
+	public boolean check(Company company, boolean newRegist) {
 		boolean checkResult = true;
 
 		//共通データチェッククラス
@@ -58,21 +59,20 @@ public class CompanyService {
 		//項目ごとにバリデーションを行う
 		//事業者番号(PK)
 		//からっぽの場合はエラーを出さない。基本的にその場合は独自の事業所番号を割り振るため。
-		if (!"".equals(company.getCompanyNo())) {
-			//Aから始まる場合
-			if ("A".equals(String.valueOf(company.getCompanyNo().charAt(0)))) {
+		if (!"".equals(company.getCompanyNo()) && (newRegist == true)) {
 
-				if (!company.getCompanyNo().matches("^A[0-9]{3}-[0-9]{6}-[0]{1}$")) {
-					checkResult = false;
-					messages.add("Aから始まる事業所番号のフォーマットが間違っています");
-				}
-			} else {
-				//Aから始まらない場合は
-				if (!company.getCompanyNo().matches("^[0-9]{4}-[0-9]{6}-[0-9]{1}$")) {
-					checkResult = false;
-					messages.add("事業所番号は0000-000000-0のフォーマットで記入してください");
-				}
+			//既に登録済みかチェック
+			if (getCompanyInfo(company.getCompanyNo()) != null) {
+				checkResult = false;
+				messages.add("その事業所番号は既に登録済みです");
 			}
+
+			//フォーマットチェック
+			if (!company.getCompanyNo().matches("^[0-9]{4}-[0-9]{6}-[0-9]{1}$")) {
+				checkResult = false;
+				messages.add("事業所番号は0000-000000-0のフォーマットで記入してください");
+			}
+
 		}
 
 		//法人番号
@@ -95,10 +95,10 @@ public class CompanyService {
 		}
 
 		//事業所郵便番号
-		if ("".equals(company.getCompanyKana())) {
+		if ("".equals(company.getCompanyPostal())) {
 
 		} else {
-			if (!company.getCompanyKana().matches("^[0-9]{3}-[0-9]{4}")) {
+			if (!company.getCompanyPostal().matches("^[0-9]{3}-[0-9]{4}$")) {
 				messages.add("郵便番号は半角数字とハイフンを使って次のように入力してください。「123-4567」");
 				checkResult = false;
 			}
@@ -366,10 +366,10 @@ public class CompanyService {
 		List<CompanySearchResult> companyList = new ArrayList<>();
 
 		// CompanySearchオブジェクトから検索条件の値を取り出す
-		String staffId = cse.getStaffId();						// A'担当者のID
-		String jobCategory = cse.getJobCategory();				// 産業大分類のコード
-		String companyNameSub = cse.getCompanyName();			// 企業名入力欄に入力された値
-		String companyPlaceSub = cse.getCompanyPlace();		// 所在地・最寄り駅の欄に入力された値
+		String staffId = cse.getStaffId(); // A'担当者のID
+		String jobCategory = cse.getJobCategory(); // 産業大分類のコード
+		String companyNameSub = cse.getCompanyName(); // 企業名入力欄に入力された値
+		String companyPlaceSub = cse.getCompanyPlace(); // 所在地・最寄り駅の欄に入力された値
 
 		//  企業名入力欄に入力された値をスペースごとに単語に分割、配列に格納
 		String[] companyName = StringCommons.splitWords(companyNameSub);
@@ -383,9 +383,9 @@ public class CompanyService {
 			transaction.open();
 			// DBから企業情報を取得し、Dao内のメソッドでListに詰め、そのListを返してもらう
 			dao = new CompanyDao(transaction);
-			companyList = dao.selectCompanyList(staffId,jobCategory,companyName,companyPlace);
+			companyList = dao.selectCompanyList(staffId, jobCategory, companyName, companyPlace);
 
-		} catch(IOException e) {
+		} catch (IOException e) {
 			// DB接続が失敗した場合、例外をキャッチする
 			messages.add(MessageCommons.ERR_DB_CONNECT);
 		} finally {
@@ -393,13 +393,12 @@ public class CompanyService {
 				// DB接続の終了
 				dao = null;
 				transaction.close();
-			} catch(Exception e) {
+			} catch (Exception e) {
 				transaction = null;
 			}
 		}
 
 		return companyList;
 	}
-
 
 }

@@ -12,8 +12,10 @@ import javax.servlet.http.HttpSession;
 
 import jp.or.adash.nexus.entity.Comment;
 import jp.or.adash.nexus.entity.Company;
+import jp.or.adash.nexus.entity.JobCategory;
 import jp.or.adash.nexus.entity.Staff;
 import jp.or.adash.nexus.services.CompanyService;
+import jp.or.adash.nexus.services.JobCategoryService;
 
 /**
  * Servlet implementation class CompanyDeleteServlet
@@ -54,8 +56,19 @@ public class CompanyDeleteServlet extends HttpServlet {
 		}
 
 		//ここから下は失敗した場合
+
+		// 1.業種大分類リストを取得する
+		JobCategoryService JCLservice = new JobCategoryService();
+		List<JobCategory> JCLlist = JCLservice.getLargeJobCategoryList();
+		// 2.業種大分類リストをリクエストに格納する
+		request.setAttribute("JCLargelist", JCLlist);
+
+
 		Company company = companyService.getCompanyInfo(companyNo);
 		List<Comment> commentList = companyService.getCompanyCommentList(companyNo);
+
+
+
 
 
 		//処理結果メッセージをリクエストに格納する

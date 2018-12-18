@@ -2,6 +2,7 @@ package jp.or.adash.nexus.servlets;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,8 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import jp.or.adash.nexus.entity.Company;
+import jp.or.adash.nexus.entity.JobCategory;
 import jp.or.adash.nexus.entity.Staff;
 import jp.or.adash.nexus.services.CompanyService;
+import jp.or.adash.nexus.services.JobCategoryService;
 import jp.or.adash.nexus.utils.common.DataCommons;
 
 /**
@@ -38,13 +41,19 @@ public class CompanyRegistServlet extends HttpServlet {
 		HttpSession session = request.getSession(true);
 		Staff staff = (Staff) session.getAttribute("UserData");
 
-		//ここでデータを受け取る
+		// 1.業種大分類リストを取得する
+		JobCategoryService JCLservice = new JobCategoryService();
+		List<JobCategory> JCLlist = JCLservice.getLargeJobCategoryList();
+		// 2.業種大分類リストをリクエストに格納する
+		request.setAttribute("JCLargelist", JCLlist);
+
+		//フォームパラメーターの取得
 
 		String companyNo = request.getParameter("companyno");
 
 		String corporateNumber = request.getParameter("corporatenumber");
 		String companyName = request.getParameter("companyname");
-		String companyKana = request.getParameter("companynana");
+		String companyKana = request.getParameter("companykana");
 		String companyPostal = request.getParameter("companypostal");
 		String companyPlace = request.getParameter("companyplace");
 		String nearStation = request.getParameter("nearstation");
@@ -70,15 +79,16 @@ public class CompanyRegistServlet extends HttpServlet {
 		String updateUserId = staff.getId();
 		String deletefFag = "0";
 
+		//企業オブジェクト生成
 		Company company = new Company(companyNo, corporateNumber, companyName, companyKana, companyPostal, companyPlace,
 				nearStation, companyUrl, jobCategorySmallCd, jobCategoryLargeCd, capital, employees, establishDt,
 				tantouYakushoku, tantou, tantouKana, tantouTel, tantouFax, tantouEmail, tantouNote, tantouStaffId,
 				salesRank, salesNote, createDt, createuserId, updateDt, updateUserId, deletefFag);
 
-		CompanyService companyService = new CompanyService();
 
+		CompanyService companyService = new CompanyService();
 		//エラーが発生しなかった場合のみ登録処理を行う
-		if (companyService.check(company)) {
+		if (companyService.check(company, true)) {
 
 			//もし事業所番号が未記入なら、独自の事業所番号を発行する
 			if ("".equals(company.getCompanyNo())) {

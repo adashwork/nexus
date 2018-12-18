@@ -13,15 +13,11 @@ import javax.servlet.http.HttpSession;
 
 import jp.or.adash.nexus.entity.Comment;
 import jp.or.adash.nexus.entity.Company;
-import jp.or.adash.nexus.entity.Job;
 import jp.or.adash.nexus.entity.JobCategory;
 import jp.or.adash.nexus.entity.Staff;
-import jp.or.adash.nexus.entity.Todouhuken;
 import jp.or.adash.nexus.services.CompanyService;
 import jp.or.adash.nexus.services.JobCategoryService;
-import jp.or.adash.nexus.services.JobService;
 import jp.or.adash.nexus.services.StaffService;
-import jp.or.adash.nexus.services.TodouhukenService;
 
 /**
  * Servlet implementation class CompanyMainInfoServlet
@@ -46,17 +42,6 @@ public class CompanyMainInfoServlet extends HttpServlet {
 		HttpSession session = request.getSession(true);
 		Staff staff = (Staff) session.getAttribute("UserData");
 
-		// 1.都道府県リストを取得する
-		TodouhukenService Tservice = new TodouhukenService();
-		List<Todouhuken> Tlist = Tservice.getTodouhukenList();
-		// 2.都道府県リストをリクエストに格納する
-		request.setAttribute("Todouhukenlist", Tlist);
-
-		// 1.職種大分類リストを取得する
-		JobService Lservice = new JobService();
-		List<Job> Llist = Lservice.getLargeJobList();
-		// 2.職種大分類リストをリクエストに格納する
-		request.setAttribute("Largelist", Llist);
 
 		// 1.業種大分類リストを取得する
 		JobCategoryService JCLservice = new JobCategoryService();
@@ -73,13 +58,13 @@ public class CompanyMainInfoServlet extends HttpServlet {
 		//コメントリストに存在するスタッフidを列挙したMapを生成
 		StaffService staffService = new StaffService();
 		Map<String, String> staffMap  =  staffService.getCommentStaffIdMap(commentList);
+		//スタッフIDと名前がセットになったMapをJSPに埋め込む
 		Map<String, String> staffNameMap = staffService.getStaffNameMap(staffMap);
-
-
+		request.setAttribute("staffNameMap", staffNameMap);
 
 		request.setAttribute("company", company);
 		request.setAttribute("commentlist", commentList);
-		request.setAttribute("staffNameMap", staffNameMap);
+
 		request.setAttribute("Staff", staff);
 		request.getRequestDispatcher("/companyregist.jsp")
 				.forward(request, response);

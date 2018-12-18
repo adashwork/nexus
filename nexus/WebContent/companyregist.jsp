@@ -166,8 +166,15 @@
 				</tr>
 				<tr>
 					<th>産業大分類コード</th>
-					<td><input type="text" name="jobcategorylargecd"
-						value="${ company.jobCategoryLargeCd }" /></td>
+					<td><select name="jobcategorylargecd">
+							<c:forEach var="JCL" items="${ JCLargelist }">
+
+								<option value="${ JCL.largecd }"
+									<c:if test="${company.jobCategoryLargeCd == JCL.largecd }">
+									selected
+									</c:if>>${ JCL.name }</option>
+							</c:forEach>
+					</select></td>
 				</tr>
 				<tr>
 					<th>資本金</th>
@@ -177,11 +184,16 @@
 				<tr>
 					<th>従業員数</th>
 					<td><select name="employees">
-							<option value="1">10名以下</option>
-							<option value="2">100名以下</option>
-							<option value="3">1000名以下</option>
-							<option value="4">10000名以下</option>
-							<option value="5">10000名以上</option>
+							<option value="10"
+								<c:if test="${company.employees == '10' }">selected</c:if>>10名以下</option>
+							<option value="100"
+								<c:if test="${company.employees == '100' }">selected</c:if>>100名以下</option>
+							<option value="1000"
+								<c:if test="${company.employees == '1000' }">selected</c:if>>1000名以下</option>
+							<option value="10000"
+								<c:if test="${company.employees == '10000' }">selected</c:if>>10000名以下</option>
+							<option value="100000"
+								<c:if test="${company.employees == '100000' }">selected</c:if>>10000名以上</option>
 					</select></td>
 				</tr>
 				<tr>
@@ -240,9 +252,12 @@
 				<tr>
 					<th>営業評価ランクABC</th>
 					<td><select name="salesrank">
-							<option value="1">A</option>
-							<option value="2">B</option>
-							<option value="3">C</option>
+							<option value="A"
+								<c:if test="${company.salesRank == 'A' }">selected</c:if>>A</option>
+							<option value="B"
+								<c:if test="${company.salesRank == 'B' }">selected</c:if>>B</option>
+							<option value="C"
+								<c:if test="${company.salesRank == 'C' }">selected</c:if>>C</option>
 					</select></td>
 				</tr>
 				<tr>

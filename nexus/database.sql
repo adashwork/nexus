@@ -157,6 +157,7 @@ companyplace varchar(75),
 nearstation varchar(30),
 companyurl varchar(100),
 jobcategorysmallcd char(3),
+jobcategorymiddlecd char(2),
 jobcategorylargecd char(1),
 capital bigint(16),
 employees varchar(6),
@@ -426,10 +427,12 @@ primary key(id)
 
 -- 採番 --
 create table saiban(
-jobseekersaiban int,
-kyujinsaiban int,
-companysaiban int,
-staffsaiban int
+jobseekersaiban int(14),
+kyujinsaiban int(14),
+companysaiban int(14),
+staffsaiban int(14),
+matchingsaiban int(14),
+commentsaiban int(14)
 )charset =utf8;
 
 

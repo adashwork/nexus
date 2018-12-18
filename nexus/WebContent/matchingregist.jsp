@@ -44,7 +44,7 @@
 						<ul class="drop-menu">
 							<li><a href="/nexus/web/kyujin-disp">求人情報<i class="fas fa-angle-right"></i></a></li>
 							<li><a href="/nexus/web/jobseeker-list">求職者情報<i class="fas fa-angle-right"></i></a></li>
-							<li><a href="/nexus/web/matching-disp">マッチング登録<i class="fas fa-angle-right"></i></a></li>
+							<li><a href="/nexus/web/matching-registdisp">マッチング登録<i class="fas fa-angle-right"></i></a></li>
 						</ul>
 					</li>
 					<c:if test="${Staff.authority == 1}">
@@ -186,8 +186,8 @@
 					入社日
 				</th>
 				<td>
-					<input type="text" class="datepicker" size="10" name="interviewdt"
-					value="<fmt:formatDate value="${ matching. }" pattern="yyyy-MM-dd"/>">
+					<input type="text" class="datepicker" size="10" name="enterdt"
+					value="<fmt:formatDate value="${ matching.enterdt }" pattern="yyyy-MM-dd"/>">
 				</td>
 				<td>
 				</td>

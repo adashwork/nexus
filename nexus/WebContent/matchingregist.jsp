@@ -90,6 +90,7 @@
 					<fmt:formatNumber value="${ matching.id }" pattern="00000000"/>
 				</td>
 				<td>
+
 				</td>
 			</tr>
 			<tr>
@@ -97,10 +98,11 @@
 					企業ID
 				</th>
 				<td>
-					<!-- komukai　2018/12/17 ID検索ボタン内編集 -->
+																	<!-- komukai　2018/12/17 ID検索ボタン内編集 -->
 					<input type="text" name="companyNo" size="10" value="<c:out value="${ matching.companyNo }" />">
 					<input type="button" value="企業ID検索"
 						onclick="window.open('/nexus/web/matching-companyid-search','','width=750,height=*,resizeable=yes')">
+
 				</td>
 				<td>
 				</td>
@@ -110,7 +112,7 @@
 					求人ID
 				</th>
 				<td>
-					<!-- komukai　2018/12/17 ID検索ボタン内編集 -->
+																	<!-- komukai　2018/12/17 ID検索ボタン内編集 -->
 					<input type="text" name="kyujinno" size="10" value="<c:out value="${ matching.kyujinno }" />">
 					<input type="button" value="求人ID検索"
 						onclick="window.open('/nexus/web/matching-kyujinid-search','','width=750,height=*,resizeable=yes')">
@@ -123,8 +125,8 @@
 					求職者ID
 				</th>
 				<td>
-					<!-- komukai　2018/12/17 ID検索ボタン内編集 -->
-					<input type="text" name="jobseekerid" size="10" value="<c:out value="${ matching.jobseekerid }" />">
+																	<!-- komukai　2018/12/18 ID検索ボタン内編集 -->
+					<input type="text" name="jobseekerid" size="10" value="<c:out value="${ list.js_id }" />">
 					<input type="button" value="求職者ID検索"
 						onclick="window.open('/nexus/web/matching-jobseekerid-search','','width=750,height=*,resizeable=yes,scrollbars=yes')">
 				</td>
@@ -192,13 +194,25 @@
 				<td>
 				</td>
 			</tr>
+			</table>
+			<table border="0">
 			<tr>
 				<th colspan="3">
 					フリーワード				<!-- TODO：入力後の処理、未 -->
 				</th>
 			</tr>
+			<tr>									<!-- komukai　2018/12/18 タイトル・重要度追加 -->
+				<td align="left">
+					<span>タイトル</span>
+					<input type="text" size="30" name="title"></textarea>
+				</td>
+				<td>
+					<span>重要</span>
+					<input type="checkbox" name="inportant"></textarea>
+				</td>
+			</tr>
 			<tr>
-				<td colspan="3">
+				<td colspan="2">
 					<textarea name="note" style="width:100%"></textarea>
 				</td>
 			</tr>

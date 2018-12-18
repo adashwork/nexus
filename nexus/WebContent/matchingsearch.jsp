@@ -69,12 +69,14 @@
 
 		<h2>マッチング事例検索</h2>
 
-		<ul>												<!-- TODO：メッセージ要確認 -->
+<!--   2018/12/18 kitayama コメントアウト -->
+<%--
+		<ul>
 			<c:forEach var="message" items="${ messages }">
 				<li><font color=#F00 size="7"><c:out value="${ message }" /></font></li>
 			</c:forEach>
 		</ul>
-
+--%>
 		<!--  kitayama 2018/12/14 form methodをgetに変更
 										  actionを検索サーブレットに変更
 										  各検索項目に検索値を受け取れるよう変更 -->
@@ -91,11 +93,11 @@
 
 				<p class="m_p">
 					企業ID<br/>
-					<input type="text" size=13 name="companyno" value="<c:out value="${ companyId }" />" >
+					<input type="text" size=13 name="companyno" value="<c:out value="${ companyno }" />" >
 				</p>
 				<p class="m_p">
 					求職者ID<br/>
-					<input type="text" size=13 name="jobseekerid" value="<c:out value="${ jobseekerid }" />" >>
+					<input type="text" size=13 name="jobseekerid" value="<c:out value="${ jobseekerid }" />" >
 				</p>
 
 				<p class="m_p">
@@ -114,6 +116,12 @@
 		</div>
 		</form>
 
+		<p>
+			検索結果：
+			<c:out value="${ matching.size() }" />
+			件
+		</p>
+
 		<table border="0">
 
 			<tr>
@@ -127,36 +135,53 @@
 
 			<!--  kitayama　2018/12/13 for文追加 -->
 
-			<c:forEach var="matchingCase" items="${ matching }">
-					<tr>
-						<td>
-							<form action="./matching-registdisp" method="get">
-							<button class="mini_b mini_b_applilist" name="matchinginfo"
-										value="<c:out value="${ matchingCase.id }" />">詳細</button>
-							</form>
-						</td>
-						<td>
-							<c:out value="${ matchingCase.id }" />
-							<input type="hidden" name="matchingid" value="<c:out value="${ matchingCase.id }" />" >
-						</td>
-						<td><c:out value="${ matchingCase.companyNo }" /></td>
-						<td><c:out value="${ matchingCase.jobseekerid }" /></td>
-						<td><c:out value="${ matchingCase.assessment }" /></td>
-						<td>
-							<c:choose>
-								<c:when test="${ fn:length(matchingCase.note)  <= 15 }">
-									<c:out value="${ matchingCase.note }" />
-								</c:when>
-								<c:otherwise>
-									<c:out value="${ fn:substring(matchingCase.note, 0, 15) }" />
-								</c:otherwise>
-							</c:choose>
-						</td>
-					</tr>
-			</c:forEach>
-
+			<c:choose>
+				<c:when test="${ empty matching }">
+					<c:forEach var="errormessage" items="${ messages }">
+						<tr>
+						<!-- TODO CSSで幅を広げる -->
+							<td colspan=6>
+								<c:out value="${ errormessage }" />
+							</td>
+						</tr>
+					</c:forEach>
+				</c:when>
+				<c:when test="${ !empty matching }">
+				<c:forEach var="matchingCase" items="${ matching }">
+						<tr>
+							<td>
+								<form action="./matching-registdisp" method="get">
+								<button class="mini_b mini_b_applilist" name="matchinginfo"
+											value="<c:out value="${ matchingCase.id }" />">詳細</button>
+								</form>
+							</td>
+							<td>
+								<c:out value="${ matchingCase.id }" />
+								<input type="hidden" name="matchingid" value="<c:out value="${ matchingCase.id }" />" >
+							</td>
+							<td><c:out value="${ matchingCase.companyNo }" /></td>
+							<td><c:out value="${ matchingCase.jobseekerid }" /></td>
+							<td><c:out value="${ matchingCase.assessment }" /></td>
+							<td>
+								<c:out value="${ matchingCase.title }" />
+<!-- 2018/12/18 kitayama 文字数によって切り捨てる部分のコメントアウト -->
+<%--
+								<c:choose>
+									<c:when test="${ fn:length(matchingCase.title)  <= 15 }">
+										<c:out value="${ matchingCase.title }" />
+									</c:when>
+									<c:otherwise>
+										<c:out value="${ fn:substring(matchingCase.title, 0, 15) }" />
+									</c:otherwise>
+								</c:choose>
+ --%>
+							</td>
+						</tr>
+				</c:forEach>
+				</c:when>
+			</c:choose>
 		</table>
-
+<%--
 <div>
 	<!-- TODO: 検索結果の件数表示 -->
 	<p>(●●件の候補があります(●●/●●))</p>
@@ -169,7 +194,7 @@
 
 		<button type="button" class="main-b" onClick="location.href='./staff-top'">戻る</button>
 		<button type="button" class="main-b" onClick="location.href='./matching-registdisp'">登録</button>
-<%-- 		<c:if test="${ matching.id == null }">
+ 		<c:if test="${ matching.id == null }">
 			<button type="submit" id="match-regist" class="main-b" onclick="MovePages(this)">登録</button>
 		</c:if>
 		<c:if test="${ matching.id != null && matching.id != 0 }">

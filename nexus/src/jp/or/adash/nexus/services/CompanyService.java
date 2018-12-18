@@ -4,21 +4,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.stream.events.Comment;
-
+import jp.or.adash.nexus.dao.CommentDao;
 import jp.or.adash.nexus.dao.CompanyDao;
+import jp.or.adash.nexus.dao.SaibanDao;
+import jp.or.adash.nexus.entity.Comment;
 import jp.or.adash.nexus.entity.Company;
-import jp.or.adash.nexus.entity.CompanySearch;
-import jp.or.adash.nexus.entity.CompanySearchResult;
-import jp.or.adash.nexus.utils.common.MessageCommons;
-import jp.or.adash.nexus.utils.common.StringCommons;
 import jp.or.adash.nexus.utils.dao.Transaction;
-
-/**
- * 企業情報の登録・更新・削除／検索に関連するServiceクラス
- * @author
- *
- */
 
 public class CompanyService {
 
@@ -37,9 +28,9 @@ public class CompanyService {
 	 * コンストラクタ
 	 */
 	public CompanyService() {
-	messages = new ArrayList<String>();
+		transaction = new Transaction();
+		messages = new ArrayList<String>();
 	}
-
 
 	/**
 	 * メッセージのリストを取得する
@@ -47,14 +38,6 @@ public class CompanyService {
 	 */
 	public List<String> getMessages() {
 		return messages;
-	}
-
-	/**
-	 * コンストラクタ
-	 */
-	public CompanyService() {
-		transaction = new Transaction();
-		messages = new ArrayList<String>();
 	}
 
 	/**
@@ -88,6 +71,66 @@ public class CompanyService {
 			}
 		}
 
+		//法人番号
+
+		//事業所名
+		if ("".equals(company.getCompanyName())) {
+			messages.add("事業名を入力してください");
+			checkResult = false;
+		}
+
+		//事業所名カナ
+		if ("".equals(company.getCompanyKana())) {
+			messages.add("事業名(カナ)を入力してください");
+			checkResult = false;
+		} else {
+			if (!company.getCompanyKana().matches("^[ァ-ヶー]*$")) {
+				messages.add("事業名(カナ)は全角カタカナで入力してください");
+				checkResult = false;
+			}
+		}
+
+		//事業所郵便番号
+		if ("".equals(company.getCompanyKana())) {
+
+		} else {
+			if (!company.getCompanyKana().matches("^[0-9]{3}-[0-9]{4}")) {
+				messages.add("郵便番号は半角数字とハイフンを使って次のように入力してください。「123-4567」");
+				checkResult = false;
+			}
+		}
+
+		//事業所所在地
+
+		//最寄駅
+
+		//事業所URL
+
+		//産業小分類コード
+
+		//産業大分類コード
+
+		//資本金
+
+		//従業員数
+
+		//創業設立年
+
+		//担当者課係名/役職名
+
+		//担当者名
+
+		//担当者名(かな)
+
+		//担当者TEL
+
+		//担当者FAX
+
+		//担当者email
+
+		//担当開拓者ID
+
+		//営業評価ランクABC
 
 		return checkResult;
 	}
@@ -314,55 +357,5 @@ public class CompanyService {
 			transaction.close();
 		}
 	}
-
-
-
-	/**
-	 * 企業情報を取得する（検索）
-	 * @return List<CompanySearchResult> companyList 該当した企業の一覧
-	 * @author mosco
-	 */
-
-
-	public List<CompanySearchResult> getCompanyList(CompanySearch cse) {
-		List<CompanySearchResult> companyList = new ArrayList<>();
-
-		// CompanySearchオブジェクトから検索条件の値を取り出す
-		String staffId = cse.getStaffId();						// A'担当者のID
-		String jobCategory = cse.getJobCategory();				// 産業大分類のコード
-		String companyNameSub = cse.getCompanyName();			// 企業名入力欄に入力された値
-		String companyPlaceSub = cse.getCompanyPlace();		// 所在地・最寄り駅の欄に入力された値
-
-		//  企業名入力欄に入力された値をスペースごとに単語に分割、配列に格納
-		String[] companyName = StringCommons.splitWords(companyNameSub);
-		// 所在地・最寄り駅の欄に入力された値も同様に
-		String[] companyPlace = StringCommons.splitWords(companyPlaceSub);
-
-		Transaction transaction = new Transaction();
-		CompanyDao dao;
-		try {
-			// データベース接続を開く
-			transaction.open();
-			// DBから企業情報を取得し、Dao内のメソッドでListに詰め、そのListを返してもらう
-			dao = new CompanyDao(transaction);
-			companyList = dao.selectCompanyList(staffId,jobCategory,companyName,companyPlace);
-
-		} catch(IOException e) {
-			// DB接続が失敗した場合、例外をキャッチする
-			messages.add(MessageCommons.ERR_DB_CONNECT);
-		} finally {
-			try {
-				// DB接続の終了
-				dao = null;
-				transaction.close();
-			} catch(Exception e) {
-				transaction = null;
-			}
-		}
-
-		return companyList;
-	}
-
-
 
 }

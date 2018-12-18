@@ -5,15 +5,134 @@ import java.util.Date;
 /**
  * 求人票マスタのEntityクラス
  * @author pgjavaAT
+ * @author kmiyamoto
  *
  */
-public class Kyujin {
 
-	/**
-	 * no 求人Ｎo.
-	* receptiondt 受付年月日（西暦）
-	* perioddt 求人有効年月日
+//public class Company {
+//
+//	/**
+//	 * 企業マスタcompanyテーブル
+//	 *
+//	 * corporatenumber 法人番号
+//	 * companyno 事業所番号
+//	* companykana 事業所名（かな）
+//	* companyname 事業所名
+//	* companypostal 事業所郵便番号
+//	* companyplace 事業所所在地
+//	* nearstation 最寄り駅
+//	* companyurl 事業所URL
+//	* jobcategorysmallcd 産業小分類コード
+//	* jobcategorylargecd 産業大分類コード
+//	* capital 資本金
+//	* employees 従業員数
+//	* establishdt 創業設立年
+//	* tantouyakushoku 選考担当者課係名/役職名
+//	* tantoukana 担当者名（カナ）
+//	* tantou 担当者名
+//	* tantoutel 担当者電話番号
+//	* tantoufax 担当者FAX
+//	* tantoumail 担当者メールアドレス
+//	* tantounote 担当者備考
+//	* tantoustaff_id 担当職業紹介者ID
+//	* salesrank 営業評価ランクABC
+//	* salesnote	営業備考
+//	*/
+//
+//	private String corporatenumber;
+//	private String companyno;
+//	private String companykana;
+//	private String companyname;
+//	private String companypostal;
+//	private String companyplace;
+//	private String nearstation;
+//	private String companyurl;
+//	private String jobcategorysmallcd;
+//	private String jobcategorylargecd;
+//	private long capital;
+//	private String employees;
+//	private Integer establishdt;
+//	private String tantouyakushoku;
+//	private String tantoukana;
+//	private String tantou;
+//	private String tantoutel;
+//	private String tantoufax;
+//	private String tantoumail;
+//	private String tantounote;
+//	private String tantoustaff_id;
+//	private String salesrank;
+//	private String salesnote;
+//	private Date createdt;
+//	private String createuserid;
+//	private Date updatedt;
+//	private String updateuserid;
+//	private String deleteflag;
+//
+//	public Company() {
+//
+//	}
+//
+//	public Company(String corporatenumber, String companyno, String companykana, String companyname,
+//			String companypostal, String companyplace, String nearstation, String companyurl,
+//			String jobcategorysmallcd, String jobcategorylargecd, long capital, String employees,
+//			Integer establishdt, String tantouyakushoku, String tantoukana, String tantou,
+//			String tantoutel, String tantoufax, String tantoumail, String tantounote, String tantoustaff_id,
+//			String salesrank, String salesnote, Date createdt, String createuserid,
+//			Date updatedt, String updateuserid, String deleteflag) {
+//		super();
+//		this.corporatenumber = corporatenumber;
+//		this.companyno = companyno;
+//		this.companykana = companykana;
+//		this.companyname = companyname;
+//		this.companypostal = companypostal;
+//		this.companyplace = companyplace;
+//		this.nearstation = nearstation;
+//		this.companyurl = companyurl;
+//		this.jobcategorysmallcd = jobcategorysmallcd;
+//		this.jobcategorylargecd = jobcategorylargecd;
+//		this.capital = capital;
+//		this.employees = employees;
+//		this.establishdt = establishdt;
+//		this.tantouyakushoku = tantouyakushoku;
+//		this.tantoukana = tantoukana;
+//		this.tantou = tantou;
+//		this.tantoutel = tantoutel;
+//		this.tantoufax = tantoufax;
+//		this.tantoumail = tantoumail;
+//		this.tantounote = tantounote;
+//		this.tantoustaff_id = tantoustaff_id;
+//		this.salesrank = salesrank;
+//		this.salesnote = salesnote;
+//		//		this.companyfeature = companyfeature;
+//		this.createdt = createdt;
+//		this.createuserid = createuserid;
+//		this.updatedt = updatedt;
+//		this.updateuserid = updateuserid;
+//		this.deleteflag = deleteflag;
+//	}
+//
+//	/*
+//	 * 従業員数をセットする
+//	 * @return employees
+//	 */
+//	public String getEmployees() {
+//		return employees;
+//	}
+//
+//}
+
+public class Kyujin {
+	/*
+	**
+	* 求人情報kyujinテーブル
+	*
+	* no 求人Ｎo.
 	* companyno 事業所番号
+	* companykana 事業所名（かな）
+	* postal 就業場所郵便番号
+	* address 就業場所
+	* nearline 沿線
+	* nearstation 最寄り駅
 	* addresscd 就業場所コード
 	* jobsmallcd１ 職種小分類コード１
 	* jobsmallcd２ 職種小分類コード２
@@ -21,21 +140,10 @@ public class Kyujin {
 	* joblargecd１ 職業大分類コード１
 	* joblargecd２ 職業大分類コード２
 	* joblargecd３ 職業大分類コード３
-	* jobcategorysmallcd 産業小分類コード
-	* jobcategorylargecd 産業大分類コード
-	* jobcategory 産業分類名
-	* companykana 事業所名（かな）
-	* companyname 事業所名
-	* companypostal 事業所郵便番号
-	* companyplace 事業所所在地
-	* companyurl 事業所URL
-	* postal 就業場所郵便番号
-	* address 就業場所
-	* nearstation 最寄り駅
 	* job 職種
-	* hakencd 派遣／請負コード
 	* detail 仕事の内容
 	* koyoukeitaicd 雇用形態コード
+	* hakencd 派遣／請負コード
 	* koyoukikan 雇用期間の定め
 	* koyoukikankaishi 雇用期間開始年月日
 	* koyoukikanowari 雇用期間終了年月日
@@ -44,34 +152,44 @@ public class Kyujin {
 	* license 必要な免許・資格等
 	* agemin 年齢制限・下限
 	* agemax 年齢制限・上限
+	* salaryformcd 賃金形態コード
 	* salarymin 基本給下限
 	* salarymax 基本給上限
-	* salaryformcd 賃金形態コード
+	* bonus 賞与
+	* koutuhi 通勤手当
+	* teate	他諸手当
 	* begintime 就業時間・始業
 	* endtime 就業時間・終業
-	* establishdt 創業設立年
-	* capital 資本金
-	* companyfeature 会社の特長
-	* tantouyakushoku 選考担当者課係名/役職名
-	* tantoukana 選考担当者名（カナ）
-	* tantou 選考担当者名
-	* tantoustaff_id 担当職業紹介者ID
+	* shift シフト制
+	* flex フレックスタイム
+	* jitan 時短勤務
+	* jikangai 時間外平均
+	* siyoukikan 試用期間
+	* workdays 週所定労働日数
+	* nenkanholiday	年間休日
 	* applicationform 応募書類
 	* background 募集背景
+	* bosyunumbers 募集人数
 	* hiddensex 性別（求職者に非公開）
 	* hiddenagemin 年齢下限（求職者に非公開）
 	* hiddenagemax 年齢上限（求職者に非公開）
 	* hiddenetc その他非公開情報
+	* receptiondt 受付年月日（西暦）
+	* perioddt 紹介期限日
 	* createdt 新規登録日
 	* createuserid 新規登録ユーザー
 	* updatedt 最終更新日
 	* updateuserid 最終更新ユーザー
 	* deleteflag 削除フラグ
 	 */
+
 	private String no;
-	private Date receptiondt;
-	private Date perioddt;
+	private String companykana;
 	private String companyno;
+	private String postal;
+	private String address;
+	private String nearline;
+	private String nearstation;
 	private String addresscd;
 	private String jobsmallcd1;
 	private String jobsmallcd2;
@@ -79,20 +197,10 @@ public class Kyujin {
 	private String joblargecd1;
 	private String joblargecd2;
 	private String joblargecd3;
-	private String jobcategorysmallcd;
-	private String jobcategorylargecd;
-	private String companykana;
-	private String companyname;
-	private String companypostal;
-	private String companyplace;
-	private String companyurl;
-	private String postal;
-	private String address;
-	private String nearstation;
 	private String job;
-	private String hakencd;
 	private String detail;
 	private String koyoukeitaicd;
+	private String hakencd;
 	private String koyoukikan;
 	private Date koyoukikankaishi;
 	private Date koyoukikanowari;
@@ -101,24 +209,30 @@ public class Kyujin {
 	private String license;
 	private Integer agemin;
 	private Integer agemax;
+	private String salaryformcd;
 	private Integer salarymin;
 	private Integer salarymax;
-	private String salaryformcd;
+	private String bonus;
+	private String koutuhi;
+	private String teate;
 	private Integer begintime;
 	private Integer endtime;
-	private Integer establishdt;
-	private long capital;
-	private String companyfeature;
-	private String tantouyakushoku;
-	private String tantoukana;
-	private String tantou;
-	private String tantoustaff_id;
+	private String shift;
+	private String flex;
+	private String jitan;
+	private Integer jikangai;
+	private Integer siyoukikan;
+	private Integer workdays;
+	private String nenkanholiday;
 	private String applicationform;
 	private String background;
+	private String bosyunumbers;
 	private String hiddensex;
 	private Integer hiddenagemin;
 	private Integer hiddenagemax;
 	private String hiddenetc;
+	private Date receptiondt;
+	private Date perioddt;
 	private Date createdt;
 	private String createuserid;
 	private Date updatedt;
@@ -129,43 +243,36 @@ public class Kyujin {
 
 	}
 
-	public Kyujin(String no, Date receptiondt, Date perioddt, String companyno, String addresscd, String jobsmallcd1,
-			String jobsmallcd2, String jobsmallcd3, String joblargecd1, String joblargecd2, String joblargecd3,
-			String jobcategorysmallcd, String jobcategorylargecd, String companykana,
-			String companyname, String companypostal, String companyplace, String companyurl, String postal,
-			String address, String nearstation, String job, String hakencd, String detail, String koyoukeitaicd,
-			String koyoukikan, Date koyoukikankaishi, Date koyoukikanowari, String education, String experience,
-			String license, Integer agemin, Integer agemax, Integer salarymin, Integer salarymax, String salaryformcd, Integer begintime,
-			Integer endtime, Integer establishdt, long capital, String companyfeature, String tantouyakushoku,
-			String tantoukana, String tantou, String tantoustaff_id, String applicationform, String background,
-			String hiddensex, Integer hiddenagemin, Integer hiddenagemax, String hiddenetc, Date createdt,
-			String createuserid, Date updatedt, String updateuserid, String deleteflag) {
+	public Kyujin(String no, String companyno, String companykana, String postal, String address,
+			String nearline, String nearstation, String addresscd, String jobsmallcd1, String jobsmallcd2,
+			String jobsmallcd3, String joblargecd1, String joblargecd2, String joblargecd3,
+			String job, String detail, String koyoukeitaicd, String hakencd, String koyoukikan,
+			Date koyoukikankaishi, Date koyoukikanowari, String education, String experience, String license,
+			Integer agemin, Integer agemax, String salaryformcd, Integer salarymin, Integer salarymax,
+			String bonus, String koutuhi, String teate, Integer begintime, Integer endtime, String shift,
+			String flex, String jitan, Integer jikangai, Integer siyoukikan, Integer workdays, String nenkanholiday,
+			String applicationform, String background, String bosyunumbers, String hiddensex,
+			Integer hiddenagemin, Integer hiddenagemax, String hiddenetc, Date receptiondt, Date perioddt,
+			Date createdt, String createuserid, Date updatedt, String updateuserid, String deleteflag) {
 		super();
 		this.no = no;
-		this.receptiondt = receptiondt;
-		this.perioddt = perioddt;
 		this.companyno = companyno;
-		this.addresscd = addresscd;
+		this.companykana = companykana;
+		this.postal = postal;
+		this.address = address;
+		this.nearline = nearline;
+		this.nearstation = nearstation;
+		this.nearstation = addresscd;
 		this.jobsmallcd1 = jobsmallcd1;
 		this.jobsmallcd2 = jobsmallcd2;
 		this.jobsmallcd3 = jobsmallcd3;
 		this.joblargecd1 = joblargecd1;
 		this.joblargecd2 = joblargecd2;
 		this.joblargecd3 = joblargecd3;
-		this.jobcategorysmallcd = jobcategorysmallcd;
-		this.jobcategorylargecd = jobcategorylargecd;
-		this.companykana = companykana;
-		this.companyname = companyname;
-		this.companypostal = companypostal;
-		this.companyplace = companyplace;
-		this.companyurl = companyurl;
-		this.postal = postal;
-		this.address = address;
-		this.nearstation = nearstation;
 		this.job = job;
-		this.hakencd = hakencd;
 		this.detail = detail;
 		this.koyoukeitaicd = koyoukeitaicd;
+		this.hakencd = hakencd;
 		this.koyoukikan = koyoukikan;
 		this.koyoukikankaishi = koyoukikankaishi;
 		this.koyoukikanowari = koyoukikanowari;
@@ -174,24 +281,30 @@ public class Kyujin {
 		this.license = license;
 		this.agemin = agemin;
 		this.agemax = agemax;
+		this.salaryformcd = salaryformcd;
 		this.salarymin = salarymin;
 		this.salarymax = salarymax;
-		this.salaryformcd = salaryformcd;
+		this.bonus = bonus;
+		this.koutuhi = koutuhi;
+		this.teate = teate;
 		this.begintime = begintime;
 		this.endtime = endtime;
-		this.establishdt = establishdt;
-		this.capital = capital;
-		this.companyfeature = companyfeature;
-		this.tantouyakushoku = tantouyakushoku;
-		this.tantoukana = tantoukana;
-		this.tantou = tantou;
-		this.tantoustaff_id = tantoustaff_id;
+		this.shift = shift;
+		this.flex = flex;
+		this.jitan = jitan;
+		this.jikangai = jikangai;
+		this.siyoukikan = siyoukikan;
+		this.workdays = workdays;
+		this.nenkanholiday = nenkanholiday;
 		this.applicationform = applicationform;
 		this.background = background;
+		this.bosyunumbers = bosyunumbers;
 		this.hiddensex = hiddensex;
 		this.hiddenagemin = hiddenagemin;
 		this.hiddenagemax = hiddenagemax;
 		this.hiddenetc = hiddenetc;
+		this.receptiondt = receptiondt;
+		this.perioddt = perioddt;
 		this.createdt = createdt;
 		this.createuserid = createuserid;
 		this.updatedt = updatedt;
@@ -208,19 +321,11 @@ public class Kyujin {
 	}
 
 	/**
-	 * 受付年月日（西暦）を返す
-	 * @return receptiondt
+	 * 事業所名（カナ）を返す
+	 * @return companykana
 	 */
-	public Date getReceptiondt() {
-		return receptiondt;
-	}
-
-	/**
-	 * 求人有効年月日を返す
-	 * @return perioddt
-	 */
-	public Date getPerioddt() {
-		return perioddt;
+	public String getCompanykana() {
+		return companykana;
 	}
 
 	/**
@@ -229,6 +334,38 @@ public class Kyujin {
 	 */
 	public String getCompanyno() {
 		return companyno;
+	}
+
+	/**
+	 * 就業場所郵便番号を返す
+	 * @return postal
+	 */
+	public String getPostal() {
+		return postal;
+	}
+
+	/**
+	 * 就業場所を返す
+	 * @return address
+	 */
+	public String getAddress() {
+		return address;
+	}
+
+	/**
+	 * 沿線を返す
+	 * @return nearstation
+	 */
+	public String getNearline() {
+		return nearline;
+	}
+
+	/**
+	 * 最寄り駅を返す
+	 * @return nearstation
+	 */
+	public String getNearstation() {
+		return nearstation;
 	}
 
 	/**
@@ -288,86 +425,6 @@ public class Kyujin {
 	}
 
 	/**
-	 * 産業小分類コードを返す
-	 * @return jobcategorysmallcd
-	 */
-	public String getJobcategorysmallcd() {
-		return jobcategorysmallcd;
-	}
-
-	/**
-	 * 産業大分類コードを返す
-	 * @return jobcategorylargecd
-	 */
-	public String getJobcategorylargecd() {
-		return jobcategorylargecd;
-	}
-
-	/**
-	 * 事業所名（かな）を返す
-	 * @return companykana
-	 */
-	public String getCompanykana() {
-		return companykana;
-	}
-
-	/**
-	 * 事業所名を返す
-	 * @return companyname
-	 */
-	public String getCompanyname() {
-		return companyname;
-	}
-
-	/**
-	 * 事業所郵便番号を返す
-	 * @return companypostal
-	 */
-	public String getCompanypostal() {
-		return companypostal;
-	}
-
-	/**
-	 * 事業所所在地を返す
-	 * @return companyplace
-	 */
-	public String getCompanyplace() {
-		return companyplace;
-	}
-
-	/**
-	 * 事業所URLを返す
-	 * @return companyurl
-	 */
-	public String getCompanyurl() {
-		return companyurl;
-	}
-
-	/**
-	 * 就業場所郵便番号を返す
-	 * @return postal
-	 */
-	public String getPostal() {
-		return postal;
-	}
-
-	/**
-	 * 就業場所を返す
-	 * @return address
-	 */
-	public String getAddress() {
-		return address;
-	}
-
-	/**
-	 * 最寄り駅を返す
-	 * @return nearstation
-	 */
-	public String getNearstation() {
-		return nearstation;
-	}
-
-	/**
 	 * 職種を返す
 	 * @return job
 	 */
@@ -376,12 +433,50 @@ public class Kyujin {
 	}
 
 	/**
-	 * 派遣／請負コードを返す
-	 * @return hakencd
-	 */
-	public String getHakencd() {
-		return hakencd;
-	}
+	 * 産業小分類コードを返す
+	 * @return jobcategorysmallcd
+
+	public String getJobcategorysmallcd() {
+		return jobcategorysmallcd;
+	} */
+	/**
+	 * 産業大分類コードを返す
+	 * @return jobcategorylargecd
+
+	public String getJobcategorylargecd() {
+		return jobcategorylargecd;
+	}*/
+	/**
+	 * 事業所名を返す
+	 * @return companyname
+
+	public String getCompanyname() {
+		return companyname;
+	}*/
+
+	/**
+	 * 事業所郵便番号を返す
+	 * @return companypostal
+
+	public String getCompanypostal() {
+		return companypostal;
+	} */
+
+	/**
+	 * 事業所所在地を返す
+	 * @return companyplace
+
+	public String getCompanyplace() {
+		return companyplace;
+	}*/
+
+	/**
+	 * 事業所URLを返す
+	 * @return companyurl
+
+	public String getCompanyurl() {
+		return companyurl;
+	}*/
 
 	/**
 	 * 仕事の内容を返す
@@ -397,6 +492,14 @@ public class Kyujin {
 	 */
 	public String getKoyoukeitaicd() {
 		return koyoukeitaicd;
+	}
+
+	/**
+	 * 派遣／請負コードを返す
+	 * @return hakencd
+	 */
+	public String getHakencd() {
+		return hakencd;
 	}
 
 	/**
@@ -464,6 +567,14 @@ public class Kyujin {
 	}
 
 	/**
+	 * 賃金形態コードを返す
+	 * @return salaryformcd
+	 */
+	public String getSalaryformcd() {
+		return salaryformcd;
+	}
+
+	/**
 	 * 基本給下限を返す
 	 * @return salarymin
 	 */
@@ -480,11 +591,27 @@ public class Kyujin {
 	}
 
 	/**
-	 * 賃金形態コードを返す
-	 * @return salaryformcd
+	 * 賞与に関することを返す
+	 * @return bonus
 	 */
-	public String getSalaryformcd() {
-		return salaryformcd;
+	public String getBonus() {
+		return bonus;
+	}
+
+	/**
+	 * 通勤手当を返す
+	 * @return koutuhi
+	 */
+	public String getKoutuhi() {
+		return koutuhi;
+	}
+
+	/**
+	 * 諸手当を返す
+	 * @return teate
+	 */
+	public String getTeate() {
+		return teate;
 	}
 
 	/**
@@ -504,60 +631,118 @@ public class Kyujin {
 	}
 
 	/**
+	 * シフト制かどうかとその詳細を返す
+	 * @return shift
+	 */
+	public String getShift() {
+		return shift;
+	}
+
+	/**
+	 * フレックス制かどうかとその詳細を返す
+	 * @return flex
+	 */
+	public String getFlex() {
+		return flex;
+	}
+
+	/**
+	 * 時短勤務対応かどうかを返す
+	 * @return jitan
+	 */
+	public String getJitan() {
+		return jitan;
+	}
+
+	/**
+	 * 時間外勤務平均を返す
+	 * @return jikangai
+	 */
+	public Integer getJikangai() {
+		return jikangai;
+	}
+
+	/**
+	 * 試用期間0～6ヶ月を返す
+	 * @return siyoukikan
+	 */
+	public Integer getSiyoukikan() {
+		return siyoukikan;
+	}
+
+	/**
+	 * 週所定労働日数を返す
+	 * @return workdays
+	 */
+	public Integer getWorkdays() {
+		return workdays;
+	}
+
+	/**
+	 * 年間休日日数を返す
+	 * @return nenkanholiday
+	 */
+	public String getNenkanholiday() {
+		return nenkanholiday;
+	}
+
+
+	/**
 	 * 創業設立年を返す
 	 * @return establishdt
-	 */
+
 	public Integer getEstablishdt() {
 		return establishdt;
-	}
+	}*/
 
 	/**
 	 * 資本金を返す
 	 * @return capital
-	 */
+
 	public long getCapital() {
 		return capital;
-	}
+	} */
 
 	/**
 	 * 会社の特長を返す
 	 * @return companyfeature
 	 */
-	public String getCompanyfeature() {
-		return companyfeature;
-	}
+	//	public String getCompanyfeature() {
+	//		return companyfeature;
+	//	}
 
 	/**
 	 * 選考担当者課係名/役職名を返す
 	 * @return tantouyakushoku
-	 */
+
 	public String getTantouyakushoku() {
 		return tantouyakushoku;
-	}
+	}*/
 
 	/**
 	 * 選考担当者名（カナ）を返す
 	 * @return tantoukana
-	 */
+
 	public String getTantoukana() {
 		return tantoukana;
-	}
+	} */
 
 	/**
 	 * 選考担当者名を返す
 	 * @return tantou
-	 */
+
 	public String getTantou() {
 		return tantou;
-	}
+	}*/
 
 	/**
 	 * 担当職業紹介者IDを返す
 	 * @return tantoustaff_id
-	 */
+
 	public String getTantoustaff_id() {
 		return tantoustaff_id;
-	}
+	}*/
+
 
 	/**
 	 * 応募書類を返す
@@ -573,6 +758,14 @@ public class Kyujin {
 	 */
 	public String getBackground() {
 		return background;
+	}
+
+	/**
+	 * 募集人数を返す
+	 * @return bosyunumbers
+	 */
+	public String getBosyunumbers() {
+		return bosyunumbers;
 	}
 
 	/**
@@ -605,6 +798,22 @@ public class Kyujin {
 	 */
 	public String getHiddenetc() {
 		return hiddenetc;
+	}
+
+	/**
+	 * 受付年月日（西暦）を返す
+	 * @return receptiondt
+	 */
+	public Date getReceptiondt() {
+		return receptiondt;
+	}
+
+	/**
+	 * 紹介期限日を返す
+	 * @return perioddt
+	 */
+	public Date getPerioddt() {
+		return perioddt;
 	}
 
 	/**
@@ -652,7 +861,6 @@ public class Kyujin {
 	 * @param no 求人Ｎo.
 	 */
 	public void setNo(String no) {
-		// TODO 自動生成されたメソッド・スタブ
 		this.no = no;
 	}
 

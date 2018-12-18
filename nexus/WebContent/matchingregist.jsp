@@ -44,7 +44,7 @@
 						<ul class="drop-menu">
 							<li><a href="/nexus/web/kyujin-disp">求人情報<i class="fas fa-angle-right"></i></a></li>
 							<li><a href="/nexus/web/jobseeker-list">求職者情報<i class="fas fa-angle-right"></i></a></li>
-							<li><a href="/nexus/web/match-disp">マッチング登録<i class="fas fa-angle-right"></i></a></li>
+							<li><a href="/nexus/web/matching-disp">マッチング登録<i class="fas fa-angle-right"></i></a></li>
 						</ul>
 					</li>
 					<c:if test="${Staff.authority == 1}">
@@ -97,9 +97,10 @@
 					企業ID
 				</th>
 				<td>
-					<input type="text" name="" size="10" value="<c:out value="${ matching.companyid }" />">
+					<!-- komukai　2018/12/17 ID検索ボタン内編集 -->
+					<input type="text" name="companyNo" size="10" value="<c:out value="${ matching.companyNo }" />">
 					<input type="button" value="企業ID検索"
-						onclick="window.open('/nexus/web/matching-id-search','','width=850,height=*,resizeable=yes')">
+						onclick="window.open('/nexus/web/matching-companyid-search','','width=750,height=*,resizeable=yes')">
 				</td>
 				<td>
 				</td>
@@ -109,9 +110,10 @@
 					求人ID
 				</th>
 				<td>
-					<input type="text" name="kyujinid" size="10" value="<c:out value="${ matching.kyujinid }" />">
+					<!-- komukai　2018/12/17 ID検索ボタン内編集 -->
+					<input type="text" name="kyujinno" size="10" value="<c:out value="${ matching.kyujinno }" />">
 					<input type="button" value="求人ID検索"
-						onclick="window.open('/nexus/web/matching-id-search','','width=850,height=*,resizeable=yes')">
+						onclick="window.open('/nexus/web/matching-kyujinid-search','','width=750,height=*,resizeable=yes')">
 				</td>
 				<td>
 				</td>
@@ -121,9 +123,10 @@
 					求職者ID
 				</th>
 				<td>
+					<!-- komukai　2018/12/17 ID検索ボタン内編集 -->
 					<input type="text" name="jobseekerid" size="10" value="<c:out value="${ matching.jobseekerid }" />">
 					<input type="button" value="求職者ID検索"
-						onclick="window.open('/nexus/web/matching-id-search','','width=850,height=*,resizeable=yes')">
+						onclick="window.open('/nexus/web/matching-jobseekerid-search','','width=750,height=*,resizeable=yes,scrollbars=yes')">
 				</td>
 				<td>
 				</td>
@@ -179,6 +182,17 @@
 				</td>
 			</tr>
 			<tr>
+				<th>
+					入社日
+				</th>
+				<td>
+					<input type="text" class="datepicker" size="10" name="interviewdt"
+					value="<fmt:formatDate value="${ matching. }" pattern="yyyy-MM-dd"/>">
+				</td>
+				<td>
+				</td>
+			</tr>
+			<tr>
 				<th colspan="3">
 					フリーワード				<!-- TODO：入力後の処理、未 -->
 				</th>
@@ -194,10 +208,10 @@
 		<button type="button" class="main-b" onClick="location.href='./matching-search'">検索画面に戻る</button>
 		<button type="button" class="main-b" onClick="location.href='./staff-top'">トップに戻る</button>
 		<c:if test="${ matching.id == null }">
-				<button type="submit" id="match-regist" class="main-b" onclick="MovePages(this)">登録</button>
+				<button type="submit" id="matching-regist" class="main-b" onclick="MovePages(this)">登録</button>
 		</c:if>
 		<c:if test="${ matching.id != null && matching.id != 0 }">
-			<button type="submit" id="match-update" class="main-b" onclick="MovePages(this)">更新</button>
+			<button type="submit" id="matching-update" class="main-b" onclick="MovePages(this)">更新</button>
 		</c:if>
 
 	</form>

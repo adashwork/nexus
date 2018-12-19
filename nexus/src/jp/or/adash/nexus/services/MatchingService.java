@@ -305,20 +305,20 @@ public class MatchingService {
 			MatchingDao dao = new MatchingDao(transaction);
 			matching = dao.selectV2(msp);
 
+			// 取得行数がない場合、メッセージをセットする
+			if(matching.isEmpty() ) {
+				messages.add("一致する項目はありませんでした");
+			}
+			
 		} catch (IOException e) {
 			// エラーメッセージをセットする
 			messages.add(MessageCommons.ERR_DB_CONNECT);
 		} finally {
 			// データベース接続を終了する
 			transaction.close();
-			// 取得行数がない場合、メッセージをセットする
-			if(matching.isEmpty() ) {
-				messages.add("一致する項目はありませんでした");
-			}
 		}
 
 		return matching;
 	}
-
 
 }

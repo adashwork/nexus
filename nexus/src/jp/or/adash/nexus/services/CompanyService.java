@@ -362,6 +362,13 @@ public class CompanyService {
 		}
 	}
 
+	/**
+	 *
+	 *
+	 * @param cse
+	 * @return
+	 */
+
 	public List<CompanySearchResult> getCompanyList(CompanySearch cse) {
 		List<CompanySearchResult> companyList = new ArrayList<>();
 

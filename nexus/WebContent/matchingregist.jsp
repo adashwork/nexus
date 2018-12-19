@@ -173,12 +173,12 @@
 					選考結果						<!-- TODO：採用不採用に変換してOKか -->
 				</th>
 				<td>
+					<input name="assessment" type="radio" value="0"
+					<c:if test="${ 1 != matching.assessment && 2 != matching.assessment }">checked="checked"</c:if>> 確認中
 					<input name="assessment" type="radio" value="1"
 					<c:if test="${ 1 == matching.assessment }">checked="checked"</c:if>> 採用
 					<input name="assessment" type="radio" value="2"
 					<c:if test="${ 2 == matching.assessment }">checked="checked"</c:if>> 不採用
-					<input name="assessment" type="radio" value="3"
-					<c:if test="${ 1 != matching.assessment && 2 != matching.assessment }">checked="checked"</c:if>> 確認中
 				</td>
 				<td>
 				</td>

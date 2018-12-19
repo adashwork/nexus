@@ -10,6 +10,7 @@ import java.util.List;
 
 import jp.or.adash.nexus.entity.MatchingCase;
 import jp.or.adash.nexus.entity.MatchingSearchParameter;
+import jp.or.adash.nexus.entity.MatchingSearchResult;
 import jp.or.adash.nexus.utils.common.DataCommons;
 import jp.or.adash.nexus.utils.dao.Transaction;
 /**
@@ -173,8 +174,8 @@ public class MatchingDao {
 	 * @return MatchingCase マッチング事例オブジェクト
 	 * @throws IOException
 	 */
-	public List<MatchingCase> selectV2(MatchingSearchParameter msp) throws IOException {
-		List<MatchingCase> matching = new ArrayList<MatchingCase>();
+	public List<MatchingSearchResult> selectV2(MatchingSearchParameter msp) throws IOException {
+		List<MatchingSearchResult> matching = new ArrayList<MatchingSearchResult>();
 
 		// SQL文を生成する
 		StringBuffer sql = new StringBuffer();
@@ -190,6 +191,7 @@ public class MatchingDao {
 		sql.append(",m.enterdt");
 		sql.append(",m.assessment");
 		sql.append(",c.title");
+		sql.append(",c.note");
 		sql.append(",m.createdt");
 		sql.append(",m.createuserid");
 		sql.append(",m.updatedt");
@@ -246,7 +248,7 @@ public class MatchingDao {
 				// 取得結果をオブジェクトに格納する
 				while(rs.next()) {
 					matching.add(
-						new MatchingCase(
+						new MatchingSearchResult(
 							rs.getInt("id"),
 							rs.getString("companyno"),		// 追加・修正 2018/12/11,12,14 T.Ikeda
 							rs.getString("kyujinno"),
@@ -256,6 +258,7 @@ public class MatchingDao {
 							rs.getDate("enterdt"),
 							rs.getString("assessment"),
 							rs.getString("title"),
+							rs.getString("note"),
 							rs.getDate("createdt"),
 							rs.getString("createuserid"),
 							rs.getDate("upDatedt"),

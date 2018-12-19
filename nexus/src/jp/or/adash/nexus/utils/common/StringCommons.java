@@ -47,4 +47,6 @@ public class StringCommons {
 		return str2;
 
 	}
+
+
 }

@@ -14,6 +14,7 @@ public class Company {
 	* nearStation	最寄駅
 	* companyUrl	事業所URL
 	* jobCategorySmallCd	産業小分類コード
+	* jobCategoryMiddleCd	産業中分類コード
 	* jobCategoryLargeCd	産業大分類コード
 	* capital	資本金
 	* employees	従業員数
@@ -44,6 +45,7 @@ public class Company {
 	private String nearStation;
 	private String companyUrl;
 	private String jobCategorySmallCd;
+	private String jobCategoryMiddleCd;
 	private String jobCategoryLargeCd;
 	private Integer capital;
 	private String employees;
@@ -65,7 +67,7 @@ public class Company {
 	private String deletefFag;
 
 	public Company(String companyNo, String corporateNumber, String companyName, String companyKana,
-			String companyPostal, String companyPlace, String nearStation, String companyUrl, String jobCategorySmallCd,
+			String companyPostal, String companyPlace, String nearStation, String companyUrl, String jobCategorySmallCd, String jobCategoryMiddleCd,
 			String jobCategoryLargeCd, Integer capital, String employees, Integer establishDt, String tantouYakushoku,
 			String tantou, String tantouKana, String tantouTel, String tantouFax, String tantouEmail, String tantouNote,
 			String tantouStaffId, String salesRank, String salesNote, Date createDt, String createuserId, Date updateDt,
@@ -79,6 +81,7 @@ public class Company {
 		this.nearStation = nearStation;
 		this.companyUrl = companyUrl;
 		this.jobCategorySmallCd = jobCategorySmallCd;
+		this.jobCategoryMiddleCd = jobCategoryMiddleCd;
 		this.jobCategoryLargeCd = jobCategoryLargeCd;
 		this.capital = capital;
 		this.employees = employees;
@@ -171,6 +174,14 @@ public class Company {
 	 */
 	public String getJobCategorySmallCd() {
 		return jobCategorySmallCd;
+	}
+
+	/**
+	 * 産業中分類コードを取得する
+	 * @return jobCategorySmallCd
+	 */
+	public String getJobCategoryMiddleCd() {
+		return jobCategoryMiddleCd;
 	}
 
 	/**

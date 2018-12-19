@@ -159,15 +159,11 @@
 					<td><input type="text" name="companyurl"
 						value="${ company.companyUrl }" /></td>
 				</tr>
-				<tr>
-					<th>産業小分類コード</th>
-					<td><input type="text" name="jobcategorysmallcd"
-						value="${ company.jobCategorySmallCd }" /></td>
-				</tr>
+
 				<tr>
 					<th>産業大分類コード</th>
-					<td><select name="jobcategorylargecd">
-							<c:forEach var="JCL" items="${ JCLargelist }">
+					<td><select id="largecd" name="jobcategorylargecd">
+							<c:forEach var="JCL" items="${ JCLargeList }">
 
 								<option value="${ JCL.largecd }"
 									<c:if test="${company.jobCategoryLargeCd == JCL.largecd }">
@@ -176,6 +172,32 @@
 							</c:forEach>
 					</select></td>
 				</tr>
+				<tr>
+					<th>産業中分類コード</th>
+					<td><select  id="middlecd"  name="jobcategorymiddlecd">
+							<c:forEach var="JCM" items="${ JCMiddleList }">
+
+								<option value="${ JCM.largecd }"
+									<c:if test="${company.jobCategoryMiddleCd == JCM.middlecd }">
+									selected
+									</c:if>>${ JCM.name }</option>
+							</c:forEach>
+					</select></td>
+				</tr>
+				<tr>
+					<th>産業小分類コード</th>
+					<td><select id="smallcd" name="jobcategorysmallcd">
+							<c:forEach var="JCS" items="${ JCSmallList }">
+
+								<option value="${ JCS.largecd }"
+									<c:if test="${company.jobCategorySmallCd == JCS.smallcd }">
+									selected
+									</c:if>>${ JCS.name }</option>
+							</c:forEach>
+					</select></td>
+				</tr>
+
+
 				<tr>
 					<th>資本金</th>
 					<td><input type="text" name="capital"

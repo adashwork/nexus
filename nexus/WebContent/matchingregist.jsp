@@ -84,8 +84,8 @@
 				<th>
 					マッチングID
 				</th>
-				<td>
-					<input type="text" name="no" size="10" value="">
+				<td>	<!-- komukai 2018/12/19 マッチングID欄：コメントアウト -->
+<!-- 					<input type="text" name="no" size="10" value="">  -->
 <!--  	 			<input type="hidden" name="nohidden" value="<c:out value="${ matching.id }" />"> -->
 					<fmt:formatNumber value="${ matching.id }" pattern="00000000"/>
 				</td>
@@ -173,12 +173,12 @@
 					選考結果						<!-- TODO：採用不採用に変換してOKか -->
 				</th>
 				<td>
+					<input name="assessment" type="radio" value="0"
+					<c:if test="${ 1 != matching.assessment && 2 != matching.assessment }">checked="checked"</c:if>> 確認中
 					<input name="assessment" type="radio" value="1"
 					<c:if test="${ 1 == matching.assessment }">checked="checked"</c:if>> 採用
 					<input name="assessment" type="radio" value="2"
 					<c:if test="${ 2 == matching.assessment }">checked="checked"</c:if>> 不採用
-					<input name="assessment" type="radio" value="3"
-					<c:if test="${ 1 != matching.assessment && 2 != matching.assessment }">checked="checked"</c:if>> 確認中
 				</td>
 				<td>
 				</td>
@@ -202,13 +202,13 @@
 				</th>
 			</tr>
 			<tr>									<!-- komukai　2018/12/18 タイトル・重要度追加 -->
-				<td align="left">
+				<td align="left" width="60%">
 					<span>タイトル</span>
 					<input type="text" size="30" name="title"></textarea>
 				</td>
-				<td>
+				<td td align="left" width="40%">
 					<span>重要</span>
-					<input type="checkbox" name="inportant"></textarea>
+					<input type="checkbox" name="inportant" value=""></textarea>
 				</td>
 			</tr>
 			<tr>

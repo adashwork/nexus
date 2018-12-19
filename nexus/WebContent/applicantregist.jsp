@@ -305,6 +305,7 @@
 				<tr>
 				<th>希望業種1</th>
 					<td><select name="hopejobcategory">
+					<option value=""></option>
 					<c:forEach var="jobcategory" items="${ JCLargelist }">
 					<option value="${ jobcategory.largecd }" ${ jobcategory.name }
 					<c:if test="${jobcategory.largecd == info.hopejobcategory }">selected</c:if>>${ jobcategory.name }
@@ -315,6 +316,7 @@
 				<tr>
 				<th>希望業種2</th>
 					<td><select name="hopejobcategory">
+					<option value=""></option>
 					<c:forEach var="jobcategory" items="${ JCLargelist }">
 					<option value="${ jobcategory.largecd }" ${ jobcategory.name }
 					<c:if test="${jobcategory.largecd == info.hopejobcategory2 }">selected</c:if>>${ jobcategory.name }
@@ -325,6 +327,7 @@
 				<tr>
 				<th>希望業種3</th>
 					<td><select name="hopejobcategory">
+					<option value=""></option>
 					<c:forEach var="jobcategory" items="${ JCLargelist }">
 					<option value="${ jobcategory.largecd }" ${ jobcategory.name }
 					<c:if test="${jobcategory.largecd == info.hopejobcategory3 }">selected</c:if>>${ jobcategory.name }
@@ -335,6 +338,7 @@
 				<tr>
 					<th>希望職種1</th>
 					<td><select name="hopejob1">
+					<option value=""></option>
 							<c:forEach var="job" items="${ Largelist }">
 								<option value="${ job.largecd }" ${ job.name }
 									<c:if test="${job.largecd == info.hopejob1 }">selected</c:if>>${ job.name }
@@ -345,6 +349,7 @@
 				<tr>
 					<th>希望職種2</th>
 					<td><select name="hopejob2">
+					<option value=""></option>
 							<c:forEach var="job" items="${ Largelist }">
 								<option value="${ job.largecd }" ${ job.name }
 									<c:if test="${job.largecd == info.hopejob2 }">selected</c:if>>${ job.name }
@@ -355,6 +360,7 @@
 				<tr>
 					<th>希望職種3</th>
 					<td><select name="hopejob3">
+					<option value=""></option>
 							<c:forEach var="job" items="${ Largelist }">
 								<option value="${ job.largecd }" ${ job.name }
 									<c:if test="${job.largecd == info.hopejob3 }">selected</c:if>>${ job.name }

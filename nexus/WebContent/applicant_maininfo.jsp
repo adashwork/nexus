@@ -305,6 +305,7 @@
 				<tr>
 				<th>希望業種1</th>
 					<td><select name="hopejobcategory">
+					<option value=""></option>
 					<c:forEach var="jobcategory" items="${ JCLargelist }">
 					<option value="${ jobcategory.largecd }" ${ jobcategory.name }
 					<c:if test="${jobcategory.largecd == info.hopejobcategory }">selected</c:if>>${ jobcategory.name }
@@ -315,6 +316,7 @@
 				<tr>
 				<th>希望業種2</th>
 					<td><select name="hopejobcategory">
+					<option value=""></option>
 					<c:forEach var="jobcategory" items="${ JCLargelist }">
 					<option value="${ jobcategory.largecd }" ${ jobcategory.name }
 					<c:if test="${jobcategory.largecd == info.hopejobcategory2 }">selected</c:if>>${ jobcategory.name }
@@ -325,6 +327,7 @@
 				<tr>
 				<th>希望業種3</th>
 					<td><select name="hopejobcategory">
+					<option value=""></option>
 					<c:forEach var="jobcategory" items="${ JCLargelist }">
 					<option value="${ jobcategory.largecd }" ${ jobcategory.name }
 					<c:if test="${jobcategory.largecd == info.hopejobcategory3 }">selected</c:if>>${ jobcategory.name }
@@ -335,9 +338,10 @@
 				<tr>
 					<th>希望職種1</th>
 					<td><select name="hopejob1">
-							<c:forEach var="job" items="${ Largelist }">
-								<option value="${ job.largecd }" ${ job.name }
-									<c:if test="${job.largecd == info.hopejob1 }">selected</c:if>>${ job.name }
+					<option value=""></option>
+					<c:forEach var="job" items="${ Largelist }">
+					<option value="${ job.largecd }" ${ job.name }
+					<c:if test="${job.largecd == info.hopejob1 }">selected</c:if>>${ job.name }
 								</option>
 							</c:forEach>
 					</select></td>
@@ -345,9 +349,10 @@
 				<tr>
 					<th>希望職種2</th>
 					<td><select name="hopejob2">
-							<c:forEach var="job" items="${ Largelist }">
-								<option value="${ job.largecd }" ${ job.name }
-									<c:if test="${job.largecd == info.hopejob2 }">selected</c:if>>${ job.name }
+					<option value=""></option>
+					<c:forEach var="job" items="${ Largelist }">
+					<option value="${ job.largecd }" ${ job.name }
+					<c:if test="${job.largecd == info.hopejob2 }">selected</c:if>>${ job.name }
 								</option>
 							</c:forEach>
 					</select></td>
@@ -355,9 +360,10 @@
 				<tr>
 					<th>希望職種3</th>
 					<td><select name="hopejob3">
-							<c:forEach var="job" items="${ Largelist }">
-								<option value="${ job.largecd }" ${ job.name }
-									<c:if test="${job.largecd == info.hopejob3 }">selected</c:if>>${ job.name }
+					<option value=""></option>
+					<c:forEach var="job" items="${ Largelist }">
+					<option value="${ job.largecd }" ${ job.name }
+					<c:if test="${job.largecd == info.hopejob3 }">selected</c:if>>${ job.name }
 								</option>
 							</c:forEach>
 					</select></td>
@@ -443,13 +449,24 @@
 			onclick="location.href='/nexus/web/jobseeker-list'" value="一覧に戻る">
 </div>
 </main>
+		<div class="comment">
 		<h3>重要</h3>
-		<textarea>フリーコメント1</textarea>
-		<h3>重要</h3>
-		<textarea>フリーコメント2</textarea>
-		<h3>重要</h3>
-		<textarea>フリーコメント3</textarea>
-
+			<table>
+				<tr>
+				<td><input type="text" name="title" value="" size="30" class="cm1" readonly></td>
+			<td><textarea rows="5" cols="80" name="commnt1" ></textarea></td>
+			<td>登録日:<input type="text" class="datepicker" name="registday"
+						value="<fmt:formatDate value="${ info.birthdt }" pattern="yyyy-MM-dd"/>"></td>
+			<td>更新日:<input type="text" class="datepicker" name="uploadday"
+						value="<fmt:formatDate value="${ info.birthdt }" pattern="yyyy-MM-dd"/>"></td>
+			<td>登録者ID:<input type="hidden" name="registrant"
+						value="<c:out value="${ info.tantoustaffid }" />">
+						<c:out value="${ info.tantoustaffid }" /></td>
+			<td>更新者ID:<input type="hidden" name="uploader"
+						value="<c:out value="${ info.tantoustaffid }" />">
+						<c:out value="${ info.tantoustaffid }" /></td>
+			</table>
+		</div>
 	<!-- フッター　-->
 	<footer>
 		<small>Copyright(C) 2009有限責任事業組合 大阪職業教育協働機構(A'ワーク創造館) All

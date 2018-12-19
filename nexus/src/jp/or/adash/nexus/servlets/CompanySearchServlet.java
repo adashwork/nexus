@@ -68,6 +68,7 @@ public class CompanySearchServlet extends HttpServlet {
 		List<CompanySearchResult> companyList = companyService.getCompanyList(cse);
 		request.setAttribute("companylist", companyList);
 		request.setAttribute("messages", companyService.getMessages());
+		request.setAttribute("cse",cse);
 
 		// フォワード
 		request.getRequestDispatcher("/companysearch.jsp").forward(request, response);

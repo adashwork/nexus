@@ -14,7 +14,6 @@ main{
   width:700px;
 }
 
-
 .m_div {
 	font-size:1rem;
 	background-color: #ddd;
@@ -31,4 +30,5 @@ main{
 
 .m_p_right{
 	float:right;
+	padding:5px 10px 5px 10px;
 }

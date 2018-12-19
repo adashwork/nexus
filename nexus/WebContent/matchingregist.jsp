@@ -81,98 +81,98 @@
 		<table border="0">
 
 			<tr>
-				<th>
+				<th width="30%">
 					マッチングID
 				</th>
-				<td>	<!-- komukai 2018/12/19 マッチングID欄：コメントアウト -->
+				<td width="35%">	<!-- komukai 2018/12/19 マッチングID欄：コメントアウト -->
 <!-- 					<input type="text" name="no" size="10" value="">  -->
 <!--  	 			<input type="hidden" name="nohidden" value="<c:out value="${ matching.id }" />"> -->
 					<fmt:formatNumber value="${ matching.id }" pattern="00000000"/>
 				</td>
-				<td>
+				<td  width="35%">
 
 				</td>
 			</tr>
 			<tr>
-				<th>
+				<th  width="30%">
 					企業ID
 				</th>
-				<td>
+				<td width="35%">
 																	<!-- komukai　2018/12/17 ID検索ボタン内編集 -->
 					<input type="text" name="companyNo" size="10" value="<c:out value="${ matching.companyNo }" />">
 					<input type="button" value="企業ID検索"
 						onclick="window.open('/nexus/web/matching-companyid-search','','width=750,height=*,resizeable=yes')">
 
 				</td>
-				<td>
+				<td width="35%">
 				</td>
 			</tr>
 			<tr>
-				<th>
+				<th width="30%">
 					求人ID
 				</th>
-				<td>
+				<td width="35%">
 																	<!-- komukai　2018/12/17 ID検索ボタン内編集 -->
 					<input type="text" name="kyujinno" size="10" value="<c:out value="${ matching.kyujinno }" />">
 					<input type="button" value="求人ID検索"
 						onclick="window.open('/nexus/web/matching-kyujinid-search','','width=750,height=*,resizeable=yes')">
 				</td>
-				<td>
+				<td width="35%">
 				</td>
 			</tr>
 			<tr>
-				<th>
+				<th width="30%">
 					求職者ID
 				</th>
-				<td>
+				<td width="35%">
 																	<!-- komukai　2018/12/18 ID検索ボタン内編集 -->
 					<input type="text" name="jobseekerid" size="10" value="<c:out value="${ list.js_id }" />">
 					<input type="button" value="求職者ID検索"
 						onclick="window.open('/nexus/web/matching-jobseekerid-search','','width=750,height=*,resizeable=yes,scrollbars=yes')">
 				</td>
-				<td>
+				<td width="35%">
 				</td>
 			</tr>
 			<tr>
-				<th>
+				<th width="30%">
 					職業紹介者ID
 				</th>
-				<td>
+				<td width="35%">
 					<input type="text" name="staffid" size="4"
 						<c:if test="${ matching.staffid == null }">value="<fmt:formatNumber value="${ Staff.id }" pattern="0000" />"</c:if>
 						<c:if test='${ matching.staffid != null }'>value="<fmt:formatNumber value='${ matchinig.staffid }' pattern='0000' />"</c:if>
 					>
 				</td>
-				<td>
+				<td width="35%">
 				</td>
 			</tr>
 			<tr>
-				<th>
+				<th width="30%">
 					履歴書送付日
 				</th>
-				<td>
+				<td width="35%">
 					<input type="text" class="datepicker" size="10" name="interviewdt"
 					value="<fmt:formatDate value="${ matching.interviewdt }" pattern="yyyy-MM-dd"/>">
 				</td>
-				<td>
+				<td width="35%">
 				</td>
 			</tr>
 			<tr>
-				<th>
+				<th width="30%">
 					面接日
 				</th>
-				<td>
+				<td width="35%">
 					<input type="text" class="datepicker" size="10" name="interviewdt"
 					value="<fmt:formatDate value="${ matching.interviewdt }" pattern="yyyy-MM-dd"/>">
 				</td>
-				<td>
+				<td width="35%">
 				</td>
 			</tr>
 			<tr>
-				<th>
+				<th width="30%">
 					選考結果						<!-- TODO：採用不採用に変換してOKか -->
 				</th>
-				<td>
+				<td width="35%">
 					<input name="assessment" type="radio" value="0"
 					<c:if test="${ 1 != matching.assessment && 2 != matching.assessment }">checked="checked"</c:if>> 確認中
 					<input name="assessment" type="radio" value="1"
@@ -180,18 +180,18 @@
 					<input name="assessment" type="radio" value="2"
 					<c:if test="${ 2 == matching.assessment }">checked="checked"</c:if>> 不採用
 				</td>
-				<td>
+				<td width="35%">
 				</td>
 			</tr>
 			<tr>
-				<th>
+				<th width="30%">
 					入社日
 				</th>
-				<td>
+				<td width="35%">
 					<input type="text" class="datepicker" size="10" name="enterdt"
 					value="<fmt:formatDate value="${ matching.enterdt }" pattern="yyyy-MM-dd"/>">
 				</td>
-				<td>
+				<td width="35%">
 				</td>
 			</tr>
 			</table>
@@ -204,11 +204,11 @@
 			<tr>									<!-- komukai　2018/12/18 タイトル・重要度追加 -->
 				<td align="left" width="60%">
 					<span>タイトル</span>
-					<input type="text" size="30" name="title"></textarea>
+					<input type="text" size="30" name="title">
 				</td>
 				<td align="left" width="40%">
 					<span>重要</span>
-					<input type="checkbox" name="inportant" value=""></textarea>
+					<input type="checkbox" name="inportant" value="">
 				</td>
 			</tr>
 			<tr>

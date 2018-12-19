@@ -41,9 +41,7 @@ header > section {
 .mainnavi > li a:hover, .user__name a:hover {
   text-decoration:none;
 }
-.mainnavi > li:first-child {
-  background:#329bcf;
-}
+
 .mainnavi > li i {
   margin-right:10px;
 }
@@ -132,9 +130,11 @@ header > section {
   display:flex;
   align-items:center;
 }
+
 .user .user__wrapper .user__name .drop-menu li a:hover {
   color:#329bcf;
 }
+
 .user .user__wrapper .user__name .drop-menu li i {
   position:absolute;
   right:20px;

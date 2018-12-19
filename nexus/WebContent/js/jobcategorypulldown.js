@@ -30,6 +30,7 @@ function callback(data) {
 	for (var category in data){
 		$('#middlecd').append("<option value="+ data[category].middlecd +">" + data[category].name + "</option>");
 	}
+	$('select#middlecd').val("");
 }
 
 // ロード時の処理
@@ -67,6 +68,7 @@ function callbackSmall(data) {
 	for (var category in data){
 		$('#smallcd').append("<option value="+ data[category].smallcd +">" + data[category].name + "</option>");
 	}
+	$('select#smallcd').val("");
 }
 
 //ロード時の処理

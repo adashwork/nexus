@@ -163,6 +163,7 @@
 				<tr>
 					<th>産業大分類コード</th>
 					<td><select id="largecd" name="jobcategorylargecd">
+						<option value=""></option>
 							<c:forEach var="JCL" items="${ JCLargeList }">
 
 								<option value="${ JCL.largecd }"
@@ -175,6 +176,7 @@
 				<tr>
 					<th>産業中分類コード</th>
 					<td><select  id="middlecd"  name="jobcategorymiddlecd">
+
 							<c:forEach var="JCM" items="${ JCMiddleList }">
 
 								<option value="${ JCM.largecd }"
@@ -187,6 +189,7 @@
 				<tr>
 					<th>産業小分類コード</th>
 					<td><select id="smallcd" name="jobcategorysmallcd">
+
 							<c:forEach var="JCS" items="${ JCSmallList }">
 
 								<option value="${ JCS.largecd }"

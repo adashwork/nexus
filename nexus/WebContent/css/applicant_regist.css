@@ -11,9 +11,6 @@ th {
 	width:20%;
 }
 
-
-
-/*
 #tab-controll ul {
   list-style-type:none;
   padding-left:196px;
@@ -37,12 +34,8 @@ th {
 	color:#ffffff;
 }
 
-#tab2 th {
-	width:20%;
-}
-
-#tab3 th {
-	width:20%;
+.main-b {
+	margin-bottom: 10px;
 }
 
 

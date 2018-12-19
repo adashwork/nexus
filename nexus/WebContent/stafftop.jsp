@@ -20,6 +20,7 @@
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
 <script type="text/javascript" src="../js/common.js"></script>
+<script type="text/javascript" src="../js/stafftop.js"></script>
 </head>
 <body>
 	<header>
@@ -50,7 +51,7 @@
 									class="fas fa-angle-right"></i></a></li>
 							<li><a href="/nexus/web/kyujin-disp">求人登録<i
 									class="fas fa-angle-right"></i></a></li>
-							<li><a href="/nexus/web/jobseeker-disp">求職者登録<i
+							<li><a href="/nexus/web/jobseeker-disp#tab1">求職者登録<i
 									class="fas fa-angle-right"></i></a></li>
 							<li><a href="/nexus/web/matching-registdisp">マッチング登録<i
 									class="fas fa-angle-right"></i></a></li>

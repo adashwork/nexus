@@ -1,5 +1,6 @@
 package jp.or.adash.nexus.utils.dao;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -23,7 +24,7 @@ public class Transaction {
 	 * トランザクションを開始する
 	 * @throws TransactionException
 	 */
-	public void open() throws TransactionException {
+	public void open() throws IOException {
 		// データベース接続がないかどうか確認する（ある場合は何もしない）
 		if (connection == null) {
 			try {
@@ -33,7 +34,7 @@ public class Transaction {
 /*
 				// 接続文字列を生成する
 				StringBuffer connStrBuffer = new StringBuffer();
-				connStrBuffer.append("jdbc:mysql://172.20.76.252:3306/kashiwagi");
+				connStrBuffer.append("jdbc:mysql://172.20.76.252:3306/kawasaki");
 				connStrBuffer.append("?");
 				connStrBuffer.append("useUnicode=true");
 				connStrBuffer.append("&amp;characterEncoding=utf8");
@@ -43,33 +44,10 @@ public class Transaction {
 
 				// データベース接続を開始する
 				connection = DriverManager.getConnection(
-						connStrBuffer.toString(), "kashiwagi", "pgJav@1807");
+						connStrBuffer.toString(), "kawasaki", "pgJav@1810");
 */
 			} catch (SQLException|NamingException e) {
-				throw new TransactionException(e);
-			}
-		}
-	}
-	/*
-	public void open() throws TransactionException {
-		// データベース接続がないかどうか確認する（ある場合は何もしない）
-		if (connection == null) {
-			try {
-				// 接続文字列を生成する
-				StringBuffer connStrBuffer = new StringBuffer();
-				connStrBuffer.append("jdbc:mysql://172.20.76.252:3306/okamura");
-				connStrBuffer.append("?");
-				connStrBuffer.append("useUnicode=true");
-				connStrBuffer.append("&amp;characterEncoding=utf8");
-				connStrBuffer.append("&amp;serverTimezone=JST");
-				connStrBuffer.append("&amp;zeroDateTimeBehavior=convertToNull");
-				connStrBuffer.append("&amp;useSSL=false");
-
-				// データベース接続を開始する
-				connection = DriverManager.getConnection(
-						connStrBuffer.toString(), "okamura", "pgJav@1807");
-			} catch (SQLException e) {
-				throw new TransactionException(e);
+				throw new IOException(e);
 			}
 		}
 	}
@@ -78,14 +56,14 @@ public class Transaction {
 	 * トランザクションを開始する
 	 * @throws TransactionException
 	 */
-	public void beginTrans() throws TransactionException {
+	public void beginTrans() throws IOException {
 		// データベース接続がないかどうか確認する（ある場合は何もしない）
 		if (connection != null) {
 			try {
 				// トランザクションを開始する
 				connection.setAutoCommit(false);
 			} catch (SQLException e) {
-				throw new TransactionException(e);
+				throw new IOException(e);
 			}
 		}
 	}

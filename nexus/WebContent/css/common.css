@@ -1,14 +1,32 @@
-*, h1, h2, ol, ul, dl, p {
+@charset "utf-8";
+/* CSS Document */
+
+html, body, h1, h2, h3, h4, ul, ol, dl, li, dt, dd, p, div, span, img, a, table, tr, th, td {
+  margin: 0;
   padding:0;
-  margin:0;
+    border: 0;
+  font-weight: normal;
+  font-size: 100%;
+  vertical-align:baseline;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
-li {
+
+article, header, footer, aside, figure, figcaption, nav, section {
+  display:block;
+}
+
+ol, ul,li {
   list-style: none;
+  list-style-type: none;
 }
 
 body{
   font-family: 'M PLUS 1p', "Helvetica Neue", "Segoe UI","Noto Sans Japanese","ヒラギノ角ゴ ProN W3", Meiryo, sans-serif;
   background: #f6f6f6;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
 }
 
 main{
@@ -23,14 +41,8 @@ h2{
   margin-bottom:50px;
 }
 
-/*
-	float:left
-　	必要性が不明な上にないほうがデザインしやすかったので一時的に無効化しています
-	20181217 mosco
-*/
-
 h3 {
-	/*float:left;*/
+	float:left;
 	font-size:1.5rem;
 	margin-top:20px;
 	margin-bottom:20px;
@@ -47,6 +59,7 @@ table {
 	margin-left: 5px;
     padding: 10px;
 	text-align:center;
+	border: none;
 	}
 
 /*　テーブル見出しの背景　*/

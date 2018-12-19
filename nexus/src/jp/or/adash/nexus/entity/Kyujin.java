@@ -23,6 +23,7 @@ import java.util.Date;
 //	* nearstation 最寄り駅
 //	* companyurl 事業所URL
 //	* jobcategorysmallcd 産業小分類コード
+//  * jobcategorymiddleCdcd 産業中分類コード
 //	* jobcategorylargecd 産業大分類コード
 //	* capital 資本金
 //	* employees 従業員数

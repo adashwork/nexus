@@ -126,9 +126,9 @@
 
 			<tr>
 				<th></th>
-				<th>マッチングID</th>
+				<th>ID</th>
 				<th>企業ID</th>
-				<th>求人者ID</th>
+				<th>求職者ID</th>
 				<th>合否</th>
 				<th>コメント</th>
 			</tr>
@@ -161,9 +161,16 @@
 							</td>
 							<td><c:out value="${ matchingCase.companyNo }" /></td>
 							<td><c:out value="${ matchingCase.jobseekerid }" /></td>
-							<td><c:out value="${ matchingCase.assessment }" /></td>
+							<td>
+								<c:choose>
+									<c:when test="${ matchingCase.assessment == 0}">確認中</c:when>
+									<c:when test="${ matchingCase.assessment == 1}">採用</c:when>
+									<c:when test="${ matchingCase.assessment == 2}">不採用</c:when>
+								</c:choose>
+							</td>
 							<td>
 								<c:out value="${ matchingCase.title }" />
+
 <!-- 2018/12/18 kitayama 文字数によって切り捨てる部分のコメントアウト -->
 <%--
 								<c:choose>

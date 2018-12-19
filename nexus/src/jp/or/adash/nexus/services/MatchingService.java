@@ -12,6 +12,7 @@ import jp.or.adash.nexus.entity.JobSeekerMain;
 import jp.or.adash.nexus.entity.Kyujin;
 import jp.or.adash.nexus.entity.MatchingCase;
 import jp.or.adash.nexus.entity.MatchingSearchParameter;
+import jp.or.adash.nexus.entity.MatchingSearchResult;
 import jp.or.adash.nexus.utils.common.DataCommons;
 import jp.or.adash.nexus.utils.common.MessageCommons;
 import jp.or.adash.nexus.utils.dao.Transaction;
@@ -293,8 +294,8 @@ public class MatchingService {
 	 * @param msp 検索条件オブジェクト
 	 * @return マッチング事例のListオブジェクト
 	 */
-	public List<MatchingCase> getMatchingV2(MatchingSearchParameter msp) {
-		List<MatchingCase> matching = new ArrayList<MatchingCase>();
+	public List<MatchingSearchResult> getMatchingV2(MatchingSearchParameter msp) {
+		List<MatchingSearchResult> matching = new ArrayList<MatchingSearchResult>();
 
 		try {
 			// データベース接続を開始する
@@ -306,9 +307,14 @@ public class MatchingService {
 
 		} catch (IOException e) {
 			// エラーメッセージをセットする
+			messages.add(MessageCommons.ERR_DB_CONNECT);
 		} finally {
 			// データベース接続を終了する
 			transaction.close();
+			// 取得行数がない場合、メッセージをセットする
+			if(matching.isEmpty() ) {
+				messages.add("一致する項目はありませんでした");
+			}
 		}
 
 		return matching;

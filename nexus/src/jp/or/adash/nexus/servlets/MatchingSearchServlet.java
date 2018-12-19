@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import jp.or.adash.nexus.entity.MatchingCase;
 import jp.or.adash.nexus.entity.MatchingSearchParameter;
+import jp.or.adash.nexus.entity.MatchingSearchResult;
 import jp.or.adash.nexus.entity.Staff;
 import jp.or.adash.nexus.services.MatchingService;
 import jp.or.adash.nexus.utils.common.StringCommons;
@@ -38,7 +38,7 @@ public class MatchingSearchServlet extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession session = request.getSession(true);
 		Staff staff = (Staff) session.getAttribute("UserData");
-		List<MatchingCase> matching = new ArrayList<MatchingCase>();
+		List<MatchingSearchResult> matching = new ArrayList<MatchingSearchResult>();
 		MatchingService service = new MatchingService();
 		int id = -1;
 
@@ -50,7 +50,7 @@ public class MatchingSearchServlet extends HttpServlet {
 			}
 			MatchingSearchParameter msp
 				= new MatchingSearchParameter(id
-											 ,request.getParameter("companyid")
+											 ,request.getParameter("companyno")
 											 ,request.getParameter("jobseekerid")
 											 ,request.getParameter("staffid")
 											 ,StringCommons.splitWords(request.getParameter("note"))

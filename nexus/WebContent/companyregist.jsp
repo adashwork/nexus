@@ -141,12 +141,12 @@
 				</tr>
 				<tr>
 					<th>事業所郵便番号</th>
-					<td><input type="text" name="companypostal"
+					<td><input id="postal" type="text" name="companypostal"
 						value="${ company.companyPostal }" /></td>
 				</tr>
 				<tr>
 					<th>事業所所在地</th>
-					<td><input type="text" name="companyplace"
+					<td><input id="address" type="text" name="companyplace"
 						value="${ company.companyPlace }" /></td>
 				</tr>
 				<tr>
@@ -159,15 +159,11 @@
 					<td><input type="text" name="companyurl"
 						value="${ company.companyUrl }" /></td>
 				</tr>
-				<tr>
-					<th>産業小分類コード</th>
-					<td><input type="text" name="jobcategorysmallcd"
-						value="${ company.jobCategorySmallCd }" /></td>
-				</tr>
+
 				<tr>
 					<th>産業大分類コード</th>
-					<td><select name="jobcategorylargecd">
-							<c:forEach var="JCL" items="${ JCLargelist }">
+					<td><select id="largecd" name="jobcategorylargecd">
+							<c:forEach var="JCL" items="${ JCLargeList }">
 
 								<option value="${ JCL.largecd }"
 									<c:if test="${company.jobCategoryLargeCd == JCL.largecd }">
@@ -176,6 +172,32 @@
 							</c:forEach>
 					</select></td>
 				</tr>
+				<tr>
+					<th>産業中分類コード</th>
+					<td><select  id="middlecd"  name="jobcategorymiddlecd">
+							<c:forEach var="JCM" items="${ JCMiddleList }">
+
+								<option value="${ JCM.largecd }"
+									<c:if test="${company.jobCategoryMiddleCd == JCM.middlecd }">
+									selected
+									</c:if>>${ JCM.name }</option>
+							</c:forEach>
+					</select></td>
+				</tr>
+				<tr>
+					<th>産業小分類コード</th>
+					<td><select id="smallcd" name="jobcategorysmallcd">
+							<c:forEach var="JCS" items="${ JCSmallList }">
+
+								<option value="${ JCS.largecd }"
+									<c:if test="${company.jobCategorySmallCd == JCS.smallcd }">
+									selected
+									</c:if>>${ JCS.name }</option>
+							</c:forEach>
+					</select></td>
+				</tr>
+
+
 				<tr>
 					<th>資本金</th>
 					<td><input type="text" name="capital"
@@ -334,8 +356,9 @@
 		<small>Copyright(C) 2009有限責任事業組合 大阪職業教育協働機構(A'ワーク創造館) All
 			Rights Reserved.</small>
 	</footer>
-
 	<script src="js/kalendae.standalone.js" type="text/javascript"
 		charset="utf-8"></script>
+	<script src="../js/jobcategorypulldown.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../js/postcode.js" type="text/javascript" charset="utf-8"></script>
 </body>
 </html>

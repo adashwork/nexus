@@ -50,6 +50,7 @@ public class CompanyDao {
 		sql.append("nearstation,       ");
 		sql.append("companyurl,        ");
 		sql.append("jobcategorysmallcd,");
+		sql.append("jobcategorymiddlecd,");
 		sql.append("jobcategorylargecd,");
 		sql.append("capital,           ");
 		sql.append("employees,         ");
@@ -74,7 +75,7 @@ public class CompanyDao {
 
 		sql.append("?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ");
 		sql.append("?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ");
-		sql.append("?, ?, ?, ?, ?, 0");
+		sql.append("?, ?, ?, ?, ?, ?, 0");
 
 		sql.append(" )");
 
@@ -88,35 +89,36 @@ public class CompanyDao {
 			ps.setString(7, company.getNearStation());
 			ps.setString(8, company.getCompanyUrl());
 			ps.setString(9, company.getJobCategorySmallCd());
-			ps.setString(10, company.getJobCategoryLargeCd());
+			ps.setString(10, company.getJobCategoryMiddleCd());
+			ps.setString(11, company.getJobCategoryLargeCd());
 			if (company.getCapital() == null) {
-				ps.setNull(11, java.sql.Types.INTEGER);
+				ps.setNull(12, java.sql.Types.INTEGER);
 			} else {
-				ps.setInt(11, company.getCapital());
+				ps.setInt(12, company.getCapital());
 			}
 
-			ps.setString(12, company.getEmployees());
+			ps.setString(13, company.getEmployees());
 
 			if (company.getEstablishDt() == null) {
-				ps.setNull(13, java.sql.Types.INTEGER);
+				ps.setNull(14, java.sql.Types.INTEGER);
 			} else {
-				ps.setInt(13, company.getEstablishDt());
+				ps.setInt(14, company.getEstablishDt());
 			}
 
-			ps.setString(14, company.getTantouYakushoku());
-			ps.setString(15, company.getTantou());
-			ps.setString(16, company.getTantouKana());
-			ps.setString(17, company.getTantouTel());
-			ps.setString(18, company.getTantouFax());
-			ps.setString(19, company.getTantouMail());
-			ps.setString(20, company.getTantouNote());
-			ps.setString(21, company.getTantouStaffId());
-			ps.setString(22, company.getSalesRank());
-			ps.setString(23, company.getSalesNote());
+			ps.setString(15, company.getTantouYakushoku());
+			ps.setString(16, company.getTantou());
+			ps.setString(17, company.getTantouKana());
+			ps.setString(18, company.getTantouTel());
+			ps.setString(19, company.getTantouFax());
+			ps.setString(20, company.getTantouMail());
+			ps.setString(21, company.getTantouNote());
+			ps.setString(22, company.getTantouStaffId());
+			ps.setString(23, company.getSalesRank());
+			ps.setString(24, company.getSalesNote());
 			//ps.setDate(1, company.getCreateDt()               );
-			ps.setString(24, company.getCreateuserId());
+			ps.setString(25, company.getCreateuserId());
 			//ps.setDate(1, company.getUpdateDt()               );
-			ps.setString(25, company.getUpdateUserId());
+			ps.setString(26, company.getUpdateUserId());
 			//ps.setDate(1, company.getDeletefFag()             );
 
 			// SQL文を実行する
@@ -162,6 +164,7 @@ public class CompanyDao {
 							rs.getString("nearstation"),
 							rs.getString("companyurl"),
 							rs.getString("jobcategorysmallcd"),
+							rs.getString("jobcategorymiddlecd"),
 							rs.getString("jobcategorylargecd"),
 							rs.getInt("capital"),
 							rs.getString("employees"),
@@ -218,6 +221,7 @@ public class CompanyDao {
 		sql.append("nearstation = ?,        ");
 		sql.append("companyurl = ?,         ");
 		sql.append("jobcategorysmallcd = ?,  ");
+		sql.append("jobcategorymiddlecd = ?,  ");
 		sql.append("jobcategorylargecd = ?, ");
 		sql.append("capital = ?,            ");
 		sql.append("employees = ?,          ");
@@ -249,24 +253,25 @@ public class CompanyDao {
 			ps.setString(6, company.getNearStation());
 			ps.setString(7, company.getCompanyUrl());
 			ps.setString(8, company.getJobCategorySmallCd());
-			ps.setString(9, company.getJobCategoryLargeCd());
-			ps.setInt(10, company.getCapital());
-			ps.setString(11, company.getEmployees());
-			ps.setInt(12, company.getEstablishDt());
-			ps.setString(13, company.getTantouYakushoku());
-			ps.setString(14, company.getTantou());
-			ps.setString(15, company.getTantouKana());
-			ps.setString(16, company.getTantouTel());
-			ps.setString(17, company.getTantouFax());
-			ps.setString(18, company.getTantouMail());
-			ps.setString(19, company.getTantouNote());
-			ps.setString(20, company.getTantouStaffId());
-			ps.setString(21, company.getSalesRank());
-			ps.setString(22, company.getSalesNote());
-			ps.setDate(23, DataCommons.convertToSqlDate(date));
-			ps.setString(24, company.getUpdateUserId());
+			ps.setString(9, company.getJobCategoryMiddleCd());
+			ps.setString(10, company.getJobCategoryLargeCd());
+			ps.setInt(   11, company.getCapital());
+			ps.setString(12, company.getEmployees());
+			ps.setInt(   13, company.getEstablishDt());
+			ps.setString(14, company.getTantouYakushoku());
+			ps.setString(15, company.getTantou());
+			ps.setString(16, company.getTantouKana());
+			ps.setString(17, company.getTantouTel());
+			ps.setString(18, company.getTantouFax());
+			ps.setString(19, company.getTantouMail());
+			ps.setString(20, company.getTantouNote());
+			ps.setString(21, company.getTantouStaffId());
+			ps.setString(22, company.getSalesRank());
+			ps.setString(23, company.getSalesNote());
+			ps.setDate(  24, DataCommons.convertToSqlDate(date));
+			ps.setString(25, company.getUpdateUserId());
 
-			ps.setString(25, company.getCompanyNo());
+			ps.setString(26, company.getCompanyNo());
 
 			// SQL文を実行する
 			count = ps.executeUpdate();

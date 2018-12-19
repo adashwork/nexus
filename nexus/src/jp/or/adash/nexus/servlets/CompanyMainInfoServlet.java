@@ -42,28 +42,34 @@ public class CompanyMainInfoServlet extends HttpServlet {
 		HttpSession session = request.getSession(true);
 		Staff staff = (Staff) session.getAttribute("UserData");
 
-
-		// 1.業種大分類リストを取得する
-		JobCategoryService JCLservice = new JobCategoryService();
-		List<JobCategory> JCLlist = JCLservice.getLargeJobCategoryList();
-		// 2.業種大分類リストをリクエストに格納する
-		request.setAttribute("JCLargelist", JCLlist);
-
 		String companyNo = request.getParameter("companyno");
 		CompanyService companyService = new CompanyService();
 		Company company = companyService.getCompanyInfo(companyNo);
 
-		List<Comment> commentList = companyService.getCompanyCommentList(companyNo);
+		// 1.業種分類リストを取得する
+		JobCategoryService JCLservice = new JobCategoryService();
+		List<JobCategory> JCLlist = JCLservice.getLargeJobCategoryList();
+		List<JobCategory> JCMlist = JCLservice.getMiddleJobCategoryList(company.getJobCategoryLargeCd());
+		List<JobCategory> JCSlist = JCLservice.getSmallJobCategoryList(company.getJobCategoryMiddleCd());
 
-		//コメントリストに存在するスタッフidを列挙したMapを生成
+		//業種分類リストをリクエストに格納する
+		request.setAttribute("JCLargeList", JCLlist);
+		request.setAttribute("JCMiddleList", JCMlist);
+		request.setAttribute("JCSmallList", JCSlist);
+
+		//コメントリストに存在するスタッフidを列挙したMapを生成してリクエストに格納する
+		List<Comment> commentList = companyService.getCompanyCommentList(companyNo);
 		StaffService staffService = new StaffService();
-		Map<String, String> staffMap  =  staffService.getCommentStaffIdMap(commentList);
+		Map<String, String> staffMap = staffService.getCommentStaffIdMap(commentList);
+		request.setAttribute("commentlist", commentList);
+
+
 		//スタッフIDと名前がセットになったMapをJSPに埋め込む
 		Map<String, String> staffNameMap = staffService.getStaffNameMap(staffMap);
 		request.setAttribute("staffNameMap", staffNameMap);
 
 		request.setAttribute("company", company);
-		request.setAttribute("commentlist", commentList);
+
 
 		request.setAttribute("Staff", staff);
 		request.getRequestDispatcher("/companyregist.jsp")

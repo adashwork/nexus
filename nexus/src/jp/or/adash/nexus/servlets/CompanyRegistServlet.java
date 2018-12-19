@@ -41,11 +41,7 @@ public class CompanyRegistServlet extends HttpServlet {
 		HttpSession session = request.getSession(true);
 		Staff staff = (Staff) session.getAttribute("UserData");
 
-		// 1.業種大分類リストを取得する
-		JobCategoryService JCLservice = new JobCategoryService();
-		List<JobCategory> JCLlist = JCLservice.getLargeJobCategoryList();
-		// 2.業種大分類リストをリクエストに格納する
-		request.setAttribute("JCLargelist", JCLlist);
+
 
 		//フォームパラメーターの取得
 
@@ -59,6 +55,7 @@ public class CompanyRegistServlet extends HttpServlet {
 		String nearStation = request.getParameter("nearstation");
 		String companyUrl = request.getParameter("companyurl");
 		String jobCategorySmallCd = request.getParameter("jobcategorysmallcd");
+		String jobCategoryMiddleCd = request.getParameter("jobcategorymiddlecd");
 		String jobCategoryLargeCd = request.getParameter("jobcategorylargecd");
 		Integer capital = DataCommons.parseInteger(request.getParameter("capital"));
 		String employees = request.getParameter("employees");
@@ -81,7 +78,7 @@ public class CompanyRegistServlet extends HttpServlet {
 
 		//企業オブジェクト生成
 		Company company = new Company(companyNo, corporateNumber, companyName, companyKana, companyPostal, companyPlace,
-				nearStation, companyUrl, jobCategorySmallCd, jobCategoryLargeCd, capital, employees, establishDt,
+				nearStation, companyUrl, jobCategorySmallCd, jobCategoryMiddleCd, jobCategoryLargeCd, capital, employees, establishDt,
 				tantouYakushoku, tantou, tantouKana, tantouTel, tantouFax, tantouEmail, tantouNote, tantouStaffId,
 				salesRank, salesNote, createDt, createuserId, updateDt, updateUserId, deletefFag);
 
@@ -98,6 +95,17 @@ public class CompanyRegistServlet extends HttpServlet {
 			//企業情報を登録する
 			boolean registResult = companyService.insertCompany(company);
 		}
+
+		// 1.業種分類リストを取得する
+		JobCategoryService JCLservice = new JobCategoryService();
+		List<JobCategory> JCLlist = JCLservice.getLargeJobCategoryList();
+		List<JobCategory> JCMlist = JCLservice.getMiddleJobCategoryList(company.getJobCategoryLargeCd());
+		List<JobCategory> JCSlist = JCLservice.getSmallJobCategoryList(company.getJobCategoryMiddleCd());
+
+		//業種分類リストをリクエストに格納する
+		request.setAttribute("JCLargeList", JCLlist);
+		request.setAttribute("JCMiddleList", JCMlist);
+		request.setAttribute("JCSmallList", JCSlist);
 
 		//処理結果メッセージをリクエストに格納する
 

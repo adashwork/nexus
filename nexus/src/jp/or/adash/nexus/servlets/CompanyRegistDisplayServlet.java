@@ -39,11 +39,13 @@ public class CompanyRegistDisplayServlet extends HttpServlet {
 		Staff staff = (Staff) session.getAttribute("UserData");
 
 
-		// 1.業種大分類リストを取得する
+		// 1.業種分類リストを取得する
 		JobCategoryService JCLservice = new JobCategoryService();
 		List<JobCategory> JCLlist = JCLservice.getLargeJobCategoryList();
-		// 2.業種大分類リストをリクエストに格納する
-		request.setAttribute("JCLargelist", JCLlist);
+
+		//業種分類リストをリクエストに格納する
+		request.setAttribute("JCLargeList", JCLlist);
+
 
 
 		request.setAttribute("Staff", staff);

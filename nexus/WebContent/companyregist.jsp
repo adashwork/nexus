@@ -141,12 +141,12 @@
 				</tr>
 				<tr>
 					<th>事業所郵便番号</th>
-					<td><input type="text" name="companypostal"
+					<td><input id="postal" type="text" name="companypostal"
 						value="${ company.companyPostal }" /></td>
 				</tr>
 				<tr>
 					<th>事業所所在地</th>
-					<td><input type="text" name="companyplace"
+					<td><input id="address" type="text" name="companyplace"
 						value="${ company.companyPlace }" /></td>
 				</tr>
 				<tr>
@@ -359,5 +359,6 @@
 	<script src="js/kalendae.standalone.js" type="text/javascript"
 		charset="utf-8"></script>
 	<script src="../js/jobcategorypulldown.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../js/postcode.js" type="text/javascript" charset="utf-8"></script>
 </body>
 </html>

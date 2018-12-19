@@ -26,6 +26,7 @@ function getMiddleCategory() {
 // jobcategoryをセットする
 function callback(data) {
 	$('select#middlecd option').remove();
+	$('select#smallcd option').remove();
 	for (var category in data){
 		$('#middlecd').append("<option value="+ data[category].middlecd +">" + data[category].name + "</option>");
 	}
@@ -44,14 +45,14 @@ $(function() {
 function getSmallCategory() {
 	// jobcategory APIから分類を取得する
 	$.ajax({
-		url : "http://localhost:8080/trynexusapi/webapi/jobcategory/getjobcatagory", // リクエストURL
+		url : "http://localhost:8080/trynexusapi/webapi/jobcategory/getjobcatagory2", // リクエストURL
 		type : "GET", // HTTPメソッド
 		dataType : "json", // データ形式
 		data : {
 			"middlecode" : $('#middlecd').val()
 		}
 	}).done(function(data) {
-		callback(data);
+		callbackSmall(data);
 	} // 成功時の処理
 	).fail(function(xhr, status, error) {
 		alert('APIアクセスに失敗しました。');
@@ -71,7 +72,7 @@ function callbackSmall(data) {
 //ロード時の処理
 $(function() {
 	// イベントハンドラの定義
-	$("#smallcd").on("change", function() {
+	$("#middlecd").on("change", function() {
 		getSmallCategory();
 	});
 });

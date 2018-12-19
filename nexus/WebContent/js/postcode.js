@@ -6,7 +6,7 @@
 // 住所を検索する
 function searchAddress(){
     // 入力チェック
-    if ($('[name=postal]').val().length != 7) {
+    if ($('#postal').val().length != 7) {
         // 7桁でない場合、処理終了
         return false;
     }
@@ -18,7 +18,7 @@ function searchAddress(){
         dataType: 'jsonp',                                              // データの種類
         data: {                                                                 // パラメータ
             appid: 'dj00aiZpPUhnOVlkSmJ4NmQwVSZzPWNvbnN1bWVyc2VjcmV0Jng9MGU-',  // アプリケーションID
-            query: $('[name=postal]').val(),                                                         // 検索条件
+            query: $('#postal').val(),                                                         // 検索条件
             output: 'json',                                                     // データの種類
             callback: 'callback'                                                // コールバック関数名
         },
@@ -40,7 +40,7 @@ function searchAddress(){
 $(function(){
     // イベントハンドらの設定
 	// atainihenkougaattatoki
-    $('[name=postal]').on('blur',function(event){
+    $('#postal').on('blur',function(event){
         searchAddress();
     });
 });

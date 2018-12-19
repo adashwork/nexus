@@ -157,6 +157,7 @@ companyplace varchar(75),
 nearstation varchar(30),
 companyurl varchar(100),
 jobcategorysmallcd char(3),
+jobcategorymiddlecd char(2),
 jobcategorylargecd char(1),
 capital bigint(16),
 employees varchar(6),
@@ -429,7 +430,9 @@ create table saiban(
 jobseekersaiban int,
 kyujinsaiban int,
 companysaiban int,
-staffsaiban int
+staffsaiban int,
+matchingsaiban int,
+commentsaiban int
 )charset =utf8;
 
 

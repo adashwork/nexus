@@ -110,12 +110,17 @@
 				<fmt:formatNumber value="${ info.id }" pattern="00000000"/></td>
 				</tr>
 				<tr>
-					<th>名前</th>
+					<th>氏名</th>
 					<td><input type="text" name="name" value="${ info.name }" /></td>
 				</tr>
 				<tr>
-					<th>ふりがな</th>
+					<th>氏名(かな)</th>
 					<td><input type="text" name="kana" value="${ info.kana }" /></td>
+				</tr>
+				<tr>
+					<th>生年月日</th>
+					<td><input type="text" class="datepicker" name="birthdt"
+						value="<fmt:formatDate value="${ info.birthdt }" pattern="yyyy-MM-dd"/>"></td>
 				</tr>
 				<tr>
 					<th>性別</th>
@@ -123,11 +128,6 @@
 						<c:if test="${ info.sex == 1 }">checked</c:if> />男 <input
 						type="radio" name="sex" value="${ info.sex }"
 						<c:if test="${ info.sex == 2 }">checked</c:if> />女</td>
-				</tr>
-				<tr>
-					<th>生年月日</th>
-					<td><input type="text" class="datepicker" name="birthdt"
-						value="<fmt:formatDate value="${ info.birthdt }" pattern="yyyy-MM-dd"/>"></td>
 				</tr>
 				<tr>
 					<th>年齢</th>

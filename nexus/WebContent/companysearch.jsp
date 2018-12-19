@@ -118,7 +118,7 @@
 		<h3>企業一覧表示</h3>
 
 		<form action="/nexus/web/company-registdisp" method="get">
-			<input type="submit" class="regist_button1" name="send" value="新規登録">
+			<input type="submit" class="regist_button" name="send" value="新規登録">
 		</form>
 
 

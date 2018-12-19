@@ -107,7 +107,9 @@ input.reset_button {
 	font-size: 16px;
 }
 
-input.regist_button1{
+input.regist_button{
+	position: relative;
+	top: -25px;
 	float: right;
 	font-size: 1rem;
 	border-style: none;

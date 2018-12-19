@@ -206,7 +206,7 @@
 					<span>タイトル</span>
 					<input type="text" size="30" name="title"></textarea>
 				</td>
-				<td td align="left" width="40%">
+				<td align="left" width="40%">
 					<span>重要</span>
 					<input type="checkbox" name="inportant" value=""></textarea>
 				</td>

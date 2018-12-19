@@ -70,9 +70,15 @@ public class MatchingService {
 	public boolean check(MatchingCase matching) {
 		boolean result = true; // チェック結果
 
+		// 企業IDの値が入力されているか　　　　　　　　　　　追加 2018/12/12 T.IKead
+		if (matching.getCompanyNo().equals("")) {
+			messages.add("企業IDが入力されていません。");
+			result = false;
+		}
+
 		// 求人IDの値が入力されているか
 		if (matching.getKyujinno().equals("")) {
-			messages.add("求人NOが入力されていません。");
+			messages.add("求人IDが入力されていません。");    // 修正 No→ID 2018/12/12 T.Ikeda
 			result = false;
 		}
 
@@ -242,5 +248,7 @@ public class MatchingService {
 
 		return matching;
 	}
+
+
 
 }

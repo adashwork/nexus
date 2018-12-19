@@ -3,7 +3,7 @@
 
 html, body, h1, h2, h3, h4, ul, ol, dl, li, dt, dd, p, div, span, img, a, table, tr, th, td {
   margin: 0;
-  padding: 0;
+  padding:0;
     border: 0;
   font-weight: normal;
   font-size: 100%;
@@ -64,7 +64,6 @@ table {
 	}
 
 /*　テーブル見出しの背景　*/
-
 table th {
 	height: 3rem;
 	font-size:0.9rem;
@@ -90,7 +89,6 @@ table tr:nth-child(2n+1) {
  background-color: #ddd;
 }
 
-
 /*ボタンのデザイン*/
 
 .main-b{
@@ -106,7 +104,6 @@ table tr:nth-child(2n+1) {
 	letter-spacing: 0.5rem;
 	font-weight: bold;
 }
-
 .main-b2{
 	float: right;
 	font-size: 1rem;
@@ -146,3 +143,6 @@ table tr:nth-child(2n+1) {
 	font-size: 1rem;
 }
 
+.errormessage{
+	color:#DF0101;
+}

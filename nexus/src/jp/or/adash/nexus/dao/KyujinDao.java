@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import jp.or.adash.nexus.entity.Company;
 import jp.or.adash.nexus.entity.Kyujin;
 import jp.or.adash.nexus.utils.common.DataCommons;
 import jp.or.adash.nexus.utils.dao.Transaction;
@@ -125,86 +124,6 @@ public class KyujinDao {
 		return count;
 	}
 
-/**
- * 企業データアクセスクラス
- *@author ??
- *@author pgjavaAT
- *
- */
-public class CompanyDao{
-	/**
-	 * データベース接続オブジェクト
-	 */
-	private Connection conn;
-	/**
-	 * コンストラクタ
-	 * @param transaction トランザクションオブジェクト
-	 */
-	public CompanyDao(Transaction transaction) {
-		this.conn = transaction.getConnection();
-	}
-	/**
-	 *企業を登録する
-	 *@param Company 登録する企業の情報
-	 *@return 登録件数
-	 *@throws IOException
-	 */
-	public int insert(Company company) throws IOException{
-		int count = 0;
-
-		// SQL文を生成する(企業１)
-		StringBuffer sql = new StringBuffer();
-		sql.append("insert into company(");
-		sql.append("companyno, corporatenumber, companyname, companykana, companypostal, companyplace,");
-        sql.append("nearstation, companyurl, jobcategorysmallcd, jobcategorymiddlecd, jobcategorylargecd, capital, employees,");
-        sql.append("establishdt, tantouyakushoku, tantou, tantoukana, tantoutel, tantoufax, tantoumail, tantounote,");
-        sql.append("tantoustaff_id, salesrank, salesnote,");
-        sql.append("createuserid, updateuserid, deleteflag,");
-        sql.append(") values (");
-        sql.append("?, ?, ?, ?, ?, ?,");
-        sql.append("?, ?, ?, ?, ?, ?, ?,");
-        sql.append("?, ?, ?, ?, ?, ?, ?, ?,");
-        sql.append("?, ?, ?,");
-        sql.append("?, ?, ?,");
-        sql.append(")");
-		try (PreparedStatement ps = this.conn.prepareStatement(sql.toString())) {
-			ps.setString(1, company.getCompanyNo());
-			ps.setString(2, company.getCorporateNumber());//法人番号
-			ps.setString(3, company.getCompanyName());
-			ps.setString(4, company.getTantouKana());
-			ps.setString(5, company.getCompanyPostal());
-			ps.setString(6, company.getCompanyPlace());
-			ps.setString(7, company.getNearStation());
-			ps.setString(8, company.getCompanyUrl());
-			ps.setString(9, company.getJobCategorySmallCd());
-			ps.setString(10, company.getJobCategoryMiddleCd());
-			ps.setString(11, company.getJobCategoryLargeCd());
-			ps.setLong(12, company.getCapital());
-			ps.setString(13, company.getEmployees());//従業員数
-			ps.setInt(14, company.getEstablishDt());
-			ps.setString(15, company.getTantouYakushoku());
-			ps.setString(16, company.getTantou());
-			ps.setString(17, company.getTantouKana());
-			ps.setString(18, company.getTantouTel());//担当者tel
-			ps.setString(19, company.getTantouFax());//担当者fax
-			ps.setString(20, company.getTantouMail());//担当者emai
-			ps.setString(21, company.getTantouNote());//担当者備考
-			ps.setString(22, company.getTantouStaffId());
-			ps.setString(23, company.getSalesRank());
-			ps.setString(24, company.getSalesNote());
-			//ps.setString(24, "now()");//createdt???
-			ps.setString(25, company.getCreateuserId());
-		    //ps.setString(25, "now()");//updatedt???
-			ps.setString(26,  company.getUpdateUserId());
-			ps.setString(27, "0");//deleteflag???
-
-			// SQL文を実行する(企業)
-			count = ps.executeUpdate();
-		}catch(SQLException e) {
-			throw new IOException(e);
-		}
-		return count;
-		}
 
     /**
 	 * 求人票コードを元に、商品情報（1件）を取得する
@@ -311,81 +230,6 @@ public class CompanyDao{
 
 
 	/**
-	 * 企業コードを元に、商品情報(1件)を取得する
-	 * @param no 事業所番号
-	 * @return 企業オブジェクト
-	 * @throws IOException
-	 */
-	public Company selectCompany(String no)throws IOException{
-		Company company = null;
-
-		//SQL文を生成する(企業２)
-		StringBuffer sql = new StringBuffer();
-		sql.append("insert into company(");
-		sql.append("companyno, corporatenumber, companyname, companykana, companypostal, companyplace,");
-        sql.append("nearstation, companyurl, jobcategorysmallcd, jobcategorymiddlecd, jobcategorylargecd, capital, employees,");
-        sql.append("establishdt, tantouyakushoku, tantou, tantoukana, tantoutel, tantoufax, tantoumail, tantounote,");
-        sql.append("tantoustaff_id, salesrank, salesnote,");
-        sql.append("createuserid, updateuserid, deleteflag,");
-        sql.append(") values (");
-        sql.append("?, ?, ?, ?, ?, ?,");
-        sql.append("?, ?, ?, ?, ?, ?, ?,");
-        sql.append("?, ?, ?, ?, ?, ?, ?, ?,");
-        sql.append("?, ?, ?,");
-        sql.append("?, ?, ?,");
-        sql.append(")");
-		sql.append("from company");
-		sql.append("where no = ?");
-		try(PreparedStatement ps = this.conn.prepareStatement(sql.toString())){
-			ps.setString(1, no);
-
-			//SQL文を実行する(企業)
-			try(ResultSet rs = ps.executeQuery()){
-				//取得結果をリストに格納する
-				while(rs.next()) {
-					return new Company(rs.getString("companyno"),//2PK
-							rs.getString("corporatenumber"),//1
-							rs.getString("companyname"),
-							rs.getString("tantoukana"),
-							rs.getString("companypostal"),
-							rs.getString("companyplace"),
-							rs.getString("nearstation"),
-							rs.getString("companyurl"),
-							rs.getString("jobcategorysmallcd"),
-							rs.getString("jobcategorymiddlecd"),
-							rs.getString("jobcategorylargecd"),
-							rs.getLong("capital"),
-							rs.getString("employees"),
-							rs.getInt("establishdt"),
-							rs.getString("tantouyakushoku"),
-							rs.getString("tantou"),
-							rs.getString("tantoukana"),
-							rs.getString("tantoutel"),
-							rs.getString("tantoufax"),
-							rs.getString("tantoumail"),
-							rs.getString("tantounote"),
-							rs.getString("tantoustaff_id"),
-							rs.getString("salesrank"),
-							rs.getString("salesnote"),
-//							rs.getTimestamp("createdt"),
-							rs.getString("createuserid"),
-//							rs.getTimestamp("upDatedt"),
-							rs.getString("upDateuserid"),
-							rs.getString("deleteflag"));
-				}
-			}catch(SQLException e) {
-				throw new IOException(e);
-			}
-
-		}catch(SQLException e) {
-			throw new IOException(e);
-		}
-
-		return company;
-
-	}
-
-	/**
 	 * 求人票の一覧を取得する
 	 * @return 求人票リスト
 	 * @throws IOException
@@ -484,73 +328,6 @@ public class CompanyDao{
 
 		return kyujins;
 	}
-
-    /**
-    *企業の一覧を取得する
-    *@return 企業リスト
-    *@throws IOException
-    */
-    public List<Company> selectCompany() throws IOException{
-	List<Company> company = new ArrayList<Company>();
-
-	//SQL文を生成する(企業３)
-	StringBuffer sql = new StringBuffer();
-	sql.append("insert into company(");
-	sql.append("corporatenumber, companyno, companyname, companykana, companypostal, companyplace,");
-    sql.append("nearstation, companyur, jobcategorysmallcd, jobcategorymiddlecd, jobcategorylargecd, capital, employees,");
-    sql.append("establishdt, tantouyakushoku, tantou, tantoukana, tantoutel, tantoufax, tantoumail, tantounote,");
-    sql.append("tantoustaff_id, salesrank, salesnote,");
-    sql.append("createuserid, updateuserid, deleteflag,");
-    sql.append(") values (");
-    sql.append("?, ?, ?, ?, ?, ?,");
-    sql.append("?, ?, ?, ?, ?, ?, ?,");
-    sql.append("?, ?, ?, ?, ?, ?, ?, ?,");
-    sql.append("?, ?, ?,");
-    sql.append("?, ?, ?,");
-    sql.append(")");
-	sql.append("from company");
-	sql.append("order by no");
-	try(PreparedStatement ps = this.conn.prepareStatement(sql.toString())){
-		//SQL文を実行する
-		try(ResultSet rs = ps.executeQuery()){
-			//取引結果をリストに格納する
-			while(rs.next()) {
-				company.add(new Company(rs.getString("corporatenumber"),
-								rs.getString("companyno"),
-								rs.getString("companyname"),
-								rs.getString("tantoukana"),
-								rs.getString("companypostal"),
-								rs.getString("companyplace"),
-								rs.getString("nearstation"),
-								rs.getString("companyurl"),
-								rs.getString("jobcategorysmallcd"),
-								rs.getString("jobcategorylargecd"),
-								rs.getLong("capital"),
-								rs.getString("corporatenumber"),
-								rs.getInt("establishdt"),
-								rs.getString("tantouyakushoku"),
-								rs.getString("tantou"),
-								rs.getString("tantoutel"),
-								rs.getString("tantoufax"),
-								rs.getString("tantouemail"),
-								rs.getString("tantounote"),
-								rs.getString("tantoustaff_id"),
-								rs.getString("salesrank"),
-								rs.getString("salesnote"),
-								rs.getTimestamp("createdt"),
-								rs.getString("createuserid"),
-								rs.getTimestamp("upDatedt"),
-								rs.getString("upDateuserid"),
-								rs.getString("deleteflag")));
-			}
-		}catch(SQLException e) {
-			throw new IOException(e);
-		}
-	}catch(SQLException e) {
-		throw new IOException(e);
-	}
-	return company;
-   }
 
 
 	/**
@@ -688,48 +465,7 @@ public class CompanyDao{
 		return count;
 	}
 
-	/**
-	 * 企業データを更新する
-	 * @param company 企業データ
-	 * @return 更新件数
-	 * @throws IOException
-	 */
-	public int update(Company company) throws IOException{
-		int count = 0;
 
-		// SQL文を生成する(企業４)
-		StringBuffer sql = new StringBuffer();
-		sql.append("update compnay set");
-		sql.append(" corporatenumber = ?");
-		sql.append(", companyno = ?");
-		sql.append(", companyname = ?");
-		sql.append(", companykana = ?");
-		sql.append(", companypostal = ?");
-		sql.append(", companyplace = ?");
-		sql.append(", nearstation = ?");
-		sql.append(", companyur = ?");
-		sql.append(", jobcategorysmallcd = ?");
-		sql.append(", jobcatagorylargecd = ?");
-		sql.append(", capital = ?");
-		sql.append(", employees = ?");
-		sql.append(", establishdt = ?");
-		sql.append(", tantouyakusyoku = ?");
-		sql.append(", tantou = ?");
-		sql.append(", tantoukana = ?");
-		sql.append(", tantoutel = ?");
-		sql.append(", tantoufax = ?");
-		sql.append(", tantoumail = ?");
-		sql.append(", tantounote = ?");
-		sql.append(", tantoustaff_id = ?");
-		sql.append(", salesrank = ?");
-		sql.append(", salesnote = ?");
-		//sql.append(" createedt = ?");
-		//sql.append(" createuserid = ?");
-		//sql.append(" updatedt = ?");
-		sql.append(", updateuserid = ?");
-		// sql.append(" deleteflag = ?");
-		sql.append("where");
-		sql.append(" no = ?");
 	/**
 	 * 求人データに削除フラグを立てる
 	 * @param kyujin 求人データ
@@ -759,37 +495,4 @@ public class CompanyDao{
 
 		return count;
 	}
-
-	/**
-	 * 企業データに削除フラグを立てる
-	 * @param company 企業データ
-	 * @return 更新件数
-	 * @throws IOException
-	 */
-	public int delete(String companyno, String staffid) throws IOException {
-		int count = 0;
-
-		// SQL文を生成する(企業５)
-		StringBuffer sql = new StringBuffer();
-		sql.append("update company set");
-		sql.append(" updateuserid = ?");
-		sql.append(", deleteflag = ?");
-		sql.append(" where");
-		sql.append(" no = ?");
-		try (PreparedStatement ps = this.conn.prepareStatement(sql.toString())) {
-			ps.setString(1, staffid);
-			ps.setString(2, "1");
-			ps.setString(3, no);
-
-			// SQL文を実行する(企業)
-			count = ps.executeUpdate();
-		} catch (SQLException e) {
-			throw new IOException(e);
-		}
-
-		return count;
-
-	}
-
 }
-

@@ -282,5 +282,24 @@ public class DataCommons {
 			return "数値ではない値が入力されています";
 		}
 	}
+
+	/**
+	 * StringからIntegerに変換する
+	 * 空文字の場合はnullを返す
+	 * @param String
+	 * @return Integer,  null
+	 * @auther mmiyamoto
+	 */
+	public static Integer parseInteger(String str) throws NumberFormatException {
+		if(str.equals("")) {
+			return null;
+		} else {
+			try {
+				return Integer.parseInt(str);
+			} catch(NumberFormatException e) {
+				throw new NumberFormatException();
+			}
+		}
+	}
 }
 

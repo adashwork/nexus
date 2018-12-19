@@ -39,7 +39,7 @@
 									class="fas fa-angle-right"></i></a></li>
 							<li><a href="/nexus/web/jobseeker-list">求職者検索<i
 									class="fas fa-angle-right"></i></a></li>
-							<li><a href="/nexus/web/matching-regist">マッチング検索
+							<li><a href="/nexus/web/matching-search">マッチング検索
 							<i class="fas fa-angle-right"></i></a></li>
 						</ul></li>
 
@@ -52,7 +52,7 @@
 									class="fas fa-angle-right"></i></a></li>
 							<li><a href="/nexus/web/jobseeker-disp">求職者登録<i
 									class="fas fa-angle-right"></i></a></li>
-							<li><a href="/nexus/web/match-disp">マッチング登録<i
+							<li><a href="/nexus/web/matching-registdisp">マッチング登録<i
 									class="fas fa-angle-right"></i></a></li>
 						</ul></li>
 <c:if test="${Staff.authority == '1'}"><li><a href="/nexus/web/account-list"><i
@@ -99,7 +99,7 @@
 
 				</tr>
 				<tr>
-					<td><a href="/nexus/web/matching-regist">■マッチング検索</a></td>
+					<td><a href="/nexus/web/matching-search">■マッチング検索</a></td>
 
 				</tr>
 
@@ -121,7 +121,7 @@
 					<td><a href="/nexus/web/jobseeker-disp">■求職者登録</a></td>
 				</tr>
 				<tr>
-					<td><a href="/nexus/web/match-disp">■マッチング登録</a></td>
+					<td><a href="/nexus/web/matching-registdisp">■マッチング登録</a></td>
 				</tr>
 			</table>
 		</div>

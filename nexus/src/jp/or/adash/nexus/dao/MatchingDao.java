@@ -189,6 +189,7 @@ public class MatchingDao {
 		sql.append(",m.interviewdt");
 		sql.append(",m.enterdt");
 		sql.append(",m.assessment");
+		sql.append(",c.important");
 		sql.append(",c.title");
 		sql.append(",c.note");
 		sql.append(",m.createdt");
@@ -228,6 +229,7 @@ public class MatchingDao {
 						rs.getDate("interviewdt"),
 						rs.getDate("enterdt"),
 						rs.getString("assessment"),
+						rs.getString("important"),
 						rs.getString("title"),
 						rs.getString("note"),
 						rs.getDate("createdt"),
@@ -272,6 +274,7 @@ public class MatchingDao {
 		sql.append(",m.interviewdt");
 		sql.append(",m.enterdt");
 		sql.append(",m.assessment");
+		sql.append(",c.important");
 		sql.append(",c.title");
 		sql.append(",c.note");
 		sql.append(",m.createdt");
@@ -332,13 +335,14 @@ public class MatchingDao {
 					matching.add(
 						new MatchingSearchResult(
 							rs.getInt("id"),
-							rs.getString("companyno"),		// 追加・修正 2018/12/11,12,14 T.Ikeda
+							rs.getString("companyno"),
 							rs.getString("kyujinno"),
 							rs.getString("jobseekerid"),
 							rs.getString("staffid"),
 							rs.getDate("interviewdt"),
 							rs.getDate("enterdt"),
 							rs.getString("assessment"),
+							rs.getString("important"),
 							rs.getString("title"),
 							rs.getString("note"),
 							rs.getDate("createdt"),

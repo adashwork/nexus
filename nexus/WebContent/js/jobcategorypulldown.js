@@ -28,9 +28,9 @@ function callback(data) {
 	$('select#middlecd option').remove();
 	$('select#smallcd option').remove();
 	for (var category in data){
+		$('#middlecd').append("<option value=\"\"></option>");
 		$('#middlecd').append("<option value="+ data[category].middlecd +">" + data[category].name + "</option>");
 	}
-	$('select#middlecd').val("");
 }
 
 // ロード時の処理
@@ -66,9 +66,10 @@ function getSmallCategory() {
 function callbackSmall(data) {
 	$('select#smallcd option').remove();
 	for (var category in data){
+		$('#smallcd').append("<option value=\"\"></option>");
 		$('#smallcd').append("<option value="+ data[category].smallcd +">" + data[category].name + "</option>");
 	}
-	$('select#smallcd').val("");
+
 }
 
 //ロード時の処理

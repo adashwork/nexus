@@ -20,6 +20,7 @@
 <link href="../css/footer.css" rel="stylesheet" type="text/css" />
 <link href="../css/job_seeker.css" rel="stylesheet" type="text/css" />
 <link href="../css/applicant_regist.css" rel="stylesheet" type="text/css" />
+<link href="../css/applicantregist_tab.js" rel="stylesheet" type="text/css" />
 
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css">
@@ -109,16 +110,15 @@
 	<div id="job_seeker">
 		<form action="/nexus/web/jobseeker-edit" method="post">
 
-		  <div id="tab-controll" class="tab-menu">
-		<ul>
+		<ul id="tab_menu1" class="tab_menu">
            <li><a href="#tab1">個人情報</a></li>
            <li><a href="#tab2">希望業種</a></li>
            <li><a href="#tab3">その他</a></li>
         </ul>
-        </div>
 
-	    <div id="controll" class="menu">
-			<table id="tab1" class="page">
+	    <div id="tab_content" class="tab_content">
+	    	<section id="page1-1" class="page">
+			<table>
 				<tr>
 				<th width="20%">ID</th>
 				<td><input type="hidden" name="id"
@@ -299,8 +299,11 @@
 					<td><input type="text" name="nearstation" value="${ info.nearstation }" size="10"/>駅</td>
 				</tr>
 				</table>
+				</section>
 
-				<table id="tab2" class="page">
+
+				<section id="page1-2" class="page">
+				<table>
 				<tr>
 				<th>希望業種1</th>
 					<td><select name="hopejobcategory">
@@ -412,8 +415,10 @@
 						value="${ info.hopeendtime }" /></td>
 				</tr>
 				</table>
+				</section>
 
-				<table id="tab3" class="page">
+				<section id="page1-3" class="page">
+				<table>
 				<tr>
 					<th>その他免許</th>
 					<td><textarea rows="3" cols="80" name="licenseetc"><c:out
@@ -436,6 +441,7 @@
 							value="${ info.tantoustaffid }" /></td>
 				</tr>
 				</table>
+				</section>
 
 			<input type="submit" value="更新" class="main-b">
 		</form>

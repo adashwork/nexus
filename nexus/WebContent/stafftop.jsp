@@ -125,6 +125,7 @@
 				</tr>
 			</table>
 		</div>
+
 		<!-- 管理メニュー　※管理者以外は表示しない-->
 		<c:if test="${Staff.authority == 1}"><div>
 			<table class="staff-table">

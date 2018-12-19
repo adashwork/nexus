@@ -44,9 +44,8 @@
 	<div class="user">
 		<div class="user__wrapper">
 			<div class="user__name">
-				<a href="#">
-					<!-- <c:out value="${ Staff.name }" /> -->
-					<i class="fas fa-ellipsis-v"></i>
+				<a href="#"> <!-- <c:out value="${ Staff.name }" /> --> <i
+					class="fas fa-ellipsis-v"></i>
 				</a>
 				<ul class="drop-menu">
 					<li><a href="/nexus/web/logout">ログアウト<i
@@ -58,12 +57,15 @@
 	</section> </header>
 	<main> <!--　企業検索項目 -->
 	<div id="company_search">
+
 		<ul class="errormessage">
 			<c:forEach var="message" items="${ messages }">
 				<li><c:out value="${ message }" /></li>
 			</c:forEach>
 		</ul>
 		<h3 style="float: none;">企業検索項目</h3>
+
+
 
 		<p>※２単語以上入力する際は間にスペースを入れてください。</p>
 		<form action="/nexus/web/companysearch" method="get">
@@ -110,8 +112,17 @@
 		</form>
 
 	</div>
+
 	<div id="company_search_list">
+
 		<h3>企業一覧表示</h3>
+
+		<form action="/nexus/web/company-registdisp" method="get">
+			<input type="submit" class="regist_button1" name="send" value="新規登録">
+		</form>
+
+
+
 		<c:if test="${companylist.size() >=0 }">
 			<p class="searchresult">
 				検索結果
@@ -119,6 +130,7 @@
 				件
 			</p>
 		</c:if>
+
 		<table width="" border="0">
 			<tbody id="">
 				<tr>
@@ -133,8 +145,9 @@
 					<tr>
 						<td>
 							<form method="get" action="/nexus/web.company-info">
-								<input type="hidden" name="companyno" value="<c:out value="${ company.companyNo }" />">
-									<input type="submit" value="詳細">
+								<input type="hidden" name="companyno"
+									value="<c:out value="${ company.companyNo }" />"> <input
+									type="submit" value="詳細">
 							</form>
 						</td>
 						<td><c:out value="${ company.companyNo }" /></td>

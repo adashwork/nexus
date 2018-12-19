@@ -166,6 +166,88 @@ public class MatchingDao {
 		return count;
 	}
 
+	// 2018/12/18 kitayama 新規追加
+	/**
+	 * マッチング事例の取得（単一行）
+	 * @param id マッチングID
+	 * @return MatchingSearchResult マッチング事例オブジェクト
+	 * @throws IOException
+	 */
+	public MatchingSearchResult selectV1(int id) throws IOException {
+		MatchingSearchResult matching = null;
+
+		// SQL文を生成する
+		StringBuffer sql = new StringBuffer();
+		// SELECT句
+		sql.append(" SELECT");
+
+		sql.append(" m.id");
+		sql.append(",m.companyno");
+		sql.append(",m.kyujinno");
+		sql.append(",m.jobseekerid");
+		sql.append(",m.staffid");
+		sql.append(",m.interviewdt");
+		sql.append(",m.enterdt");
+		sql.append(",m.assessment");
+		sql.append(",c.title");
+		sql.append(",c.note");
+		sql.append(",m.createdt");
+		sql.append(",m.createuserid");
+		sql.append(",m.updatedt");
+		sql.append(",m.updateuserid");
+
+		// FROM句
+		// テーブル名に別名をつける
+		// matchingcase = m
+		// comment 		= c
+		sql.append(" FROM");
+		sql.append(" matchingcase m");
+		sql.append(" LEFT JOIN");
+		sql.append(" comment c");
+		sql.append(" ON");
+		sql.append(" m.id = c.matchid");
+
+		// WHERE句
+		sql.append(" WHERE");
+		sql.append(" COALESCE(m.id, '') = COALESCE(NULLIF(?, -1), COALESCE(m.id, ''))");
+
+		try (PreparedStatement ps = this.conn.prepareStatement(sql.toString())) {
+			// 各項目に検索条件を置く
+			ps.setInt(1, id);
+
+			// SQL文を実行する
+			try (ResultSet rs = ps.executeQuery()) {
+				// 取得結果をオブジェクトに格納する
+				while(rs.next()) {
+					matching = new MatchingSearchResult(
+						rs.getInt("id"),
+						rs.getString("companyno"),
+						rs.getString("kyujinno"),
+						rs.getString("jobseekerid"),
+						rs.getString("staffid"),
+						rs.getDate("interviewdt"),
+						rs.getDate("enterdt"),
+						rs.getString("assessment"),
+						rs.getString("title"),
+						rs.getString("note"),
+						rs.getDate("createdt"),
+						rs.getString("createuserid"),
+						rs.getDate("upDatedt"),
+						rs.getString("updateuserid")
+					);
+				}
+			} catch(SQLException e) {
+				throw new IOException(e);
+			}
+		} catch(SQLException e) {
+			throw new IOException(e);
+		}
+
+		return matching;
+
+	}
+
+
 
 	// 2018/12/17 kitayama 新規追加
 	/**

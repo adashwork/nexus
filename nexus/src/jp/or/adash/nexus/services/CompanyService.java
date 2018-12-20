@@ -15,6 +15,11 @@ import jp.or.adash.nexus.utils.common.MessageCommons;
 import jp.or.adash.nexus.utils.common.StringCommons;
 import jp.or.adash.nexus.utils.dao.Transaction;
 
+/**
+ * 企業に関する処理のクラス
+ * @author mmiyamoto
+ *
+ */
 public class CompanyService {
 
 	String errMsg = null;
@@ -62,7 +67,7 @@ public class CompanyService {
 		if (!"".equals(company.getCompanyNo()) && (newRegist == true)) {
 
 			//既に登録済みかチェック
-			if (getCompanyInfo(company.getCompanyNo()) != null) {
+			if (isRegistCompany(company.getCompanyNo())) {
 				checkResult = false;
 				messages.add("その事業所番号は既に登録済みです");
 			}
@@ -302,6 +307,9 @@ public class CompanyService {
 	}
 
 	/**
+	 * ※コメント機能はコメントサービスに統合されるため
+	 * このメソッドは使わなくなりました。
+	 *
 	 * 企業のコメント一覧を取得する
 	 * @param companyNo
 	 * @return Commentオブジェクト
@@ -363,10 +371,32 @@ public class CompanyService {
 	}
 
 	/**
-	 *
-	 *
+	 * 事業番号を元に、その企業が登録済みか確認する
+	 * @param CompanyNo
+	 * @return ture:登録済み false:未登録
+	 * @throws IOException
+	 */
+	public boolean isRegistCompany(String CompanyNo){
+		try {
+			transaction.open();
+			CompanyDao companyDao = new CompanyDao(transaction);
+			if (companyDao.isRegistCompany(CompanyNo)) {
+				return true;
+			}
+		} catch (IOException e) {
+
+		} finally {
+			// データベース接続をを終了する
+			transaction.close();
+		}
+		return false;
+	}
+
+
+	/**
+	 * 企業情報の検索
 	 * @param cse
-	 * @return
+	 * @return companyList
 	 */
 
 	public List<CompanySearchResult> getCompanyList(CompanySearch cse) {

@@ -168,6 +168,8 @@ public class CommentDao {
 	}
 
 	/**
+	 * ※このメソッドは使わなくなりました。
+	 *
 	 * companyNoを元に企業コメント情報のデータを取得する
 	 * @param companyNo
 	 * @return List<Comment> コメントの入ったリストを取得する
@@ -181,6 +183,7 @@ public class CommentDao {
 		sql.append(" select *  ");
 		sql.append(" from comment  ");
 		sql.append(" where companyno = ? ");
+		sql.append("  ORDER BY  important desc, createdt desc  ");
 		try (PreparedStatement ps = this.conn.prepareStatement(sql.toString())) {
 			ps.setString(1, companyNo);
 

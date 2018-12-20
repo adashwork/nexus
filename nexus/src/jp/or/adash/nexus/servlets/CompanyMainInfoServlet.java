@@ -20,6 +20,9 @@ import jp.or.adash.nexus.services.JobCategoryService;
 import jp.or.adash.nexus.services.StaffService;
 
 /**
+ * 企業の詳細情報を表示するサーブレット
+ * (検索結果などから企業ページを開く場合は、このサーブレットが呼ばれる)
+ * @author mmiyamoto
  * Servlet implementation class CompanyMainInfoServlet
  */
 @WebServlet("/web/company-info")

@@ -130,15 +130,14 @@ public class Transaction {
 	 */
 	public boolean isActive() throws TransactionException {
 		try {
-			if (connection != null && connection.isClosed()) {
-				connection = null;
-				return false;
+			if (connection != null && !connection.isClosed()) {
+				return true;
 			}
 		} catch (SQLException e) {
 			throw new TransactionException(e);
 		}
 
-		return true;
+		return false;
 	}
 
 	/**

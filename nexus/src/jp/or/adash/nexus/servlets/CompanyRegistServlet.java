@@ -19,6 +19,9 @@ import jp.or.adash.nexus.services.JobCategoryService;
 import jp.or.adash.nexus.utils.common.DataCommons;
 
 /**
+ * 企業登録サーブレット
+ * (※最初に登録ページを表示するサーブレッドではありません)
+ * @author mmiyamoto
  * Servlet implementation class CompanyRegistServlet
  */
 @WebServlet("/web/company-regist")
@@ -40,6 +43,8 @@ public class CompanyRegistServlet extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession session = request.getSession(true);
 		Staff staff = (Staff) session.getAttribute("UserData");
+
+
 
 
 
@@ -94,7 +99,16 @@ public class CompanyRegistServlet extends HttpServlet {
 
 			//企業情報を登録する
 			boolean registResult = companyService.insertCompany(company);
+		} else {
+			//エラーが発生したら
+
+			//新規登録中のパラメーターをリクエストに渡す
+			request.setAttribute("status", "regist");
 		}
+
+
+
+
 
 		// 1.業種分類リストを取得する
 		JobCategoryService JCLservice = new JobCategoryService();

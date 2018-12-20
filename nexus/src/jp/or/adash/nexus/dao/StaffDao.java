@@ -9,6 +9,12 @@ import java.sql.SQLException;
 import jp.or.adash.nexus.entity.Staff;
 import jp.or.adash.nexus.utils.dao.Transaction;
 
+
+/**
+ * スタッフデータアクセスクラス
+ * @author mmiyamoto
+ *
+ */
 public class StaffDao {
 
 	/**

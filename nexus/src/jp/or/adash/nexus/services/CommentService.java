@@ -7,6 +7,8 @@ import java.util.List;
 import jp.or.adash.nexus.dao.CommentDao;
 import jp.or.adash.nexus.dao.SaibanDao;
 import jp.or.adash.nexus.entity.Comment;
+import jp.or.adash.nexus.entity.CommentSearchParameter;
+import jp.or.adash.nexus.utils.common.MessageCommons;
 import jp.or.adash.nexus.utils.dao.Transaction;
 
 public class CommentService {
@@ -29,12 +31,10 @@ public class CommentService {
 		return messages;
 	}
 
-
-	public CommentService(){
+	public CommentService() {
 		transaction = new Transaction();
 		messages = new ArrayList<String>();
 	}
-
 
 	/**
 	 * 入力チェック
@@ -46,30 +46,29 @@ public class CommentService {
 
 		// フォーマットチェック
 		// 事業所NO（13桁）
-		if(comment.getCompanyNo() != null && !comment.getCompanyNo().equals("")) {
-			if(comment.getCompanyNo().length() != 13) {
+		if (comment.getCompanyNo() != null && !comment.getCompanyNo().equals("")) {
+			if (comment.getCompanyNo().length() != 13) {
 				messages.add("事業所NOは13桁で入力してください。");
 				checkResult = false;
 			}
 		}
 
 		// 求人NO（14桁）
-		if(comment.getKyujinNo() != null && !comment.getKyujinNo().equals("")) {
-			if(comment.getKyujinNo().length() != 14) {
+		if (comment.getKyujinNo() != null && !comment.getKyujinNo().equals("")) {
+			if (comment.getKyujinNo().length() != 14) {
 				messages.add("求人NOは14桁で入力してください。");
 				checkResult = false;
 			}
 		}
 
 		// カテゴリ選択「0：選択なし」ならエラー
-		if(comment.getGenre().equals("0")) {
+		if (comment.getGenre().equals("0")) {
 			messages.add("内容分類を選択してください。");
 			checkResult = false;
 		}
 
 		return checkResult;
 	}
-
 
 	/**
 	 * コメントの登録
@@ -96,19 +95,17 @@ public class CommentService {
 			// comment.setId(str);
 
 			CommentDao commentDao = new CommentDao(transaction);
-			int count = commentDao.insert(comment);
+			int count = commentDao.insertV2(comment);
 
 			if (count > 0) {
 				// 完了メッセージをセットする
 				messages.add("登録が完了しました");
-
 
 			} else {
 				// エラーメッセージをセットする
 				messages.add("登録に失敗しました");
 				// 登録に失敗した場合は備考IDを返さない
 				comment.setId(null);
-
 
 			}
 
@@ -127,6 +124,38 @@ public class CommentService {
 		}
 
 		return comment;
+	}
 
+	/**
+	 * 求人・企業・求職者各画面からコメント（備考）一覧を取得する
+	 * @param CommentSearchParameter
+	 * @return commentList
+	 */
+	public List<Comment> commentSearch(CommentSearchParameter csp){
+		List<Comment> commentList = new ArrayList<>();
+
+		Transaction transaction = new Transaction();
+		CommentDao dao;
+		try {
+			// データベース接続を開く
+			transaction.open();
+			// DBから企業情報を取得し、Dao内のメソッドでListに詰め、そのListを返してもらう
+			dao = new CommentDao(transaction);
+			// commentList = dao.selectCommentList(csp);
+
+		} catch (IOException e) {
+			// DB接続が失敗した場合、例外をキャッチする
+			messages.add(MessageCommons.ERR_DB_CONNECT);
+		} finally {
+			try {
+				// DB接続の終了
+				dao = null;
+				transaction.close();
+			} catch (Exception e) {
+				transaction = null;
+			}
+		}
+
+		return commentList;
 	}
 }

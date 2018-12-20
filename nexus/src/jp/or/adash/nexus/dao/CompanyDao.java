@@ -152,6 +152,7 @@ public class CompanyDao {
 		sql.append("select * ");
 		sql.append("from company  ");
 		sql.append("where companyno = ? ");
+		sql.append(" and deleteflag = 0 ");
 
 		try (PreparedStatement ps = this.conn.prepareStatement(sql.toString())) {
 			ps.setString(1, companyNo);

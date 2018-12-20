@@ -393,6 +393,28 @@ public class CompanyService {
 	}
 
 	/**
+	 * 事業番号を元に、その企業が登録済みか確認する
+	 * @param CompanyNo
+	 * @return ture:登録済み false:未登録
+	 * @throws IOException
+	 */
+	public boolean isRegistCompany(String CompanyNo){
+		try {
+			transaction.open();
+			CompanyDao companyDao = new CompanyDao(transaction);
+			if (companyDao.isRegistCompany(CompanyNo)) {
+				return true;
+			}
+		} catch (IOException e) {
+
+		} finally {
+			// データベース接続をを終了する
+			transaction.close();
+		}
+		return false;
+	}
+
+	/**
 	 * 企業情報の検索
 	 * @param cse
 	 * @return companyList

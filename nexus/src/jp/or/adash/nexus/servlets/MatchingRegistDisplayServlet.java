@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import jp.or.adash.nexus.entity.Comment;
 import jp.or.adash.nexus.entity.MatchingSearchResult;
 import jp.or.adash.nexus.entity.Staff;
 import jp.or.adash.nexus.services.MatchingService;
@@ -39,15 +40,19 @@ public class MatchingRegistDisplayServlet extends HttpServlet {
 		Staff staff = (Staff) session.getAttribute("UserData");
 		MatchingService service = new MatchingService();
 		MatchingSearchResult matching;
+		Comment comment;
 
 		//idが入力されていた場合、そのidのマッチング事例を表示する。
 		if(request.getParameter("matchinginfo") != null &&  !"".equals(request.getParameter("matchinginfo"))) {
 			int id = Integer.parseInt(request.getParameter("matchinginfo"));
 
 			matching = service.getMatching(id);
+			comment = new Comment(0, "", "","","",0,"", matching.getImportant(),
+											matching.getTitle(), matching.getNote(), null, "",null, "");
 
 			//処理結果メッセージをリクエストに格納する
 			request.setAttribute("matching", matching);
+			request.setAttribute("comment", comment);
 		}
 
 		// JSPにフォワードする

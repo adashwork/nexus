@@ -3,7 +3,7 @@ package jp.or.adash.nexus.entity;
 import java.util.Date;
 
 /**
- * 求人票マスタのEntityクラス
+/ * 求人票マスタのEntityクラス
  * @author pgjavaAT
  * @author kmiyamoto
  *
@@ -20,7 +20,6 @@ import java.util.Date;
 //	* companyname 事業所名
 //	* companypostal 事業所郵便番号
 //	* companyplace 事業所所在地
-<<<<<<< HEAD
 //	* nearstationkj 最寄り駅
 //	* companyurl 事業所URL
 //	* jobcategorysmallcd 産業小分類コード
@@ -89,7 +88,6 @@ import java.util.Date;
 //		this.companypostal = companypostal;
 //		this.companyplace = companyplace;
 //		this.nearstationkj = nearstationkj;
-=======
 //	* nearstation 最寄り駅
 //	* companyurl 事業所URL
 //	* jobcategorysmallcd 産業小分類コード
@@ -158,7 +156,6 @@ import java.util.Date;
 //		this.companypostal = companypostal;
 //		this.companyplace = companyplace;
 //		this.nearstation = nearstation;
->>>>>>> refs/remotes/origin/#216
 //		this.companyurl = companyurl;
 //		this.jobcategorysmallcd = jobcategorysmallcd;
 //		this.jobcategorylargecd = jobcategorylargecd;
@@ -200,18 +197,10 @@ public class Kyujin {
 	*
 	* no 求人Ｎo.
 	* companyno 事業所番号
-<<<<<<< HEAD
 	* postal 就業場所郵便番号
 	* address 就業場所
 	* nearline 沿線
 	* nearstationkj 最寄り駅
-=======
-	* companykana 事業所名（かな）
-	* postal 就業場所郵便番号
-	* address 就業場所
-	* nearline 沿線
-	* nearstation 最寄り駅
->>>>>>> refs/remotes/origin/#216
 	* addresscd 就業場所コード
 	* jobsmallcd１ 職種小分類コード１
 	* jobsmallcd２ 職種小分類コード２
@@ -263,19 +252,11 @@ public class Kyujin {
 	 */
 
 	private String no;
-<<<<<<< HEAD
-=======
-	private String companykana;
->>>>>>> refs/remotes/origin/#216
 	private String companyno;
 	private String postal;
 	private String address;
 	private String nearline;
-<<<<<<< HEAD
 	private String nearstationkj;
-=======
-	private String nearstation;
->>>>>>> refs/remotes/origin/#216
 	private String addresscd;
 	private String jobsmallcd1;
 	private String jobsmallcd2;
@@ -329,13 +310,8 @@ public class Kyujin {
 
 	}
 
-<<<<<<< HEAD
 	public Kyujin(String no, String companyno, String postal, String address,
 			String nearline, String nearstationkj, String addresscd, String jobsmallcd1, String jobsmallcd2,
-=======
-	public Kyujin(String no, String companyno, String companykana, String postal, String address,
-			String nearline, String nearstation, String addresscd, String jobsmallcd1, String jobsmallcd2,
->>>>>>> refs/remotes/origin/#216
 			String jobsmallcd3, String joblargecd1, String joblargecd2, String joblargecd3,
 			String job, String detail, String koyoukeitaicd, String hakencd, String koyoukikan,
 			Date koyoukikankaishi, Date koyoukikanowari, String education, String experience, String license,
@@ -348,20 +324,11 @@ public class Kyujin {
 		super();
 		this.no = no;
 		this.companyno = companyno;
-<<<<<<< HEAD
 		this.postal = postal;
 		this.address = address;
 		this.nearline = nearline;
 		this.nearstationkj = nearstationkj;
 		this.addresscd = addresscd;
-=======
-		this.companykana = companykana;
-		this.postal = postal;
-		this.address = address;
-		this.nearline = nearline;
-		this.nearstation = nearstation;
-		this.nearstation = addresscd;
->>>>>>> refs/remotes/origin/#216
 		this.jobsmallcd1 = jobsmallcd1;
 		this.jobsmallcd2 = jobsmallcd2;
 		this.jobsmallcd3 = jobsmallcd3;
@@ -420,17 +387,14 @@ public class Kyujin {
 	}
 
 	/**
-<<<<<<< HEAD
-=======
 	 * 事業所名（カナ）を返す
 	 * @return companykana
-	 */
+
 	public String getCompanykana() {
 		return companykana;
-	}
+	}*/
 
 	/**
->>>>>>> refs/remotes/origin/#216
 	 * 事業所番号を返す
 	 * @return companyno
 	 */
@@ -456,7 +420,6 @@ public class Kyujin {
 
 	/**
 	 * 沿線を返す
-<<<<<<< HEAD
 	 * @return nearline
 	 */
 	public String getNearline() {
@@ -469,20 +432,6 @@ public class Kyujin {
 	 */
 	public String getNearstationKyujin() {
 		return nearstationkj;
-=======
-	 * @return nearstation
-	 */
-	public String getNearline() {
-		return nearline;
-	}
-
-	/**
-	 * 最寄り駅を返す
-	 * @return nearstation
-	 */
-	public String getNearstation() {
-		return nearstation;
->>>>>>> refs/remotes/origin/#216
 	}
 
 	/**
@@ -802,11 +751,6 @@ public class Kyujin {
 	public String getNenkanholiday() {
 		return nenkanholiday;
 	}
-
-<<<<<<< HEAD
-=======
-
->>>>>>> refs/remotes/origin/#216
 	/**
 	 * 創業設立年を返す
 	 * @return establishdt
@@ -831,12 +775,7 @@ public class Kyujin {
 		public String getCompanyfeature() {
 			return companyfeature;
 		} */
-=======
-	 */
-	//	public String getCompanyfeature() {
-	//		return companyfeature;
-	//	}
->>>>>>> refs/remotes/origin/#216
+
 
 	/**
 	 * 選考担当者課係名/役職名を返す
@@ -869,10 +808,7 @@ public class Kyujin {
 	public String getTantoustaff_id() {
 		return tantoustaff_id;
 	}*/
-<<<<<<< HEAD
-=======
 
->>>>>>> refs/remotes/origin/#216
 
 	/**
 	 * 応募書類を返す

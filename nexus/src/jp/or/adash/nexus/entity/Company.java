@@ -178,9 +178,9 @@ public class Company {
 
 	/**
 	 * 産業中分類コードを取得する
-	 * @return jobCategorySmallCd
+	 * @return jobCategoryMiddleCd
 	 */
-	public String getjobCategoryMiddleCd() {
+	public String getJobCategoryMiddleCd() {
 		return jobCategoryMiddleCd;
 	}
 

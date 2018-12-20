@@ -1,0 +1,75 @@
+
+/* CSS Document */
+@charset "utf-8";
+/*
+
+textarea {
+	width:750px
+}
+
+th {
+	width:20%;
+}
+
+#tab-controll ul {
+  list-style-type:none;
+  padding-left:196px;
+  margin-left:5px;
+  float:left;
+
+}
+
+
+#tab-controll ul li {
+  display:inline-block;
+  background-color:#004d91;
+  margin-bottom:5px;
+  height:50px;
+  width:150px;
+  text-align:center;
+  padding-top:15px;
+}
+
+#tab-controll ul li a {
+	color:#ffffff;
+}
+
+.main-b {
+	margin-bottom: 10px;
+}
+
+*/
+
+#wrap .comment-title{
+	width:50%;
+	height:20px;
+	margin-right: 40px;
+	border:1px solid #000;
+}
+
+
+#wrap textarea {
+	width:600px;
+	height:200px;
+	border:1px solid #000;
+	margin-top: 10px;
+}
+
+.box {
+	float: left;
+
+}
+
+.box p{
+	padding-right:240px;
+	border-bottom: 1px solid #000;
+}
+
+.up1,.up2,.up3 {
+	clear: both;
+	padding-top: 50px;
+}
+
+
+
+

@@ -1,14 +1,32 @@
-*, h1, h2, ol, ul, dl, p {
+@charset "utf-8";
+/* CSS Document */
+
+html, body, h1, h2, h3, h4, ul, ol, dl, li, dt, dd, p, div, span, img, a, table, tr, th, td {
+  margin: 0;
   padding:0;
-  margin:0;
+    border: 0;
+  font-weight: normal;
+  font-size: 100%;
+  vertical-align:baseline;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
-li {
+
+article, header, footer, aside, figure, figcaption, nav, section {
+  display:block;
+}
+
+ol, ul,li {
   list-style: none;
+  list-style-type: none;
 }
 
 body{
   font-family: 'M PLUS 1p', "Helvetica Neue", "Segoe UI","Noto Sans Japanese","ヒラギノ角ゴ ProN W3", Meiryo, sans-serif;
   background: #f6f6f6;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
 }
 
 main{
@@ -38,9 +56,11 @@ table {
 	margin-top: 20px;
 	margin-right: 5px;
 	margin-bottom: 20px;
-	margin-left: 5px;
+/*	margin-left: 5px;
     padding: 10px;
+*/
 	text-align:center;
+	border: none;
 	}
 
 /*　テーブル見出しの背景　*/
@@ -121,20 +141,6 @@ table tr:nth-child(2n+1) {
 
 .user{
 	font-size: 1rem;
-}
-
-.subbtn{
-	float: right;
-	font-size: 1rem;
-	border-style: none;
-	background-color: #f03c97 ;
-	color: #fff;
-	height: 40px;
-	padding-left: 10px;
-	margin-left:5px;
-	margin-right:5px;
-	letter-spacing: 0.5rem;
-	font-weight: bold;
 }
 
 .errormessage{

@@ -42,9 +42,9 @@ values(3,'2222-123456-7','41244-95544575','00113','0001','2017-3-9','2017-4-1','
 
 
 -- 企業マスタのサンプルデータ
-insert into company values('1234567890123','1234-567890-1','ABC株式会社','エービーシーカブシキガイシャ','555-1144','兵庫県尼崎市南城内4-4-15','園部駅','https://localhost:8080/nexus/top',null,'S','1000000000','1200',1955,'社畜','修羅コーサク','しゅら こうさく','06-459-4649','06-459-4949','hakata@pineapple.go.jp','総務・人事と様々にご担当。赤福を持参すると喜ばれる。','0001','A','過去実績良好',current_timestamp,'0001',current_timestamp,'0001',0);
-insert into company values('5678901231234','567890-1-1234','C株式会社','シーカブシキガイシャ','102-0075','東京都千代田区三番町20番地','東京駅','https://localhost:8080/nexus/staff','53','C','5000000000','100',1867,null,null,null,null,null,null,null,'0002','B',null,current_timestamp,'0003',current_timestamp,'0003',0);
-insert into company values('3123456789012','890567-1-1234','D株式会社','ディーカブシキガイシャ','102-0015','東京都千代田区三番町20番地','渋谷駅','https://localhost:8080/web/jobseeker-list','102','E','3000000','10',2011,null,null,null,null,null,null,null,'0002','C',null,current_timestamp,'0002',current_timestamp,'0001',0);
+insert into company values('1234567890123','1234-567890-1','ABC株式会社','エービーシーカブシキガイシャ','555-1144','兵庫県尼崎市南城内4-4-15','園部駅','https://localhost:8080/nexus/top','972','97','S','1000000000','1200',1955,'社畜','修羅コーサク','しゅら こうさく','06-459-4649','06-459-4949','hakata@pineapple.go.jp','総務・人事と様々にご担当。赤福を持参すると喜ばれる。','0001','A','過去実績良好',current_timestamp,'0001',current_timestamp,'0001',0);
+insert into company values('5678901231234','567890-1-1234','C株式会社','シーカブシキガイシャ','102-0075','東京都千代田区三番町20番地','東京駅','https://localhost:8080/nexus/staff','53','5','C','5000000000','100',1867,null,null,null,null,null,null,null,'0002','B',null,current_timestamp,'0003',current_timestamp,'0003',0);
+insert into company values('3123456789012','890567-1-1234','D株式会社','ディーカブシキガイシャ','102-0015','東京都千代田区三番町20番地','渋谷駅','https://localhost:8080/web/jobseeker-list','102','10','E','3000000','10',2011,null,null,null,null,null,null,null,'0002','C',null,current_timestamp,'0002',current_timestamp,'0001',0);
 
 
 -- 求人情報のサンプルデータ
@@ -84,7 +84,7 @@ insert into jscareer values('45759','製造業',201101, 201202);
 
 
 -- 採番のサンプルデータ
-insert into saiban values(4,0,0,4);
+insert into saiban values(00111,0,0,0001,3,1);
 
 
 -- 職種マスタのサンプルデータ

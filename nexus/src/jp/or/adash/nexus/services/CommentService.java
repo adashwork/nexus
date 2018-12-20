@@ -106,6 +106,7 @@ public class CommentService {
 			} else {
 				// エラーメッセージをセットする
 				messages.add("登録に失敗しました");
+				// 登録に失敗した場合は備考IDを返さない
 				comment.setId(null);
 
 

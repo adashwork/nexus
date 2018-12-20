@@ -216,4 +216,76 @@ public class CommentDao {
 
 
 
+	/**
+	 * コメントを登録する
+	 * @param comment コメントオブジェクト
+	 * @return	count 登録行数
+	 * @throws IOException
+	 */
+	public int insertV2(Comment comment) throws IOException {
+		int count = 0;
+
+		// SQL文を生成する
+		StringBuffer sql = new StringBuffer();
+		// INSERT句
+		sql.append(" INSERT INTO");
+		sql.append(" comment");
+
+		sql.append(" ( ");
+
+		sql.append(" id ");
+		sql.append(",companyno");
+		sql.append(",kyujinno");
+		sql.append(",jobseekerid");
+		sql.append(",staffid");
+		sql.append(",matchid");
+		sql.append(",genre");
+		sql.append(",important");
+		sql.append(",title");
+		sql.append(",note");
+		sql.append(",createuserid");
+		sql.append(",updateuserid");
+
+		sql.append(")");
+
+		// VALUE句
+		sql.append(" VALUES (");
+
+		sql.append(" ?");				// id
+		sql.append(",NULLIF(?, '')");	// companyno
+		sql.append(",NULLIF(?, '')");	// kyujinno
+		sql.append(",NULLIF(?, '')");	// jobseekerid
+		sql.append(",NULLIF(?, '')");	// staffid
+		sql.append(",NULLIF(?, -1)");	// matchid
+		sql.append(",NULLIF(?, '')");	// genre
+		sql.append(",NULLIF(?, '')");	// important
+		sql.append(",NULLIF(?, '')");	// title
+		sql.append(",NULLIF(?, '')");	// note
+		sql.append(",NULLIF(?, '')");	// createuserid
+		sql.append(",NULLIF(?, '')");	// updateuserid
+
+		sql.append(")");
+
+		try (PreparedStatement ps = this.conn.prepareStatement(sql.toString())) {
+			ps.setInt(1, comment.getId());
+			ps.setString(2,comment.getCompanyNo());
+			ps.setString(3,comment.getKyujinNo());
+			ps.setString(4,comment.getJobSeekerId());
+			ps.setString(5,comment.getStaffId());
+			ps.setInt(6,comment.getMatchId());
+			ps.setString(7,comment.getGenre());
+			ps.setString(8,comment.getImportant());
+			ps.setString(9,comment.getTitle());
+			ps.setString(10,comment.getNote());
+			ps.setString(11,comment.getCreateUserId());
+			ps.setString(12,comment.getUpdateUserId());
+
+			// SQL文を実行する
+			count = ps.executeUpdate();
+		} catch (SQLException e) {
+			throw new IOException(e);
+		}
+
+		return count;
+	}
 }

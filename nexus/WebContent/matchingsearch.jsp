@@ -69,39 +69,47 @@
 
 		<h2>マッチング事例検索</h2>
 
-		<ul>												<!-- TODO：メッセージ要確認 -->
+<!--   2018/12/18 kitayama コメントアウト -->
+<%--
+		<ul>
 			<c:forEach var="message" items="${ messages }">
 				<li><font color=#F00 size="7"><c:out value="${ message }" /></font></li>
 			</c:forEach>
 		</ul>
-
- 		<form id="form" method="post" action="">
+--%>
+		<!--  kitayama 2018/12/14 form methodをgetに変更
+										  actionを検索サーブレットに変更
+										  各検索項目に検索値を受け取れるよう変更 -->
+ 		<form id="form" method="get" action="./matching-search">
 
 			<!--  komukai　2018/12/13 検索欄テーブルタグからdivへ変更 -->
 			<div class="m_div">
+
 				<p class="m_p">
 					マッチングID<br/>
-				<input type="text" name="no" size=13  value="">
-<!--  				<input type="hidden" name="nohidden" value="<c:out value="${ matching.id }"/>"> -->
-					<fmt:formatNumber value="${ matching.id }" pattern="00000000"/>
+				<!-- 2018/12/14 kitayama nameを変更 -->
+				<!-- 2018/12/14 kitayama typeを変更-->
+				<input type="number" name="matchingid" size=13  value="<c:out value="${ matchingid }" />" >
 				</p>
-				<p class="m_p">
-					求人ID<br/>
-					<input type="text" size=13 name="kyujinno" value="<c:out value="${ matching.kyujinno }" />">
-				</p>
+
 				<p class="m_p">
 					企業ID<br/>
-					<input type="text" size=13 name="kigyou" value="">		<!-- TODO: 処理未 -->
+					<input type="text" size=13 name="companyno" value="<c:out value="${ companyno }" />" >
 				</p>
 				<p class="m_p">
 					求職者ID<br/>
-					<input type="text" size=13 name="jobseekerid" value="<c:out value="${ matching.jobseekerid }" />">
+					<input type="text" size=13 name="jobseekerid" value="<c:out value="${ jobseekerid }" />" >
 				</p>
-			</div>
+
+				<p class="m_p">
+				<!--  kitayama 2018/12/14 検索項目を職業紹介者IDに変更 -->
+					職業紹介者ID<br/>
+					<input type="text" size=13 name="staffid" value="<c:out value="${ staffid }" />" >
+				</p>			</div>
 			<div class="m_div">
 				<p class="m_p">
 					フリーワード検索<br/>
-					<textarea name="note" cose="100" rows="1"></textarea>
+					<input type="text" name="note" size="50"></textarea>
 				</p>
 				<p class="m_p_right">
 					<input type="submit" class="main-b" name="send" value="検索">
@@ -109,47 +117,79 @@
 		</div>
 		</form>
 
+		<p>
+			検索結果：
+			<c:out value="${ matching.size() }" />
+			件
+		</p>
+
 		<table border="0">
 
 			<tr>
 				<th></th>
-				<th>マッチングID</th>
+				<th>ID</th>
 				<th>企業ID</th>
-				<th>求人者ID</th>
+				<th>求職者ID</th>
 				<th>合否</th>
 				<th>コメント</th>
 			</tr>
 
 			<!--  kitayama　2018/12/13 for文追加 -->
-			<form action="/nexus/web/jobseeker-info" method="get">
-			<c:forEach var="matching" items="${ matching }">
-					<tr>
-						<td>
-							<button class="mini_b mini_b_applilist" name="js_id">詳細</button>
-						</td>
-						<td>
-							<c:out value="${ matching.id }" />
-							<input type="hidden" name="matchingid" value="<c:out value="${ matching.id }" />" >
-						</td>
-						<td><c:out value="${ matching.companyNo }" /></td>
-						<td><c:out value="${ matching.jobseekerid }" /></td>
-						<td><c:out value="${ matching.assessment }" /></td>
-						<td>
-							<c:choose>
-								<c:when test="${ fn:length(matching.note)  <= 15 }">
-									<c:out value="${ matching.note }" />
-								</c:when>
-								<c:otherwise>
-									<c:out value="${ fn:substring(matching.note, 0, 15) }" />
-								</c:otherwise>
-							</c:choose>
-						</td>
-					</tr>
-			</c:forEach>
-			</form>
 
+			<c:choose>
+				<c:when test="${ empty matching }">
+					<c:forEach var="errormessage" items="${ messages }">
+						<tr>
+						<!-- TODO CSSで幅を広げる -->
+							<td colspan=6>
+								<c:out value="${ errormessage }" />
+							</td>
+						</tr>
+					</c:forEach>
+				</c:when>
+				<c:when test="${ !empty matching }">
+				<c:forEach var="matchingCase" items="${ matching }">
+						<tr>
+							<td>
+								<form action="./matching-registdisp" method="get">
+								<button class="mini_b mini_b_applilist" name="matchinginfo"
+											value="<c:out value="${ matchingCase.id }" />">詳細</button>
+								</form>
+							</td>
+							<td>
+								<c:out value="${ matchingCase.id }" />
+								<input type="hidden" name="matchingid" value="<c:out value="${ matchingCase.id }" />" >
+							</td>
+							<td><c:out value="${ matchingCase.companyNo }" /></td>
+							<td><c:out value="${ matchingCase.jobseekerid }" /></td>
+							<td>
+								<c:choose>
+									<c:when test="${ matchingCase.assessment == 0}">確認中</c:when>
+									<c:when test="${ matchingCase.assessment == 1}">採用</c:when>
+									<c:when test="${ matchingCase.assessment == 2}">不採用</c:when>
+								</c:choose>
+							</td>
+							<td>
+								<c:out value="${ matchingCase.title }" />
+
+<!-- 2018/12/18 kitayama 文字数によって切り捨てる部分のコメントアウト -->
+<%--
+								<c:choose>
+									<c:when test="${ fn:length(matchingCase.title)  <= 15 }">
+										<c:out value="${ matchingCase.title }" />
+									</c:when>
+									<c:otherwise>
+										<c:out value="${ fn:substring(matchingCase.title, 0, 15) }" />
+									</c:otherwise>
+								</c:choose>
+ --%>
+							</td>
+						</tr>
+				</c:forEach>
+				</c:when>
+			</c:choose>
 		</table>
-
+<%--
 <div>
 	<!-- TODO: 検索結果の件数表示 -->
 	<p>(●●件の候補があります(●●/●●))</p>
@@ -161,13 +201,14 @@
 </div>
 
 		<button type="button" class="main-b" onClick="location.href='./staff-top'">戻る</button>
-		<c:if test="${ matching.id == null }">
+		<button type="button" class="main-b" onClick="location.href='./matching-registdisp'">登録</button>
+ 		<c:if test="${ matching.id == null }">
 			<button type="submit" id="match-regist" class="main-b" onclick="MovePages(this)">登録</button>
 		</c:if>
 		<c:if test="${ matching.id != null && matching.id != 0 }">
 			<button type="submit" id="match-update" class="main-b" onclick="MovePages(this)">更新</button>
 		</c:if>
-
+ --%>
 
 	</main>
 <!-- フッター　-->

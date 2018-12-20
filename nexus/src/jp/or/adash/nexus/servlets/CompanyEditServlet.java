@@ -20,6 +20,9 @@ import jp.or.adash.nexus.services.JobCategoryService;
 import jp.or.adash.nexus.utils.common.DataCommons;
 
 /**
+ * 企業更新サーブレット
+ * (更新がクリックされたときに呼び出されるサーブレット)
+ * @author mmiyamoto
  * Servlet implementation class CompanyEditServlet
  */
 @WebServlet("/web/company-edit")

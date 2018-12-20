@@ -112,10 +112,10 @@
 
 				<tr>
 					<th>事業所番号</th>
-					<td><c:if test="${ company.companyNo == null }">
+					<td><c:if test="${ status == 'regist' }">
 							<input type="text" name="companyno"
 								value="${ company.companyNo }" />
-						</c:if> <c:if test="${ company.companyNo != null }">
+						</c:if> <c:if test="${ status != 'regist' }">
 
 							<c:out value="${ company.companyNo }" />
 							<input type="hidden" name="companyno"
@@ -295,13 +295,13 @@
 
 
 			<button type="button" class="main-b"
-				onClick="location.href='./job-search'" tabindex="62">求人一覧に戻る</button>
+				onClick="location.href='./companysearch'" tabindex="62">企業検索に戻る</button>
 
-			<c:if test="${ company.companyNo == null }">
+			<c:if test="${ status == 'regist' }">
 				<button type="submit" id="company-regist" class="main-b"
 					onclick="MovePages(this)" tabindex="61">登録</button>
 			</c:if>
-			<c:if test="${ company.companyNo != null }">
+			<c:if test="${ status != 'regist' }">
 				<button type="submit" id="company-edit" class="main-b"
 					onclick="MovePages(this)" tabindex="61">更新</button>
 				<button type="submit" id="company-delete" class="main-b2"

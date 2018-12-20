@@ -30,6 +30,7 @@
 </head>
 
 <body>
+<%-- 	<%@ include file="/header.jsp" %> --%>
 
 	<header>
  		<section>
@@ -86,7 +87,7 @@
 				</th>
 				<td>	<!-- komukai 2018/12/19 マッチングID欄：コメントアウト -->
 <!-- 					<input type="text" name="no" size="10" value="">  -->
-<!--  	 			<input type="hidden" name="nohidden" value="<c:out value="${ matching.id }" />"> -->
+	  	 			<input type="hidden" name="nohidden" value="<c:out value="${ matching.id }" />">
 					<fmt:formatNumber value="${ matching.id }" pattern="00000000"/>
 				</td>
 				<td>
@@ -126,7 +127,7 @@
 				</th>
 				<td>
 																	<!-- komukai　2018/12/18 ID検索ボタン内編集 -->
-					<input type="text" name="jobseekerid" size="10" value="<c:out value="${ list.js_id }" />">
+					<input type="text" name="jobseekerid" size="10" value="<c:out value="${ matching.jobseekerid }" />">
 					<input type="button" value="求職者ID検索"
 						onclick="window.open('/nexus/web/matching-jobseekerid-search','','width=750,height=*,resizeable=yes,scrollbars=yes')">
 				</td>
@@ -146,17 +147,17 @@
 				<td>
 				</td>
 			</tr>
-			<tr>
-				<th>
-					履歴書送付日
-				</th>
-				<td>
-					<input type="text" class="datepicker" size="10" name="interviewdt"
-					value="<fmt:formatDate value="${ matching.interviewdt }" pattern="yyyy-MM-dd"/>">
-				</td>
-				<td>
-				</td>
-			</tr>
+<!-- 			<tr> -->
+<!-- 				<th> -->
+<!-- 					履歴書送付日 -->
+<!-- 				</th> -->
+<!-- 				<td> -->
+<!-- 					<input type="text" class="datepicker" size="10" name="interviewdt" -->
+<%-- 					value="<fmt:formatDate value="${ matching.interviewdt }" pattern="yyyy-MM-dd"/>"> --%>
+<!-- 				</td> -->
+<!-- 				<td> -->
+<!-- 				</td> -->
+<!-- 			</tr> -->
 			<tr>
 				<th>
 					面接日
@@ -204,11 +205,11 @@
 			<tr>									<!-- komukai　2018/12/18 タイトル・重要度追加 -->
 				<td align="left" width="60%">
 					<span>タイトル</span>
-					<input type="text" size="30" name="title"></textarea>
+					<input type="text" size="30" name="title">
 				</td>
 				<td align="left" width="40%">
 					<span>重要</span>
-					<input type="checkbox" name="inportant" value=""></textarea>
+					<input type="checkbox" name="inportant" value="">
 				</td>
 			</tr>
 			<tr>

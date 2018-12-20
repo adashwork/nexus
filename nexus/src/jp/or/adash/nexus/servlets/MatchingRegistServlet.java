@@ -87,6 +87,7 @@ public class MatchingRegistServlet extends HttpServlet {
 			//入力チェックでエラーがあった場合、エラーメッセージをセット
 			request.setAttribute("Staff", staff);
 			request.setAttribute("matching", matching);
+			request.setAttribute("comment", comment);
 			request.setAttribute("messages", service.getMessages());
 
 			//JSPにフォワード
@@ -101,6 +102,7 @@ public class MatchingRegistServlet extends HttpServlet {
 		//処理結果メッセージをリクエストに格納する
 		request.setAttribute("Staff", staff);
 		request.setAttribute("matching", matching);
+		request.setAttribute("comment", comment);
 		request.setAttribute("messages", service.getMessages());
 
 		//1.8 JSPにフォワード

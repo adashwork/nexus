@@ -114,9 +114,11 @@ public class MatchingService {
 		}
 
 		//入社日の値が入力されているか
-		if (matching.getEnterdt() == null) {
-			messages.add("入社日が入力されていません。");
-			result = false;
+		if (matching.getAssessment().equals("1")) {
+			if (matching.getEnterdt() == null) {
+				messages.add("入社日が入力されていません。");
+				result = false;
+			}
 		}
 		// 評価の値が入力されているか
 		if (matching.getAssessment().equals("")) {

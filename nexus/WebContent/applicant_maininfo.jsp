@@ -275,10 +275,7 @@
 								<c:if test="${ info.huyou == 49 }">selected</c:if>>49</option>
 					</select>人</td>
 				</tr>
-				<tr>
-					<th>メールアドレス</th>
-					<td><input type="text" name="seekermail" value="${ info.seekermail }"/></td>
-				</tr>
+
 				<tr>
 					<th>自宅電話番号</th>
 					<td><input type="text" name="phone" value="${ info.phone }" /></td>
@@ -467,6 +464,7 @@
 						<c:out value="${ info.tantoustaffid }" /></td>
 			</table>
 		</div>
+
 	<!-- フッター　-->
 	<footer>
 		<small>Copyright(C) 2009有限責任事業組合 大阪職業教育協働機構(A'ワーク創造館) All

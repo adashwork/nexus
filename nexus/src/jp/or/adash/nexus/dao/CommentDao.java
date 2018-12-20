@@ -288,4 +288,60 @@ public class CommentDao {
 
 		return count;
 	}
+
+	/**
+	 * コメントを更新する
+	 * @param comment コメントオブジェクト
+	 * @return count 更新した行数
+	 * @throws IOException
+	 */
+	public int updateV2(Comment comment) throws IOException {
+		int count = 0;
+
+		// SQL文を生成する
+		StringBuffer sql = new StringBuffer();
+		// UPDATE句
+		sql.append(" UPDATE");
+		sql.append(" comment");
+		sql.append(" SET");
+
+		// VALUES
+		sql.append(" companyno = 	?");
+		sql.append(",kyujinno = 	?");
+		sql.append(",jobseekerid = 	?");
+		sql.append(",staffid = 		?");
+		sql.append(",matchid = 		NULLIF(?, -1)");
+		sql.append(",genre = 		?");
+		sql.append(",important = 	?");
+		sql.append(",title = 		?");
+		sql.append(",note = 		?");
+		sql.append(",updateuserid = ?");
+		sql.append(",updatedt = current_timestamp()");
+
+		// WHERE句
+		sql.append(" WHERE");
+		sql.append(" id = ?");
+
+		try (PreparedStatement ps = this.conn.prepareStatement(sql.toString())) {
+
+			ps.setString(1, comment.getCompanyNo());
+			ps.setString(2, comment.getKyujinNo());
+			ps.setString(3, comment.getJobSeekerId());
+			ps.setString(4, comment.getStaffId());
+			ps.setInt(5, comment.getMatchId());
+			ps.setString(6, comment.getGenre());
+			ps.setString(7, comment.getImportant());
+			ps.setString(8, comment.getTitle());
+			ps.setString(9, comment.getNote());
+			ps.setString(10, comment.getUpdateUserId());
+
+			// SQL文を実行する
+			count = ps.executeUpdate();
+		} catch(SQLException e) {
+			throw new IOException(e);
+		}
+
+		return count;
+	}
+
 }

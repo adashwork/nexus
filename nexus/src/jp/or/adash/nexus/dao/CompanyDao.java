@@ -14,6 +14,12 @@ import jp.or.adash.nexus.entity.CompanySearchResult;
 import jp.or.adash.nexus.utils.common.DataCommons;
 import jp.or.adash.nexus.utils.dao.Transaction;
 
+/**
+ * 企業データアクセスクラス
+ * @author mmiyamoto
+ * @author msc
+ *
+ */
 public class CompanyDao {
 
 	/**
@@ -146,6 +152,7 @@ public class CompanyDao {
 		sql.append("select * ");
 		sql.append("from company  ");
 		sql.append("where companyno = ? ");
+		sql.append(" and deleteflag = 0 ");
 
 		try (PreparedStatement ps = this.conn.prepareStatement(sql.toString())) {
 			ps.setString(1, companyNo);
@@ -194,6 +201,37 @@ public class CompanyDao {
 		}
 
 		return companyInfo;
+	}
+
+
+	/**
+	 * 企業が登録済みならtrueを返す
+	 * 削除フラグが1の企業も含む
+	 * @param companyNo
+	 * @return true:登録済み false:未登録
+	 * @throws IOException
+	 */
+	public boolean isRegistCompany(String companyNo) throws IOException {
+		// SQL文を生成する
+		StringBuffer sql = new StringBuffer();
+		sql.append("select * ");
+		sql.append("from company  ");
+		sql.append("where companyno = ?  ");
+
+		try (PreparedStatement ps = this.conn.prepareStatement(sql.toString())) {
+			ps.setString(1, companyNo);
+			// SQL文を実行する
+			try (ResultSet rs = ps.executeQuery()) {
+				if (rs.next()) {
+					return true;
+				}
+			} catch (SQLException e) {
+				throw new IOException(e);
+			}
+		} catch (SQLException e) {
+			throw new IOException(e);
+		}
+		return false;
 	}
 
 	/**
@@ -310,6 +348,15 @@ public class CompanyDao {
 				return count;
 	}
 
+	/**
+	 * 企業情報を検索する
+	 * @param staffId
+	 * @param jobCategory
+	 * @param companyName
+	 * @param companyPlace
+	 * @return companyList
+	 * @throws IOException
+	 */
 
 	public List<CompanySearchResult> selectCompanyList(
 			String staffId,String jobCategory,String[] companyName,String[] companyPlace

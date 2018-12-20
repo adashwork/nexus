@@ -75,6 +75,7 @@ public class Comment {
 	}
 
 	/**
+	 * 備考IDを取得する
 	 * @return id
 	 */
 	public Integer getId() {
@@ -82,6 +83,7 @@ public class Comment {
 	}
 
 	/**
+	 * 事業所番号を取得する
 	 * @return companyNo
 	 */
 	public String getCompanyNo() {
@@ -89,6 +91,7 @@ public class Comment {
 	}
 
 	/**
+	 * 求人NOを取得する
 	 * @return kyujinNo
 	 */
 	public String getKyujinNo() {
@@ -96,6 +99,7 @@ public class Comment {
 	}
 
 	/**
+	 * 求職者IDを取得する
 	 * @return jobSeekerId
 	 */
 	public String getJobSeekerId() {
@@ -103,6 +107,7 @@ public class Comment {
 	}
 
 	/**
+	 * 職業紹介者IDを取得する
 	 * @return staffId
 	 */
 	public String getStaffId() {
@@ -110,6 +115,7 @@ public class Comment {
 	}
 
 	/**
+	 * マッチング事例IDを取得する
 	 * @return matchId
 	 */
 	public Integer getMatchId() {
@@ -125,6 +131,7 @@ public class Comment {
 	}
 
 	/**
+	 * 内容分類を取得する
 	 * @return genre
 	 */
 	public String getGenre() {
@@ -132,6 +139,7 @@ public class Comment {
 	}
 
 	/**
+	 * 重要アラート
 	 * @return important
 	 */
 	public String getImportant() {
@@ -139,6 +147,7 @@ public class Comment {
 	}
 
 	/**
+	 * 件名を取得する
 	 * @return title
 	 */
 	public String getTitle() {
@@ -146,6 +155,7 @@ public class Comment {
 	}
 
 	/**
+	 * 備考を取得する
 	 * @return note
 	 */
 	public String getNote() {
@@ -153,6 +163,7 @@ public class Comment {
 	}
 
 	/**
+	 * 新規登録日を取得する
 	 * @return createDt
 	 */
 	public Date getCreateDt() {
@@ -160,6 +171,7 @@ public class Comment {
 	}
 
 	/**
+	 * 新規登録ユーザーを取得する
 	 * @return createUserId
 	 */
 	public String getCreateUserId() {
@@ -167,6 +179,7 @@ public class Comment {
 	}
 
 	/**
+	 * 最終更新日を取得する
 	 * @return updateDt
 	 */
 	public Date getUpdateDt() {
@@ -174,6 +187,7 @@ public class Comment {
 	}
 
 	/**
+	 * 最終更新ユーザーを取得する
 	 * @return updateUserId
 	 */
 	public String getUpdateUserId() {

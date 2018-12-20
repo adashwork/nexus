@@ -136,3 +136,7 @@ table tr:nth-child(2n+1) {
 	letter-spacing: 0.5rem;
 	font-weight: bold;
 }
+
+.errormessage{
+	color:#DF0101;
+}

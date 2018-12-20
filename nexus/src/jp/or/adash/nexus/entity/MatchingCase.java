@@ -10,7 +10,8 @@ import java.util.Date;
 public class MatchingCase {
 
 	/**
-	 * id マッチング事例ID
+	* id マッチング事例ID
+	* companyNo 事業所番号		// 追加・修正 2018/12/11.12 T.Ikeda
 	* kyujinno 求人NO
 	* jobseekerid 求職者ID
 	* staffid 職業紹介者ID
@@ -24,6 +25,7 @@ public class MatchingCase {
 	* updateuserid 最終更新ユーザー
 	 */
 	private Integer id;
+	private String companyNo;		// 追加・修正 2018/12/11.12 T.Ikeda
 	private String kyujinno;
 	private String jobseekerid;
 	private String staffid;
@@ -36,10 +38,13 @@ public class MatchingCase {
 	private Date updatedt;
 	private String updateuserid;
 
-	public MatchingCase(Integer id, String kyujinno, String jobseekerid, String staffid, Date interviewdt, Date enterdt,
-			String assessment, String note, Date createdt, String createuserid, Date updatedt,
-			String updateuserid) {
+
+	public MatchingCase(Integer id, String companyNo, String kyujinno, String jobseekerid, String staffid,
+			Date interviewdt, Date enterdt, String assessment, String note, Date createdt, String createuserid,
+			Date updatedt, String updateuserid) {		// companyNo追加・修正 2018/12/11.12 T.Ikeda
+		super();
 		this.id = id;
+		this.companyNo = companyNo;
 		this.kyujinno = kyujinno;
 		this.jobseekerid = jobseekerid;
 		this.staffid = staffid;
@@ -60,6 +65,15 @@ public class MatchingCase {
 	public Integer getId() {
 	return id;
 	}
+
+	/**
+	 * 事業所番号を返す			// 追加・修正 2018/12/11.12 T.Ikeda
+	 * @return companyNo
+	 */
+	public String getCompanyNo() {
+		return companyNo;
+	}
+
 
 	/**
 	 * 求人NOを返す

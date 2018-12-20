@@ -106,7 +106,7 @@
 							value="<c:out value="${ jobseeker.id }" />">詳細</button>
 					</form>
 				</td>
-				<td><fmt:formatNumber value="${ jobseeker.id }" pattern="00000000"/></td>
+				<td><fmt:formatNumber value="${ jobseeker.id }"/></td>
 				<td><c:out value="${ jobseeker.js_name }" /></td>
 				<td><c:if test="${ jobseeker.sex == 1 }">男</c:if> <c:if
 						test="${ jobseeker.sex == 2 }">女</c:if></td>

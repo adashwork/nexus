@@ -17,6 +17,7 @@ import jp.or.adash.nexus.entity.Staff;
 import jp.or.adash.nexus.services.KyujinService;
 
 /**
+ * @author kmiyamoto 2018-12-14～
  * Servlet implementation class KyujinUpdateServlet
  */
 @WebServlet("/web/kyujin-update")
@@ -37,49 +38,34 @@ public class KyujinUpdateServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// 1.1 リクエストから値を取得する
-
 		HttpSession session = request.getSession(true);
 		Staff staff = (Staff) session.getAttribute("UserData");
-
 		String no = request.getParameter("no");
 		//		String hiddenno = request.getParameter("hiddenno");
-		Date receptiondt = null;
-		try {
-			receptiondt = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("receptiondt"));
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-
-		Date perioddt = null;
-		try {
-			perioddt = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("perioddt"));
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
 		String companyno = request.getParameter("companyno");
-		String addresscd = request.getParameter("addresscd");
-		String jobsmallcd1 = request.getParameter("jobsmallcd１");
-		String jobsmallcd2 = request.getParameter("jobsmallcd2");
-		String jobsmallcd3 = request.getParameter("jobsmallcd3");
-		String joblargecd1 = request.getParameter("joblargecd１");
-		String joblargecd2 = request.getParameter("joblargecd2");
-		String joblargecd3 = request.getParameter("joblargecd3");
-		String jobcategorysmallcd = request.getParameter("jobcategorysmallcd");
-		String jobcategorylargecd = request.getParameter("jobcategorylargecd");
-		String companykana = request.getParameter("companykana");
-		String companyname = request.getParameter("companyname");
-		String companypostal = request.getParameter("companypostal");
-		String companyplace = request.getParameter("companyplace");
-		String companyurl = request.getParameter("companyurl");
 		String postal = request.getParameter("postal");
 		String address = request.getParameter("address");
-		String nearstation = request.getParameter("nearstation");
+		String nearline = request.getParameter("nearline");
+		String nearstationkj = request.getParameter("nearstationkj");
+		String addresscd = request.getParameter("addresscd");
+		String jobsmallcd1 = request.getParameter("jobsmallcd1");
+		String jobsmallcd2 = request.getParameter("jobsmallcd2");
+		String jobsmallcd3 = request.getParameter("jobsmallcd3");
+		String joblargecd1 = request.getParameter("joblargecd1");
+		String joblargecd2 = request.getParameter("joblargecd2");
+		String joblargecd3 = request.getParameter("joblargecd3");
+		//		String jobcategorysmallcd = request.getParameter("jobcategorysmallcd");
+		//		String jobcategorylargecd = request.getParameter("jobcategorylargecd");
+		//		String companykana = request.getParameter("companykana");
+		//		String companyname = request.getParameter("companyname");
+		//		String companypostal = request.getParameter("companypostal");
+		//		String companyplace = request.getParameter("companyplace");
+		//		String companyurl = request.getParameter("companyurl");
 		String job = request.getParameter("job");
-		String hakencd = request.getParameter("hakencd");
 		String detail = request.getParameter("detail");
 		String koyoukeitaicd = request.getParameter("koyoukeitaicd");
+		String hakencd = request.getParameter("hakencd");
 		String koyoukikan = request.getParameter("koyoukikan");
-
 		Date koyoukikankaishi = null;
 		try {
 			koyoukikankaishi = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("koyoukikankaishi"));
@@ -92,11 +78,11 @@ public class KyujinUpdateServlet extends HttpServlet {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-
 		String education = request.getParameter("education");
 		String experience = request.getParameter("experience");
 		String license = request.getParameter("license");
-		// 空データでparseIntをするとエラーになるので、空データ以外はチェック。空データは０をセット
+
+		// 空データでparseIntをするとエラーになるので、空データ以外はチェック。空データーは0をセット
 		int agemin = 0;
 		if (!request.getParameter("agemin").equals("")) {
 			agemin = Integer.parseInt(request.getParameter("agemin"));
@@ -105,6 +91,7 @@ public class KyujinUpdateServlet extends HttpServlet {
 		if (!request.getParameter("agemax").equals("")) {
 			agemax = Integer.parseInt(request.getParameter("agemax"));
 		}
+		String salaryformcd = request.getParameter("salaryformcd");
 		int salarymin = 0;
 		if (!request.getParameter("salarymin").equals("")) {
 			salarymin = Integer.parseInt(request.getParameter("salarymin"));
@@ -113,7 +100,9 @@ public class KyujinUpdateServlet extends HttpServlet {
 		if (!request.getParameter("salarymax").equals("")) {
 			salarymax = Integer.parseInt(request.getParameter("salarymax"));
 		}
-		String salaryformcd = request.getParameter("salaryformcd");
+		String bonus = request.getParameter("bonus");
+		String koutuhi = request.getParameter("koutuhi");
+		String teate = request.getParameter("teate");
 		int begintime = 0;
 		if (!request.getParameter("begintime").equals("")) {
 			begintime = Integer.parseInt(request.getParameter("begintime"));
@@ -122,21 +111,41 @@ public class KyujinUpdateServlet extends HttpServlet {
 		if (!request.getParameter("endtime").equals("")) {
 			endtime = Integer.parseInt(request.getParameter("endtime"));
 		}
-		int establishdt = 0;
-		if (!request.getParameter("establishdt").equals("")) {
-			establishdt = Integer.parseInt(request.getParameter("establishdt"));
+		String shift = request.getParameter("shift");
+		String flex = request.getParameter("flex");
+		String jitan = request.getParameter("jitan");
+		int jikangai = 0;
+		if (!request.getParameter("jikangai").equals("")) {
+			jikangai = Integer.parseInt(request.getParameter("jikangai"));
 		}
-		long capital = 0;
-		if (!request.getParameter("capital").equals("")) {
-			capital = Long.parseLong(request.getParameter("capital"));
+		;
+		int siyoukikan = 0;
+		if (!request.getParameter("siyoukikan").equals("")) {
+			siyoukikan = Integer.parseInt(request.getParameter("siyoukikan"));
 		}
-		String companyfeature = request.getParameter("companyfeature");
-		String tantouyakushoku = request.getParameter("tantouyakushoku");
-		String tantoukana = request.getParameter("tantoukana");
-		String tantou = request.getParameter("tantou");
-		String tantoustaff_id = request.getParameter("tantoustaff_id");
+		;
+		int workdays = 0;
+		if (!request.getParameter("workdays").equals("")) {
+			workdays = Integer.parseInt(request.getParameter("workdays"));
+		}
+		;
+		String nenkanholiday = request.getParameter("nenkanholiday");
+
+		//		int establishdt = 0;
+		//		if (!request.getParameter("establishdt").equals("")) {
+		//		    establishdt = Integer.parseInt(request.getParameter("establishdt"));}
+		//		long capital = 0;
+		//		if (!request.getParameter("capital").equals("")) {
+		//		    capital = Long.parseLong(request.getParameter("capital"));}
+		//		String employees = request.getParameter("employees");
+		//		String companyfeature = request.getParameter("companyfeature");
+		//		String tantouyakushoku = request.getParameter("tantouyakushoku");
+		//		String tantoukana = request.getParameter("tantoukana");
+		//		String tantou = request.getParameter("tantou");
+		//		String tantoustaff_id = request.getParameter("tantoustaff_id");
 		String applicationform = request.getParameter("applicationform");
 		String background = request.getParameter("background");
+		String bosyunumbers = request.getParameter("bosyunumbers");
 		String hiddensex = request.getParameter("hiddensex");
 		int hiddenagemin = 0;
 		if (!request.getParameter("hiddenagemin").equals("")) {
@@ -147,7 +156,18 @@ public class KyujinUpdateServlet extends HttpServlet {
 			hiddenagemax = Integer.parseInt(request.getParameter("hiddenagemax"));
 		}
 		String hiddenetc = request.getParameter("hiddenetc");
-
+		Date receptiondt = null;
+		try {
+			receptiondt = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("receptiondt"));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		Date perioddt = null;
+		try {
+			perioddt = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("perioddt"));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 		Date createdt = null;
 		try {
 			createdt = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("createdt"));
@@ -171,17 +191,14 @@ public class KyujinUpdateServlet extends HttpServlet {
 		// 1.2求人票オブジェクトを作成
 
 		Kyujin kyujin = new Kyujin(
-				no, receptiondt, perioddt, companyno, addresscd, jobsmallcd1,
-				jobsmallcd2, jobsmallcd3, joblargecd1, joblargecd2, joblargecd3,
-				jobcategorysmallcd, jobcategorylargecd, companykana,
-				companyname, companypostal, companyplace, companyurl, postal,
-				address, nearstation, job, hakencd, detail, koyoukeitaicd,
-				koyoukikan, koyoukikankaishi, koyoukikanowari, education, experience,
-				license, agemin, agemax, salarymin, salarymax, salaryformcd, begintime,
-				endtime, establishdt, capital, companyfeature, tantouyakushoku,
-				tantoukana, tantou, tantoustaff_id, applicationform, background,
-				hiddensex, hiddenagemin, hiddenagemax, hiddenetc, createdt,
-				createuserid, updatedt, updateuserid, deleteflag);
+				no, companyno, postal, address, nearline, nearstationkj, addresscd,
+				jobsmallcd1, jobsmallcd2, jobsmallcd3, joblargecd1, joblargecd2, joblargecd3,
+				job, detail, koyoukeitaicd, hakencd, koyoukikan, koyoukikankaishi, koyoukikanowari,
+				education, experience, license, agemin, agemax, salaryformcd, salarymin, salarymax,
+				bonus, koutuhi, teate, begintime, endtime, shift, flex, jitan, jikangai, siyoukikan,
+				workdays, nenkanholiday, applicationform, background, bosyunumbers, hiddensex,
+				hiddenagemin, hiddenagemax, hiddenetc, receptiondt, perioddt,
+				createdt, createuserid, updatedt, updateuserid, deleteflag);
 		// 1.3 入力チェック
 		KyujinService service = new KyujinService();
 		if (!service.check(kyujin)) {
@@ -198,14 +215,13 @@ public class KyujinUpdateServlet extends HttpServlet {
 			return;
 		}
 
-		// 1.6　求人票を更新する
+		// 1.6 求人票を更新する
 
 		service.updateKyujin(kyujin);
 
 		// 処理結果メッセージをリクエストに格納する
 
 		request.setAttribute("Staff", staff);
-		// TODO 18/09/30 コメントアウトを解除
 		request.setAttribute("kyujin", kyujin);
 		request.setAttribute("messages", service.getMessages());
 

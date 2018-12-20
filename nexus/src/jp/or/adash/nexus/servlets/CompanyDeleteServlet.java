@@ -18,6 +18,8 @@ import jp.or.adash.nexus.services.CompanyService;
 import jp.or.adash.nexus.services.JobCategoryService;
 
 /**
+ * 企業削除サーブレット
+ * @author mmiyamoto
  * Servlet implementation class CompanyDeleteServlet
  */
 @WebServlet("/web/company-delete")

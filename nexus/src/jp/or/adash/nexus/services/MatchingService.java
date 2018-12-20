@@ -4,11 +4,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import jp.or.adash.nexus.dao.CommentDao;
 import jp.or.adash.nexus.dao.MatchingDao;
 import jp.or.adash.nexus.dao.SaibanDao;
+import jp.or.adash.nexus.entity.Comment;
 import jp.or.adash.nexus.entity.JobSeekerMain;
 import jp.or.adash.nexus.entity.Kyujin;
 import jp.or.adash.nexus.entity.MatchingCase;
+import jp.or.adash.nexus.entity.MatchingSearchParameter;
+import jp.or.adash.nexus.entity.MatchingSearchResult;
 import jp.or.adash.nexus.utils.common.DataCommons;
 import jp.or.adash.nexus.utils.common.MessageCommons;
 import jp.or.adash.nexus.utils.dao.Transaction;
@@ -110,9 +114,11 @@ public class MatchingService {
 		}
 
 		//入社日の値が入力されているか
-		if (matching.getEnterdt() == null) {
-			messages.add("入社日が入力されていません。");
-			result = false;
+		if (matching.getAssessment().equals("1")) {
+			if (matching.getEnterdt() == null) {
+				messages.add("入社日が入力されていません。");
+				result = false;
+			}
 		}
 		// 評価の値が入力されているか
 		if (matching.getAssessment().equals("")) {
@@ -132,7 +138,7 @@ public class MatchingService {
 	 * @param matching マッチング情報
 	 * @return マッシング情報を登録する。
 	 */
-	public boolean insertMatchingCase(MatchingCase matching) {
+	public boolean insertMatchingCase(MatchingCase matching, Comment comment) {	// comment追加 2018/12/14 T.Ikeda
 		boolean result = false; //1処理結果
 
 		try {
@@ -145,12 +151,27 @@ public class MatchingService {
 			SaibanDao sdao = new SaibanDao(transaction);
 			int id = sdao.getMatching();
 			matching.setId(id);
+			comment.setMatchId(id);									// 追加 2018/12/18 T.Ikeda
 
 			// マッチング事例をDBに登録する
 			MatchingDao dao = new MatchingDao(transaction);
 			int count = dao.insert(matching);
 
 			if (count > 0) {
+				// 1完了メッセージをセットする
+				messages.add(MessageCommons.MSG_REGIST_COMPLETE);
+				result = true;
+			} else {
+				// 1エラーメッセージをセットする
+				messages.add(MessageCommons.MSG_REGIST_FAILURE);
+				result = false;
+			}
+
+			// コメントをDBに登録する　　　　　　　　　　　　　追加 2018/12/14T.Ikeda
+			CommentDao cdao = new CommentDao(transaction);
+			int countC = cdao.insert(comment);
+
+			if (countC > 0) {
 				// 1完了メッセージをセットする
 				messages.add(MessageCommons.MSG_REGIST_COMPLETE);
 				result = true;
@@ -182,7 +203,7 @@ public class MatchingService {
 	 * @param matching
 	 * @return
 	 */
-	public boolean updateMatchingCase(MatchingCase matching) {
+	public boolean updateMatchingCase(MatchingCase matching, Comment comment) {	// comment追加 2018/12/14 T.Ikeda
 		boolean result = false;
 
 		try {
@@ -192,11 +213,25 @@ public class MatchingService {
 			// 1トランザクションを開始する
 			transaction.beginTrans();
 
-			// 1商品単価を取得する
+			// 1マッチング情報を取得する
 			MatchingDao dao = new MatchingDao(transaction);
 			int count = dao.update(matching);
 
 			if (count > 0) {
+				// 1完了メッセージをセットする
+				messages.add(MessageCommons.MSG_UPDATE_COMPLETE);
+				result = true;
+			} else {
+				// 1エラーメッセージをセットする
+				messages.add(MessageCommons.MSG_UPDATE_FAILURE);
+				result = false;
+			}
+
+			// 1コメント情報を取得する　　　　　　　　　　　　　追加 2018/12/14T.Ikeda
+			CommentDao cdao = new CommentDao(transaction);
+			int countC = cdao.update(comment);
+
+			if (countC > 0) {
 				// 1完了メッセージをセットする
 				messages.add(MessageCommons.MSG_UPDATE_COMPLETE);
 				result = true;
@@ -228,8 +263,9 @@ public class MatchingService {
 	 * @param id
 	 * @return
 	 */
-	public MatchingCase getMatching(int id) {
-		MatchingCase matching = null;
+	public MatchingSearchResult getMatching(int id) {
+		MatchingSearchResult matching = null;
+//		Comment matchingComment = null;
 
 		try {
 			// データベース接続を開始する
@@ -237,7 +273,12 @@ public class MatchingService {
 
 			// idを元にマッチング事例を取得
 			MatchingDao dao = new MatchingDao(transaction);
-			matching = dao.select(id);
+			matching = dao.selectV1(id);
+
+//			// マッチングidを元にマッチングコメントを取得
+//			CommentDao cdao = new CommentDao(transaction);
+//			matchingComment = cdao.selectMatching(matchid);
+
 
 		} catch (IOException e) {
 			// エラーメッセージをセットする
@@ -249,6 +290,37 @@ public class MatchingService {
 		return matching;
 	}
 
+	// 2018/12/17 kitayama 新規作成
+	/**
+	 * マッチング事例を取得する
+	 * @param msp 検索条件オブジェクト
+	 * @return マッチング事例のListオブジェクト
+	 */
+	public List<MatchingSearchResult> getMatchingV2(MatchingSearchParameter msp) {
+		List<MatchingSearchResult> matching = new ArrayList<MatchingSearchResult>();
 
+		try {
+			// データベース接続を開始する
+			transaction.open();
+
+			// idを元にマッチング事例を取得
+			MatchingDao dao = new MatchingDao(transaction);
+			matching = dao.selectV2(msp);
+
+			// 取得行数がない場合、メッセージをセットする
+			if(matching.isEmpty() ) {
+				messages.add("一致する項目はありませんでした");
+			}
+
+		} catch (IOException e) {
+			// エラーメッセージをセットする
+			messages.add(MessageCommons.ERR_DB_CONNECT);
+		} finally {
+			// データベース接続を終了する
+			transaction.close();
+		}
+
+		return matching;
+	}
 
 }

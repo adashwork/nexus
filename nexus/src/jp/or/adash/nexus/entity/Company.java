@@ -14,7 +14,7 @@ public class Company {
 	* nearStation	最寄駅
 	* companyUrl	事業所URL
 	* jobCategorySmallCd	産業小分類コード
-	* jobCategoryMiddleCd	産業中分類コード
+	* jobCategoryMiddleCd   産業中分類コード
 	* jobCategoryLargeCd	産業大分類コード
 	* capital	資本金
 	* employees	従業員数
@@ -180,7 +180,7 @@ public class Company {
 	 * 産業中分類コードを取得する
 	 * @return jobCategorySmallCd
 	 */
-	public String getJobCategoryMiddleCd() {
+	public String getjobCategoryMiddleCd() {
 		return jobCategoryMiddleCd;
 	}
 
@@ -196,6 +196,7 @@ public class Company {
 	 * 資本金を取得する
 	 * @return capital
 	 */
+
 	public Integer getCapital() {
 		return capital;
 	}
@@ -258,7 +259,7 @@ public class Company {
 
 	/**
 	 * 担当者emailを取得する
-	 * @return tantouEmail
+	 * @return tantouMail
 	 */
 	public String getTantouMail() {
 		return tantouMail;

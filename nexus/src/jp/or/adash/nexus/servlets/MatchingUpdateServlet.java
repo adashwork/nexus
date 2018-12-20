@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import jp.or.adash.nexus.entity.Comment;
 import jp.or.adash.nexus.entity.MatchingCase;
 import jp.or.adash.nexus.entity.Staff;
 import jp.or.adash.nexus.services.MatchingService;
@@ -20,7 +21,7 @@ import jp.or.adash.nexus.services.MatchingService;
  * マッチング情報更新のためのサーブレット
  * @author pgjavaAT
  */
-@WebServlet("/web/match-update")
+@WebServlet("/web/matching-update")
 public class MatchingUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -40,36 +41,49 @@ public class MatchingUpdateServlet extends HttpServlet {
 		Staff staff = (Staff) session.getAttribute("UserData");
 
 		int id = 0;
-		String testid = request.getParameter("id");
-		if (request.getParameter("no") != null) {
-			id = Integer.parseInt(request.getParameter("no"));
+//		String testid = request.getParameter("nohidden");           2018/12/20 T.Ikeda
+		if (request.getParameter("nohidden") != null) {
+			id = Integer.parseInt(request.getParameter("nohidden"));
 		}
 		String companyNo = request.getParameter("companyNo");		// 追加・修正 2018/12/11.12 T.Ikeda
-		String kyujinno = request.getParameter("kyujinno");
-		String jobseekerid = request.getParameter("jobseekerid");
-		String staffid = request.getParameter("staffid");
-		Date interviewdt = null;
+		String kyujinNo = request.getParameter("kyujinno");
+		String jobseekerId = request.getParameter("jobseekerid");
+		String staffId = request.getParameter("staffid");
+		Date interviewDt = null;
+
+		Comment comment = null;									// 追加 2018/12/11 T.Ikeda
+
 		try {
-			interviewdt = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("interviewdt"));
+			interviewDt = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("interviewdt"));
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		Date enterdt = null;
+		Date enterDt = null;
 		try {
-			enterdt = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("enterdt"));
+			enterDt = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("enterdt"));
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 		String assessment = request.getParameter("assessment");
 		String note = request.getParameter("note");
-		Date createdt = null;
-		String createuserid = request.getParameter("createuserid");
-		Date updatedt = null;
-		String updateuserid = staff.getId();
+		Date createDt = null;
+		String createUserId = request.getParameter("createuserid");
+		Date updateDt = null;
+		String updateUserId = staff.getId();
+		Integer matchId = id;									// 追加 2018/12/20 T.Ikeda
+		String genre = "4";	 // 1:求職者情報　2:企業情報　3:求人情報　4:マッチング情報    追加 2018/12/20 T.Ikeda
+		String important = request.getParameter("important");	// 追加,修正 2018/12/20 T.Ikeda
+		String title = request.getParameter("title");			// 追加,修正 2018/12/20 T.Ikeda
 
 
-		MatchingCase matching = new MatchingCase(id, companyNo, kyujinno, jobseekerid, staffid, interviewdt, enterdt,
-				assessment, note, createdt, createuserid, updatedt, updateuserid);		// companyNo追加・修正 2018/12/11.12 T.Ikeda
+		//1.2 マッチング結果オブジェクトを作成
+		MatchingCase matching = new MatchingCase(id, companyNo, kyujinNo, jobseekerId, staffId, interviewDt, enterDt,
+				assessment, note, createDt, createUserId, updateDt, updateUserId);		// companyNo追加・修正 2018/12/11.12 T.Ikeda
+
+		// マッチングコメントオブジェクトを作成                 // 追加 2018/12/20 T.Ikeda
+		comment = new Comment(0, companyNo, kyujinNo, jobseekerId, staffId, matchId,
+				genre, important, title, note, createDt, createUserId,
+				updateDt, updateUserId);
 
 		MatchingService service = new MatchingService();
 
@@ -77,6 +91,7 @@ public class MatchingUpdateServlet extends HttpServlet {
 			//入力チェックでエラーがあった場合、エラーメッセージをセット
 			request.setAttribute("Staff", staff);
 			request.setAttribute("matching", matching);
+			request.setAttribute("comment", comment);
 			request.setAttribute("messages", service.getMessages());
 
 			//JSPにフォワード
@@ -86,11 +101,12 @@ public class MatchingUpdateServlet extends HttpServlet {
 			return;
 		}
 
-		service.updateMatchingCase(matching);
+		service.updateMatchingCase(matching, comment);
 
 		//処理結果メッセージをリクエストに格納する
 		request.setAttribute("Staff", staff);
 		request.setAttribute("matching", matching);
+		request.setAttribute("comment", comment);
 		request.setAttribute("messages", service.getMessages());
 
 		//1.8 JSPにフォワード

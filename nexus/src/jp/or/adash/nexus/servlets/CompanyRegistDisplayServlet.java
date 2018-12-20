@@ -15,6 +15,8 @@ import jp.or.adash.nexus.entity.Staff;
 import jp.or.adash.nexus.services.JobCategoryService;
 
 /**
+ * 企業の新規登録画面を表示するサーブレット
+ * @author mmiyamoto
  * Servlet implementation class CompanyRegistDisplayServlet
  */
 @WebServlet("/web/company-registdisp")
@@ -45,6 +47,10 @@ public class CompanyRegistDisplayServlet extends HttpServlet {
 
 		//業種分類リストをリクエストに格納する
 		request.setAttribute("JCLargeList", JCLlist);
+
+
+		//新規登録中か編集中か
+		request.setAttribute("status", "regist");
 
 
 

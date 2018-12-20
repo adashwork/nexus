@@ -52,51 +52,8 @@
 }
 </style>
 <title>企業情報</title>
-</head>
 <body>
-	<!-- ヘッダー　-->
-	<header>
-		<section>
-			<h1 class="logo">
-				<a href="/nexus/web/staff-top"><img
-					src="../css/TryNexus-Logo.png" width="97" height="70"
-					alt="TryNexus" /></a>
-			</h1>
-			/*
-			<nav>
-				<ul class="mainnavi">
-					<li><a href="/nexus/web/job-search"><i class="fas fa-home"></i>検索</a></li>
-					<li><a href="/nexus/web/jobseeker-list"><i
-							class="fas fa-search"></i>登録&amp;閲覧</a>
-						<ul class="drop-menu">
-							<li><a href="/nexus/web/kyujin-disp">求人情報<i
-									class="fas fa-angle-right"></i></a></li>
-							<li><a href="/nexus/web/jobseeker-list">求職者情報<i
-									class="fas fa-angle-right"></i></a></li>
-							<li><a href="/nexus/web/match-disp">マッチング登録<i
-									class="fas fa-angle-right"></i></a></li>
-						</ul></li>
-					<c:if test="${Staff.authority == 1}">
-						<li><a href="/nexus/web/account-list"><i
-								class="far fa-bookmark"></i>管理</a></li>
-					</c:if>
-				</ul>
-			</nav>
-			*/
-			<div class="user">
-				<div class="user__wrapper">
-					<div class="user__name">
-						<a href="#"><c:out value="${ Staff.name }" /><i
-							class="fas fa-ellipsis-v"></i></a>
-						<ul class="drop-menu">
-							<li><a href="/nexus/web/logout">ログアウト<i
-									class="fas fa-angle-right"></i></a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</section>
-	</header>
+	<%@ include file="/header.jsp"%>
 	<main>
 	<h2>企業情報</h2>
 	<ul>
@@ -111,11 +68,11 @@
 
 
 				<tr>
-					<th>事業所番号</th>
-					<td><c:if test="${ company.companyNo == null }">
+					<th>事業所番号(ハイフンあり) [必須] </th>
+					<td><c:if test="${ status == 'regist' }">
 							<input type="text" name="companyno"
-								value="${ company.companyNo }" />
-						</c:if> <c:if test="${ company.companyNo != null }">
+								value="${ company.companyNo }"   />
+						</c:if> <c:if test="${ status != 'regist' }">
 
 							<c:out value="${ company.companyNo }" />
 							<input type="hidden" name="companyno"
@@ -130,23 +87,23 @@
 				</tr>
 
 				<tr>
-					<th>事業所名</th>
+					<th>事業所名 [必須]</th>
 					<td><input type="text" name="companyname"
 						value="${ company.companyName }" /></td>
 				</tr>
 				<tr>
-					<th>事業所名(カナ)</th>
+					<th>事業所名(カナ) [必須]</th>
 					<td><input type="text" name="companykana"
 						value="${ company.companyKana }" /></td>
 				</tr>
 				<tr>
-					<th>事業所郵便番号</th>
-					<td><input type="text" name="companypostal"
+					<th>事業所郵便番号 (123-4567)</th>
+					<td><input id="postal" type="text" name="companypostal"
 						value="${ company.companyPostal }" /></td>
 				</tr>
 				<tr>
 					<th>事業所所在地</th>
-					<td><input type="text" name="companyplace"
+					<td><input id="address" type="text" name="companyplace"
 						value="${ company.companyPlace }" /></td>
 				</tr>
 				<tr>
@@ -163,6 +120,7 @@
 				<tr>
 					<th>産業大分類コード</th>
 					<td><select id="largecd" name="jobcategorylargecd">
+							<option value=""></option>
 							<c:forEach var="JCL" items="${ JCLargeList }">
 
 								<option value="${ JCL.largecd }"
@@ -174,10 +132,10 @@
 				</tr>
 				<tr>
 					<th>産業中分類コード</th>
-					<td><select  id="middlecd"  name="jobcategorymiddlecd">
+					<td><select id="middlecd" name="jobcategorymiddlecd">
+							<option value=""></option>
 							<c:forEach var="JCM" items="${ JCMiddleList }">
-
-								<option value="${ JCM.largecd }"
+								<option value="${ JCM.middlecd }"
 									<c:if test="${company.jobCategoryMiddleCd == JCM.middlecd }">
 									selected
 									</c:if>>${ JCM.name }</option>
@@ -187,9 +145,10 @@
 				<tr>
 					<th>産業小分類コード</th>
 					<td><select id="smallcd" name="jobcategorysmallcd">
-							<c:forEach var="JCS" items="${ JCSmallList }">
 
-								<option value="${ JCS.largecd }"
+							<option value=""></option>
+							<c:forEach var="JCS" items="${ JCSmallList }">
+								<option value="${ JCS.smallcd }"
 									<c:if test="${company.jobCategorySmallCd == JCS.smallcd }">
 									selected
 									</c:if>>${ JCS.name }</option>
@@ -201,7 +160,7 @@
 				<tr>
 					<th>資本金</th>
 					<td><input type="text" name="capital"
-						value="${ company.capital }" /></td>
+						value="${ company.capital }" />万円</td>
 				</tr>
 				<tr>
 					<th>従業員数</th>
@@ -219,9 +178,9 @@
 					</select></td>
 				</tr>
 				<tr>
-					<th>創業設立年</th>
+					<th>創業設立年 </th>
 					<td><input type="text" name="establishdt"
-						value="${ company.establishDt }" /></td>
+						value="${ company.establishDt }" />年</td>
 				</tr>
 				<tr>
 					<th>担当者課係名/役職名</th>
@@ -261,15 +220,7 @@
 				<tr>
 					<th>担当開拓者ID</th>
 					<td><input type="text" name="tantoustaff_id"
-						<c:if test="${company.companyNo == null}">
-							value="${Staff.id }"
-						</c:if>
-						<c:if test="${company.companyNo != null}">
-							value="${ company.tantouStaffId }"
-						</c:if> />
-
-
-					</td>
+							value="${ company.tantouStaffId }" /></td>
 				</tr>
 				<tr>
 					<th>営業評価ランクABC</th>
@@ -292,13 +243,13 @@
 
 
 			<button type="button" class="main-b"
-				onClick="location.href='./job-search'" tabindex="62">求人一覧に戻る</button>
+				onClick="location.href='./companysearch'" tabindex="62">企業検索に戻る</button>
 
-			<c:if test="${ company.companyNo == null }">
+			<c:if test="${ status == 'regist' }">
 				<button type="submit" id="company-regist" class="main-b"
 					onclick="MovePages(this)" tabindex="61">登録</button>
 			</c:if>
-			<c:if test="${ company.companyNo != null }">
+			<c:if test="${ status != 'regist' }">
 				<button type="submit" id="company-edit" class="main-b"
 					onclick="MovePages(this)" tabindex="61">更新</button>
 				<button type="submit" id="company-delete" class="main-b2"
@@ -356,8 +307,10 @@
 		<small>Copyright(C) 2009有限責任事業組合 大阪職業教育協働機構(A'ワーク創造館) All
 			Rights Reserved.</small>
 	</footer>
-
 	<script src="js/kalendae.standalone.js" type="text/javascript"
 		charset="utf-8"></script>
+	<script src="../js/jobcategorypulldown.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="../js/postcode.js" type="text/javascript" charset="utf-8"></script>
 </body>
 </html>

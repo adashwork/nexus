@@ -88,26 +88,27 @@ public class CommentDao {
 		sql.append(" kyujinno = ?,");
 		sql.append(" jobseekerid = ?,");
 		sql.append(" staffid = ?,");
-		sql.append(" matchid = ?,");
+//												sql.append(" matchid = ?,"); 2018/12/20 T.Ikeda
 		sql.append(" genre = ?,");
 		sql.append(" important = ?,");
 		sql.append(" title = ?,");
 		sql.append(" note = ?,");
 		sql.append(" updateuserid = ?");
 		sql.append(" where");
-		sql.append(" id = ?");
+		sql.append(" matchid = ?");
 		try (PreparedStatement ps = this.conn.prepareStatement(sql.toString())) {
 
 			ps.setString(1, comment.getCompanyNo());
 			ps.setString(2, comment.getKyujinNo());
 			ps.setString(3, comment.getJobSeekerId());
 			ps.setString(4, comment.getStaffId());
-			ps.setInt(5, comment.getMatchId());
-			ps.setString(6, comment.getGenre());
-			ps.setString(7, comment.getImportant());
-			ps.setString(8, comment.getTitle());
-			ps.setString(9, comment.getNote());
-			ps.setInt(10, comment.getId());
+//														ps.setInt(5, comment.getMatchId()); 2018/12/20 T.Ikeda
+			ps.setString(5, comment.getGenre());
+			ps.setString(6, comment.getImportant());
+			ps.setString(7, comment.getTitle());
+			ps.setString(8, comment.getNote());
+			ps.setString(9, comment.getUpdateUserId());
+			ps.setInt(10, comment.getMatchId());
 
 			// SQL文を実行する
 			count = ps.executeUpdate();
@@ -167,6 +168,8 @@ public class CommentDao {
 	}
 
 	/**
+	 * ※このメソッドは使わなくなりました。
+	 *
 	 * companyNoを元に企業コメント情報のデータを取得する
 	 * @param companyNo
 	 * @return List<Comment> コメントの入ったリストを取得する
@@ -180,6 +183,7 @@ public class CommentDao {
 		sql.append(" select *  ");
 		sql.append(" from comment  ");
 		sql.append(" where companyno = ? ");
+		sql.append("  ORDER BY  important desc, createdt desc  ");
 		try (PreparedStatement ps = this.conn.prepareStatement(sql.toString())) {
 			ps.setString(1, companyNo);
 
@@ -215,5 +219,133 @@ public class CommentDao {
 	}
 
 
+
+	/**
+	 * コメントを登録する
+	 * @param comment コメントオブジェクト
+	 * @return	count 登録行数
+	 * @throws IOException
+	 */
+	public int insertV2(Comment comment) throws IOException {
+		int count = 0;
+
+		// SQL文を生成する
+		StringBuffer sql = new StringBuffer();
+		// INSERT句
+		sql.append(" INSERT INTO");
+		sql.append(" comment");
+
+		sql.append(" ( ");
+
+		sql.append(" id ");
+		sql.append(",companyno");
+		sql.append(",kyujinno");
+		sql.append(",jobseekerid");
+		sql.append(",staffid");
+		sql.append(",matchid");
+		sql.append(",genre");
+		sql.append(",important");
+		sql.append(",title");
+		sql.append(",note");
+		sql.append(",createuserid");
+		sql.append(",updateuserid");
+
+		sql.append(")");
+
+		// VALUE句
+		sql.append(" VALUES (");
+
+		sql.append(" ?");				// id
+		sql.append(",NULLIF(?, '')");	// companyno
+		sql.append(",NULLIF(?, '')");	// kyujinno
+		sql.append(",NULLIF(?, '')");	// jobseekerid
+		sql.append(",NULLIF(?, '')");	// staffid
+		sql.append(",NULLIF(?, -1)");	// matchid
+		sql.append(",NULLIF(?, '')");	// genre
+		sql.append(",NULLIF(?, '')");	// important
+		sql.append(",NULLIF(?, '')");	// title
+		sql.append(",NULLIF(?, '')");	// note
+		sql.append(",NULLIF(?, '')");	// createuserid
+		sql.append(",NULLIF(?, '')");	// updateuserid
+
+		sql.append(")");
+
+		try (PreparedStatement ps = this.conn.prepareStatement(sql.toString())) {
+			ps.setInt(1, comment.getId());
+			ps.setString(2,comment.getCompanyNo());
+			ps.setString(3,comment.getKyujinNo());
+			ps.setString(4,comment.getJobSeekerId());
+			ps.setString(5,comment.getStaffId());
+			ps.setInt(6,comment.getMatchId());
+			ps.setString(7,comment.getGenre());
+			ps.setString(8,comment.getImportant());
+			ps.setString(9,comment.getTitle());
+			ps.setString(10,comment.getNote());
+			ps.setString(11,comment.getCreateUserId());
+			ps.setString(12,comment.getUpdateUserId());
+
+			// SQL文を実行する
+			count = ps.executeUpdate();
+		} catch (SQLException e) {
+			throw new IOException(e);
+		}
+
+		return count;
+	}
+
+	/**
+	 * コメントを更新する
+	 * @param comment コメントオブジェクト
+	 * @return count 更新した行数
+	 * @throws IOException
+	 */
+	public int updateV2(Comment comment) throws IOException {
+		int count = 0;
+
+		// SQL文を生成する
+		StringBuffer sql = new StringBuffer();
+		// UPDATE句
+		sql.append(" UPDATE");
+		sql.append(" comment");
+		sql.append(" SET");
+
+		// VALUES
+		sql.append(" companyno = 	?");
+		sql.append(",kyujinno = 	?");
+		sql.append(",jobseekerid = 	?");
+		sql.append(",staffid = 		?");
+		sql.append(",matchid = 		NULLIF(?, -1)");
+		sql.append(",genre = 		?");
+		sql.append(",important = 	?");
+		sql.append(",title = 		?");
+		sql.append(",note = 		?");
+		sql.append(",updateuserid = ?");
+		sql.append(",updatedt = current_timestamp()");
+
+		// WHERE句
+		sql.append(" WHERE");
+		sql.append(" id = ?");
+
+		try (PreparedStatement ps = this.conn.prepareStatement(sql.toString())) {
+
+			ps.setString(1, comment.getCompanyNo());
+			ps.setString(2, comment.getKyujinNo());
+			ps.setString(3, comment.getJobSeekerId());
+			ps.setString(4, comment.getStaffId());
+			ps.setInt(5, comment.getMatchId());
+			ps.setString(6, comment.getGenre());
+			ps.setString(7, comment.getImportant());
+			ps.setString(8, comment.getTitle());
+			ps.setString(9, comment.getNote());
+			ps.setString(10, comment.getUpdateUserId());
+
+			// SQL文を実行する
+			count = ps.executeUpdate();
+		} catch(SQLException e) {
+			throw new IOException(e);
+		}
+
+		return count;
+	}
 
 }

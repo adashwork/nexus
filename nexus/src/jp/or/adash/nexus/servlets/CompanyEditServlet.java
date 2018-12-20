@@ -1,6 +1,7 @@
 package jp.or.adash.nexus.servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -20,33 +21,37 @@ import jp.or.adash.nexus.services.JobCategoryService;
 import jp.or.adash.nexus.utils.common.DataCommons;
 
 /**
+ * 企業更新サーブレット
+ * (更新がクリックされたときに呼び出されるサーブレット)
+ * @author mmiyamoto
  * Servlet implementation class CompanyEditServlet
  */
 @WebServlet("/web/company-edit")
 public class CompanyEditServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public CompanyEditServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public CompanyEditServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		HttpSession session = request.getSession(true);
 		Staff staff = (Staff) session.getAttribute("UserData");
 
+		//エラーが発生すればfalseにする
+		boolean parameterGetError = true;
+		//後でエラーメッセージにaddAllする
+		List<String> parameterErrorMessage = new ArrayList<>();
 
-
-
-
-		//事業所番号の記入がなければ、独自の事業所番号を生成する
+		//パラメーターを取得する
 		String companyNo = request.getParameter("companyno");
 
 		String corporateNumber = request.getParameter("corporatenumber");
@@ -59,9 +64,21 @@ public class CompanyEditServlet extends HttpServlet {
 		String jobCategorySmallCd = request.getParameter("jobcategorysmallcd");
 		String jobCategoryMiddleCd = request.getParameter("jobcategorymiddlecd");
 		String jobCategoryLargeCd = request.getParameter("jobcategorylargecd");
-		Integer capital = DataCommons.parseInteger(request.getParameter("capital"));
+		Integer capital = null;
+		try{
+			capital = DataCommons.parseInteger(request.getParameter("capital"));
+		}catch(NumberFormatException e) {
+			parameterGetError = false;
+			parameterErrorMessage.add("資本金は半角数字で入力してください");
+		}
 		String employees = request.getParameter("employees");
-		Integer establishDt = DataCommons.parseInteger(request.getParameter("establishdt"));
+		Integer establishDt = null;
+		try{
+			establishDt = DataCommons.parseInteger(request.getParameter("establishdt"));
+		}catch(NumberFormatException e) {
+			parameterGetError = false;
+			parameterErrorMessage.add("創設年は半角数字4文字で入力してください");
+		}
 		String tantouYakushoku = request.getParameter("tantouyakushoku");
 		String tantou = request.getParameter("tantou");
 		String tantouKana = request.getParameter("tantoukana");
@@ -69,7 +86,7 @@ public class CompanyEditServlet extends HttpServlet {
 		String tantouFax = request.getParameter("tantoufax");
 		String tantouEmail = request.getParameter("tantouemail");
 		String tantouNote = request.getParameter("tantounote");
-		String tantouStaffId = request.getParameter("tantoustaffid");
+		String tantouStaffId = request.getParameter("tantoustaff_id");
 		String salesRank = request.getParameter("salesrank");
 		String salesNote = request.getParameter("salesnote");
 		Date createDt = null;
@@ -79,23 +96,19 @@ public class CompanyEditServlet extends HttpServlet {
 		String deletefFag = "0";
 
 		Company company = new Company(companyNo, corporateNumber, companyName, companyKana, companyPostal, companyPlace,
-				nearStation, companyUrl, jobCategorySmallCd, jobCategoryMiddleCd, jobCategoryLargeCd, capital, employees, establishDt,
+				nearStation, companyUrl, jobCategorySmallCd, jobCategoryMiddleCd, jobCategoryLargeCd, capital,
+				employees, establishDt,
 				tantouYakushoku, tantou, tantouKana, tantouTel, tantouFax, tantouEmail, tantouNote, tantouStaffId,
 				salesRank, salesNote, createDt, null, updateDt, updateUserId, deletefFag);
 
 		CompanyService companyService = new CompanyService();
 
 		//エラーが発生しなかった場合のみ登録処理を行う
-		if (companyService.check(company, false)) {
-
-			//もし事業所番号が未記入なら、独自の事業所番号を発行する
-			if ("".equals(company.getCompanyNo())) {
-				company.setCompanyNo(companyService.createUniqueCompanyNo());
-			}
-
+		if (companyService.check(company, false) && parameterGetError) {
 			//企業情報を更新する
 			boolean registResult = companyService.updateCompany(company);
 		}
+
 
 		// 1.業種分類リストを取得する
 		JobCategoryService JCLservice = new JobCategoryService();
@@ -108,18 +121,15 @@ public class CompanyEditServlet extends HttpServlet {
 		request.setAttribute("JCMiddleList", JCMlist);
 		request.setAttribute("JCSmallList", JCSlist);
 
-
-
-
 		List<Comment> commentList = companyService.getCompanyCommentList(companyNo);
-
 
 		//処理結果メッセージをリクエストに格納する
 
 		request.setAttribute("company", company);
 		request.setAttribute("commentlist", commentList);
 		request.setAttribute("staff", staff);
-		request.setAttribute("messages", companyService.getMessages());
+		parameterErrorMessage.addAll(companyService.getMessages());
+		request.setAttribute("messages", parameterErrorMessage);
 
 		// JSPにフォワード
 		request.getRequestDispatcher("/companyregist.jsp")

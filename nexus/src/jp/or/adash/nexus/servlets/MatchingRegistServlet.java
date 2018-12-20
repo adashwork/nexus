@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import jp.or.adash.nexus.entity.Comment;
 import jp.or.adash.nexus.entity.MatchingCase;
 import jp.or.adash.nexus.entity.Staff;
 import jp.or.adash.nexus.services.MatchingService;
@@ -19,7 +20,7 @@ import jp.or.adash.nexus.services.MatchingService;
 /**
  * Servlet implementation class MaServlet
  */
-@WebServlet("/web/match-regist")
+@WebServlet("/web/matching-regist")
 public class MatchingRegistServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -40,31 +41,18 @@ public class MatchingRegistServlet extends HttpServlet {
 		Staff staff = (Staff) session.getAttribute("UserData");
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		MatchingCase matching = null;
+		Comment comment = null;								// 追加 2018/12/14 T.Ikead
 		MatchingService service = new MatchingService();
 
-		//idが入力されていた場合、そのidのマッチング事例を表示する。
-		if(request.getParameter("id") != null && request.getParameter("id") != "") {
-			Integer id = Integer.parseInt(request.getParameter("id"));
-
-			matching = service.getMatching(id);
-			//処理結果メッセージをリクエストに格納する
-			request.setAttribute("Staff", staff);
-			request.setAttribute("matching", matching);
-			request.setAttribute("messages", service.getMessages());
-
-			//1.8 JSPにフォワード
-			request.getRequestDispatcher("/matchingregist.jsp")
-			.forward(request, response);
-		}
 		String companyNo = request.getParameter("companyNo");		// 追加・修正 2018/12/11.12 T.Ikeda
-		String kyujinno = request.getParameter("kyujinno");
-		String jobseekerid = request.getParameter("jobseekerid");
-		String staffid = request.getParameter("staffid");
-		Date interviewdt = null;
+		String kyujinNo = request.getParameter("kyujinno");
+		String jobSeekerId = request.getParameter("jobseekerid");
+		String staffId = request.getParameter("staffid");
+		Date interviewDt = null;
 		try {
-			interviewdt = sdf.parse(request.getParameter("interviewdt"));
+			interviewDt = sdf.parse(request.getParameter("interviewdt"));
 		} catch (ParseException e) {
-			interviewdt = null;
+			interviewDt = null;
 		}
 		//		request.getParameter("interviewdt");
 		Date enterdt = null;
@@ -76,22 +64,30 @@ public class MatchingRegistServlet extends HttpServlet {
 		//		request.getParameter("enterdt");
 		String assessment = request.getParameter("assessment");
 		String note = request.getParameter("note");
-		Date createdt = null;
-		Date upDatedt = null;
+		Date createDt = null;
+		Date updateDt = null;
 
-		String createuserid = staff.getId();
-		String upDateuserid = staff.getId();
+		String createUserId = staff.getId();
+		String updateUserId = staff.getId();
+		Integer matchId = 0;									// 追加 2018/12/18 T.Ikeda
+		String genre = "4";	 // 1:求職者情報　2:企業情報　3:求人情報　4:マッチング情報    追加,修正 2018/12/17,18 T.Ikeda
+		String important = request.getParameter("important");	// 追加,修正 2018/12/17,18 T.Ikeda
+		String title = request.getParameter("title");			// 追加,修正 2018/12/17,18 T.Ikeda
 
 		//1.2 マッチング結果オブジェクトを作成
-		matching = new MatchingCase(0, companyNo, kyujinno, jobseekerid, staffid, interviewdt, enterdt, assessment, note,
-				createdt,
-				createuserid, upDatedt, upDateuserid);    		// 追加・修正 2018/12/11.12 T.Ikeda
-
+		matching = new MatchingCase(0, companyNo, kyujinNo, jobSeekerId, staffId, interviewDt, enterdt, assessment, note,
+				createDt,
+				createUserId, updateDt, updateUserId);    		// 追加・修正 2018/12/11.12 T.Ikeda
+		// マッチングコメントオブジェクトを作成                 // 追加 2018/12/14 T.Ikeda
+		comment = new Comment(0, companyNo, kyujinNo, jobSeekerId, staffId, matchId,
+				genre, important, title, note, createDt, createUserId,
+				updateDt, updateUserId);
 
 		if (!service.check(matching)) {
 			//入力チェックでエラーがあった場合、エラーメッセージをセット
 			request.setAttribute("Staff", staff);
 			request.setAttribute("matching", matching);
+			request.setAttribute("comment", comment);
 			request.setAttribute("messages", service.getMessages());
 
 			//JSPにフォワード
@@ -101,11 +97,12 @@ public class MatchingRegistServlet extends HttpServlet {
 			return;
 		}
 
-		service.insertMatchingCase(matching);
+		service.insertMatchingCase(matching, comment);
 
 		//処理結果メッセージをリクエストに格納する
 		request.setAttribute("Staff", staff);
 		request.setAttribute("matching", matching);
+		request.setAttribute("comment", comment);
 		request.setAttribute("messages", service.getMessages());
 
 		//1.8 JSPにフォワード

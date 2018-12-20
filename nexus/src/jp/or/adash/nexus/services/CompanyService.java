@@ -15,6 +15,11 @@ import jp.or.adash.nexus.utils.common.MessageCommons;
 import jp.or.adash.nexus.utils.common.StringCommons;
 import jp.or.adash.nexus.utils.dao.Transaction;
 
+/**
+ * 企業に関する処理のクラス
+ * @author mmiyamoto
+ *
+ */
 public class CompanyService {
 
 	String errMsg = null;
@@ -62,7 +67,7 @@ public class CompanyService {
 		if (!"".equals(company.getCompanyNo()) && (newRegist == true)) {
 
 			//既に登録済みかチェック
-			if (getCompanyInfo(company.getCompanyNo()) != null) {
+			if (isRegistCompany(company.getCompanyNo())) {
 				checkResult = false;
 				messages.add("その事業所番号は既に登録済みです");
 			}
@@ -76,6 +81,10 @@ public class CompanyService {
 		}
 
 		//法人番号
+		if (!company.getCorporateNumber().matches("^[0-9]{13}$|^$")) {
+			messages.add("法人番号は半角数字13桁で書いてください");
+			checkResult = false;
+		}
 
 		//事業所名
 		if ("".equals(company.getCompanyName())) {
@@ -105,32 +114,79 @@ public class CompanyService {
 		}
 
 		//事業所所在地
+		if (company.getCompanyPlace().length() > 75) {
+			messages.add("事業所所在地は75文字以内でお願いします");
+			checkResult = false;
+		}
 
 		//最寄駅
+		if (company.getNearStation().length() > 35) {
+			messages.add("事業所所在地は35文字以内でお願いします");
+			checkResult = false;
+		}
 
 		//事業所URL
+		if (company.getCompanyUrl().length() > 100) {
+			messages.add("事業所所在地は100文字以内でお願いします");
+			checkResult = false;
+		}
 
 		//産業小分類コード
-
+		//産業中分類コード
 		//産業大分類コード
 
 		//資本金
+		//オーバーフローしている場合を考慮して、上限値も含む
+		if (company.getCapital() != null) {
+			if (company.getCapital() >= 2147483647) {
+				messages.add("資本金は2147483647万までしか入力できません");
+				checkResult = false;
+			}
+		}
 
 		//従業員数
 
 		//創業設立年
+		if (company.getEstablishDt() != null) {
+			if (company.getEstablishDt() > 9999) {
+				messages.add("創業設立年は9999年までしか入力できません");
+				checkResult = false;
+			}
+		}
 
 		//担当者課係名/役職名
+		if (company.getTantouYakushoku().length() > 28) {
+			messages.add("担当役職は28文字以内でお願いします");
+			checkResult = false;
+		}
 
 		//担当者名
+		if (company.getTantou().length() > 14) {
+			messages.add("担当者名は14文字以内でお願いします");
+			checkResult = false;
+		}
 
 		//担当者名(かな)
 
+		if (!company.getTantouKana().matches("^[ぁ-ん]{0,28}$")) {
+			messages.add("担当者名(かな)は全角ひらがな28文字以内で入力してください");
+			checkResult = false;
+		}
 		//担当者TEL
-
+		if (company.getTantouTel().length() > 20) {
+			messages.add("担当者TELは20文字以内でお願いします");
+			checkResult = false;
+		}
 		//担当者FAX
-
+		if (company.getTantouFax().length() > 20) {
+			messages.add("担当者FAXは20文字以内でお願いします");
+			checkResult = false;
+		}
 		//担当者email
+		if (company.getTantouMail().length() > 50) {
+			messages.add("担当者emailは50文字以内でお願いします");
+			checkResult = false;
+		}
 
 		//担当開拓者ID
 
@@ -154,6 +210,9 @@ public class CompanyService {
 			// トランザクションを開始する
 			transaction.beginTrans();
 
+			if ("".equals(company.getCompanyNo())) {
+				company.setCompanyNo(createUniqueCompanyNo());
+			}
 			CompanyDao companyDao = new CompanyDao(transaction);
 			int count = companyDao.insertCompany(company);
 
@@ -302,6 +361,9 @@ public class CompanyService {
 	}
 
 	/**
+	 * ※コメント機能はコメントサービスに統合されるため
+	 * このメソッドは使わなくなりました。
+	 *
 	 * 企業のコメント一覧を取得する
 	 * @param companyNo
 	 * @return Commentオブジェクト
@@ -331,36 +393,70 @@ public class CompanyService {
 	/**
 	 * 独自のユニークなCompanyNoを取得する
 	 * 頭に「A」を付け加えた13文字の独自companyNoを生成
+	 * Transactionがopenされていることが前提
 	 *
 	 * @return CompanyNo
 	 * @throws IOException
 	 */
 	public String createUniqueCompanyNo() throws IOException {
 		//采番マスタよりデータ取得
+
+		if (transaction.isActive()) {
+			try {
+				SaibanDao saidao = new SaibanDao(transaction);
+				int saiban = saidao.getCompanyInt();
+				String saibanString = String.valueOf(saiban);
+
+				//独自の事業所番号を生成
+				StringBuffer uniqueCompanyNo = new StringBuffer();
+				uniqueCompanyNo.append("A");
+				for (int i = saibanString.length() + 1; i < 11; i++) {
+					uniqueCompanyNo.append("0");
+				}
+				uniqueCompanyNo.append(saibanString);
+				uniqueCompanyNo.insert(4, "-");
+				uniqueCompanyNo.insert(11, "-");
+
+				return uniqueCompanyNo.toString();
+			} catch (IOException e) {
+				messages.add("事業所番号の発行に失敗しました");
+				throw new IOException(e);
+
+			}
+		} else {
+			messages.add("事業所番号発行のための正しい処理が踏まれていません");
+			throw new IOException();
+		}
+
+	}
+
+	/**
+	 * 事業番号を元に、その企業が登録済みか確認する
+	 * @param CompanyNo
+	 * @return ture:登録済み false:未登録
+	 * @throws IOException
+	 */
+	public boolean isRegistCompany(String CompanyNo) {
 		try {
 			transaction.open();
-			SaibanDao saidao = new SaibanDao(transaction);
-			int saiban = saidao.getCompanyInt();
-			String saibanString = String.valueOf(saiban);
-
-			//独自の事業所番号を生成
-			StringBuffer uniqueCompanyNo = new StringBuffer();
-			uniqueCompanyNo.append("A");
-			for (int i = saibanString.length() + 1; i < 11; i++) {
-				uniqueCompanyNo.append("0");
+			CompanyDao companyDao = new CompanyDao(transaction);
+			if (companyDao.isRegistCompany(CompanyNo)) {
+				return true;
 			}
-			uniqueCompanyNo.append(saibanString);
-			uniqueCompanyNo.insert(4, "-");
-			uniqueCompanyNo.insert(11, "-");
-
-			return uniqueCompanyNo.toString();
 		} catch (IOException e) {
-			throw new IOException(e);
+
 		} finally {
 			// データベース接続をを終了する
 			transaction.close();
 		}
+		return false;
 	}
+
+	/**
+	 * 企業情報の検索
+	 * @param cse
+	 * @return companyList
+	 */
 
 	public List<CompanySearchResult> getCompanyList(CompanySearch cse) {
 		List<CompanySearchResult> companyList = new ArrayList<>();

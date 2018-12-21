@@ -97,8 +97,7 @@ public class CompanyRegistServlet extends HttpServlet {
 
 		//企業オブジェクト生成
 		Company company = new Company(companyNo, corporateNumber, companyName, companyKana, companyPostal, companyPlace,
-				nearStation, companyUrl, jobCategorySmallCd, jobCategoryMiddleCd, jobCategoryLargeCd, capital,
-				employees, establishDt,
+				nearStation, companyUrl, jobCategorySmallCd, jobCategoryMiddleCd, jobCategoryLargeCd, capital, employees, establishDt,
 				tantouYakushoku, tantou, tantouKana, tantouTel, tantouFax, tantouEmail, tantouNote, tantouStaffId,
 				salesRank, salesNote, createDt, createuserId, updateDt, updateUserId, deletefFag);
 

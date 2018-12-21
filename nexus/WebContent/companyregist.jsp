@@ -53,11 +53,7 @@
 </style>
 <title>企業情報</title>
 <body>
-<<<<<<< HEAD
-	<%@ include file="/header.jsp"%>
-=======
 	<%@ include file="/header.jsp" %>
->>>>>>> refs/remotes/origin/#196
 	<main>
 	<h2>企業情報</h2>
 	<ul>

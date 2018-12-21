@@ -218,6 +218,7 @@ public class CommentDao {
 
 
 	/**
+	 * 2018/12/20 kitayama 新規作成
 	 * コメントを登録する
 	 * @param comment コメントオブジェクト
 	 * @return	count 登録行数
@@ -291,6 +292,7 @@ public class CommentDao {
 	}
 
 	/**
+	 * 2018/12/20 kitayama 新規作成
 	 * コメントを更新する
 	 * @param comment コメントオブジェクト
 	 * @return count 更新した行数
@@ -307,10 +309,10 @@ public class CommentDao {
 		sql.append(" SET");
 
 		// VALUES
-		sql.append(" companyno = 	?");
-		sql.append(",kyujinno = 	?");
-		sql.append(",jobseekerid = 	?");
-		sql.append(",staffid = 		?");
+		sql.append(" companyno = 	NULLIF(?, '')");
+		sql.append(",kyujinno = 	NULLIF(?, '')");
+		sql.append(",jobseekerid = 	NULLIF(?, '')");
+		sql.append(",staffid = 		NULLIF(?, '')");
 		sql.append(",matchid = 		NULLIF(?, -1)");
 		sql.append(",genre = 		?");
 		sql.append(",important = 	?");
@@ -335,6 +337,7 @@ public class CommentDao {
 			ps.setString(8, comment.getTitle());
 			ps.setString(9, comment.getNote());
 			ps.setString(10, comment.getUpdateUserId());
+			ps.setInt(11, comment.getId());
 
 			// SQL文を実行する
 			count = ps.executeUpdate();

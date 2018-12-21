@@ -134,25 +134,25 @@ public class KyujinDao {
 
 		// SQL文を生成する(求人票②)
 		StringBuffer sql = new StringBuffer();
-		sql.append("insert into kyujin(");
+		sql.append("select  ");
 		sql.append("no, companyno, postal, address, nearline, nearstationkj, addresscd,");
         sql.append("jobsmallcd1, jobsmallcd2, jobsmallcd3, joblargecd1, joblargecd2, joblargecd3,");
         sql.append("job, detail, koyoukeitaicd, hakencd, koyoukikan, koyoukikankaishi, koyoukikanowari,");
         sql.append("education, experience, license, agemin, agemax, salaryformcd, salarymin, salarymax, bonus, koutuhi, teate,");
         sql.append("begintime, endtime, shift, flex, jitan, jikangai, siyoukikan, workdays, nenkanholiday,");
         sql.append("applicationform, background, bosyunumbers,hiddensex, hiddenagemin, hiddenagemax, hiddenetc,");
-        sql.append("receptiondt, perioddt, createuserid, updateuserid, deleteflag,");
-        sql.append(") values (");
-        sql.append("?, ?, ?, ?, ?, ?, ?, ");
-        sql.append("?, ?, ?, ?, ?, ?, ");
-        sql.append("?, ?, ?, ?, ?, ?, ?, ");
-        sql.append("?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ");
-        sql.append("?, ?, ?, ?, ?, ?, ?, ?, ?, ");
-        sql.append("?, ?, ?, ?, ?, ?, ?, ");
-        sql.append("?, ?, ?, ?, ?, ");
-        sql.append(")");
-		sql.append(" from kyujin");
-		sql.append(" where no = ?");
+        sql.append("receptiondt, perioddt, createdt, createuserid, updatedt, updateuserid, deleteflag ");
+//        sql.append(") values (");
+//        sql.append("?, ?, ?, ?, ?, ?, ?, ");
+//        sql.append("?, ?, ?, ?, ?, ?, ");
+//        sql.append("?, ?, ?, ?, ?, ?, ?, ");
+//        sql.append("?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ");
+//        sql.append("?, ?, ?, ?, ?, ?, ?, ?, ?, ");
+//        sql.append("?, ?, ?, ?, ?, ?, ?, ");
+//        sql.append("?, ?, ?, ?, ?, ");
+//        sql.append(")");
+		sql.append(" from kyujin ");
+		sql.append(" where no = ? ");
 		try (PreparedStatement ps = this.conn.prepareStatement(sql.toString())) {
 			ps.setString(1, no);
 
@@ -184,7 +184,7 @@ public class KyujinDao {
 							rs.getString("experience"),
 							rs.getString("license"),
 							rs.getInt("agemin"),
-							rs.getInt("ageman"),
+							rs.getInt("agemax"),
 							rs.getString("salaryformcd"),
 							rs.getInt("salarymin"),
 							rs.getInt("salarymax"),
@@ -197,7 +197,7 @@ public class KyujinDao {
 							rs.getString("flex"),
 							rs.getString("jitan"),
 							rs.getInt("jikangai"),
-							rs.getInt("siyoukika"),
+							rs.getInt("siyoukikan"),
 							rs.getInt("workdays"),
 							rs.getString("nenkanholiday"),
 							rs.getString("applicationform"),
@@ -209,10 +209,10 @@ public class KyujinDao {
 							rs.getString("hiddenetc"),
 							rs.getDate("receptiondt"),
 							rs.getDate("perioddt"),
-							rs.getTimestamp("createdt"),
+							rs.getDate("createdt"),
 							rs.getString("createuserid"),
-							rs.getTimestamp("upDatedt"),
-							rs.getString("upDateuserid"),
+							rs.getDate("updatedt"),
+							rs.getString("updateuserid"),
 							rs.getString("deleteflag"));
 				}
 			}catch(SQLException e) {
@@ -284,7 +284,7 @@ public class KyujinDao {
 									rs.getString("experience"),
 									rs.getString("license"),
 									rs.getInt("agemin"),
-									rs.getInt("ageman"),
+									rs.getInt("agemax"),
 									rs.getString("salaryformcd"),
 									rs.getInt("salarymin"),
 									rs.getInt("salarymax"),
@@ -309,9 +309,9 @@ public class KyujinDao {
 									rs.getString("hiddenetc"),
 									rs.getDate("receptiondt"),
 									rs.getDate("perioddt"),
-									rs.getTimestamp("createdt"),
+									rs.getDate("createdt"),
 									rs.getString("createuserid"),
-									rs.getTimestamp("upDatedt"),
+									rs.getDate("upDatedt"),
 									rs.getString("upDateuserid"),
 									rs.getString("deleteflag")));
 				}

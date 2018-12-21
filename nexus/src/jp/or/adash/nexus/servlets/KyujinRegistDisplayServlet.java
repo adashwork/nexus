@@ -10,11 +10,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import jp.or.adash.nexus.entity.Company;
 import jp.or.adash.nexus.entity.Job;
 import jp.or.adash.nexus.entity.JobCategory;
 import jp.or.adash.nexus.entity.Kyujin;
 import jp.or.adash.nexus.entity.Staff;
 import jp.or.adash.nexus.entity.Todouhuken;
+import jp.or.adash.nexus.services.CompanyService;
 import jp.or.adash.nexus.services.JobCategoryService;
 import jp.or.adash.nexus.services.JobService;
 import jp.or.adash.nexus.services.KyujinService;
@@ -54,13 +56,21 @@ public class KyujinRegistDisplayServlet extends HttpServlet {
 
 		// 1.2 求人コードがある場合、商品情報を取得
 		Kyujin kyujin = null;
+		Company company = null;
 		if (no != null) {
 			KyujinService service = new KyujinService();
 			kyujin = service.getKyujin(no);
+			//求人に事業所番号が登録されている場合、企業情報を取得する
+			if(!"".equals(kyujin.getCompanyno()) && kyujin.getCompanyno() != null){
+				CompanyService companyService = new CompanyService();
+				company = companyService.getCompanyInfo(kyujin.getCompanyno());
+			}
 		}
 
 		// 1.3 リクエストに求人情報をセットする
 		request.setAttribute("kyujin", kyujin);
+		// 企業情報をセットする
+		request.setAttribute("company", company);
 
 		// 1.都道府県リストを取得する
 		TodouhukenService service = new TodouhukenService();

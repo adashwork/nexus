@@ -15,7 +15,7 @@ import jp.or.adash.nexus.services.CommentService;
 /**
  * Servlet implementation class CommentRegistServlet
  */
-@WebServlet("/CommentRegistServlet")
+@WebServlet("/comment-regist")
 public class CommentRegistServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

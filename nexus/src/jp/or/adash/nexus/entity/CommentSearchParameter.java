@@ -11,7 +11,6 @@ public class CommentSearchParameter {
 	 * matchId		マッチング事例ID
 	 */
 	private Integer id;
-
 	private String companyNo;
 	private String kyujinNo;
 	private String staffId;

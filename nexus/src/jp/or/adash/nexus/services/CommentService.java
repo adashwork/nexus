@@ -133,6 +133,7 @@ public class CommentService {
 	 */
 	public List<Comment> commentSearch(CommentSearchParameter csp){
 		List<Comment> commentList = new ArrayList<>();
+		// 受け取った
 
 		Transaction transaction = new Transaction();
 		CommentDao dao;

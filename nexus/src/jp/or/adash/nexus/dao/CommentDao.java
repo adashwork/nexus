@@ -356,29 +356,100 @@ public class CommentDao {
 		List<Comment> commentList = new ArrayList<>();
 		// SQLのWHERE句に条件を追加するためのリスト
 		List<String> whereStr = new ArrayList<String>();
+		// 各項目の？の番号を振るための変数
+		int setFlag = 0;
+		int setFlagCompanyNo = 0;
+		int setFlagKyujinNo = 0;
+		int setFlagStaffId = 0;
+		int setFlagJobSeekerId = 0;
+		int setFlagMatchId = 0;
 
-		if(csp.getId() != null || !csp.getId().equals("")) {
-			whereStr.add("id = ?");
+		// 事業所番号の有無
+		if(csp.getCompanyNo() != null || !csp.getCompanyNo().equals("")) {
+			whereStr.add("companyNo = ?");
+			setFlagCompanyNo = ++setFlag;
 		}
+
+		// 求人NOの有無
+		if(csp.getKyujinNo() != null || !csp.getKyujinNo().equals("")) {
+			whereStr.add("kyujinNo = ?");
+			setFlagKyujinNo = ++setFlag;
+		}
+
+		// 職業紹介者IDの有無
+		if(csp.getStaffId() != null || !csp.getStaffId().equals("")) {
+			whereStr.add("staffId = ?");
+			setFlagStaffId = ++setFlag;
+		}
+
+		// 求職者IDの有無
+		if(csp.getJobSeekerId() != null || !csp.getJobSeekerId().equals("")) {
+			whereStr.add("jobSeekerId = ?");
+			setFlagJobSeekerId = ++setFlag;
+		}
+
+		// マッチング事例IDの有無 : ない場合は呼び出し元サーブレット側で(-1)を代入させている
+		if(csp.getMatchId() != null || csp.getMatchId() != -1) {
+			whereStr.add("matchId = ?");
+			setFlagMatchId = ++setFlag;
+		}
+
 
 		// SQL文の作成
 		StringBuilder sqlSearchComment = new StringBuilder();
-		sqlSearchComment.append("SELECT cmp.companyno, cmp.companyname,jbc.name,cmp.companyplace,cmp.tantou");
+		sqlSearchComment.append("SELECT");
+		sqlSearchComment.append(" id, companyno, kyujinno,");
+		sqlSearchComment.append(" jobseekerid, staffid, matchid, genre,");
+		sqlSearchComment.append(" important, title, note, createdt, createuserid,");
+		sqlSearchComment.append(" updatedt, updateuserid");
+		sqlSearchComment.append(" from comment");
+		sqlSearchComment.append(" where");
+		if(setFlag != 0 ) {
+			sqlSearchComment.append(" and ");
+			sqlSearchComment.append(String.join(" and ", whereStr));
+		}
 
 		try (PreparedStatement ps = conn.prepareStatement(sqlSearchComment.toString())) {
+
+			if(setFlagCompanyNo != 0) {
+				ps.setString(setFlagCompanyNo, csp.getCompanyNo());
+			}
+			if(setFlagKyujinNo != 0) {
+				ps.setString(setFlagKyujinNo, csp.getKyujinNo());
+			}
+			if(setFlagStaffId != 0) {
+				ps.setString(setFlagStaffId, csp.getStaffId());
+			}
+			if(setFlagJobSeekerId != 0) {
+				ps.setString(setFlagJobSeekerId, csp.getJobSeekerId());
+			}
+			if(setFlagMatchId != 0) {
+				// IntegerからStringに変換
+				String matchId = Integer.toString(csp.getMatchId());
+				ps.setString(setFlagMatchId, matchId);
+			}
 
 			// SQLを実行する
 			try (ResultSet rs = ps.executeQuery()) {
 				// ResultSetから1行読み込む
 				while (rs.next()) {
-					// ResultSetからCompanyオブジェクトにデータを詰め直し、リストに格納
-					/*companyList.add(
-							new CompanySearchResult(	rs.getString("companyno"),
-														rs.getString("companyname"),
-														rs.getString("companyplace"),
-														rs.getString("tantou"),
-														rs.getString("name")
-													));*/
+					// ResultSetからCommentオブジェクトにデータを詰め直し、リストに格納
+					commentList.add(
+							new Comment(rs.getInt("id"),				// 備考ID
+										rs.getString("companyno"),		// 事業所番号
+										rs.getString("kyujinno"),		// 求人NO
+										rs.getString("jobseekerid"),	// 求職者ID
+										rs.getString("staffid"),		// 職業紹介者ID
+										rs.getInt("matchid"),			// マッチング事例ID
+										rs.getString("genre"),			// 内容分類
+										rs.getString("important"),		// 重要アラート
+										rs.getString("title"),			// 件名
+										rs.getString("note"),			// 備考
+										rs.getDate("createdt"),			// 新規登録日
+										rs.getString("createuserid"),	// 新規登録ユーザー
+										rs.getDate("updatedt"),			// 最終更新日
+										rs.getString("updateuserid")	// 最終更新ユーザー
+										));
 				}
 			} catch (SQLException e) {
 				throw new IOException(e);

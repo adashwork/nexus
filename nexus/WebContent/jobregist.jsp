@@ -107,8 +107,11 @@
 					<th>産業大分類コード</th>
 					<td><select name="jobcategorylargecd" tabindex="5">
 							<option></option>
-							<c:forEach var="jobcategory" items="${ JCLargelist }">
-								<option value="${ jobcategory.largecd }">${ jobcategory.name }</option>
+							<c:forEach var="jobcategory" items="${ JCLargelist }"
+								varStatus="status">
+								<option value="${ status.index }"
+									<c:if test="${company.jobcategorylargecd == status.index}">selected="selected" </c:if>>
+									${ jobcategory.name }</option>
 							</c:forEach>
 					</select></td>
 				</tr>
@@ -116,8 +119,11 @@
 					<th>産業細分類コード</th>
 					<td><select name="jobcategorysmallcd" tabindex="6">
 							<option></option>
-							<c:forEach var="jobcategory" items="${ JCSmalllist }">
-								<option value="${ jobcategory.smallcd }">${ jobcategory.name }</option>
+							<c:forEach var="jobcategory" items="${ JCSmalllist }"
+								varStatus="status">
+								<option value="${ status.index }"
+									<c:if test="${company.jobcategorysmallcd == status.index}">selected="selected" </c:if>>
+									${ jobcategory.name }</option>
 							</c:forEach>
 					</select></td>
 				</tr>
@@ -144,8 +150,10 @@
 					<th>職種大分類コード１</th>
 					<td><select name="joblargecd1" tabindex="15">
 							<option></option>
-							<c:forEach var="job" items="${ Largelist }">
-								<option value="${ job.largecd }">${ job.name }</option>
+							<c:forEach var="job" items="${ Largelist }" varStatus="status">
+								<option value="${ status.index }"
+									<c:if test="${kyujin.joblargecd1 == status.index}">selected="selected" </c:if>>
+									${ job.name }</option>
 							</c:forEach>
 					</select></td>
 				</tr>
@@ -153,8 +161,10 @@
 					<th>職種細分類コード１</th>
 					<td><select name="jobsmallcd1" tabindex="16">
 							<option></option>
-							<c:forEach var="job" items="${ Smalllist }">
-								<option value="${ job.smallcd }">${ job.name }</option>
+							<c:forEach var="job" items="${ Smalllist }" varStatus="status">
+								<option value="${ status.index }"
+									<c:if test="${kyujin.jobsmallcd1 == status.index}">selected="selected" </c:if>>
+									${ job.name }</option>
 							</c:forEach>
 					</select></td>
 				</tr>
@@ -162,8 +172,10 @@
 					<th>職種大分類コード2</th>
 					<td><select name="joblargecd2" tabindex="17">
 							<option></option>
-							<c:forEach var="job" items="${ Largelist }">
-								<option value="${ job.largecd }">${ job.name }</option>
+							<c:forEach var="job" items="${ Largelist }" varStatus="status">
+								<option value="${ status.index }"
+									<c:if test="${kyujin.joblargecd2 == status.index}">selected="selected" </c:if>>
+									${ job.name }</option>
 							</c:forEach>
 					</select></td>
 				</tr>
@@ -171,8 +183,10 @@
 					<th>職種細分類コード2</th>
 					<td><select name="jobsmallcd2" tabindex="18">
 							<option></option>
-							<c:forEach var="job" items="${ Smalllist }">
-								<option value="${ job.smallcd }">${ job.name }</option>
+							<c:forEach var="job" items="${ Smalllist }" varStatus="status">
+								<option value="${ status.index }"
+									<c:if test="${kyujin.jobsmallcd2 == status.index}">selected="selected" </c:if>>
+									${ job.name }</option>
 							</c:forEach>
 					</select></td>
 				</tr>
@@ -180,8 +194,10 @@
 					<th>職種大分類コード3</th>
 					<td><select name="joblargecd3" tabindex="19">
 							<option></option>
-							<c:forEach var="job" items="${ Largelist }">
-								<option value="${ job.largecd }">${ job.name }</option>
+							<c:forEach var="job" items="${ Largelist }" varStatus="status">
+								<option value="${ status.index }"
+									<c:if test="${kyujin.joblargecd3 == status.index}">selected="selected" </c:if>>
+									${ job.name }</option>
 							</c:forEach>
 					</select></td>
 				</tr>
@@ -190,8 +206,10 @@
 					<td><select name="jobsmallcd3" tabindex="20">
 							<option></option>
 							<c:forEach var="job" items="${ Smalllist }" varStatus="status">
-							<option value="${ status.index }" selected="selected">
-							${ job.name }</option></c:forEach>
+								<option value="${ status.index }"
+									<c:if test="${kyujin.jobsmallcd3 == status.index}">selected="selected" </c:if>>
+									${ job.name }</option>
+							</c:forEach>
 					</select></td>
 				</tr>
 				<tr>
@@ -206,8 +224,10 @@
 					<td><select name="adresscd" tabindex="22">
 							<option></option>
 							<c:forEach var="todouhuken" items="${ list }" varStatus="status">
-							<option value="${ status.index }" selected="selected">
-							${ todouhuken.name }</option></c:forEach>
+								<option value="${ status.index }"
+									<c:if test="${kyujin.todouhuken == status.index}">selected="selected" </c:if>>
+									${ todouhuken.name }</option>
+							</c:forEach>
 					</select></td>
 				</tr>
 				<tr>

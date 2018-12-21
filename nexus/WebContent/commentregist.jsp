@@ -61,7 +61,7 @@
 						<input type="text" name="companyno" value="<c:out value="${ comment.companyNo }" />">
 					</td>
 					<td>
-						<input type="text" name="jobSeekerId" value="<c:out value="${ comment.jobSeekerId }" />">
+						<input type="text" name="jobseekerid" value="<c:out value="${ comment.jobSeekerId }" />">
 					</td>
 				</tr>
 				<tr>
@@ -70,10 +70,10 @@
 				</tr>
 				<tr>
 					<td>
-						<input type="text" name="kyujinNo" value="<c:out value="${ comment.kyujinNo }" />">
+						<input type="text" name="kyujinno" value="<c:out value="${ comment.kyujinNo }" />">
 					</td>
 					<td>
-						<input type="text" name="matchid" value="<c:out value="${ comment.matchid }" />">
+						<input type="text" name="matchid" value="<c:out value="${ comment.matchId }" />">
 					</td>
 				</tr>
 				</thead>

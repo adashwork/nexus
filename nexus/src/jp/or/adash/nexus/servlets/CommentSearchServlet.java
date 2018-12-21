@@ -15,7 +15,8 @@ import jp.or.adash.nexus.entity.CommentSearchParameter;
 import jp.or.adash.nexus.services.CommentService;
 
 /**
- * Servlet implementation class CommentSearchServlet
+ * コメントの検索動作確認用の暫定サーブレット
+ * 本来使用する際は、求職者・求人・企業のページからServiceのcommentSearchを呼び出してもらう
  */
 @WebServlet("/web/comment-search")
 public class CommentSearchServlet extends HttpServlet {
@@ -33,7 +34,7 @@ public class CommentSearchServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		CommentSearchParameter csp = new CommentSearchParameter(1,"aaaaaaaaaaaa","","0001","",-1);
+		CommentSearchParameter csp = new CommentSearchParameter(1,"","","0001","",-1);
 		CommentService cs = new CommentService();
 		List<Comment> commentList = new ArrayList<>();
 		commentList = cs.commentSearch(csp);

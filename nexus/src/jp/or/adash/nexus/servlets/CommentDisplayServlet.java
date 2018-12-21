@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import jp.or.adash.nexus.entity.Comment;
+import jp.or.adash.nexus.services.CommentService;
+
 /**
  * Servlet implementation class CommentDisplayServlet
  */
@@ -20,23 +23,30 @@ public class CommentDisplayServlet extends HttpServlet {
      */
     public CommentDisplayServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		// IDがあったら検索実行、なければ空のcommentオブジェクトを返す
+		// TODO 内容分類選択への対応
+		// TODO 暫定的に入力しているID = 1の削除
+		Comment comment = null;
+
+		int id = 1;
+		CommentService commentService = new CommentService();
+		comment = commentService.commentSearch2(id);
+
+		/*if(request.getParameter("comment") != null && !(request.getParameter("comment").equals(""))) {
+			int id = Integer.parseInt(request.getParameter("comment"));
+			CommentService commentService = new CommentService();
+			comment = commentService.commentSearch2(id);
+		}*/
+		request.setAttribute("comment", comment);
+		request.getRequestDispatcher("/commentregist.jsp").forward(request, response);
+
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
 
 }

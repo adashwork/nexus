@@ -350,9 +350,11 @@ public class CommentDao {
 
 	/**
 	 * 備考（コメント）の一覧取得のためのメソッド
+	 * 与えられたパラメータから該当するものを検索する
 	 * @param CommentSearchParameter
 	 * @return commentList
 	 * @throws IOException
+	 * @author mosco(2018/12/21完了)
 	 */
 	public List<Comment> selectCommentList(CommentSearchParameter csp) throws IOException{
 		// 検索結果のコメント格納リスト
@@ -432,9 +434,7 @@ public class CommentDao {
 				ps.setString(setFlagJobSeekerId, csp.getJobSeekerId());
 			}
 			if(setFlagMatchId != 0) {
-				// IntegerからStringに変換
-				String matchId = Integer.toString(csp.getMatchId());
-				ps.setString(setFlagMatchId, matchId);
+				ps.setInt(setFlagMatchId, csp.getMatchId());
 			}
 
 			// SQLを実行する
@@ -465,10 +465,57 @@ public class CommentDao {
 		} catch (SQLException e) {
 			throw new IOException(e);
 		}
-
-
 		return commentList;
 	}
+
+	/**
+	 * IDから該当するコメントを一件取得
+	 * @param id
+	 * @return Comment
+	 * @throws IOException
+	 * @author mosco(2018/12/21完了)
+	 */
+	public Comment selectComment(int id) throws IOException{
+
+		Comment comment = null;
+		// SQL文の作成
+		StringBuilder sqlSearchComment = new StringBuilder();
+		sqlSearchComment.append("SELECT *");
+		sqlSearchComment.append(" from comment");
+		sqlSearchComment.append(" where id = ?");
+
+		try (PreparedStatement ps = conn.prepareStatement(sqlSearchComment.toString())) {
+			ps.setInt(1, id);
+
+			// SQLを実行する
+			try (ResultSet rs = ps.executeQuery()) {
+				while (rs.next()) {
+				comment =
+						new Comment(1,		// rs.getInt("id"),				// 備考ID
+								rs.getString("companyno"),		// 事業所番号
+								rs.getString("kyujinno"),		// 求人NO
+								rs.getString("jobseekerid"),	// 求職者ID
+								rs.getString("staffid"),		// 職業紹介者ID
+								rs.getInt("matchid"),			// マッチング事例ID
+								rs.getString("genre"),			// 内容分類
+								rs.getString("important"),		// 重要アラート
+								rs.getString("title"),			// 件名
+								rs.getString("note"),			// 備考
+								rs.getDate("createdt"),			// 新規登録日
+								rs.getString("createuserid"),	// 新規登録ユーザー
+								rs.getDate("updatedt"),			// 最終更新日
+								rs.getString("updateuserid")	// 最終更新ユーザー
+								);
+				}
+
+				} catch (SQLException e) {
+						throw new IOException(e);
+				}
+			} catch (SQLException e) {
+					throw new IOException(e);
+			}
+			return comment;
+		}
 
 
 }

@@ -1,5 +1,11 @@
 package jp.or.adash.nexus.entity;
 
+/**
+ * コメントを複数件取得する際に、検索条件を格納するためのエンティティ
+ * @author mosco
+ *
+ */
+
 public class CommentSearchParameter {
 
 	/**

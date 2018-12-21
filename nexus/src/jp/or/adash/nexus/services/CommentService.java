@@ -40,6 +40,7 @@ public class CommentService {
 	 * 入力チェック
 	 * @param comment
 	 * @return checkResult true or false
+	 * @author mosco(2018/12/21 完了確認)
 	 */
 	public boolean checkComment(Comment comment) {
 		boolean checkResult = true;
@@ -91,6 +92,7 @@ public class CommentService {
 			int saiban = saidao.getsaiban();
 
 			//とってきた番号を加工し、Kyujin.noにデータ格納
+			// TODO 採番の処理
 			String str = String.format("A" + "%013d", saiban);
 			// comment.setId(str);
 
@@ -99,11 +101,11 @@ public class CommentService {
 
 			if (count > 0) {
 				// 完了メッセージをセットする
-				messages.add("登録が完了しました");
+				messages.add(MessageCommons.MSG_REGIST_COMPLETE);
 
 			} else {
 				// エラーメッセージをセットする
-				messages.add("登録に失敗しました");
+				messages.add(MessageCommons.MSG_REGIST_FAILURE);
 				// 登録に失敗した場合は備考IDを返さない
 				comment.setId(null);
 
@@ -117,7 +119,7 @@ public class CommentService {
 			transaction.rollback();
 
 			// エラーメッセージをセットする
-			messages.add("データベースアクセスに失敗しました。");
+			messages.add(MessageCommons.ERR_DB_CONNECT);
 		} finally {
 			// データベース接続をを終了する
 			transaction.close();
@@ -128,12 +130,13 @@ public class CommentService {
 
 	/**
 	 * 求人・企業・求職者各画面からコメント（備考）一覧を取得する
+	 * パラメータを受け取るのは各呼び出し元のServletにて指定
 	 * @param CommentSearchParameter
 	 * @return commentList
+	 * @author mosco
 	 */
 	public List<Comment> commentSearch(CommentSearchParameter csp){
 		List<Comment> commentList = new ArrayList<>();
-		// 受け取った
 
 		Transaction transaction = new Transaction();
 		CommentDao dao;
@@ -203,6 +206,40 @@ public class CommentService {
 		}
 
 		return result;
+	}
+
+	/**
+	 * 備考IDでコメントを一件取得する
+	 * @param id
+	 * @return comment
+	 * @author mosco(2018/12/21完了)
+	 */
+	public Comment commentSearch2(int id){
+		Comment comment = null;
+
+		Transaction transaction = new Transaction();
+		CommentDao dao;
+		try {
+			// データベース接続を開く
+			transaction.open();
+			// DBから企業情報を取得し、Dao内のメソッドでListに詰め、そのListを返してもらう
+			dao = new CommentDao(transaction);
+			comment = dao.selectComment(id);
+
+		} catch (IOException e) {
+			// DB接続が失敗した場合、例外をキャッチする
+			messages.add(MessageCommons.ERR_DB_CONNECT);
+		} finally {
+			try {
+				// DB接続の終了
+				dao = null;
+				transaction.close();
+			} catch (Exception e) {
+				transaction = null;
+			}
+		}
+
+		return comment;
 	}
 
 }

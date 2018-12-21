@@ -87,8 +87,9 @@
 
 				<p class="m_p">
 					マッチングID<br/>
-				<!--  kitayama 2018/12/14 nameを変更 -->
-				<input type="text" name="matchingid" size=13  value="<c:out value="${ matchingid }" />" >
+				<!-- 2018/12/14 kitayama nameを変更 -->
+				<!-- 2018/12/14 kitayama typeを変更-->
+				<input type="number" name="matchingid" size=13  value="<c:out value="${ matchingid }" />" >
 				</p>
 
 				<p class="m_p">

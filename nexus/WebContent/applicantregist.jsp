@@ -20,7 +20,6 @@
 <link href="../css/footer.css" rel="stylesheet" type="text/css" />
 <link href="../css/job_seeker.css" rel="stylesheet" type="text/css" />
 <link href="../css/applicant_regist.css" rel="stylesheet" type="text/css" />
-<link href="../css/applicantregist_tab.js" rel="stylesheet" type="text/css" />
 
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css">
@@ -32,10 +31,12 @@
 	src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
 <link rel="stylesheet"
 	href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/Base/jquery-ui.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
+
+<script src="js/kalendae.standalone.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
 <script type="text/javascript" src="../js/common.js"></script>
-<!--  <script type="text/javascript" src="../js/applicantregist_tab.js"></script> -->
+<script type="text/javascript" src="../js/applicantregist_tab.js"></script>
 <style>
 #job_seeker {
 	width: 980px;
@@ -110,15 +111,16 @@
 	<div id="job_seeker">
 		<form action="/nexus/web/jobseeker-edit" method="post">
 
-		<ul id="tab_menu1" class="tab_menu">
-           <li><a href="#tab1">個人情報</a></li>
-           <li><a href="#tab2">希望業種</a></li>
-           <li><a href="#tab3">その他</a></li>
+		  <div id="tab-controll" class="tab-menu">
+		<ul>
+           <li id="btn1"><a href="#tab1">個人情報</a></li>
+           <li id="btn2"><a href="#tab2">希望業種</a></li>
+           <li id="btn3"><a href="#tab3">その他</a></li>
         </ul>
+        </div>
 
-	    <div id="tab_content" class="tab_content">
-	    	<section id="page1-1" class="page">
-			<table>
+	    <div id="controll" class="menu">
+			<table id="tab1" class="page">
 				<tr>
 				<th width="20%">ID</th>
 				<td><input type="hidden" name="id"
@@ -299,11 +301,7 @@
 					<td><input type="text" name="nearstation" value="${ info.nearstation }" size="10"/>駅</td>
 				</tr>
 				</table>
-				</section>
-
-
-				<section id="page1-2" class="page">
-				<table>
+				<table id="tab2" class="page">
 				<tr>
 				<th>希望業種1</th>
 					<td><select name="hopejobcategory">
@@ -415,10 +413,8 @@
 						value="${ info.hopeendtime }" /></td>
 				</tr>
 				</table>
-				</section>
 
-				<section id="page1-3" class="page">
-				<table>
+				<table id="tab3" class="page">
 				<tr>
 					<th>その他免許</th>
 					<td><textarea rows="3" cols="80" name="licenseetc"><c:out
@@ -441,14 +437,14 @@
 							value="${ info.tantoustaffid }" /></td>
 				</tr>
 				</table>
-				</section>
 
-			<input type="submit" value="更新" class="main-b">
+			<!--<input type="submit" value="更新" class="main-b">  -->
 		</form>
 		<input class="main-b" type="button"
-			onclick="location.href='/nexus/web/jobseeker-list'" value="一覧に戻る">
+			onclick="location.href='/nexus/web/jobseeker-regist'" value="登録">
 		<input class="main-b" type="button"
-			onclick="location.href='/nexus/web/jobseeker-list'" value="削除">
+			onclick="location.href='/nexus/web/jobseeker-list'" value="一覧に戻る">
+
 </div>
 </main>
 	<!-- フッター　-->
@@ -457,9 +453,6 @@
 			Rights Reserved.</small>
 	</footer>
 
-	<script src="js/kalendae.standalone.js" type="text/javascript"
-		charset="utf-8"></script>
-	<script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
 
 </body>
 </html>

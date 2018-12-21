@@ -5,6 +5,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import jp.or.adash.nexus.entity.Comment;
 import jp.or.adash.nexus.utils.dao.Transaction;
@@ -162,6 +164,57 @@ public class CommentDao {
 		}
 
 		return matchingComment;
+	}
+
+	/**
+	 * ※このメソッドは使わなくなりました。
+	 *
+	 * companyNoを元に企業コメント情報のデータを取得する
+	 * @param companyNo
+	 * @return List<Comment> コメントの入ったリストを取得する
+	 * @throws IOException
+	 */
+	public List<Comment> selectCompanyCommentList(String companyNo)throws IOException {
+		List<Comment> companyCommentList = new ArrayList<Comment>();
+
+		// SQL文を生成する
+		StringBuffer sql = new StringBuffer();
+		sql.append(" select *  ");
+		sql.append(" from comment  ");
+		sql.append(" where companyno = ? ");
+		sql.append("  ORDER BY  important desc, createdt desc  ");
+		try (PreparedStatement ps = this.conn.prepareStatement(sql.toString())) {
+			ps.setString(1, companyNo);
+
+			// SQL文を実行する
+			try (ResultSet rs = ps.executeQuery()) {
+				// 取得結果をリストに格納する
+				while(rs.next()) {
+					companyCommentList.add(new Comment(
+							rs.getInt("id"),
+							rs.getString("companyNo"),
+							rs.getString("kyujinNo"),
+							rs.getString("jobSeekerId"),
+							rs.getString("staffId"),
+							rs.getInt("matchId"),
+							rs.getString("genre"),
+							rs.getString("important"),
+							rs.getString("title"),
+							rs.getString("note"),
+							rs.getDate("createDt"),
+							rs.getString("createUserId"),
+							rs.getDate("updateDt"),
+							rs.getString("updateUserId")
+							));
+				}
+			} catch(SQLException e) {
+				throw new IOException(e);
+			}
+		} catch(SQLException e) {
+			throw new IOException(e);
+		}
+
+		return companyCommentList;
 	}
 
 

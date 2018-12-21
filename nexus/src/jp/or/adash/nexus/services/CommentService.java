@@ -142,7 +142,7 @@ public class CommentService {
 			transaction.open();
 			// DBから企業情報を取得し、Dao内のメソッドでListに詰め、そのListを返してもらう
 			dao = new CommentDao(transaction);
-			// commentList = dao.selectCommentList(csp);
+			commentList = dao.selectCommentList(csp);
 
 		} catch (IOException e) {
 			// DB接続が失敗した場合、例外をキャッチする

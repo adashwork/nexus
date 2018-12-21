@@ -209,7 +209,8 @@
 				</td>
 				<td align="left" width="40%">
 					<span>重要</span>
-					<input type="checkbox" name="inportant" value="">
+					<input type="checkbox" name="inportant" value="1" checked>
+					<input type="checkbox" name="inportant" value="0">
 				</td>
 			</tr>
 			<tr>

@@ -33,11 +33,11 @@ public class CommentSearchServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		CommentSearchParameter csp = new CommentSearchParameter(1,"","","0001","00111",-1);
+		CommentSearchParameter csp = new CommentSearchParameter(1,"aaaaaaaaaaaa","","0001","",-1);
 		CommentService cs = new CommentService();
 		List<Comment> commentList = new ArrayList<>();
 		commentList = cs.commentSearch(csp);
-		request.setAttribute("commentlist",commentList.get(0));
+		request.setAttribute("commentlist",commentList);
 		request.getRequestDispatcher("/commentsearch.jsp").forward(request, response);
 	}
 

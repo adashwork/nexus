@@ -369,47 +369,52 @@ public class CommentDao {
 
 		// 事業所番号の有無
 		if(csp.getCompanyNo() != null && !(csp.getCompanyNo().equals(""))) {
-			whereStr.add("companyNo = ?");
+			whereStr.add("companyno = ?");
 			setFlagCompanyNo = ++setFlag;
 		}
 
 		// 求人NOの有無
 		if(csp.getKyujinNo() != null && !(csp.getKyujinNo().equals(""))) {
-			whereStr.add("kyujinNo = ?");
+			whereStr.add("kyujinno = ?");
 			setFlagKyujinNo = ++setFlag;
 		}
 
 		// 職業紹介者IDの有無
 		if(csp.getStaffId() != null && !(csp.getStaffId().equals(""))) {
-			whereStr.add("staffId = ?");
+			whereStr.add("staffid = ?");
 			setFlagStaffId = ++setFlag;
 		}
 
 		// 求職者IDの有無
 		if(csp.getJobSeekerId() != null && !(csp.getJobSeekerId().equals(""))) {
-			whereStr.add("jobSeekerId = ?");
+			whereStr.add("jobseekerid = ?");
 			setFlagJobSeekerId = ++setFlag;
 		}
 
 		// マッチング事例IDの有無 : ない場合は呼び出し元サーブレット側で(-1)を代入させている
 		if(csp.getMatchId() != null && csp.getMatchId() != -1) {
-			whereStr.add("matchId = ?");
+			whereStr.add("matchid = ?");
 			setFlagMatchId = ++setFlag;
 		}
 
 
 		// SQL文の作成
 		StringBuilder sqlSearchComment = new StringBuilder();
-		sqlSearchComment.append("SELECT");
-		sqlSearchComment.append(" id, companyno, kyujinno,");
-		sqlSearchComment.append(" jobseekerid, staffid, matchid, genre,");
-		sqlSearchComment.append(" important, title, note, createdt, createuserid,");
-		sqlSearchComment.append(" updatedt, updateuserid");
+		sqlSearchComment.append("SELECT *");
+		// sqlSearchComment.append(" id, companyno, kyujinno,");
+		// sqlSearchComment.append(" jobseekerid, staffid, matchid, genre,");
+		// sqlSearchComment.append(" important, title, note, createdt, createuserid,");
+		// sqlSearchComment.append(" updatedt, updateuserid");
 		sqlSearchComment.append(" from comment");
-		sqlSearchComment.append(" where");
 		if(setFlag != 0 ) {
-			sqlSearchComment.append(" and ");
-			sqlSearchComment.append(String.join(" and ", whereStr));
+			sqlSearchComment.append(" where ");
+			sqlSearchComment.append(whereStr.get(0));
+			if(setFlag >= 1) {
+				for(int i = 1; i <= setFlag-1; i++) {
+					sqlSearchComment.append(" and ");
+					sqlSearchComment.append(whereStr.get(i));
+				}
+			}
 		}
 
 		try (PreparedStatement ps = conn.prepareStatement(sqlSearchComment.toString())) {

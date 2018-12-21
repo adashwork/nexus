@@ -209,8 +209,12 @@
 				</td>
 				<td align="left" width="40%">
 					<span>重要</span>
-					<input type="checkbox" name="inportant" value="1" checked>
-					<input type="checkbox" name="inportant" value="0">
+					<c:if test="${ comment.important == 1 }">
+						<input type="checkbox" name="important" value="1" checked>
+					</c:if>
+					<c:if test="${ comment.important == 0 || comment.important == null }">
+						<input type="checkbox" name="important" value="1">
+					</c:if>
 				</td>
 			</tr>
 			<tr>

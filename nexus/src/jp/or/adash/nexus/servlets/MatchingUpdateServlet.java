@@ -73,6 +73,9 @@ public class MatchingUpdateServlet extends HttpServlet {
 		Integer matchId = id;									// 追加 2018/12/20 T.Ikeda
 		String genre = "4";	 // 1:求職者情報　2:企業情報　3:求人情報　4:マッチング情報    追加 2018/12/20 T.Ikeda
 		String important = request.getParameter("important");	// 追加,修正 2018/12/20 T.Ikeda
+		if (important == null) {
+			important = "0";
+		}
 		String title = request.getParameter("title");			// 追加,修正 2018/12/20 T.Ikeda
 
 

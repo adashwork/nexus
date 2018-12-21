@@ -153,7 +153,7 @@
 							</form>
 						</td>
 						<td><c:out value="${ SimpleKyujin.no }" /></td>
-						<td><c:out value="${ SimpleKyujin.companyname }" /></td>
+						<td><c:out value="${ companyMap[SimpleKyujin.companyname].companyName }" /></td>
 						<td><c:out value="${ SimpleKyujin.address }" /></td>
 						<td><c:out value="${ SimpleKyujin.nearstation }" /></td>
 						<td><c:out value="${ SimpleKyujin.job }" /></td>

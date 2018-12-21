@@ -47,27 +47,35 @@
 </head>
 
 <body>
-
+<form method="post" action="">
 <div id="container">
 			<h3>フリーコメント1</h3>
 				<div class="comment">
 				<table class="c1">
-					<tr>
+				<tr>
 					<th>企業番号</th>
 					<th>求職者ID</th>
-					</tr>
-					<tr>
-					<td><input type="text" name=""></td>
-					<td><input type="text" name=""></td>
-					</tr>
-					<tr>
+				</tr>
+				<tr>
+					<td>
+						<input type="text" name="companyno" value="<c:out value="${ comment.companyNo }" />">
+					</td>
+					<td>
+						<input type="text" name="jobSeekerId" value="<c:out value="${ comment.jobSeekerId }" />">
+					</td>
+				</tr>
+				<tr>
 					<th>求人番号</th>
 					<th>マッチングID</th>
-					</tr>
-					<tr>
-					<td><input type="text" name=""></td>
-					<td><input type="text" name=""></td>
-					</tr>
+				</tr>
+				<tr>
+					<td>
+						<input type="text" name="kyujinNo" value="<c:out value="${ comment.kyujinNo }" />">
+					</td>
+					<td>
+						<input type="text" name="matchid" value="<c:out value="${ comment.matchid }" />">
+					</td>
+				</tr>
 				</thead>
 				<tbody>
 				<tr>
@@ -75,47 +83,56 @@
 					<th>タイトル表示</th>
 				</tr>
 				<tr>
-					<td><select name="hopejobcategory">
-					<option value="">-</option>
-					<option value="">a</option>
-					<option value="">b</option>
-					<option value="">c</option>
-					<option value="">d</option>
-					</select></td>
-				 	 <td><input type="text" name=""></td>
-				 	 <td><input type="checkbox" name="">重要</td>
+					<td>
+						<select name="genre">
+							<option value="0">えらんでください</option>
+							<option value="1">求職者</option>
+							<option value="2">企業</option>
+							<option value="3">求人</option>
+							<option value="4">マッチング</option>
+							<option value="9">その他</option>
+						</select>
+					</td>
+				 	 <td>
+				 		 <input type="text" name="title" value="<c:out value="${ comment.title }" />">
+				 	 </td>
+				 	 <td>
+				 	 	<input type="checkbox" name="">重要
+				 	 </td>
 				</tr>
-				</tbody>
-				<tfoot>
+			</tbody>
+			<tfoot>
 				<tr>
 					<th>カテゴリー表示</th>
 				</tr>
 				<tr>
-					<td><textarea rows="3" cols="40" name="career"><c:out
-								value="${ info.careea }" /></textarea></td>
+					<td>
+						<textarea rows="3" cols="40" name="note">
+							<c:out value="${ comment.note }" />
+						</textarea>
+					</td>
 				</tr>
 				</tfoot>
 		</table>
        <div class="down">
 		<div class="box">
-			<p>登録ID：</p>
-			<p>更新ID：</p>
+			<p>登録ID：<c:out value="${ comment.createUserId }" /></p>
+			<p>更新ID：<c:out value="${ comment.updateUserId }" /></p>
 	  	</div>
  		<div class="box">
-			<p>登録日:</p>
-		  	<p>更新日：</p>
+			<p>登録日:<c:out value="${ comment.createDt }" /></p>
+		  	<p>更新日:<c:out value="${ comment.createDt }" /></p>
 	    </div>
   </div>
 </div>
-<form method="get" action="/nexus/web/account-edit">
-		<input class="main-b" type="button"
-							onclick="location.href=''" value="削除">
-		<input class="main-b" type="button"
-							onclick="location.href=''" value="更新">
-		<input class="main-b" type="button"
-							onclick="location.href=''" value="戻る">
-		<input class="main-b" type="button"
-							onclick="location.href=''" value="登録">
+		<input class="main-b" type="submit" id="comment-delete"
+							onclick="PageMoves(this)" value="削除">
+		<input class="main-b" type="submit" id="comment-update"
+							onclick="PageMoves(this)" value="更新">
+		<input class="main-b" type="submit"
+							onclick="" value="戻る">
+		<input class="main-b" type="submit" id="comment-regist"
+							onclick="PageMoves(this)" value="登録">
 </form>
 
 	<!-- フッター　-->

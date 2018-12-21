@@ -275,8 +275,12 @@
 								<c:if test="${ info.huyou == 49 }">selected</c:if>>49</option>
 					</select>人</td>
 				</tr>
+<<<<<<< HEAD
 
+=======
+>>>>>>> refs/remotes/origin/#196
 				<tr>
+<<<<<<< HEAD
 					<th>自宅電話番号</th>
 					<td><input type="text" name="phone" value="${ info.phone }" /></td>
 				</tr>
@@ -325,6 +329,57 @@
 				<th>希望業種3</th>
 					<td><select name="hopejobcategory">
 					<option value=""></option>
+=======
+					<th>メールアドレス</th>
+					<td><input type="text" name="seekermail" value="${ info.seekermail }"/></td>
+				</tr>
+				<tr>
+					<th>自宅電話番号</th>
+					<td><input type="text" name="phone" value="${ info.phone }" /></td>
+				</tr>
+				<tr>
+					<th>携帯電話番号</th>
+					<td><input type="text" name="mobile" value="${ info.mobile }" /></td>
+				</tr>
+				<tr>
+					<th>郵便番号</th>
+					<td><input type="text" name="zip21" class="form_text-small" size="3" maxlength="3"> - <input type="text" name="zip22" class="form_text-small" onKeyUp="AjaxZip3.zip2addr('zip21','zip22','addr21','addr21');" size="4" maxlength="4"></td>
+				</tr>
+				<tr>
+					<th>住所</th>
+					<td><input type="text" name="addr21" class="form_text"  value="${ info.address }" size="50"></td>
+				</tr>
+				<tr>
+					<th>最寄り駅</th>
+					<td><input type="text" name="nearstation" value="${ info.nearstation }" size="10"/>駅</td>
+				</tr>
+				</table>
+
+				<table id="tab2" class="page">
+				<tr>
+				<th>希望業種1</th>
+					<td><select name="hopejobcategory">
+					<c:forEach var="jobcategory" items="${ JCLargelist }">
+					<option value="${ jobcategory.largecd }" ${ jobcategory.name }
+					<c:if test="${jobcategory.largecd == info.hopejobcategory }">selected</c:if>>${ jobcategory.name }
+								</option>
+							</c:forEach>
+					</select></td>
+				</tr>
+				<tr>
+				<th>希望業種2</th>
+					<td><select name="hopejobcategory">
+					<c:forEach var="jobcategory" items="${ JCLargelist }">
+					<option value="${ jobcategory.largecd }" ${ jobcategory.name }
+					<c:if test="${jobcategory.largecd == info.hopejobcategory2 }">selected</c:if>>${ jobcategory.name }
+								</option>
+							</c:forEach>
+					</select></td>
+				</tr>
+				<tr>
+				<th>希望業種3</th>
+					<td><select name="hopejobcategory">
+>>>>>>> refs/remotes/origin/#196
 					<c:forEach var="jobcategory" items="${ JCLargelist }">
 					<option value="${ jobcategory.largecd }" ${ jobcategory.name }
 					<c:if test="${jobcategory.largecd == info.hopejobcategory3 }">selected</c:if>>${ jobcategory.name }
@@ -446,6 +501,7 @@
 			onclick="location.href='/nexus/web/jobseeker-list'" value="一覧に戻る">
 </div>
 </main>
+<<<<<<< HEAD
 		<div class="comment">
 		<h3>重要</h3>
 			<table>
@@ -464,6 +520,14 @@
 						<c:out value="${ info.tantoustaffid }" /></td>
 			</table>
 		</div>
+=======
+		<h3>重要</h3>
+		<textarea>フリーコメント1</textarea>
+		<h3>重要</h3>
+		<textarea>フリーコメント2</textarea>
+		<h3>重要</h3>
+		<textarea>フリーコメント3</textarea>
+>>>>>>> refs/remotes/origin/#196
 
 	<!-- フッター　-->
 	<footer>

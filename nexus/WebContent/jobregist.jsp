@@ -36,8 +36,7 @@
 <script type="text/javascript" src="../js/common.js"></script>
 </head>
 <body>
-
-	<%@ include file="/header.jsp" %>
+	<%@ include file="/header.jsp"%>
 	<main>
 	<form id="form" method="post" action="">
 		<div id="job_regist">
@@ -238,14 +237,12 @@
 				<tr>
 					<th>派遣/請負</th>
 					<td><input type="radio" name="hakencd" value="1"
-						<c:if test="${1 == kyujin.hakencd}" >checked="checked"</c:if>
-						> 派遣 <input type="radio" name="hakencd"
-						value="2"
-						<c:if test="${2 == kyujin.hakencd}" >checked="checked"</c:if>
-						> 請負 <input type="radio" name="hakencd"
-						value="3"
-						<c:if test="${1 != kyujin.hakencd && 2 != kyujin.hakencd }" >checked="checked"</c:if>
-						> その他</td>
+						<c:if test="${1 == kyujin.hakencd}" >checked="checked"</c:if>>
+						派遣 <input type="radio" name="hakencd" value="2"
+						<c:if test="${2 == kyujin.hakencd}" >checked="checked"</c:if>>
+						請負 <input type="radio" name="hakencd" value="3"
+						<c:if test="${1 != kyujin.hakencd && 2 != kyujin.hakencd }" >checked="checked"</c:if>>
+						その他</td>
 
 				</tr>
 				<tr>
@@ -492,14 +489,12 @@
 				<tr>
 					<th>性別（求職者に非公開）</th>
 					<td><input type="radio" name="hiddensex" value="1"
-						<c:if test="${1 == kyujin.hiddensex}">checked="checked"</c:if>
-						> 男 <input type="radio" name="hiddensex"
-						value="2"
-						<c:if test="${2 == kyujin.hiddensex}">checked="checked"</c:if>
-						> 女 <input type="radio" name="hiddensex"
-						value="3"
-						<c:if test="${1 != kyujin.hiddensex && 2 != kyujin.hiddensex}">checked="checked"</c:if>
-						> その他</td>
+						<c:if test="${1 == kyujin.hiddensex}">checked="checked"</c:if>>
+						男 <input type="radio" name="hiddensex" value="2"
+						<c:if test="${2 == kyujin.hiddensex}">checked="checked"</c:if>>
+						女 <input type="radio" name="hiddensex" value="3"
+						<c:if test="${1 != kyujin.hiddensex && 2 != kyujin.hiddensex}">checked="checked"</c:if>>
+						その他</td>
 				</tr>
 				<tr>
 					<th>年齢下限（求職者に非公開）</th>

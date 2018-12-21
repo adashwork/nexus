@@ -446,7 +446,7 @@ public class CompanyService {
 		} catch (IOException e) {
 
 		} finally {
-			// データベース接続をを終了する
+			// データベース接続を終了する
 			transaction.close();
 		}
 		return false;

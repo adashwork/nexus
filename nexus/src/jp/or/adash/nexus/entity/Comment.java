@@ -84,6 +84,7 @@ public class Comment {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * 備考IDに値をセットする
 	 * @param id
 	 */
@@ -92,6 +93,8 @@ public class Comment {
 	}
 
 	/**
+=======
+>>>>>>> refs/remotes/origin/#196
 	 * 事業所番号を取得する
 	 * @return companyNo
 	 */

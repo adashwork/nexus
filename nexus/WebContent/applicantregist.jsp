@@ -305,6 +305,7 @@
 				<tr>
 				<th>希望業種1</th>
 					<td><select name="hopejobcategory">
+<<<<<<< HEAD
 					<option value=""></option>
 					<c:forEach var="jobcategory" items="${ JCLargelist }">
 					<option value="${ jobcategory.largecd }" ${ jobcategory.name }
@@ -328,6 +329,28 @@
 				<th>希望業種3</th>
 					<td><select name="hopejobcategory">
 					<option value=""></option>
+=======
+					<c:forEach var="jobcategory" items="${ JCLargelist }">
+					<option value="${ jobcategory.largecd }" ${ jobcategory.name }
+					<c:if test="${jobcategory.largecd == info.hopejobcategory }">selected</c:if>>${ jobcategory.name }
+								</option>
+							</c:forEach>
+					</select></td>
+				</tr>
+				<tr>
+				<th>希望業種2</th>
+					<td><select name="hopejobcategory">
+					<c:forEach var="jobcategory" items="${ JCLargelist }">
+					<option value="${ jobcategory.largecd }" ${ jobcategory.name }
+					<c:if test="${jobcategory.largecd == info.hopejobcategory2 }">selected</c:if>>${ jobcategory.name }
+								</option>
+							</c:forEach>
+					</select></td>
+				</tr>
+				<tr>
+				<th>希望業種3</th>
+					<td><select name="hopejobcategory">
+>>>>>>> refs/remotes/origin/#196
 					<c:forEach var="jobcategory" items="${ JCLargelist }">
 					<option value="${ jobcategory.largecd }" ${ jobcategory.name }
 					<c:if test="${jobcategory.largecd == info.hopejobcategory3 }">selected</c:if>>${ jobcategory.name }
@@ -443,6 +466,7 @@
 							value="${ info.tantoustaffid }" /></td>
 				</tr>
 				</table>
+<<<<<<< HEAD
 <!doctype html>
 <html>
 <head>
@@ -502,6 +526,8 @@
 	    </div>
   </div>
  </div>
+=======
+>>>>>>> refs/remotes/origin/#196
 
 			<!--<input type="submit" value="更新" class="main-b">  -->
 		</form>

@@ -286,7 +286,7 @@
 
 				<tr>
 				<th>希望業種1</th>
-					<td><select name="hopejobcategory">
+					<td><select name="HOPEJOBCATEGORY">
 					<c:forEach var="jobcategory" items="${ JCLargelist }">
 					<option value="${ jobcategory.largecd }" ${ jobcategory.name }
 					<c:if test="${jobcategory.largecd == info.hopejobcategory }">selected</c:if>>${ jobcategory.name }
@@ -296,8 +296,8 @@
 				</tr>
 				<tr>
 				<th>希望業種2</th>
-					<td><select name="hopejobcategory">
-					<c:forEach var="jobcategory" items="${ JCLargelist }">
+					<td><select name="HOPEJOBCATEGORY2">
+					<c:forEach var="jobcategory2" items="${ JCLargelist }">
 					<option value="${ jobcategory.largecd }" ${ jobcategory.name }
 					<c:if test="${jobcategory.largecd == info.hopejobcategory2 }">selected</c:if>>${ jobcategory.name }
 								</option>
@@ -306,8 +306,8 @@
 				</tr>
 				<tr>
 				<th>希望業種3</th>
-					<td><select name="hopejobcategory">
-					<c:forEach var="jobcategory" items="${ JCLargelist }">
+					<td><select name="HOPEJOBCATEGORY3">
+					<c:forEach var="jobcategory3" items="${ JCLargelist }">
 					<option value="${ jobcategory.largecd }" ${ jobcategory.name }
 					<c:if test="${jobcategory.largecd == info.hopejobcategory3 }">selected</c:if>>${ jobcategory.name }
 								</option>
@@ -316,7 +316,7 @@
 				</tr>
 				<tr>
 					<th>希望職種1</th>
-					<td><select name="hopejob1">
+					<td><select name="HOPEJOB1">
 							<c:forEach var="job" items="${ Largelist }">
 								<option value="${ job.largecd }" ${ job.name }
 									<c:if test="${job.largecd == info.hopejob1 }">selected</c:if>>${ job.name }
@@ -326,7 +326,7 @@
 				</tr>
 				<tr>
 					<th>希望職種2</th>
-					<td><select name="hopejob2">
+					<td><select name="HOPEJOB2">
 							<c:forEach var="job" items="${ Largelist }">
 								<option value="${ job.largecd }" ${ job.name }
 									<c:if test="${job.largecd == info.hopejob2 }">selected</c:if>>${ job.name }
@@ -336,7 +336,7 @@
 				</tr>
 				<tr>
 					<th>希望職種3</th>
-					<td><select name="hopejob3">
+					<td><select name="HOPEJOB3">
 							<c:forEach var="job" items="${ Largelist }">
 								<option value="${ job.largecd }" ${ job.name }
 									<c:if test="${job.largecd == info.hopejob3 }">selected</c:if>>${ job.name }

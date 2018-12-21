@@ -46,21 +46,22 @@
   <div class="comment">
 		<h3>フリーコメント1</h3>
 		<p>タイトル<p>
-		<input class="comment-title" type="text" name="タイトル">
+		<input class="comment-title" type="text" name="title" value="<c:out value="${ comment.title }"/>" >
 		<p>内容<p>
 		<textarea rows="4" cols="50" wrap="hard"></textarea>
 	</div>
   <div class="down">
 		<div class="box">
-			<p>登録ID：</p>
-			<p>更新ID：</p>
+			<p>登録ID：<c:out value="${ comment.createUserId }" /></p>
+			<p>更新ID：<c:out value="${ comment.updateUserId }" /></p>
 	  	</div>
  		<div class="box">
-			<p>登録日:</p>
-		  	<p>更新日：</p>
+			<p>登録日:<c:out value="${ comment.createDt }" /></p>
+		  	<p>更新日:<c:out value="${ comment.updateDt }" /></p>
 	    </div>
   </div>
-<form method="get" action="/nexus/web/account-edit">
+<form method="get" action="./comment-disp">
+
 		<input class="main-b" type="button"
 							onclick="location.href=''" value="編集">
 </form>

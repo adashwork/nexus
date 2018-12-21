@@ -13,11 +13,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import jp.or.adash.nexus.entity.Company;
 import jp.or.adash.nexus.entity.Job;
 import jp.or.adash.nexus.entity.JobCategory;
 import jp.or.adash.nexus.entity.Kyujin;
 import jp.or.adash.nexus.entity.Staff;
 import jp.or.adash.nexus.entity.Todouhuken;
+import jp.or.adash.nexus.services.CompanyService;
 import jp.or.adash.nexus.services.JobCategoryService;
 import jp.or.adash.nexus.services.JobService;
 import jp.or.adash.nexus.services.KyujinService;
@@ -234,6 +236,16 @@ public class KyujinInsertServlet extends HttpServlet {
 		List<Job> Slist = Sservice.getSmallJobList();
 		// 2.職種小分類リストをリクエストに格納する
 		request.setAttribute("Smalllist", Slist);
+
+		// 企業情報を取得してリクエストに格納する
+		// 1.2 求人コードがある場合、商品情報を取得
+		Company company = null;
+		//求人に事業所番号が登録されている場合、企業情報を取得する
+		if (!"".equals(kyujin.getCompanyno()) && kyujin.getCompanyno() != null) {
+			CompanyService companyService = new CompanyService();
+			company = companyService.getCompanyInfo(kyujin.getCompanyno());
+		}
+		request.setAttribute("company", company);
 
 		// 1.3 入力チェック
 		KyujinService service = new KyujinService();

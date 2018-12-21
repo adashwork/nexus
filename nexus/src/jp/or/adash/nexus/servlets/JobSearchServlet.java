@@ -124,7 +124,7 @@ public class JobSearchServlet extends HttpServlet {
 		// 1.3 リクエストに求人票情報をセットする
 
 		request.setAttribute("Staff", staff);
-		request.setAttribute("kyujin", kyujinlist);
+		request.setAttribute("kyujinlist", kyujinlist);
 		request.setAttribute("companyMap", companyMap);
 		request.setAttribute("todouhukenlist",todouhukenlist);
 		// 1.4 JSPにフォワードする

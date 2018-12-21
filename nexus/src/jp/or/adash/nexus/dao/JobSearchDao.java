@@ -123,8 +123,8 @@ public class JobSearchDao {
 		sqlSearchJob.append("select no, companyno,addresscd, jobsmallcd1,jobsmallcd2,jobsmallcd3,");
 		sqlSearchJob.append("joblargecd1,joblargecd2,joblargecd3,");
 		//企業情報のため次の3項目を削除 jobcategorysmallcd,jobcategorylargecd,companyname,
-		sqlSearchJob.append("jobcategorysmallcd,jobcategorylargecd, ");
-		sqlSearchJob.append("address,addresscd,nearstation,job,koyoukeitaicd, ");
+		//sqlSearchJob.append("jobcategorysmallcd,jobcategorylargecd, ");
+		sqlSearchJob.append("address,addresscd,nearstationkj,job,koyoukeitaicd, ");
 		sqlSearchJob.append("agemin,agemax,salarymin,salarymax,deleteflag ");
 		sqlSearchJob.append(" from kyujin");
 		sqlSearchJob.append(" where deleteflag like '0'");
@@ -189,7 +189,7 @@ public class JobSearchDao {
 									//rs.getString("companyname"),
 									null, null, null,
 									rs.getString("address"), rs.getString("addresscd"),
-									rs.getString("nearstation"), rs.getString("job"), rs.getString("koyoukeitaicd"),
+									rs.getString("nearstationkj"), rs.getString("job"), rs.getString("koyoukeitaicd"),
 									rs.getInt("agemin"), rs.getInt("agemax"), rs.getInt("salarymin"),
 									rs.getInt("salarymax"), rs.getString("deleteflag")));
 				}

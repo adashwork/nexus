@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jp.or.adash.nexus.entity.Comment;
+import jp.or.adash.nexus.entity.CommentSearchParameter;
 import jp.or.adash.nexus.utils.dao.Transaction;
 
 /***
@@ -343,5 +344,52 @@ public class CommentDao {
 
 		return count;
 	}
+
+	/**
+	 * 備考（コメント）の一覧取得のためのメソッド
+	 * @param CommentSearchParameter
+	 * @return commentList
+	 * @throws IOException
+	 */
+	public List<Comment> selectCommentList(CommentSearchParameter csp) throws IOException{
+		// 検索結果のコメント格納リスト
+		List<Comment> commentList = new ArrayList<>();
+		// SQLのWHERE句に条件を追加するためのリスト
+		List<String> whereStr = new ArrayList<String>();
+
+		if(csp.getId() != null || !csp.getId().equals("")) {
+			whereStr.add("id = ?");
+		}
+
+		// SQL文の作成
+		StringBuilder sqlSearchComment = new StringBuilder();
+		sqlSearchComment.append("SELECT cmp.companyno, cmp.companyname,jbc.name,cmp.companyplace,cmp.tantou");
+
+		try (PreparedStatement ps = conn.prepareStatement(sqlSearchComment.toString())) {
+
+			// SQLを実行する
+			try (ResultSet rs = ps.executeQuery()) {
+				// ResultSetから1行読み込む
+				while (rs.next()) {
+					// ResultSetからCompanyオブジェクトにデータを詰め直し、リストに格納
+					/*companyList.add(
+							new CompanySearchResult(	rs.getString("companyno"),
+														rs.getString("companyname"),
+														rs.getString("companyplace"),
+														rs.getString("tantou"),
+														rs.getString("name")
+													));*/
+				}
+			} catch (SQLException e) {
+				throw new IOException(e);
+			}
+		} catch (SQLException e) {
+			throw new IOException(e);
+		}
+
+
+		return commentList;
+	}
+
 
 }

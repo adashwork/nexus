@@ -3,192 +3,195 @@ package jp.or.adash.nexus.entity;
 import java.util.Date;
 
 /**
-/ * 求人票マスタのEntityクラス
+ * 求人票マスタのEntityクラス
  * @author pgjavaAT
  * @author kmiyamoto
  *
  */
 
-//public class Company {
-//
-//	/**
-//	 * 企業マスタcompanyテーブル
-//	 *
-//	 * corporatenumber 法人番号
-//	 * companyno 事業所番号
-//	* companykana 事業所名（かな）
-//	* companyname 事業所名
-//	* companypostal 事業所郵便番号
-//	* companyplace 事業所所在地
-//	* nearstationkj 最寄り駅
-//	* companyurl 事業所URL
-//	* jobcategorysmallcd 産業小分類コード
-//  * jobcategorymiddleCdcd 産業中分類コード
-//	* jobcategorylargecd 産業大分類コード
-//	* capital 資本金
-//	* employees 従業員数
-//	* establishdt 創業設立年
-//	* tantouyakushoku 選考担当者課係名/役職名
-//	* tantoukana 担当者名（カナ）
-//	* tantou 担当者名
-//	* tantoutel 担当者電話番号
-//	* tantoufax 担当者FAX
-//	* tantoumail 担当者メールアドレス
-//	* tantounote 担当者備考
-//	* tantoustaff_id 担当職業紹介者ID
-//	* salesrank 営業評価ランクABC
-//	* salesnote	営業備考
-//	*/
-//
-//	private String corporatenumber;
-//	private String companyno;
-//	private String companykana;
-//	private String companyname;
-//	private String companypostal;
-//	private String companyplace;
-//	private String nearstationkj;
-//	private String companyurl;
-//	private String jobcategorysmallcd;
-//	private String jobcategorylargecd;
-//	private long capital;
-//	private String employees;
-//	private Integer establishdt;
-//	private String tantouyakushoku;
-//	private String tantoukana;
-//	private String tantou;
-//	private String tantoutel;
-//	private String tantoufax;
-//	private String tantoumail;
-//	private String tantounote;
-//	private String tantoustaff_id;
-//	private String salesrank;
-//	private String salesnote;
-//	private Date createdt;
-//	private String createuserid;
-//	private Date updatedt;
-//	private String updateuserid;
-//	private String deleteflag;
-//
-//	public Company() {
-//
-//	}
-//
-//	public Company(String corporatenumber, String companyno, String companykana, String companyname,
-//			String companypostal, String companyplace, String nearstationkj, String companyurl,
-//			String jobcategorysmallcd, String jobcategorylargecd, long capital, String employees,
-//			Integer establishdt, String tantouyakushoku, String tantoukana, String tantou,
-//			String tantoutel, String tantoufax, String tantoumail, String tantounote, String tantoustaff_id,
-//			String salesrank, String salesnote, Date createdt, String createuserid,
-//			Date updatedt, String updateuserid, String deleteflag) {
-//		super();
-//		this.corporatenumber = corporatenumber;
-//		this.companyno = companyno;
-//		this.companykana = companykana;
-//		this.companyname = companyname;
-//		this.companypostal = companypostal;
-//		this.companyplace = companyplace;
-//		this.nearstationkj = nearstationkj;
-//	* nearstation 最寄り駅
-//	* companyurl 事業所URL
-//	* jobcategorysmallcd 産業小分類コード
-//  * jobcategorymiddleCdcd 産業中分類コード
-//	* jobcategorylargecd 産業大分類コード
-//	* capital 資本金
-//	* employees 従業員数
-//	* establishdt 創業設立年
-//	* tantouyakushoku 選考担当者課係名/役職名
-//	* tantoukana 担当者名（カナ）
-//	* tantou 担当者名
-//	* tantoutel 担当者電話番号
-//	* tantoufax 担当者FAX
-//	* tantoumail 担当者メールアドレス
-//	* tantounote 担当者備考
-//	* tantoustaff_id 担当職業紹介者ID
-//	* salesrank 営業評価ランクABC
-//	* salesnote	営業備考
-//	*/
-//
-//	private String corporatenumber;
-//	private String companyno;
-//	private String companykana;
-//	private String companyname;
-//	private String companypostal;
-//	private String companyplace;
-//	private String nearstation;
-//	private String companyurl;
-//	private String jobcategorysmallcd;
-//	private String jobcategorylargecd;
-//	private long capital;
-//	private String employees;
-//	private Integer establishdt;
-//	private String tantouyakushoku;
-//	private String tantoukana;
-//	private String tantou;
-//	private String tantoutel;
-//	private String tantoufax;
-//	private String tantoumail;
-//	private String tantounote;
-//	private String tantoustaff_id;
-//	private String salesrank;
-//	private String salesnote;
-//	private Date createdt;
-//	private String createuserid;
-//	private Date updatedt;
-//	private String updateuserid;
-//	private String deleteflag;
-//
-//	public Company() {
-//
-//	}
-//
-//	public Company(String corporatenumber, String companyno, String companykana, String companyname,
-//			String companypostal, String companyplace, String nearstation, String companyurl,
-//			String jobcategorysmallcd, String jobcategorylargecd, long capital, String employees,
-//			Integer establishdt, String tantouyakushoku, String tantoukana, String tantou,
-//			String tantoutel, String tantoufax, String tantoumail, String tantounote, String tantoustaff_id,
-//			String salesrank, String salesnote, Date createdt, String createuserid,
-//			Date updatedt, String updateuserid, String deleteflag) {
-//		super();
-//		this.corporatenumber = corporatenumber;
-//		this.companyno = companyno;
-//		this.companykana = companykana;
-//		this.companyname = companyname;
-//		this.companypostal = companypostal;
-//		this.companyplace = companyplace;
-//		this.nearstation = nearstation;
-//		this.companyurl = companyurl;
-//		this.jobcategorysmallcd = jobcategorysmallcd;
-//		this.jobcategorylargecd = jobcategorylargecd;
-//		this.capital = capital;
-//		this.employees = employees;
-//		this.establishdt = establishdt;
-//		this.tantouyakushoku = tantouyakushoku;
-//		this.tantoukana = tantoukana;
-//		this.tantou = tantou;
-//		this.tantoutel = tantoutel;
-//		this.tantoufax = tantoufax;
-//		this.tantoumail = tantoumail;
-//		this.tantounote = tantounote;
-//		this.tantoustaff_id = tantoustaff_id;
-//		this.salesrank = salesrank;
-//		this.salesnote = salesnote;
-//		//		this.companyfeature = companyfeature;
-//		this.createdt = createdt;
-//		this.createuserid = createuserid;
-//		this.updatedt = updatedt;
-//		this.updateuserid = updateuserid;
-//		this.deleteflag = deleteflag;
-//	}
-//
-//	/*
-//	 * 従業員数をセットする
-//	 * @return employees
-//	 */
-//	public String getEmployees() {
-//		return employees;
-//	}
-//
-//}
+/*
+public class Company {
+
+	/**
+	 * 企業マスタcompanyテーブル
+	 *
+	 * corporatenumber 法人番号
+	 * companyno 事業所番号
+	* companykana 事業所名（かな）
+	* companyname 事業所名
+	* companypostal 事業所郵便番号
+	* companyplace 事業所所在地
+	* nearstationkj 最寄り駅
+	* companyurl 事業所URL
+	* jobcategorysmallcd 産業小分類コード
+  * jobcategorymiddleCdcd 産業中分類コード
+	* jobcategorylargecd 産業大分類コード
+	* capital 資本金
+	* employees 従業員数
+	* establishdt 創業設立年
+	* tantouyakushoku 選考担当者課係名/役職名
+	* tantoukana 担当者名（カナ）
+	* tantou 担当者名
+	* tantoutel 担当者電話番号
+	* tantoufax 担当者FAX
+	* tantoumail 担当者メールアドレス
+	* tantounote 担当者備考
+	* tantoustaff_id 担当職業紹介者ID
+	* salesrank 営業評価ランクABC
+	* salesnote	営業備考
+	*/
+/*
+
+	private String corporatenumber;
+	private String companyno;
+	private String companykana;
+	private String companyname;
+	private String companypostal;
+	private String companyplace;
+	private String nearstationkj;
+	private String companyurl;
+	private String jobcategorysmallcd;
+	private String jobcategorylargecd;
+	private long capital;
+	private String employees;
+	private Integer establishdt;
+	private String tantouyakushoku;
+	private String tantoukana;
+	private String tantou;
+	private String tantoutel;
+	private String tantoufax;
+	private String tantoumail;
+	private String tantounote;
+	private String tantoustaff_id;
+	private String salesrank;
+	private String salesnote;
+	private Date createdt;
+	private String createuserid;
+	private Date updatedt;
+	private String updateuserid;
+	private String deleteflag;
+
+	public Company() {
+
+	}
+
+	public Company(String corporatenumber, String companyno, String companykana, String companyname,
+			String companypostal, String companyplace, String nearstationkj, String companyurl,
+			String jobcategorysmallcd, String jobcategorylargecd, long capital, String employees,
+			Integer establishdt, String tantouyakushoku, String tantoukana, String tantou,
+			String tantoutel, String tantoufax, String tantoumail, String tantounote, String tantoustaff_id,
+			String salesrank, String salesnote, Date createdt, String createuserid,
+			Date updatedt, String updateuserid, String deleteflag) {
+		super();
+		this.corporatenumber = corporatenumber;
+		this.companyno = companyno;
+		this.companykana = companykana;
+		this.companyname = companyname;
+		this.companypostal = companypostal;
+		this.companyplace = companyplace;
+		this.nearstationkj = nearstationkj;
+	* nearstation 最寄り駅
+	* companyurl 事業所URL
+	* jobcategorysmallcd 産業小分類コード
+  * jobcategorymiddleCdcd 産業中分類コード
+	* jobcategorylargecd 産業大分類コード
+	* capital 資本金
+	* employees 従業員数
+	* establishdt 創業設立年
+	* tantouyakushoku 選考担当者課係名/役職名
+	* tantoukana 担当者名（カナ）
+	* tantou 担当者名
+	* tantoutel 担当者電話番号
+	* tantoufax 担当者FAX
+	* tantoumail 担当者メールアドレス
+	* tantounote 担当者備考
+	* tantoustaff_id 担当職業紹介者ID
+	* salesrank 営業評価ランクABC
+	* salesnote	営業備考
+	*/
+
+/*	private String corporatenumber;
+	private String companyno;
+	private String companykana;
+	private String companyname;
+	private String companypostal;
+	private String companyplace;
+	private String nearstation;
+	private String companyurl;
+	private String jobcategorysmallcd;
+	private String jobcategorylargecd;
+	private long capital;
+	private String employees;
+	private Integer establishdt;
+	private String tantouyakushoku;
+	private String tantoukana;
+	private String tantou;
+	private String tantoutel;
+	private String tantoufax;
+	private String tantoumail;
+	private String tantounote;
+	private String tantoustaff_id;
+	private String salesrank;
+	private String salesnote;
+	private Date createdt;
+	private String createuserid;
+	private Date updatedt;
+	private String updateuserid;
+	private String deleteflag;
+
+	public Company() {
+
+	}
+
+	public Company(String corporatenumber, String companyno, String companykana, String companyname,
+			String companypostal, String companyplace, String nearstation, String companyurl,
+			String jobcategorysmallcd, String jobcategorylargecd, long capital, String employees,
+			Integer establishdt, String tantouyakushoku, String tantoukana, String tantou,
+			String tantoutel, String tantoufax, String tantoumail, String tantounote, String tantoustaff_id,
+			String salesrank, String salesnote, Date createdt, String createuserid,
+			Date updatedt, String updateuserid, String deleteflag) {
+		super();
+		this.corporatenumber = corporatenumber;
+		this.companyno = companyno;
+		this.companykana = companykana;
+		this.companyname = companyname;
+		this.companypostal = companypostal;
+		this.companyplace = companyplace;
+		this.nearstation = nearstation;
+		this.companyurl = companyurl;
+		this.jobcategorysmallcd = jobcategorysmallcd;
+		this.jobcategorylargecd = jobcategorylargecd;
+		this.capital = capital;
+		this.employees = employees;
+		this.establishdt = establishdt;
+		this.tantouyakushoku = tantouyakushoku;
+		this.tantoukana = tantoukana;
+		this.tantou = tantou;
+		this.tantoutel = tantoutel;
+		this.tantoufax = tantoufax;
+		this.tantoumail = tantoumail;
+		this.tantounote = tantounote;
+		this.tantoustaff_id = tantoustaff_id;
+		this.salesrank = salesrank;
+		this.salesnote = salesnote;
+		//		this.companyfeature = companyfeature;
+		this.createdt = createdt;
+		this.createuserid = createuserid;
+		this.updatedt = updatedt;
+		this.updateuserid = updateuserid;
+		this.deleteflag = deleteflag;
+	}
+
+
+	 * 従業員数をセットする
+	 * @return employees
+
+	public String getEmployees() {
+		return employees;
+	}
+
+}*/
+
 
 public class Kyujin {
 	/*
@@ -385,14 +388,6 @@ public class Kyujin {
 	public String getNo() {
 		return no;
 	}
-
-	/**
-	 * 事業所名（カナ）を返す
-	 * @return companykana
-
-	public String getCompanykana() {
-		return companykana;
-	}*/
 
 	/**
 	 * 事業所番号を返す
@@ -751,6 +746,7 @@ public class Kyujin {
 	public String getNenkanholiday() {
 		return nenkanholiday;
 	}
+
 	/**
 	 * 創業設立年を返す
 	 * @return establishdt
@@ -770,12 +766,10 @@ public class Kyujin {
 	/**
 	 * 会社の特長を返す
 	 * @return companyfeature
-<<<<<<< HEAD
 
 		public String getCompanyfeature() {
 			return companyfeature;
 		} */
-
 
 	/**
 	 * 選考担当者課係名/役職名を返す

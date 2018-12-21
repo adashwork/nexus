@@ -67,7 +67,8 @@ public class Company {
 	private String deletefFag;
 
 	public Company(String companyNo, String corporateNumber, String companyName, String companyKana,
-			String companyPostal, String companyPlace, String nearStation, String companyUrl, String jobCategorySmallCd, String jobCategoryMiddleCd,
+			String companyPostal, String companyPlace, String nearStation, String companyUrl, String jobCategorySmallCd,
+			String jobCategoryMiddleCd,
 			String jobCategoryLargeCd, Integer capital, String employees, Integer establishDt, String tantouYakushoku,
 			String tantou, String tantouKana, String tantouTel, String tantouFax, String tantouEmail, String tantouNote,
 			String tantouStaffId, String salesRank, String salesNote, Date createDt, String createuserId, Date updateDt,
@@ -102,7 +103,6 @@ public class Company {
 		this.updateUserId = updateUserId;
 		this.deletefFag = deletefFag;
 	}
-
 
 	/**
 	 * 事業所番号を取得する
@@ -338,7 +338,6 @@ public class Company {
 		return deletefFag;
 	}
 
-
 	/**
 	 * 事業所番号を登録する
 	 * @param companyNo 事業所番号
@@ -346,8 +345,5 @@ public class Company {
 	public void setCompanyNo(String companyNo) {
 		this.companyNo = companyNo;
 	}
-
-
-
 
 }

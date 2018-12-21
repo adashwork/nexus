@@ -113,7 +113,6 @@ public class KyujinDao {
 		  //ps.setString(52, "now()");//updatedt???
 			ps.setString(51, kyujin.getUpdateuserid());
 			ps.setString(52, "0");//deleteflag???
-
 			// SQL文を実行する(求人票)
 			count = ps.executeUpdate();
 		} catch (SQLException e) {

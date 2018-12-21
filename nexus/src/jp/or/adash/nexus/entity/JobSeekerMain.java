@@ -146,6 +146,7 @@ public class JobSeekerMain{
 		this.updateuserid = updateuserid;
 		this.deleteflag = deleteflag;
 	}
+
 	/**
 	 * 求職者IDを返す
 	 * @return id

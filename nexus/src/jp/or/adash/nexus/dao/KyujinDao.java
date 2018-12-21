@@ -45,7 +45,7 @@ public class KyujinDao {
 			sql.append("no, companyno, postal, address, nearline, nearstationkj, addresscd,");
 	        sql.append("jobsmallcd1, jobsmallcd2, jobsmallcd3, joblargecd1, joblargecd2, joblargecd3,");
 	        sql.append("job, detail, koyoukeitaicd, hakencd, koyoukikan, koyoukikankaishi, koyoukikanowari,");
-	        sql.append("education, experience, license, agemin, agemax, salaryformcd, salarymin, salarymax, bouns, koutuhi, teate,");
+	        sql.append("education, experience, license, agemin, agemax, salaryformcd, salarymin, salarymax, bonus, koutuhi, teate,");
 	        sql.append("begintime, endtime, shift, flex, jitan, jikangai, siyoukikan, workdays, nenkanholiday,");
 	        sql.append("applicationform, background, bosyunumbers,hiddensex, hiddenagemin, hiddenagemax, hiddenetc,");
 	        sql.append("receptiondt, perioddt, createuserid, updateuserid, deleteflag,");
@@ -138,7 +138,7 @@ public class KyujinDao {
 		sql.append("no, companyno, postal, address, nearline, nearstationkj, addresscd,");
         sql.append("jobsmallcd1, jobsmallcd2, jobsmallcd3, joblargecd1, joblargecd2, joblargecd3,");
         sql.append("job, detail, koyoukeitaicd, hakencd, koyoukikan, koyoukikankaishi, koyoukikanowari,");
-        sql.append("education, experience, license, agemin, agemax, salaryformcd, salarymin, salarymax, bouns, koutuhi, teate,");
+        sql.append("education, experience, license, agemin, agemax, salaryformcd, salarymin, salarymax, bonus, koutuhi, teate,");
         sql.append("begintime, endtime, shift, flex, jitan, jikangai, siyoukikan, workdays, nenkanholiday,");
         sql.append("applicationform, background, bosyunumbers,hiddensex, hiddenagemin, hiddenagemax, hiddenetc,");
         sql.append("receptiondt, perioddt, createuserid, updateuserid, deleteflag,");
@@ -240,7 +240,7 @@ public class KyujinDao {
 		sql.append("no, companyno, postal, address, nearline, nearstationkj, addresscd,");
         sql.append("jobsmallcd1, jobsmallcd2, jobsmallcd3, joblargecd1, joblargecd2, joblargecd3,");
         sql.append("job, detail, koyoukeitaicd, hakencd, koyoukikan, koyoukikankaishi, koyoukikanowari,");
-        sql.append("education, experience, license, agemin, agemax, salaryformcd, salarymin, salarymax, bouns, koutuhi, teate,");
+        sql.append("education, experience, license, agemin, agemax, salaryformcd, salarymin, salarymax, bonus, koutuhi, teate,");
         sql.append("begintime, endtime, shift, flex, jitan, jikangai, siyoukikan, workdays, nenkanholiday,");
         sql.append("applicationform, background, bosyunumbers,hiddensex, hiddenagemin, hiddenagemax, hiddenetc,");
         sql.append("receptiondt, perioddt, createuserid, updateuserid, deleteflag,");

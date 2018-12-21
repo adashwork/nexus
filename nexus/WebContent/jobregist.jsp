@@ -189,9 +189,9 @@
 					<th>職種細分類コード3</th>
 					<td><select name="jobsmallcd3" tabindex="20">
 							<option></option>
-							<c:forEach var="job" items="${ Smalllist }">
-								<option value="${ job.smallcd }">${ job.name }</option>
-							</c:forEach>
+							<c:forEach var="job" items="${ Smalllist }" varStatus="status">
+							<option value="${ status.index }" selected="selected">
+							${ job.name }</option></c:forEach>
 					</select></td>
 				</tr>
 				<tr>
@@ -205,9 +205,9 @@
 					<th>就業場所都道府県</th>
 					<td><select name="adresscd" tabindex="22">
 							<option></option>
-							<c:forEach var="todouhuken" items="${ list }">
-								<option value="${ todouhuken.cd }">${ todouhuken.name }</option>
-							</c:forEach>
+							<c:forEach var="todouhuken" items="${ list }" varStatus="status">
+							<option value="${ status.index }" selected="selected">
+							${ todouhuken.name }</option></c:forEach>
 					</select></td>
 				</tr>
 				<tr>

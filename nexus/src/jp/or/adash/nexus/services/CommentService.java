@@ -142,7 +142,7 @@ public class CommentService {
 			transaction.open();
 			// DBから企業情報を取得し、Dao内のメソッドでListに詰め、そのListを返してもらう
 			dao = new CommentDao(transaction);
-			// commentList = dao.selectCommentList(csp);
+			commentList = dao.selectCommentList(csp);
 
 		} catch (IOException e) {
 			// DB接続が失敗した場合、例外をキャッチする
@@ -159,4 +159,50 @@ public class CommentService {
 
 		return commentList;
 	}
+
+	/**
+	 * コメントをDBに登録する
+	 * @param comment コメントオブジェクト
+	 * @return result 更新に成功すればtrue、失敗すればfalseを返す
+	 */
+	public boolean commentUpdate(Comment comment) {
+		boolean result = false;
+
+		try {
+			// データベース接続を開始する
+			transaction.open();
+
+			// トランザクションを開始する
+			transaction.beginTrans();
+
+			CommentDao commentDao = new CommentDao(transaction);
+			int count = commentDao.updateV2(comment);
+
+			if (count > 0) {
+				// 完了メッセージをセットする
+				messages.add(MessageCommons.MSG_UPDATE_COMPLETE);
+				result = true;
+			} else {
+				// エラーメッセージをセットする
+				messages.add(MessageCommons.MSG_UPDATE_FAILURE);
+				result = false;
+			}
+
+			// トランザクションをコミットする
+			transaction.commit();
+
+		} catch (IOException e) {
+			// トランザクションをロールバックする
+			transaction.rollback();
+
+			// エラーメッセージをセットする
+			messages.add(MessageCommons.ERR_DB_CONNECT);
+		} finally {
+			// データベース接続をを終了する
+			transaction.close();
+		}
+
+		return result;
+	}
+
 }

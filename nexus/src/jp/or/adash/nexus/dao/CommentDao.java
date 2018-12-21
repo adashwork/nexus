@@ -368,31 +368,31 @@ public class CommentDao {
 		int setFlagMatchId = 0;
 
 		// 事業所番号の有無
-		if(csp.getCompanyNo() != null || !csp.getCompanyNo().equals("")) {
+		if(csp.getCompanyNo() != null && !(csp.getCompanyNo().equals(""))) {
 			whereStr.add("companyNo = ?");
 			setFlagCompanyNo = ++setFlag;
 		}
 
 		// 求人NOの有無
-		if(csp.getKyujinNo() != null || !csp.getKyujinNo().equals("")) {
+		if(csp.getKyujinNo() != null && !(csp.getKyujinNo().equals(""))) {
 			whereStr.add("kyujinNo = ?");
 			setFlagKyujinNo = ++setFlag;
 		}
 
 		// 職業紹介者IDの有無
-		if(csp.getStaffId() != null || !csp.getStaffId().equals("")) {
+		if(csp.getStaffId() != null && !(csp.getStaffId().equals(""))) {
 			whereStr.add("staffId = ?");
 			setFlagStaffId = ++setFlag;
 		}
 
 		// 求職者IDの有無
-		if(csp.getJobSeekerId() != null || !csp.getJobSeekerId().equals("")) {
+		if(csp.getJobSeekerId() != null && !(csp.getJobSeekerId().equals(""))) {
 			whereStr.add("jobSeekerId = ?");
 			setFlagJobSeekerId = ++setFlag;
 		}
 
 		// マッチング事例IDの有無 : ない場合は呼び出し元サーブレット側で(-1)を代入させている
-		if(csp.getMatchId() != null || csp.getMatchId() != -1) {
+		if(csp.getMatchId() != null && csp.getMatchId() != -1) {
 			whereStr.add("matchId = ?");
 			setFlagMatchId = ++setFlag;
 		}

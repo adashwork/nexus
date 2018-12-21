@@ -66,6 +66,7 @@ public class MatchingUpdateServlet extends HttpServlet {
 		}
 		String assessment = request.getParameter("assessment");
 		String note = request.getParameter("note");
+		String noteM = "";
 		Date createDt = null;
 		String createUserId = request.getParameter("createuserid");
 		Date updateDt = null;
@@ -81,7 +82,7 @@ public class MatchingUpdateServlet extends HttpServlet {
 
 		//1.2 マッチング結果オブジェクトを作成
 		MatchingCase matching = new MatchingCase(id, companyNo, kyujinNo, jobseekerId, staffId, interviewDt, enterDt,
-				assessment, note, createDt, createUserId, updateDt, updateUserId);		// companyNo追加・修正 2018/12/11.12 T.Ikeda
+				assessment, noteM, createDt, createUserId, updateDt, updateUserId);		// companyNo追加・修正 2018/12/11.12 T.Ikeda
 
 		// マッチングコメントオブジェクトを作成                 // 追加 2018/12/20 T.Ikeda
 		comment = new Comment(0, companyNo, kyujinNo, jobseekerId, staffId, matchId,

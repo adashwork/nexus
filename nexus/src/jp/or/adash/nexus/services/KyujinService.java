@@ -228,36 +228,36 @@ public class KyujinService {
 
 		// 就業場所の長さが適切か
 		length = DataCommons.getBytes(kyujin.getAddress());
-		if (length <= 0 || length > 90) {
+		if (length <= 0 || length > 270) {
 			messages.add("就業場所を90字以内で入力してください。");
 			result = false;
 		}
 
 		// 沿線の長さが適切か
 		length = DataCommons.getBytes(kyujin.getNearline());
-		if (length < 0 || length > 30) {
+		if (length < 0 || length > 90) {
 			messages.add("沿線を30字以内で入力してください。");
 			result = false;
 		}
 
 		// 最寄り駅の長さが適切か
 		length = DataCommons.getBytes(kyujin.getNearstationKyujin());
-		if (length <= 0 || length > 30) {
+		if (length <= 0 || length > 90) {
 			messages.add("最寄り駅を30字以内で入力してください。");
 			result = false;
 		}
 
 		// 職種名の長さが適切か
 		length = DataCommons.getBytes(kyujin.getJob());
-		if (length <= 0 || length > 28) {
+		if (length <= 0 || length > 84) {
 			messages.add("職種名を28字以内で入力してください。");
 			result = false;
 		}
 
 		// 仕事の内容の長さが適切か
 		length = DataCommons.getBytes(kyujin.getDetail());
-		if (length <= 0 || length > 297) {
-			messages.add("仕事の内容を297字以内で入力してください。");
+		if (length <= 0 || length > 1200) {
+			messages.add("仕事の内容を400字以内で入力してください。");
 			result = false;
 		}
 
@@ -268,7 +268,7 @@ public class KyujinService {
 			result = false;
 		}
 
-		if (!kyujin.getKoyoukikan().equals("0")) {
+		if (kyujin.getKoyoukikan().equals("1")) {
 
 			if (kyujin.getKoyoukikankaishi() == null || kyujin.getKoyoukikanowari() == null) {
 				messages.add("雇用期間の期限を入れてください。");
@@ -306,21 +306,21 @@ public class KyujinService {
 
 		// 学歴の内容の長さが適切か
 		length = DataCommons.getBytes(kyujin.getEducation());
-		if (length < 0 || length > 64) {
+		if (length < 0 || length > 192) {
 			messages.add("学歴は64字以内にしてください。");
 			result = false;
 		}
 
 		// 必要な経験等の長さが適切か
 		length = DataCommons.getBytes(kyujin.getExperience());
-		if (length < 0 || length > 84) {
+		if (length < 0 || length > 252) {
 			messages.add("必要な経験等は84字以内にしてください。");
 			result = false;
 		}
 
 		// 必要な免許・資格等の内容の長さが適切か
 		length = DataCommons.getBytes(kyujin.getLicense());
-		if (length < 0 || length > 84) {
+		if (length < 0 || length > 252) {
 			messages.add("必要な免許・資格等は84字以内にしてください。");
 			result = false;
 		}
@@ -379,21 +379,21 @@ public class KyujinService {
 
 		// 賞与の内容の長さが適切か
 		length = DataCommons.getBytes(kyujin.getBonus());
-		if (length < 0 || length > 50) {
+		if (length < 0 || length > 150) {
 			messages.add("賞与は50字以内にしてください。");
 			result = false;
 		}
 
 		// 通勤手当の長さが適切か
 		length = DataCommons.getBytes(kyujin.getKoutuhi());
-		if (length < 0 || length > 30) {
+		if (length < 0 || length > 90) {
 			messages.add("通勤手当は30字以内にしてください。");
 			result = false;
 		}
 
 		// 諸手当の内容の長さが適切か
 		length = DataCommons.getBytes(kyujin.getTeate());
-		if (length < 0 || length > 30) {
+		if (length < 0 || length > 90) {
 			messages.add("諸手当は30字以内にしてください。");
 			result = false;
 		}

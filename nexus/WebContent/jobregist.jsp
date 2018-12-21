@@ -74,7 +74,7 @@
 						size="10" maxlength="10" tabindex="3"></td>
 				</tr>
 				<tr>
-					<th>事業所番号</th>
+					<th>事業所番号 [必須]</th>
 					<td><input type="text" name="companyno"
 						value="<c:out value="${ kyujin.companyno }" />" size="20"
 						maxlength="13" tabindex="4"></td>
@@ -126,8 +126,8 @@
 					<td><name="establishdt">年</td>
 				</tr>
 				<tr>
-					<th>資本金</th>
-					<td><name="capital">万円</td>
+					<th>資本金（単位：百万円）</th>
+					<td><name="capital">百万円</td>
 				</tr>
 				<tr>
 					<th>従業員数</th>
@@ -195,7 +195,7 @@
 					</select></td>
 				</tr>
 				<tr>
-					<th>就業場所郵便番号</th>
+					<th>就業場所郵便番号 [必須]</th>
 					<td><input type="text" name="postal"
 						value="<c:out value="${ kyujin.postal }" />" size="10"
 						maxlength="8" tabindex="21"></td>
@@ -211,7 +211,7 @@
 					</select></td>
 				</tr>
 				<tr>
-					<th>就業場所住所</th>
+					<th>就業場所住所 [必須]</th>
 					<td><input type="text" name="address"
 						value="<c:out value="${ kyujin.address }" />" size="40"
 						maxlength="90" tabindex="23"></td>
@@ -223,15 +223,15 @@
 						maxlength="30" tabindex="24"></td>
 				</tr>
 				<tr>
-					<th>就業場所最寄り駅</th>
+					<th>就業場所最寄り駅 [必須]</th>
 					<td><input type="text" name="nearstationkj"
 						value="<c:out value="${ kyujin.nearstationKyujin }" />" size="40"
 						maxlength="30" tabindex="25"></td>
 				</tr>
 				<tr>
-					<th>職種</th>
+					<th>職種 [必須]</th>
 					<td><input type="text" name="job"
-						value="<c:out value="${ kyujin.job }" />" size="40" maxlength="28"
+						value="<c:out value="${ kyujin.job }" />" size="28" maxlength="28"
 						tabindex="26"></td>
 				</tr>
 				<tr>
@@ -246,7 +246,7 @@
 
 				</tr>
 				<tr>
-					<th>仕事の内容</th>
+					<th>仕事の内容 [必須]</th>
 					<td><textarea name="detail" rows="3" cols="40" tabindex="29"><c:out
 								value="${ kyujin.detail }" /></textarea></td>
 				</tr>

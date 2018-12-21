@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class CommentDeleteServlet
  */
-@WebServlet("/comment-delete")
+@WebServlet("/web/comment-delete")
 public class CommentDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

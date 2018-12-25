@@ -1,6 +1,6 @@
 begin;
 -- ローカルで試す際は自身のuser名に変更
-use mori;
+use trynexus;
 
  truncate table   staff;
  truncate table   jobseeker;

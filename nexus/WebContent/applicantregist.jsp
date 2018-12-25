@@ -104,7 +104,7 @@
 		</c:forEach>
 	</ul>
 	<div id="job_seeker">
-		<form action="/nexus/web/jobseeker-edit" method="post">
+		<form action="/nexus/web/jobseeker-regist" method="post">
 
 		  <div id="tab-controll" class="tab-menu">
 		<ul>
@@ -493,13 +493,10 @@
 				</tr>
 
 			</table>
-			<input type="submit" value="更新" class="main-b">
-		</form>
-		<input class="main-b" type="button"
-			onclick="location.href='/nexus/web/jobseeker-regist'" value="登録">
+		<input class="main-b" type="submit" value="登録">
 		<input class="main-b" type="button"
 			onclick="location.href='/nexus/web/jobseeker-list'" value="一覧に戻る">
-
+	</form>
 	</div>
 	</main>
 	<!-- フッター　-->

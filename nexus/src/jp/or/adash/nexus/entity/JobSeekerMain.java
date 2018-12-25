@@ -139,6 +139,7 @@ public class JobSeekerMain{
 		this.caution = caution;
 		//this.tantoustaffname = tantoustaffname;
 		this.tantoustaffid = tantoustaffid;
+		this.note = note;
 		this.password = password;
 		this.createdt = createdt;
 		this.createuserid = createuserid;

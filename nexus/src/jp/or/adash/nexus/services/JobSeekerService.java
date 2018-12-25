@@ -107,8 +107,10 @@ public class JobSeekerService {
 			transaction.open();
 
 			// 商品単価を取得する
-			JobSeeker_dao dao = new JobSeeker_dao(transaction);
-			jobseeker = dao.selectJobseekermaininfo(js_id);
+/*			JobSeeker_dao dao = new JobSeeker_dao(transaction);
+			jobseeker = dao.selectJobseekermaininfo(js_id);*/
+			JobSeekerDao jobSeekerDao = new JobSeekerDao(transaction);
+			jobseeker = jobSeekerDao.selectJobSeeker(js_id);
 
 		} catch (IOException e) {
 			// エラーメッセージをセットする
@@ -764,7 +766,7 @@ public class JobSeekerService {
 	 * 求職者情報をデータベースに登録する
 	 * @param seeker 求職者情報
 	 * @return 処理結果（true:成功、false:失敗）
-	 * @author Y.Okamura & T.Uchi
+	 * @author Y.Okamura & T.Uchi & mmiyamoto
 	 */
 	public boolean insertJobSeeker(JobSeeker seeker) {
 		boolean result = false; // 処理結果
@@ -786,9 +788,10 @@ public class JobSeekerService {
 
 			// DBに求職者情報を取得する
 			JobSeekerDao dao = new JobSeekerDao(transaction);
-			int count = dao.insert(seeker);
+			int count = dao.insertPrivateData(seeker);
+			count += dao.insertZokuseiData(seeker);
 
-			if (count > 0) {
+			if (count > 1) {
 				// 完了メッセージをセットする
 				messages.add("登録完了");
 				result = true;

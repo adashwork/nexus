@@ -81,23 +81,23 @@
 				</tr>
 				<tr>
 					<th>事業所名（全角カナ）</th>
-					<td><name="companykana"></td>
+					<td><c:out value="${ company.companyKana }" /></td>
 				</tr>
 				<tr>
 					<th>事業所名</th>
-					<td><name="companyname"></td>
+					<td><c:out value="${ company.companyName }" /></td>
 				</tr>
 				<tr>
 					<th>事業所郵便番号</th>
-					<td><name="companypostal"></td>
+					<td><c:out value="${ company.companyPostal }" /></td>
 				</tr>
 				<tr>
 					<th>事業所所在地</th>
-					<td><name="companyplace"></td>
+					<td><c:out value="${ company.companyPlace }" /></td>
 				</tr>
 				<tr>
 					<th>事業所URL</th>
-					<td><name="companyurl"></td>
+					<td><c:out value="${ company.companyUrl }" /></td>
 				</tr>
 
 				<!-- 1やりたかったメモ：一行テキストボックスはenter押すとすぐに登録なので
@@ -105,39 +105,23 @@
 
 				<tr>
 					<th>産業大分類コード</th>
-					<td><select name="jobcategorylargecd" tabindex="5">
-							<option></option>
-							<c:forEach var="jobcategory" items="${ JCLargelist }"
-								varStatus="status">
-								<option value="${ status.index }"
-									<c:if test="${ company.jobcategorylargecd == status.index }">selected="selected" </c:if>>
-									${ jobcategory.name }</option>
-							</c:forEach>
-					</select></td>
+					<td><c:out value="${ company.jobCategoryLargeCd }" /></td>
 				</tr>
 				<tr>
 					<th>産業細分類コード</th>
-					<td><select name="jobcategorysmallcd" tabindex="6">
-							<option></option>
-							<c:forEach var="jobcategory" items="${ JCSmalllist }"
-								varStatus="status">
-								<option value="${ status.index }"
-									<c:if test="${ company.jobcategorysmallcd == status.index }">selected="selected" </c:if>>
-									${ jobcategory.name }</option>
-							</c:forEach>
-					</select></td>
+					<td><c:out value="${ company.jobCategorySmallCd }" /></td>
 				</tr>
 				<tr>
 					<th>創業設立年</th>
-					<td><name="establishdt">年</td>
+					<td><c:out value="${ company.establishDt }" /></td>
 				</tr>
 				<tr>
 					<th>資本金（単位：百万円）</th>
-					<td><name="capital">百万円</td>
+					<td><c:out value="${ company.capital }" /></td>
 				</tr>
 				<tr>
 					<th>従業員数</th>
-					<td><name="employees"></td>
+					<td><c:out value="${ company.employees }" /></td>
 				</tr>
 				<tr>
 					<%--					<th>会社の特徴</th>
@@ -148,7 +132,7 @@
 --%>
 
 
-<!-- selectedのバグを修正するひつようあり -->
+					<!-- selectedのバグを修正するひつようあり -->
 				<tr>
 					<th>職種大分類コード１</th>
 
@@ -176,7 +160,7 @@
 					<th>職種大分類コード2</th>
 					<td><select id="joblcd2" name="joblargecd2" tabindex="17">
 							<option value=""></option>
-							<c:forEach var="job" items="${ Largelist }" varStatus="status">
+							<c:forEach var="job" items="${ Largelist }">
 								<option value="${ job.largecd }"
 									<c:if test="${ kyujin.joblargecd2 == job.largecd }">selected</c:if>>
 									${ job.name }</option>
@@ -187,7 +171,7 @@
 					<th>職種細分類コード2</th>
 					<td><select id="jobscd2" name="jobsmallcd2" tabindex="18">
 							<option value=""></option>
-							<c:forEach var="job" items="${ Smalllist }" varStatus="status">
+							<c:forEach var="job" items="${ Smalllist }">
 								<option value="${ job.smallcd }"
 									<c:if test="${ kyujin.jobsmallcd2 == job.smallcd }">selected</c:if>>
 									${ job.name }</option>
@@ -198,7 +182,7 @@
 					<th>職種大分類コード3</th>
 					<td><select id="joblcd3" name="joblargecd3" tabindex="19">
 							<option value=""></option>
-							<c:forEach var="job" items="${ Largelist }" varStatus="status">
+							<c:forEach var="job" items="${ Largelist }">
 								<option value="${ job.largecd }"
 									<c:if test="${ kyujin.joblargecd3 == job.largecd }">selected</c:if>>
 									${ job.name }</option>
@@ -209,7 +193,7 @@
 					<th>職種細分類コード3</th>
 					<td><select id="jobscd3" name="jobsmallcd3" tabindex="20">
 							<option value=""></option>
-							<c:forEach var="job" items="${ Smalllist }" varStatus="status">
+							<c:forEach var="job" items="${ Smalllist }">
 								<option value="${ job.smallcd }"
 									<c:if test="${ kyujin.jobsmallcd3 == job.smallcd }">selected</c:if>>
 									${ job.name }</option>
@@ -225,11 +209,11 @@
 
 				<tr>
 					<th>就業場所都道府県</th>
-					<td><select id="tdhken" name="adresscd" tabindex="22">
+					<td><select id="tdhken" name="addresscd" tabindex="22">
 							<option value=""></option>
 							<c:forEach var="todouhuken" items="${ list }">
-								<option value="${ tdhken.name }"
-									<c:if test="${ kyujin.adresscd == todouhuken.cd }">selected</c:if>>
+								<option value="${ todouhuken.cd }"
+									<c:if test="${ kyujin.addresscd == todouhuken.cd }">selected</c:if>>
 									${ todouhuken.name }</option>
 							</c:forEach>
 					</select></td>
@@ -455,43 +439,43 @@
 				</tr>
 				<tr>
 					<th>選考担当者課係名/役職名</th>
-					<td><name="tantouyakushoku"></td>
+					<td><c:out value="${ company.tantouYakushoku }" /></td>
 				</tr>
 				<tr>
 					<th>選考担当者名（ひらがな）</th>
-					<td><name="tantoukana"></td>
+					<td><c:out value="${ company.tantouKana }" /></td>
 				</tr>
 				<tr>
 					<th>選考担当者名</th>
-					<td><name="tantou"></td>
+					<td><c:out value="${ company.tantou }" /></td>
 				</tr>
 				<tr>
 					<th>担当者TEL</th>
-					<td><name="tantoutel"></td>
+					<td><c:out value="${ company.tantouTel }" /></td>
 				</tr>
 				<tr>
 					<th>担当者FAX</th>
-					<td><name="tantoufax"></td>
+					<td><c:out value="${ company.tantouFax }" /></td>
 				</tr>
 				<tr>
 					<th>担当者email</th>
-					<td><name="tantoumail"></td>
+					<td><c:out value="${ company.tantouMail }" /></td>
 				</tr>
 				<tr>
 					<th>担当者備考</th>
-					<td><name="tantoumail"></td>
+					<td><c:out value="${ company.tantouNote }" /></td>
 				</tr>
 				<tr>
 					<th>担当職業紹介者ID</th>
-					<td><name="tantounote"></td>
+					<td><c:out value="${ company.tantouStaffId }" /></td>
 				</tr>
 				<tr>
 					<th>営業評価ランクABC</th>
-					<td><name="salesrank"></td>
+					<td><c:out value="${ company.salesRank }" /></td>
 				</tr>
 				<tr>
 					<th>営業備考</th>
-					<td><name="salesnote"></td>
+					<td><c:out value="${ company.salesNote }" /></td>
 				</tr>
 				<tr>
 					<th>応募書類</th>
@@ -586,7 +570,7 @@
 		<small>Copyright(C) 2009有限責任事業組合 大阪職業教育協働機構(A'ワーク創造館) All
 			Rights Reserved.</small>
 	</footer>
-<%--		<script src="../js/jobcategorypulldown.js" type="text/javascript"
+	<%--		<script src="../js/jobcategorypulldown.js" type="text/javascript"
 		charset="utf-8"></script>
  				<script src="../js/jobcd.js" type="text/javascript"
 		charset="utf-8"></script>

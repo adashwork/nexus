@@ -466,7 +466,6 @@
 							value="${ info.tantoustaffid }" /></td>
 				</tr>
 				</table>
-<<<<<<< HEAD
 <!doctype html>
 <html>
 <head>
@@ -526,8 +525,6 @@
 	    </div>
   </div>
  </div>
-=======
->>>>>>> refs/remotes/origin/#196
 
 			<!--<input type="submit" value="更新" class="main-b">  -->
 		</form>

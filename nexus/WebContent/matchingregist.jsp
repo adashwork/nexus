@@ -133,7 +133,7 @@
 				</th>
 				<td>
 																	<!-- komukai　2018/12/17 ID検索ボタン内編集 -->
-					<input type="text" name="companyNo" size="10" value="<c:out value="${ matching.companyNo }" />">
+					<input type="text" name="companyNo" size="10" maxlength="13" value="<c:out value="${ matching.companyNo }" />">
 					<input type="button" value="企業ID検索"
 						onclick="window.open('/nexus/web/matching-companyid-search','','width=750,height=*,resizeable=yes')">
 
@@ -147,7 +147,7 @@
 				</th>
 				<td>
 																	<!-- komukai　2018/12/17 ID検索ボタン内編集 -->
-					<input type="text" name="kyujinno" size="10" value="<c:out value="${ matching.kyujinno }" />">
+					<input type="text" name="kyujinno" size="10" maxlength="14" value="<c:out value="${ matching.kyujinno }" />">
 					<input type="button" value="求人ID検索"
 						onclick="window.open('/nexus/web/matching-kyujinid-search','','width=750,height=*,resizeable=yes')">
 				</td>
@@ -160,7 +160,7 @@
 				</th>
 				<td>
 																	<!-- komukai　2018/12/18 ID検索ボタン内編集 -->
-					<input type="text" name="jobseekerid" size="10" value="<c:out value="${ matching.jobseekerid }" />">
+					<input type="text" name="jobseekerid" size="10" maxlength="8" value="<c:out value="${ matching.jobseekerid }" />">
 					<input type="button" value="求職者ID検索"
 						onclick="window.open('/nexus/web/matching-jobseekerid-search','','width=750,height=*,resizeable=yes,scrollbars=yes')">
 				</td>
@@ -172,7 +172,7 @@
 					職業紹介者ID
 				</th>
 				<td>
-					<input type="text" name="staffid" size="4"
+					<input type="text" name="staffid" size="4" maxlength="4"
 						<c:if test="${ matching.staffid == null }">value="<fmt:formatNumber value="${ Staff.id }" pattern="0000" />"</c:if>
 						<c:if test='${ matching.staffid != null }'>value="<fmt:formatNumber value='${ matching.staffid }' pattern='0000' />"</c:if>
 					>
@@ -242,7 +242,12 @@
 				</td>
 				<td align="left" width="40%">
 					<span>重要</span>
-					<input type="checkbox" name="inportant" value="">
+					<c:if test="${ comment.important == 1 }">
+						<input type="checkbox" name="important" value="1" checked>
+					</c:if>
+					<c:if test="${ comment.important == 0 || comment.important == null }">
+						<input type="checkbox" name="important" value="1">
+					</c:if>
 				</td>
 			</tr>
 			<tr>
@@ -255,7 +260,7 @@
 
 		<button type="button" class="main-b" onClick="location.href='./matching-search'">検索画面に戻る</button>
 		<button type="button" class="main-b" onClick="location.href='./staff-top'">トップに戻る</button>
-		<c:if test="${ matching.id == null }">
+		<c:if test="${ matching.id == null || matching.id == 0 }">
 				<button type="submit" id="matching-regist" class="main-b" onclick="MovePages(this)">登録</button>
 		</c:if>
 		<c:if test="${ matching.id != null && matching.id != 0 }">

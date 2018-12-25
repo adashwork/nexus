@@ -443,65 +443,6 @@
 							value="${ info.tantoustaffid }" /></td>
 				</tr>
 				</table>
-<!doctype html>
-<html>
-<head>
-<meta charset="UTF-8">
-<link rel="stylesheet" href="test1.css">
-<title>test</title>
-</head>
-<body>
-
-<div id="wrap">
-  <div class="up1">
-		<p>フリーコメント1</p>
-		<input class="comment-title" type="text" name="タイトル">
-		<label><input class="comment-checkbox" type="checkbox">重要</label>
-		<textarea rows="4" cols="50" wrap="hard"></textarea>
-	</div>
-  <div class="down">
-		<div class="box">
-			<p>登録ID：</p>
-			<p>更新ID：</p>
-	  	</div>
- 		<div class="box">
-			<p>登録日:</p>
-		  	<p>更新日：</p>
-	    </div>
-  </div>
-	<div class="up2">
-		<h2>フリーコメント2</h2>
-		<input class="comment-title" type="text" name="タイトル">
-		<label><input class="comment-checkbox" type="checkbox">重要</label>
-		<textarea rows="4" cols="50" wrap="hard"></textarea>
-	</div>
-  <div class="down">
-		<div class="box">
-			<p>登録ID：</p>
-			<p>更新ID：</p>
-	  	</div>
- 		<div class="box">
-			<p>登録日:</p>
-		  	<p>更新日：</p>
-	    </div>
-  </div>
-	<div class="up3">
-		<h2>フリーコメント3</h2>
-		<input class="comment-title" type="text" name="タイトル">
-		<label><input class="comment-checkbox" type="checkbox">重要</label>
-		<textarea rows="4" cols="50" wrap="hard"></textarea>
-	</div>
-  <div class="down">
-		<div class="box">
-			<p>登録ID：</p>
-			<p>更新ID：</p>
-	  	</div>
- 		<div class="box">
-			<p>登録日:</p>
-		  	<p>更新日：</p>
-	    </div>
-  </div>
- </div>
 
 			<!--<input type="submit" value="更新" class="main-b">  -->
 		</form>

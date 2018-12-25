@@ -49,6 +49,8 @@
 <body>
 	<form id="form" method="post" action="">
 		<div id="container">
+			<!-- 必要なパラメータをhiddenで持たせる -->
+			<input type="hidden" name="commentid" value="<c:out value="${ comment.id }" />">
 			<h3>フリーコメント1</h3>
 			<ul>
 				<c:forEach var="message" items="${ messages }">
@@ -94,7 +96,9 @@
 							</select></td>
 							<td><input type="text" name="title"
 								value="<c:out value="${ comment.title }" />"></td>
-							<td><input type="checkbox" name="">重要</td>
+							<td>
+								<input type="checkbox" name="important" value="1">重要
+							</td>
 						</tr>
 					</tbody>
 					<tfoot>
@@ -132,7 +136,7 @@
 				</div>
 			</div>
 			<input class="main-b" type="submit" id="comment-delete"
-				onclick="PageMoves(this)" value="削除"> <input class="main-b"
+				onclick="MovePages(this)" value="削除"> <input class="main-b"
 				type="submit" id="comment-update" onclick="MovePages(this)"
 				value="更新"> <input class="main-b" type="submit" onclick=""
 				value="戻る"> <input class="main-b" type="submit"

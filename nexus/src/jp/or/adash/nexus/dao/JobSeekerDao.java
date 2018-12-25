@@ -139,6 +139,209 @@ public class JobSeekerDao {
 		return count;
 	}
 
+
+	/**
+	 * 求職者の個人情報を登録する
+	 * @param seeker 登録する求職者の情報
+	 * @return 登録件数
+	 * @throws IOException
+	 * @author mmiyamoto
+	 */
+	public int insertPrivateData(JobSeeker seeker) throws IOException {
+		int count = 0;
+
+		// SQL文を生成する
+		StringBuffer sql = new StringBuffer();
+		sql.append("insert into jobseeker(");
+		sql.append(" id, ");
+		sql.append(" name, ");
+		sql.append(" kana, ");
+		sql.append(" address, ");
+		sql.append(" seekermail, ");
+		sql.append(" phone, ");
+		sql.append(" mobile, ");
+		sql.append(" createuserid ");
+		sql.append(" updateuserid ");
+		sql.append(" deleteflag ");
+
+		sql.append(") values (");
+
+		sql.append("?, ?, ?, ?, ?, ");
+		sql.append("?, ?, ?, ?, ?, ");
+		sql.append("0 ");
+		sql.append(")");
+		try (PreparedStatement ps = this.conn.prepareStatement(sql.toString())) {
+			ps.setString(1, seeker.getId());
+			ps.setString(2, seeker.getName());
+			ps.setString(3, seeker.getKana());
+			ps.setString(4, seeker.getAddress());
+			ps.setString(5, seeker.getSeekermail());
+			ps.setString(6, seeker.getPhone());
+			ps.setString(7, seeker.getMobile());
+			ps.setString(8, seeker.getCreateuserid());
+			ps.setString(9, seeker.getUpdateuserid());
+			// SQL文を実行する
+			count = ps.executeUpdate();
+		} catch (SQLException e) {
+			throw new IOException(e);
+		}
+		return count;
+	}
+
+	/**
+	 * 求職者の属性情報を登録する
+	 * @param seeker 登録する求職者の情報
+	 * @return 登録件数
+	 * @throws IOException
+	 * @author mmiyamoto
+	 */
+	public int insertZokuseiData(JobSeeker seeker) throws IOException {
+		int count = 0;
+
+		// SQL文を生成する
+		StringBuffer sql = new StringBuffer();
+		sql.append("insert into zokuseijobseeker(");
+		sql.append(" id, ");
+		sql.append(" birthdt, ");
+		sql.append(" sex, ");
+		sql.append(" postal, ");
+		sql.append(" nearstation, ");
+		sql.append(" partner, ");
+		sql.append(" huyou, ");
+		sql.append(" education, ");
+		sql.append(" career, ");
+		sql.append(" HOPEJOB1, ");
+		sql.append(" HOPEJOB2, ");
+		sql.append(" HOPEJOB3, ");
+		sql.append(" HOPEJOBCATEGORY, ");
+		sql.append(" HOPEJOBCATEGORY2, ");
+		sql.append(" HOPEJOBCATEGORY3, ");
+		sql.append(" hopeworkplace, ");
+		sql.append(" hopekoyoukeitai, ");
+		sql.append(" hopeweekday, ");
+		sql.append(" hopeworkingdate, ");
+		sql.append(" hopebegintime, ");
+
+		sql.append(" hopesalary, ");
+		sql.append(" hopejikyu, ");
+		sql.append(" hopeetc, ");
+		sql.append(" driverlicense, ");
+		sql.append(" licenseetc, ");
+		sql.append(" pasokonskill, ");
+		sql.append(" caution, ");
+		sql.append(" tantoustaffid, ");
+		sql.append(" id, ");
+		sql.append(" id, ");
+		sql.append(" id, ");
+		sql.append(" id, ");
+		sql.append(" id, ");
+		sql.append(" id, ");
+		sql.append(" id, ");
+		sql.append(" id, ");
+		sql.append(" id, ");
+		sql.append(" id, ");
+		sql.append(" id, ");
+		sql.append(" id, ");
+		sql.append(" id, ");
+		sql.append(" id, ");
+		sql.append(" id, ");
+		sql.append(" id, ");
+		sql.append(" id, ");
+
+		sql.append("id, name, kana, birthdt, sex, postal,");
+		sql.append("address, seekermail, nearstation, phone, mobile, partner, huyou, education, career");
+		sql.append("HOPEJOB1, HOPEJOB2, HOPEJOB3, HOPEJOBCATEGORY, HOPEJOBCATEGORY2, HOPEJOBCATEGORY3, hopeworkplace,");
+		sql.append("hopekoyoukeitai, hopeweekday, hopeworkingdate, hopebegintime, hopeendtime,");
+		sql.append("hopesalary, hopejikyu, hopeetc, driverlicense,licenseetc,");
+		sql.append("pasokonskill,caution, tantoustaffid, password, note");
+		sql.append("createdt, createuserid, updatedt, updateuserid, deleteflag");
+		sql.append(") values (");
+		sql.append("?, ?, ?, ?, ?, ?, ?,");
+		sql.append("?, ?, ?, ?, ?, ?, ?,");
+		sql.append("?, ?, ?, ?, ?,");
+		sql.append("?, ?, ?, ?,");
+		sql.append("?, ?, ?, ?, ?,");
+		sql.append("?, ?, ?, ?,");
+		sql.append("? ,?, 0");
+		sql.append(")");
+		try (PreparedStatement ps = this.conn.prepareStatement(sql.toString())) {
+			ps.setString(1, seeker.getId());
+			ps.setString(2, seeker.getName());
+			ps.setString(3, seeker.getKana());
+			ps.setDate(4, DataCommons.convertToSqlDate(seeker.getBirthdt()));
+			ps.setString(5, seeker.getSex());
+//			ps.setInt(6, seeker.getAge());
+			ps.setString(6, seeker.getPostal());
+			ps.setString(7, seeker.getAddress());
+			ps.setString(8, seeker.getSeekermail());
+			ps.setString(9, seeker.getNearstation());
+			ps.setString(10, seeker.getPhone());
+			ps.setString(11, seeker.getMobile());
+			ps.setString(12, seeker.getPartner());
+			ps.setInt(13, seeker.getHuyou());
+			ps.setString(14, seeker.getEducation());
+			ps.setString(15, seeker.getCareer());
+			ps.setString(16, seeker.getHOPEJOB1());
+			ps.setString(17, seeker.getHOPEJOB2());
+			ps.setString(18, seeker.getHOPEJOB3());
+			ps.setString(19, seeker.getHOPEJOBCATEGORY());
+			ps.setString(20, seeker.getHOPEJOBCATEGORY2());
+			ps.setString(21, seeker.getHOPEJOBCATEGORY3());
+			ps.setString(22, seeker.getHopeworkplace());
+			ps.setString(23, seeker.getHopekoyoukeitai());
+			if (seeker.getHopeworkingdate() != null) {
+                ps.setInt(24, seeker.getHopeworkingdate());
+            } else {
+                ps.setNull(25, java.sql.Types.INTEGER);
+            }
+			if (seeker.getHopebegintime() != null) {
+                ps.setInt(26, seeker.getHopebegintime());
+            } else {
+                ps.setNull(27, java.sql.Types.INTEGER);
+            }
+			if (seeker.getHopeendtime() != null) {
+                ps.setInt(28, seeker.getHopeendtime());
+            } else {
+                ps.setNull(29, java.sql.Types.INTEGER);
+            }
+			if (seeker.getHopesalary() != null) {
+                ps.setInt(30, seeker.getHopesalary());
+            } else {
+                ps.setNull(31, java.sql.Types.INTEGER);
+            }
+			if (seeker.getHopejikyu() != null) {
+                ps.setInt(32, seeker.getHopejikyu());
+            } else {
+                ps.setNull(33, java.sql.Types.INTEGER);
+            }
+			//ps.setInt(21, seeker.getHopeworkingDate());
+//			ps.setInt(22, seeker.getHopebegintime());
+//			ps.setInt(23, seeker.getHopeendtime());
+//			ps.setInt(24, seeker.getHopesalary());
+//			ps.setInt(25, seeker.getHopejikyu());
+			ps.setString(34, seeker.getHopeetc());
+			ps.setString(35, seeker.getDriverlicense());
+			ps.setString(36, seeker.getLicenseetc());
+			ps.setString(37, seeker.getPasokonskill());
+			ps.setString(38, seeker.getCaution());
+			ps.setString(39, seeker.getTantoustaffid());
+			ps.setString(40, seeker.getPassword());
+		    ps.setString(41, seeker.getNote());
+		    //ps.setDate(42, (Date) seeker.getCreatedt());
+			ps.setString(42, seeker.getCreateuserid());
+			//ps.setDate(44, (Date) seeker.getUpdatedt());
+			ps.setString(43, seeker.getUpdateuserid());
+			//ps.setString(34, seeker.getDeleteflag());
+
+			// SQL文を実行する
+			count = ps.executeUpdate();
+		} catch (SQLException e) {
+			throw new IOException(e);
+		}
+
+		return count;
+	}
+
 	/**
 	 * 求職者IDを元に、求人情報（1件）を取得する
 	 * @param id 求職者ID

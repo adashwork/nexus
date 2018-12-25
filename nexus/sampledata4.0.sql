@@ -27,7 +27,7 @@ insert into staff values('0003','大西奈央','おおにしなお','2','333',cu
 
 
 -- 求職者マスタのサンプルデータ
-insert into jobseeker values('00111','後藤又兵衛','ごとうまたべえ','1969/7/27','1',49,'633-0234','奈良県宇陀市榛原高塚1-4-4','bdash@gnail.com','喜連瓜破','745263141','8028916797','1',1,'4','さる事件の影響でリストラに遭い、様々な職を経験して参りました。','31','233','10','30','12','972','31','1','1234567',5,1000,1800,230000,null,'海外勤務も希望です。','12','ひよこ鑑定士 / アロマセラピスト2級 / 毛筆初段','Javaプログラミング能力1級','軽度の色覚障碍','0001','2525cash','勤務時間、曜日は柔軟に可',current_timestamp,'0001',current_timestamp,'0001','0');
+insert into jobseeker values('00111','後藤又兵衛','ごとうまたべえ','1969/7/27','1',49,'555-6969','大阪市藤井寺市道明寺１－２０','bdash@gnail.com','喜連瓜破','745263141','8028916797','1',1,'4','さる事件の影響でリストラに遭い、様々な職を経験して参りました。','31','233','10','30','12','972','31','1','1234567',5,1000,1800,230000,null,'海外勤務も希望です。','12','ひよこ鑑定士 / アロマセラピスト2級 / 毛筆初段','Javaプログラミング能力1級','軽度の色覚障碍','0001','2525cash','勤務時間、曜日は柔軟に可',current_timestamp,'0001',current_timestamp,'0001','0');
 insert into jobseeker values('00112','蘇我蝦夷','そがのえみし','1991/1/20','1',27,'623-0025','京都府綾部市月見町3-7-4-4','ueue@shitashita.ne.jp','男山','777463775','8057721419','1',2,'2','ファーウェイジャパンの個人情報管理課に3年間勤務','20','22','23','5',null,null,'28','5','12345',5,1000,1700,130000,1200,'残業不可','1',null,'MOSエキスパート',null,'0003','2525cash',null,current_timestamp,'0003',current_timestamp,'0003','0');
 insert into jobseeker values('00113','浅井お市','あざいおいち','1985/3/30','2',33,'522-0005','滋賀県彦根市小野町4-12','hidarimigi@hidarimigi.ba.jp','虎姫','749638094','9004399284','0',1,'3','保育園で通算10年働いておりました。','133','361','42','6','3',null,'27','5','12456',4,9000,2000,null,1300,'特になし','0','保育士',null,'てんかんの持病あり','0002','2525cash',null,'2018-10-15','0002',current_timestamp,'0003','0');
 
@@ -42,22 +42,22 @@ values(3,'2222-123456-7','41244-95544575','00113','0001','2017-3-9','2017-4-1','
 
 
 -- 企業マスタのサンプルデータ
-insert into company values('1234567890123','1234-567890-1','ABC株式会社','エービーシーカブシキガイシャ','555-1144','兵庫県尼崎市南城内4-4-15','園部駅','https://localhost:8080/nexus/top','972','97','S','1000000000','1200',1955,'社畜','修羅コーサク','しゅら こうさく','06-459-4649','06-459-4949','hakata@pineapple.go.jp','総務・人事と様々にご担当。赤福を持参すると喜ばれる。','0001','A','過去実績良好',current_timestamp,'0001',current_timestamp,'0001',0);
-insert into company values('5678901231234','567890-1-1234','C株式会社','シーカブシキガイシャ','102-0075','東京都千代田区三番町20番地','東京駅','https://localhost:8080/nexus/staff','53','5','C','5000000000','100',1867,null,null,null,null,null,null,null,'0002','B',null,current_timestamp,'0003',current_timestamp,'0003',0);
+insert into company values('1234567890123','1234-567890-1','ABC株式会社','エービーシーカブシキガイシャ','555-1144','兵庫県尼崎市南城内4-4-15','園部駅','https://localhost:8080/nexus/top','972','97','S','15000','1200',1955,'社畜','修羅コーサク','しゅら こうさく','06-459-4649','06-459-4949','hakata@pineapple.go.jp','総務・人事と様々にご担当。赤福を持参すると喜ばれる。','0001','A','過去実績良好',current_timestamp,'0001',current_timestamp,'0001',0);
+insert into company values('5678901231234','567890-1-1234','C株式会社','シーカブシキガイシャ','102-0075','東京都千代田区三番町20番地','東京駅','https://localhost:8080/nexus/staff','53','5','C','80','100',1867,null,null,null,null,null,null,null,'0002','B',null,current_timestamp,'0003',current_timestamp,'0003',0);
 insert into company values('3123456789012','890567-1-1234','D株式会社','ディーカブシキガイシャ','102-0015','東京都千代田区三番町20番地','渋谷駅','https://localhost:8080/web/jobseeker-list','102','10','E','3000000','10',2011,null,null,null,null,null,null,null,'0002','C',null,current_timestamp,'0002',current_timestamp,'0001',0);
 
 
 -- 求人情報のサンプルデータ
-insert into kyujin values('12457-44446666','1234-567890-1','エービーシーカブシキガイシャ','555-1144','兵庫県尼崎市南城内4-4-15','阪神神戸線','園部駅','12','000','012','011','C','A','A','議員','あぁぁぁあ','5','1','有り。更新の可能性有り（最長4年）','2019-04-25','2023-04-20','大卒','ジバン　カンバン　カバン','税理士',20,70,'1',180000,600000,'なし','50000','350000','0930','1730','有り 1600～2130勤務も','時期によりあり','0',20,3,5,'180','履歴書・職務経歴書','社内高齢化による人手不足のため','10','1',25,60,'暴力団・半グレ構成員は不可','2025-03-01','2019-07-25',current_timestamp,'0002',current_timestamp,'0002',0);
-insert into kyujin values('98765-43211234','2222-333333-4','エスビークリエイティブカブシキガイシャ','106-0032','東京都港区六本木2-4-5',null,'東京駅','10','011','000','051','A','C','B','システムエンジニア','AAAAA','4','1','なし',null,null,'専門学校',null,null,20,65,'3',1500,2500,'なし','あり','なし',9999,9999,null,null,'0',null,0,'3',null,null,null,'3','2',18,40,null,'2019-10-01','2019-08-31',current_timestamp,'0003',current_timestamp,'0001',0);
-insert into kyujin values('27010-82282581','2701-925459-2','カブシキガイシャパソナハートフルオオサカジギョウショ','541-0047','大阪市中央区淡路町4-2-15','地下鉄各線','本町駅','01','251','051','042','D','A','C','一般事務・軽作業','庶務二課にて庶務','1','2','あり','2019-01-07','2025-09-30','高卒',null,null,18,60,'1',150000,250000,'あり','あり',null,0900,1700,null,null,'1','0',null,'5',null,null,null,'5','2',20,35,null,'2019-03-28','2019-03-10',current_timestamp,'0002',current_timestamp,'0002',0);
+insert into kyujin values('12457-44446666','1234-567890-1','555-1144','兵庫県尼崎市南城内4-4-15','阪神神戸線','園部駅','12','000','012','011','C','A','A','議員','あぁぁぁあ','5','1','有り。更新の可能性有り（最長4年）','2019-04-25','2023-04-20','大卒','ジバン　カンバン　カバン','税理士',20,70,'1',180000,600000,'なし','50000','350000','0930','1730','有り 1600～2130勤務も','時期によりあり','0',20,3,5,'180','履歴書・職務経歴書','社内高齢化による人手不足のため','10','1',25,60,'暴力団・半グレ構成員は不可','2025-03-01','2019-07-25',current_timestamp,'0002',current_timestamp,'0002',0);
+insert into kyujin values('98765-43211234','2222-333333-4','106-0032','東京都港区六本木2-4-5',null,'東京駅','10','011','000','051','A','C','B','システムエンジニア','AAAAA','4','1','なし',null,null,'専門学校',null,null,20,65,'3',1500,2500,'なし','あり','なし',9999,9999,null,null,'0',null,0,'3',null,null,null,'3','2',18,40,null,'2019-10-01','2019-08-31',current_timestamp,'0003',current_timestamp,'0001',0);
+insert into kyujin values('27010-82282581','2701-925459-2','541-0047','大阪市中央区淡路町4-2-15','地下鉄中央線・御堂筋線・四つ橋線','本町駅','01','251','051','042','D','A','C','一般事務・軽作業','庶務二課にて庶務','1','2','あり','2019-01-07','2025-09-30','高卒',null,null,18,60,'1',150000,250000,'あり','あり',null,0900,1700,null,null,'1','0',null,'5',null,null,null,'5','2',20,35,null,'2019-03-28','2019-03-10',current_timestamp,'0002',current_timestamp,'0002',0);
 
 
 -- 備考コメント欄のサンプルデータ
 insert into comment (id,companyno,kyujinno,jobseekerid,staffid,matchid,genre,important,title,note,createdt,createuserid,updatedt,updateuserid)
 values(1,'A101-555555-9','45141-45445554','00113','0003',2,'2','1','12月10日面接受けた者からのフィードバック','長い圧迫面接があったとのことです。',current_timestamp,'0003',current_timestamp,'0003');
-insert into comment (id,jobseekerid,staffid,genre,title,note,createdt,createuserid,updatedt,updateuserid)
-values(2,'00111','0001','1','本人の希望、状況','倒産により失業。\n元の勤め先を倒産に追い込んだトクガワ社を見返したいのでライバル企業に入りたいとのこと。',current_timestamp,'0001',current_timestamp,'0001');
+insert into comment (id,jobseekerid,staffid,genre,important,title,note,createdt,createuserid,updatedt,updateuserid)
+values(2,'00111','0001','1','0','本人の希望、状況','倒産により失業。\n元の勤め先を倒産に追い込んだトクガワ社を見返したいのでライバル企業に入りたいとのこと。',current_timestamp,'0001',current_timestamp,'0001');
 insert into comment (id,companyno,staffid,genre,title,note,createdt,createuserid,updatedt,updateuserid)
 values(3,'A100-567890-5','0002','2','求める人材像','Java、C言語、Rubyの技術者を特に求めている。\nハイスキルであればCOBOL技術者も。',current_timestamp,'0002',current_timestamp,'0002');
 insert into comment (id,companyno,kyujinno,jobseekerid,staffid,matchid,genre,title,note,createdt,createuserid,updatedt,updateuserid)
@@ -1211,6 +1211,5 @@ insert into todouhuken values ('47','沖縄県');
 
 
 commit;
-
 
 

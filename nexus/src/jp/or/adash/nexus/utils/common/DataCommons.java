@@ -97,17 +97,32 @@ public class DataCommons {
 	}
 
 	/**
-	 *【エラー】形式チェック（半角カナ）
+	 *【エラー】形式チェック（半角ｶﾅ）
 	 * @param String 文字列
 	 * @return string エラーメッセージ
 	 * @author y.Koura
 	 */
 	public static String chkKana(String str) {
-		String MATCH_KATAKANA = "^[ｦ-ﾟ]*$";
-		if (str.matches(MATCH_KATAKANA)) {
+		String MATCH_HANKANA = "^[\\uFF65-\\uFF9F]+$";
+		if (str.matches(MATCH_HANKANA)) {
 			return null;
 		} else {
 			return "半角ｶﾀｶﾅではない値が入力されています";
+		}
+	}
+
+	/**
+	 *【エラー】形式チェック（全角カナ）
+	 * @param String 文字列
+	 * @return string エラーメッセージ
+	 * @author kemiyan
+	 */
+	public static String chklgKana(String str) {
+		String MATCH_KATAKANA = "^[\\u30A0-\\u30FF]+$";
+		if (str.matches(MATCH_KATAKANA)) {
+			return null;
+		} else {
+			return "全角カタカナではない値が入力されています";
 		}
 	}
 
@@ -133,11 +148,11 @@ public class DataCommons {
 	 * @author y.Koura
 	 */
 	public static String chkCompanyno(String str) {
-		String MATCH_CNO = "^[0-9]{4}-[0-9]{6}-[0-9]{1}$";
+		String MATCH_CNO = "^[A,0-9]{4}-[0-9]{6}-[0-9]{1}$";
 		if (str.matches(MATCH_CNO)) {
 			return null;
 		} else {
-			return "事業所番号は xxxx-xxxxxx-x の形式で入力してください";
+			return "事業所番号はxxxx-yyyyyy-zの桁で入力してください";
 		}
 	}
 
@@ -152,7 +167,7 @@ public class DataCommons {
 		if (str.matches(MATCH_ZIP)) {
 			return null;
 		} else {
-			return "郵便番号は xxx-xxxx の形式で入力してください";
+			return "郵便番号を xxx-xxxx で入力してください";
 		}
 	}
 

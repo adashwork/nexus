@@ -53,7 +53,7 @@
 </style>
 <title>企業情報</title>
 <body>
-	<%@ include file="/header.jsp"%>
+	<%@ include file="/header.jsp" %>
 	<main>
 	<h2>企業情報</h2>
 	<ul>
@@ -69,6 +69,7 @@
 
 				<tr>
 					<th>事業所番号(ハイフンあり) [必須] </th>
+
 					<td><c:if test="${ status == 'regist' }">
 							<input type="text" name="companyno"
 								value="${ company.companyNo }"   />
@@ -98,6 +99,7 @@
 				</tr>
 				<tr>
 					<th>事業所郵便番号 (123-4567)</th>
+
 					<td><input id="postal" type="text" name="companypostal"
 						value="${ company.companyPostal }" /></td>
 				</tr>
@@ -145,7 +147,6 @@
 				<tr>
 					<th>産業小分類コード</th>
 					<td><select id="smallcd" name="jobcategorysmallcd">
-
 							<option value=""></option>
 							<c:forEach var="JCS" items="${ JCSmallList }">
 								<option value="${ JCS.smallcd }"

@@ -144,18 +144,28 @@
 						<c:if test="${ info.sex == 2 }">checked</c:if> />女</td>
 				</tr>
 				<tr>
-					<th>最終学歴</th>
-					<td><input type="radio" name="education" value="1"
-						<c:if test="${ info.education == 1 }">checked</c:if> />中学
-						<input type="radio" name="education" value="2"
-						<c:if test="${ info.education == 2 }">checked</c:if> />高校
-						<input type="radio" name="education" value="3"
-						<c:if test="${ info.education == 3 }">checked</c:if> />短大
-						<input type="radio" name="education" value="4"
-						<c:if test="${ info.education == 4 }">checked</c:if> />大学
-						<input type="radio" name="education" value="5"
-						<c:if test="${ info.education == 5 }">checked</c:if> />専門学校
-					</td>
+					<th>郵便番号</th>
+					<td><input type="text" name="zip21" class="form_text-small" size="3" maxlength="3"> - <input type="text" name="zip22" class="form_text-small" onKeyUp="AjaxZip3.zip2addr('zip21','zip22','addr21','addr21');" size="4" maxlength="4"></td>
+				</tr>
+				<tr>
+					<th>住所</th>
+					<td><input type="text" name="addr21" class="form_text"  value="${ info.address }" size="50"></td>
+				</tr>
+				<tr>
+					<th>メールアドレス</th>
+					<td><input type="text" name="seekermail" value="${ info.seekermail }" /></td>
+				</tr>
+				<tr>
+					<th>最寄り駅</th>
+					<td><input type="text" name="nearstation" value="${ info.nearstation }" size="10"/>駅</td>
+				</tr>
+				<tr>
+					<th>自宅電話番号</th>
+					<td><input type="text" name="phone" value="${ info.phone }" /></td>
+				</tr>
+				<tr>
+					<th>携帯電話番号</th>
+					<td><input type="text" name="mobile" value="${ info.mobile }" /></td>
 				</tr>
 				<tr>
 					<th>配偶者</th>
@@ -272,64 +282,26 @@
 					</select>人</td>
 				</tr>
 				<tr>
-					<th>メールアドレス</th>
-					<td><input type="text" name="seekermail" value="${ info.seekermail }" /></td>
+					<th>最終学歴</th>
+					<td><input type="radio" name="education" value="1"
+						<c:if test="${ info.education == 1 }">checked</c:if> />中学
+						<input type="radio" name="education" value="2"
+						<c:if test="${ info.education == 2 }">checked</c:if> />高校
+						<input type="radio" name="education" value="3"
+						<c:if test="${ info.education == 3 }">checked</c:if> />短大
+						<input type="radio" name="education" value="4"
+						<c:if test="${ info.education == 4 }">checked</c:if> />大学
+						<input type="radio" name="education" value="5"
+						<c:if test="${ info.education == 5 }">checked</c:if> />専門学校
+					</td>
 				</tr>
 				<tr>
-					<th>自宅電話番号</th>
-					<td><input type="text" name="phone" value="${ info.phone }" /></td>
-				</tr>
-				<tr>
-					<th>携帯電話番号</th>
-					<td><input type="text" name="mobile" value="${ info.mobile }" /></td>
-				</tr>
-				<tr>
-					<th>郵便番号</th>
-					<td><input type="text" name="zip21" class="form_text-small" size="3" maxlength="3"> - <input type="text" name="zip22" class="form_text-small" onKeyUp="AjaxZip3.zip2addr('zip21','zip22','addr21','addr21');" size="4" maxlength="4"></td>
-				</tr>
-				<tr>
-					<th>住所</th>
-					<td><input type="text" name="address" class="form_text"  value="${ info.address }" size="50"></td>
-				</tr>
-				<tr>
-					<th>最寄り駅</th>
-					<td><input type="text" name="nearstation" value="${ info.nearstation }" size="10"/>駅</td>
+					<th>職歴・経歴</th>
+					<td><textarea rows="20" cols="80" name="career"><c:out
+								value="${ info.career }" /></textarea></td>
 				</tr>
 				</table>
 				<table id="tab2" class="page">
-				<tr>
-				<th>希望業種1</th>
-					<td><select name="HOPEJOBCATEGORY">
-					<option value=""></option>
-					<c:forEach var="jobcategory" items="${ JCLargelist }">
-					<option value="${ jobcategory.largecd }" ${ jobcategory.name }
-					<c:if test="${jobcategory.largecd == info.hopejobcategory }">selected</c:if>>${ jobcategory.name }
-								</option>
-							</c:forEach>
-					</select></td>
-				</tr>
-				<tr>
-				<th>希望業種2</th>
-					<td><select name="HOPEJOBCATEGORY2">
-					<option value=""></option>
-					<c:forEach var="jobcategory" items="${ JCLargelist }">
-					<option value="${ jobcategory.largecd }" ${ jobcategory.name }
-					<c:if test="${jobcategory.largecd == info.hopejobcategory2 }">selected</c:if>>${ jobcategory.name }
-								</option>
-							</c:forEach>
-					</select></td>
-				</tr>
-				<tr>
-				<th>希望業種3</th>
-					<td><select name="HOPEJOBCATEGORY3">
-					<option value=""></option>
-					<c:forEach var="jobcategory" items="${ JCLargelist }">
-					<option value="${ jobcategory.largecd }" ${ jobcategory.name }
-					<c:if test="${jobcategory.largecd == info.hopejobcategory3 }">selected</c:if>>${ jobcategory.name }
-								</option>
-							</c:forEach>
-					</select></td>
-				</tr>
 				<tr>
 					<th>希望職種1</th>
 					<td><select name="HOPEJOB1">
@@ -364,9 +336,37 @@
 					</select></td>
 				</tr>
 				<tr>
-					<th>希望月給</th>
-					<td><input type="text" name="hopesalary"
-						value="${ info.hopesalary }" size="4" />万円</td>
+				<th>希望業種1</th>
+					<td><select name="HOPEJOBCATEGORY">
+					<option value=""></option>
+					<c:forEach var="jobcategory" items="${ JCLargelist }">
+					<option value="${ jobcategory.largecd }" ${ jobcategory.name }
+					<c:if test="${jobcategory.largecd == info.hopejobcategory }">selected</c:if>>${ jobcategory.name }
+								</option>
+							</c:forEach>
+					</select></td>
+				</tr>
+				<tr>
+				<th>希望業種2</th>
+					<td><select name="HOPEJOBCATEGORY2">
+					<option value=""></option>
+					<c:forEach var="jobcategory" items="${ JCLargelist }">
+					<option value="${ jobcategory.largecd }" ${ jobcategory.name }
+					<c:if test="${jobcategory.largecd == info.hopejobcategory2 }">selected</c:if>>${ jobcategory.name }
+								</option>
+							</c:forEach>
+					</select></td>
+				</tr>
+				<tr>
+				<th>希望業種3</th>
+					<td><select name="HOPEJOBCATEGORY3">
+					<option value=""></option>
+					<c:forEach var="jobcategory" items="${ JCLargelist }">
+					<option value="${ jobcategory.largecd }" ${ jobcategory.name }
+					<c:if test="${jobcategory.largecd == info.hopejobcategory3 }">selected</c:if>>${ jobcategory.name }
+								</option>
+							</c:forEach>
+					</select></td>
 				</tr>
 				<tr>
 					<th>希望勤務地</th>
@@ -399,9 +399,9 @@
 				</td>
 				</tr>
 				<tr>
-					<th>希望勤務日時</th>
-					<td><input type="text" name="hopeworkingDate"
-						value="${ info.hopeworkingDate }" /></td>
+					<th>希望勤務日数</th>
+					<td><input type="text" name="hopeworkingdate"
+						value="${ info.hopeworkingdate }" /></td>
 				</tr>
 				<tr>
 					<th>希望勤務時間(開始)</th>
@@ -413,13 +413,56 @@
 					<td><input type="text" name="hopeendtime"
 						value="${ info.hopeendtime }" /></td>
 				</tr>
+				<tr>
+					<th>希望月給</th>
+					<td><input type="text" name="hopesalary"
+						value="${ info.hopesalary }" size="4" />万円</td>
+				</tr>
+				<tr>
+					<th>希望時間給</th>
+					<td><input type="text" name="hopejikyu"
+						value="${ info.hopejikyu }" size="4" />円</td>
+				</tr>
+				<tr>
+					<th>その他希望</th>
+					<td><textarea rows="3" cols="80" name="hopeetc"><c:out
+								value="${ info.hopeetc }" /></textarea></td>
+				</tr>
+				<tr>
+					<th>自動車免許</th>
+					<td><input type="text" name="driverlicense" value="${ info.driverlicense }" /></td>
+				</tr>
+
+
 				</table>
 
 				<table id="tab3" class="page">
+
 				<tr>
-					<th>その他免許</th>
+					<th>その他資格</th>
 					<td><textarea rows="3" cols="80" name="licenseetc"><c:out
 								value="${ info.licenseetc }" /></textarea></td>
+				</tr>
+				<tr>
+					<th>パソコンスキル</th>
+					<td><textarea rows="5" cols="80" name="pasokonskill"><c:out
+								value="${ info.pasokonskill }" /></textarea></td>
+				</tr>
+				<tr>
+					<th>留意点</th>
+					<td><textarea rows="5" cols="80" name="caution"><c:out
+								value="${ info.caution }" /></textarea></td>
+				</tr>
+				<tr>
+					<th>担当職業者紹介者ID</th>
+					<td><input type="hidden" name="tantoustaffid"
+						value="<c:out value="${ info.tantoustaffid }" />"> <c:out
+							value="${ info.tantoustaffid }" /></td>
+				</tr>
+				<tr>
+					<th>パスワード</th>
+					<td><textarea rows="1" cols="80" name="password"><c:out
+								value="${ info.password }" /></textarea></td>
 				</tr>
 				<tr>
 					<th>補足</th>
@@ -427,17 +470,28 @@
 								value="${ info.note }" /></textarea></td>
 				</tr>
 				<tr>
-					<th>職歴・経歴</th>
-					<td><textarea rows="3" cols="80" name="career"><c:out
-								value="${ info.careea }" /></textarea></td>
+					<th>新規登録日</th>
+					<td><input type="text" name="createdt"
+						value="${ info.createdt }" pattern="yyyy-MM-dd" /></td>
+				</tr>
+				<tr>
+					<th>新規登録ユーザー</th>
+					<td><input type="text" name="createuserid" value="${ info.createuserid }" /></td>
+				</tr>
+				<tr>
+					<th>最終更新日</th>
+					<td><input type="text" name="updatedt"
+						value="${ info.updatedt }" pattern="yyyy-MM-dd" /></td>
+				</tr>
+                 <tr>
+					<th>最終更新ユーザー</th>
+					<td><input type="text" name="updateuserid" value="${ info.updateuserid }" /></td>
+				</tr>
+				 <tr>
+					<th>削除フラグ</th>
+					<td><input type="text" name="deleteflag" value="${ info.deleteflag }" /></td>
 				</tr>
 
-				<tr>
-					<th>担当職業者紹介者ID</th>
-					<td><input type="hidden" name="tantoustaffid"
-						value="<c:out value="${ info.tantoustaffid }" />"> <c:out
-							value="${ info.tantoustaffid }" /></td>
-				</tr>
 			</table>
 			<input type="submit" value="更新" class="main-b">
 		</form>

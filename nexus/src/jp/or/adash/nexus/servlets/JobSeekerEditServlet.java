@@ -48,6 +48,7 @@ public class JobSeekerEditServlet extends HttpServlet {
 		String id = request.getParameter("id");
 		String name = request.getParameter("name");
 		String kana = request.getParameter("kana");
+		//Date  birthdt= request.getParameter("birthdt");
 		Date birthdt = null;
 		try {
 			birthdt = sdf.parse(request.getParameter("birthdt"));

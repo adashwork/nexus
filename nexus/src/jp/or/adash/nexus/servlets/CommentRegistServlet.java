@@ -86,8 +86,7 @@ public class CommentRegistServlet extends HttpServlet {
 		request.setAttribute("Staff", staff);
 
 		// JSPにフォワード
-		request.getRequestDispatcher("/commentregist.jsp")
-				.forward(request, response);
+		request.getRequestDispatcher("/commentregist.jsp").forward(request, response);
 
 	}
 

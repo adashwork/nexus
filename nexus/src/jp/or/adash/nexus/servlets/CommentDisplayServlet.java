@@ -45,8 +45,9 @@ public class CommentDisplayServlet extends HttpServlet {
 		CommentService commentService = new CommentService();
 		comment = commentService.commentSearch2(id);*/
 
+
 		if(request.getParameter("commentid") != null && !(request.getParameter("commentid").equals(""))) {
-			int id = Integer.parseInt(request.getParameter("comment"));
+			int id = Integer.parseInt(request.getParameter("commentid"));
 			CommentService commentService = new CommentService();
 			comment = commentService.commentSearch2(id);
 		}
@@ -56,6 +57,13 @@ public class CommentDisplayServlet extends HttpServlet {
 		request.getRequestDispatcher("/commentregist.jsp").forward(request, response);
 
 	}
+
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request,response);
+
+	}
+
 
 
 }

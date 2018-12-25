@@ -45,12 +45,12 @@ public class CommentUpdateServlet extends HttpServlet {
 		String companyNo = request.getParameter("companyno");				// 事業所番号
 		String kyujinNo = request.getParameter("kyujinno");				// 求人番号
 		String jobSeekerId = request.getParameter("jobseekeeid");			// 求職者ID
-		String staffId = request.getParameter("staffid");					// 職業紹介者ID
+		String staffId = staff.getId();										// 職業紹介者ID
 		Integer matchId = -1;												// マッチングID
 		String genre = request.getParameter("genre");						// 内容分類
 		String important = request.getParameter("important");				// 重要度
 		String title = request.getParameter("title");						// 件名
-		String note = request.getParameter("note");						// 備考
+		String note = request.getParameter("note");							// 備考
 		Date createDt = null;												// 新規登録日
 		String createUserId = request.getParameter("createuserid");		// 新規登録ユーザー
 		Date updateDt = null;												// 最終更新日

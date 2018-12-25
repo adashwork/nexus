@@ -111,6 +111,11 @@ public class MatchingService {
 		if (matching.getInterviewdt() == null) {
 			messages.add("面接日が入力されていません。");
 			result = false;
+		}else {
+
+			errMsg = DataCommons.chkDate(matching.getInterviewdt().toString());
+			messages.add(errMsg);
+			result = false;
 		}
 
 		//入社日の値が入力されているか
@@ -118,9 +123,15 @@ public class MatchingService {
 			if (matching.getEnterdt() == null) {
 				messages.add("入社日が入力されていません。");
 				result = false;
-			}
-			if (matching.getEnterdt().before( matching.getInterviewdt())) {
+			}else if(matching.getEnterdt().before( matching.getInterviewdt())) {
 				messages.add("入社日が面接日の前です。");
+				result = false;
+			}
+
+			else {
+
+				errMsg = DataCommons.chkDate(matching.getEnterdt().toString());
+				messages.add(errMsg);
 				result = false;
 			}
 
@@ -132,7 +143,7 @@ public class MatchingService {
 		}
 
 		// 備考の値が入力されているか
-		errMsg = DataCommons.chksDigits(matching.getNote(), 200);
+		errMsg = DataCommons.chksDigits(matching.getNote(), 4000);
 		messages.add(errMsg);
 
 		return result;

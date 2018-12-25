@@ -139,7 +139,8 @@
 					職業紹介者ID
 				</th>
 				<td>
-					<input type="text" name="staffid" size="4" maxlength="4"
+					<input type="text" name="staffid" size="4" maxlength="4" onkeyup="if(event.keyCode==9||event.keyCode==16) return;
+        				this.value=this.value.replace(/[^0-9]+/i,'');"
 						<c:if test="${ matching.staffid == null }">value="<fmt:formatNumber value="${ Staff.id }" pattern="0000" />"</c:if>
 						<c:if test='${ matching.staffid != null }'>value="<fmt:formatNumber value='${ matching.staffid }' pattern='0000' />"</c:if>
 					>
@@ -205,7 +206,7 @@
 			<tr>									<!-- komukai　2018/12/18 タイトル・重要度追加 -->
 				<td align="left" width="60%">
 					<span>タイトル</span>
-					<input type="text" size="30" name="title" value="<c:out value="${ comment.title }" />">
+					<input type="text" size="30" name="title" value="<c:out value="${ comment.title }" />" maxlength="60">
 				</td>
 				<td align="left" width="40%">
 					<span>重要</span>
@@ -219,7 +220,7 @@
 			</tr>
 			<tr>
 				<td colspan="2">
-					<textarea name="note" style="width:100%" ><c:out value="${ comment.note }" /></textarea>
+					<textarea name="note" style="width:100%" maxlength="4000"><c:out value="${ comment.note }" /></textarea>
 				</td>
 			</tr>
 

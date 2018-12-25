@@ -33,17 +33,12 @@ public class CommentDisplayServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// IDがあったら検索実行、なければ空のcommentオブジェクトを返す
 		// TODO 内容分類選択への対応
-		// TODO 暫定的に入力しているID = 1の削除
 
 		HttpSession session = request.getSession(true);
 		Staff staff = (Staff) session.getAttribute("UserData");
 
 
 		Comment comment = null;
-
-		/*int id = 1;
-		CommentService commentService = new CommentService();
-		comment = commentService.commentSearch2(id);*/
 
 
 		if(request.getParameter("commentid") != null && !(request.getParameter("commentid").equals(""))) {

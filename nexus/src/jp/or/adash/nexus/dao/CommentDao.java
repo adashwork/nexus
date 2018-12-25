@@ -521,7 +521,7 @@ public class CommentDao {
 			try (ResultSet rs = ps.executeQuery()) {
 				while (rs.next()) {
 				comment =
-						new Comment(1,		// rs.getInt("id"),				// 備考ID
+						new Comment(id,			// 備考ID
 								rs.getString("companyno"),		// 事業所番号
 								rs.getString("kyujinno"),		// 求人NO
 								rs.getString("jobseekerid"),	// 求職者ID
@@ -537,6 +537,9 @@ public class CommentDao {
 								rs.getString("updateuserid")	// 最終更新ユーザー
 								);
 				}
+				// 備考IDをgetInt("id")でとろうとすると、どんなデータでもid=1になってしまうので、
+				// idを直接オブジェクトにセットしています
+				// 20181225 mosco
 
 				} catch (SQLException e) {
 						throw new IOException(e);

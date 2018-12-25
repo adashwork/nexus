@@ -111,31 +111,33 @@ public class MatchingService {
 		if (matching.getInterviewdt() == null) {
 			messages.add("面接日が入力されていません。");
 			result = false;
-		}else {
-
-			errMsg = DataCommons.chkDate(matching.getInterviewdt().toString());
-			messages.add(errMsg);
-			result = false;
 		}
+//		else {
+//			errMsg = DataCommons.chkDate(matching.getInterviewdt().toString());
+//			messages.add(errMsg);
+//			result = false;
+//		}
 
 		//入社日の値が入力されているか
 		if (matching.getAssessment().equals("1")) {
 			if (matching.getEnterdt() == null) {
 				messages.add("入社日が入力されていません。");
 				result = false;
+
 			}else if(matching.getEnterdt().before( matching.getInterviewdt())) {
 				messages.add("入社日が面接日の前です。");
 				result = false;
 			}
 
-			else {
-
-				errMsg = DataCommons.chkDate(matching.getEnterdt().toString());
-				messages.add(errMsg);
-				result = false;
-			}
+		// {
+//			errMsg = DataCommons.chkDate(matching.getEnterdt().toString());
+//			messages.add(errMsg);
+//			result = false;
+//
+//			}
 
 		}
+
 		// 評価の値が入力されているか
 		if (matching.getAssessment().equals("")) {
 			messages.add("評価が入力されていません。");

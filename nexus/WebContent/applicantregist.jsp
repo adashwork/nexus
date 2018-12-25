@@ -54,9 +54,6 @@
 #job_seeker table td {
 	text-align: left;
 }
-
-
-
 </style>
 <title>求職者詳細情報</title>
 </head>
@@ -74,13 +71,11 @@
 					<li><a href="/nexus/web/jobseeker-list"><i
 							class="fas fa-search"></i>登録&amp;閲覧</a>
 						<ul class="drop-menu">
-							<li><a href="/nexus/web/company-registdisp">企業登録<i
+							<li><a href="/nexus/web/kyujin-disp">求人情報<i
 									class="fas fa-angle-right"></i></a></li>
-							<li><a href="/nexus/web/kyujin-disp">求人登録<i
+							<li><a href="/nexus/web/jobseeker-list">求職者情報<i
 									class="fas fa-angle-right"></i></a></li>
-							<li><a href="/nexus/web/jobseeker-list">求職者登録<i
-									class="fas fa-angle-right"></i></a></li>
-							<li><a href="/nexus/web/matching-regist">マッチング登録<i
+							<li><a href="/nexus/web/match-disp">マッチング登録<i
 									class="fas fa-angle-right"></i></a></li>
 						</ul></li>
 					<c:if test="${Staff.authority == 1}"><li><a href="/nexus/web/account-list"><i
@@ -109,7 +104,7 @@
 		</c:forEach>
 	</ul>
 	<div id="job_seeker">
-		<form action="/nexus/web/jobseeker-edit" method="post">
+		<form action="/nexus/web/jobseeker-regist" method="post">
 
 		  <div id="tab-controll" class="tab-menu">
 		<ul>
@@ -122,8 +117,8 @@
 	    <div id="controll" class="menu">
 			<table id="tab1" class="page">
 				<tr>
-				<th width="20%">ID</th>
-				<td><input type="hidden" name="id"
+					<th width="20%">ID</th>
+					<td><input type="hidden" name="id"
 						value="<c:out value="${ info.id }" />">
 				<fmt:formatNumber value="${ info.id }" pattern="00000000"/></td>
 				</tr>
@@ -278,7 +273,7 @@
 				</tr>
 				<tr>
 					<th>メールアドレス</th>
-					<td><input type="text" name="seekermail" value="${ info.seekermail }"/></td>
+					<td><input type="text" name="seekermail" value="${ info.seekermail }" /></td>
 				</tr>
 				<tr>
 					<th>自宅電話番号</th>
@@ -294,7 +289,7 @@
 				</tr>
 				<tr>
 					<th>住所</th>
-					<td><input type="text" name="addr21" class="form_text"  value="${ info.address }" size="50"></td>
+					<td><input type="text" name="address" class="form_text"  value="${ info.address }" size="50"></td>
 				</tr>
 				<tr>
 					<th>最寄り駅</th>
@@ -304,8 +299,7 @@
 				<table id="tab2" class="page">
 				<tr>
 				<th>希望業種1</th>
-					<td><select name="hopejobcategory">
-<<<<<<< HEAD
+					<td><select name="HOPEJOBCATEGORY">
 					<option value=""></option>
 					<c:forEach var="jobcategory" items="${ JCLargelist }">
 					<option value="${ jobcategory.largecd }" ${ jobcategory.name }
@@ -316,7 +310,7 @@
 				</tr>
 				<tr>
 				<th>希望業種2</th>
-					<td><select name="hopejobcategory">
+					<td><select name="HOPEJOBCATEGORY2">
 					<option value=""></option>
 					<c:forEach var="jobcategory" items="${ JCLargelist }">
 					<option value="${ jobcategory.largecd }" ${ jobcategory.name }
@@ -327,30 +321,8 @@
 				</tr>
 				<tr>
 				<th>希望業種3</th>
-					<td><select name="hopejobcategory">
+					<td><select name="HOPEJOBCATEGORY3">
 					<option value=""></option>
-=======
-					<c:forEach var="jobcategory" items="${ JCLargelist }">
-					<option value="${ jobcategory.largecd }" ${ jobcategory.name }
-					<c:if test="${jobcategory.largecd == info.hopejobcategory }">selected</c:if>>${ jobcategory.name }
-								</option>
-							</c:forEach>
-					</select></td>
-				</tr>
-				<tr>
-				<th>希望業種2</th>
-					<td><select name="hopejobcategory">
-					<c:forEach var="jobcategory" items="${ JCLargelist }">
-					<option value="${ jobcategory.largecd }" ${ jobcategory.name }
-					<c:if test="${jobcategory.largecd == info.hopejobcategory2 }">selected</c:if>>${ jobcategory.name }
-								</option>
-							</c:forEach>
-					</select></td>
-				</tr>
-				<tr>
-				<th>希望業種3</th>
-					<td><select name="hopejobcategory">
->>>>>>> refs/remotes/origin/#196
 					<c:forEach var="jobcategory" items="${ JCLargelist }">
 					<option value="${ jobcategory.largecd }" ${ jobcategory.name }
 					<c:if test="${jobcategory.largecd == info.hopejobcategory3 }">selected</c:if>>${ jobcategory.name }
@@ -360,7 +332,7 @@
 				</tr>
 				<tr>
 					<th>希望職種1</th>
-					<td><select name="hopejob1">
+					<td><select name="HOPEJOB1">
 					<option value=""></option>
 							<c:forEach var="job" items="${ Largelist }">
 								<option value="${ job.largecd }" ${ job.name }
@@ -371,7 +343,7 @@
 				</tr>
 				<tr>
 					<th>希望職種2</th>
-					<td><select name="hopejob2">
+					<td><select name="HOPEJOB2">
 					<option value=""></option>
 							<c:forEach var="job" items="${ Largelist }">
 								<option value="${ job.largecd }" ${ job.name }
@@ -382,7 +354,7 @@
 				</tr>
 				<tr>
 					<th>希望職種3</th>
-					<td><select name="hopejob3">
+					<td><select name="HOPEJOB3">
 					<option value=""></option>
 							<c:forEach var="job" items="${ Largelist }">
 								<option value="${ job.largecd }" ${ job.name }
@@ -459,82 +431,20 @@
 					<td><textarea rows="3" cols="80" name="career"><c:out
 								value="${ info.careea }" /></textarea></td>
 				</tr>
+
 				<tr>
 					<th>担当職業者紹介者ID</th>
 					<td><input type="hidden" name="tantoustaffid"
 						value="<c:out value="${ info.tantoustaffid }" />"> <c:out
 							value="${ info.tantoustaffid }" /></td>
 				</tr>
-				</table>
-<!doctype html>
-<html>
-<head>
-<meta charset="UTF-8">
-<link rel="stylesheet" href="test1.css">
-<title>test</title>
-</head>
-<body>
-
-<div id="wrap">
-  <div class="up1">
-		<p>フリーコメント1</p>
-		<input class="comment-title" type="text" name="タイトル">
-		<label><input class="comment-checkbox" type="checkbox">重要</label>
-		<textarea rows="4" cols="50" wrap="hard"></textarea>
-	</div>
-  <div class="down">
-		<div class="box">
-			<p>登録ID：</p>
-			<p>更新ID：</p>
-	  	</div>
- 		<div class="box">
-			<p>登録日:</p>
-		  	<p>更新日：</p>
-	    </div>
-  </div>
-	<div class="up2">
-		<h2>フリーコメント2</h2>
-		<input class="comment-title" type="text" name="タイトル">
-		<label><input class="comment-checkbox" type="checkbox">重要</label>
-		<textarea rows="4" cols="50" wrap="hard"></textarea>
-	</div>
-  <div class="down">
-		<div class="box">
-			<p>登録ID：</p>
-			<p>更新ID：</p>
-	  	</div>
- 		<div class="box">
-			<p>登録日:</p>
-		  	<p>更新日：</p>
-	    </div>
-  </div>
-	<div class="up3">
-		<h2>フリーコメント3</h2>
-		<input class="comment-title" type="text" name="タイトル">
-		<label><input class="comment-checkbox" type="checkbox">重要</label>
-		<textarea rows="4" cols="50" wrap="hard"></textarea>
-	</div>
-  <div class="down">
-		<div class="box">
-			<p>登録ID：</p>
-			<p>更新ID：</p>
-	  	</div>
- 		<div class="box">
-			<p>登録日:</p>
-		  	<p>更新日：</p>
-	    </div>
-  </div>
- </div>
-
-			<!--<input type="submit" value="更新" class="main-b">  -->
-		</form>
-		<input class="main-b" type="button"
-			onclick="location.href='/nexus/web/jobseeker-regist'" value="登録">
+			</table>
+		<input class="main-b" type="submit" value="登録">
 		<input class="main-b" type="button"
 			onclick="location.href='/nexus/web/jobseeker-list'" value="一覧に戻る">
-
-</div>
-</main>
+	</form>
+	</div>
+	</main>
 	<!-- フッター　-->
 	<footer>
 		<small>Copyright(C) 2009有限責任事業組合 大阪職業教育協働機構(A'ワーク創造館) All

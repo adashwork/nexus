@@ -1,0 +1,82 @@
+@charset "utf-8";
+/* CSS Document */
+
+.comment-name1{
+	float:left;
+}
+
+.comment-name1 p{
+	margin-bottom: 0px;
+}
+
+.comment-name1 input{
+	margin-right: 10px;
+	padding-top:0px;
+}
+
+.second {
+	clear:both;
+}
+
+.comment-name2{
+	float:left;
+	margin-bottom: 1rem;
+}
+
+.comment-name2 p{
+	margin-right:34px;
+	margin-bottom: 0px;
+}
+
+.comment-name2 input{
+	height:25px;
+	width:200px;
+}
+
+.comment-name2 .important{
+	margin-left: 150px;
+}
+
+.comment-name2 input[type=checkbox]{
+	margin-left: 65px;
+	height:15px;
+}
+
+.textbox {
+	clear:both;
+}
+
+.textbox p{
+	margin-bottom: 0px;
+}
+/*登録日など*/
+.box {
+	float: left;
+}
+
+
+.box p{
+	padding-right: 140px;
+	border-bottom: 1px solid #000;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+/*ボタンのデザイン*/
+.main-d{
+	float: right;
+	font-size: 1rem;
+	border-style: none;
+  background-color: #808080 ;
+	color: #fff;
+	height: 40px;
+	padding-left: 10px;
+	letter-spacing: 0.5rem;
+	font-weight: bold;
+	margin-top:50px;
+	margin-right:10px;
+}
+
+form {
+	margin-right:50px;
+}

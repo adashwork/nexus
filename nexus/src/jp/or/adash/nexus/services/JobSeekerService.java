@@ -216,7 +216,7 @@ public class JobSeekerService {
 		}
 
 		// 年齢の値が入力されているか
-		if (seeker.getAge() == -1) {
+		/*if (seeker.getAge() == -1) {
 			messages.add("年齢が入力されていません。");
 			result = false;
 		}
@@ -225,7 +225,7 @@ public class JobSeekerService {
 
 		errMsg = DataCommons.chkiDigits(seeker.getAge(), 3);
 		messages.add(errMsg);
-
+		 */
 		// 郵便番号の値が入力されているか
 		if (seeker.getPostal().equals("")) {
 			messages.add("郵便番号が入力されていません。");
@@ -504,7 +504,7 @@ public class JobSeekerService {
 		}
 
 		// 年齢の値が入力されているか
-		if (seeker.getAge() == -1) {
+	/*	if (seeker.getAge() == -1) {
 			messages.add("年齢が入力されていません。");
 			result = false;
 		}
@@ -513,7 +513,7 @@ public class JobSeekerService {
 
 		errMsg = DataCommons.chkiDigits(seeker.getAge(), 3);
 		messages.add(errMsg);
-
+	 */
 		// 郵便番号の値が入力されているか
 		if (seeker.getPostal().equals("")) {
 			messages.add("郵便番号が入力されていません。");
@@ -659,8 +659,8 @@ public class JobSeekerService {
 		*/
 
 		// 希望勤務日時の値が入力されているか
-		if (seeker.getHopeworkingDate() != -1) {
-			messages.add(DataCommons.chkTime(seeker.getHopeworkingDate()));
+		if (seeker.getHopeworkingdate() != -1) {
+			messages.add(DataCommons.chkTime(seeker.getHopeworkingdate()));
 		}
 
 		/*

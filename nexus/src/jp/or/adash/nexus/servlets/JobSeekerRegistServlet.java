@@ -45,7 +45,7 @@ public class JobSeekerRegistServlet extends HttpServlet {
 		HttpSession session = request.getSession(true);
 		Staff staff = (Staff) session.getAttribute("UserData");
 
-		CommonsService cservice = new CommonsService();
+		CommonsService service = new CommonsService();
 		//入力された情報を登録する
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -134,7 +134,7 @@ public class JobSeekerRegistServlet extends HttpServlet {
 		String deleteflag = request.getParameter("deleteflag");
 
 		// 担当職業紹介者IDから担当職業紹介者の名前を取得する
-		String tantoustaffname = cservice.checkStaffName(tantoustaffid);
+		//String tantoustaffname = cservice.checkStaffName(tantoustaffid);
 
 		//求人情報のオブジェクトを作成
 		JobSeeker seeker = new JobSeeker(id, name, kana, birthdt, sex, postal,
@@ -147,11 +147,11 @@ public class JobSeekerRegistServlet extends HttpServlet {
 
 
 		//入力チェック
-		JobSeekerService service = new JobSeekerService();
-			if(!service.check(seeker)) {
+		JobSeekerService jobseekerService = new JobSeekerService();
+			if(!jobseekerService.check(seeker)) {
 				//入力チェックでエラーがあった場合、エラーメッセージをセット
 				request.setAttribute("seeker", seeker);
-				request.setAttribute("messages", service.getMessages());
+				request.setAttribute("messages", jobseekerService.getMessages());
 
 				//JSPにフォワード
 				request.getRequestDispatcher("/applicantregist.jsp")
@@ -161,13 +161,13 @@ public class JobSeekerRegistServlet extends HttpServlet {
 			}
 
 				//求人者idが使用されてない場合情報を登録する
-				service.insertJobSeeker(seeker);
+				jobseekerService.insertJobSeeker(seeker);
 
 			//処理結果メッセージをリクエストに格納する
 
 			request.setAttribute("Staff", staff);
 			request.setAttribute("info", seeker);
-			request.setAttribute("messages", service.getMessages());
+			request.setAttribute("messages", jobseekerService.getMessages());
 
 			// JSPにフォワード
 			request.getRequestDispatcher("/applicant_maininfo.jsp")

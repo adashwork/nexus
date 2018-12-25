@@ -106,9 +106,9 @@
 							<th>カテゴリー表示</th>
 						</tr>
 						<tr>
-							<td><textarea rows="3" cols="40" name="note">
-							<c:out value="${ comment.note }" />
-						</textarea></td>
+							<td>
+								<textarea rows="3" cols="40" name="note"><c:out value="${ comment.note }" /></textarea>
+							</td>
 						</tr>
 					</tfoot>
 				</table>
@@ -135,13 +135,17 @@
 					</div>
 				</div>
 			</div>
-			<input class="main-b" type="submit" id="comment-delete"
-				onclick="MovePages(this)" value="削除"> <input class="main-b"
-				type="submit" id="comment-update" onclick="MovePages(this)"
-				value="更新"> <input class="main-b" type="submit" onclick=""
-				value="戻る"> <input class="main-b" type="submit"
-				id="comment-regist" onclick="MovePages(this)" value="登録">
-	</form>
+
+			<c:if test="${ !empty comment.id }">
+				<input class="main-b"type="submit" id="comment-update" onclick="MovePages(this)"value="更新">
+				<input class="main-b" type="submit" id="comment-delete"onclick="MovePages(this)" value="削除">
+			</c:if>
+			<c:if test="${ empty comment.id }">
+				<input class="main-b" type="submit" id="comment-regist" onclick="MovePages(this)" value="登録">
+			</c:if>
+			<input class="main-b" type="submit" onclick="" value="戻る">
+
+		</form>
 
 	<!-- フッター　-->
 	<footer>

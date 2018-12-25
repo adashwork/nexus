@@ -115,6 +115,7 @@ public class KyujinService {
 			messages.add("事業所番号が不当です。");
 			result = false;
 		}
+
 		msg = DataCommons.chkCompanyno(kyujin.getCompanyno());
 		if (msg != null) {
 			messages.add(msg);

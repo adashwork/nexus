@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import jp.or.adash.nexus.entity.Kyujin;
@@ -48,7 +49,7 @@ public class KyujinDao {
 	        sql.append("education, experience, license, agemin, agemax, salaryformcd, salarymin, salarymax, bonus, koutuhi, teate,");
 	        sql.append("begintime, endtime, shift, flex, jitan, jikangai, siyoukikan, workdays, nenkanholiday,");
 	        sql.append("applicationform, background, bosyunumbers,hiddensex, hiddenagemin, hiddenagemax, hiddenetc,");
-	        sql.append("receptiondt, perioddt, createuserid, updateuserid, deleteflag,");
+	        sql.append("receptiondt, perioddt, createuserid, updateuserid, deleteflag");
 	        sql.append(") values (");
 	        sql.append("?, ?, ?, ?, ?, ?, ?, ");
 	        sql.append("?, ?, ?, ?, ?, ?, ");
@@ -56,7 +57,7 @@ public class KyujinDao {
 	        sql.append("?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ");
 	        sql.append("?, ?, ?, ?, ?, ?, ?, ?, ?, ");
 	        sql.append("?, ?, ?, ?, ?, ?, ?, ");
-	        sql.append("?, ?, ?, ?, ?, ");
+	        sql.append("?, ?, ?, ?, ? ");
 	        sql.append(")");
 		try (PreparedStatement ps = this.conn.prepareStatement(sql.toString())) {
 			ps.setString(1, kyujin.getNo());
@@ -335,6 +336,8 @@ public class KyujinDao {
 	public int update(Kyujin kyujin) throws IOException {
 		int count = 0;
 
+
+		Date date = new Date();
 		// SQL文を生成する(求人票④)
 		StringBuffer sql = new StringBuffer();
 		sql.append("update kyujin set");
@@ -345,9 +348,9 @@ public class KyujinDao {
 		sql.append(", nearline = ?");
 		sql.append(", nearstationkj = ?");
 		sql.append(", addresscd = ?");
-		sql.append(", jobsmallcd１ = ?");
-		sql.append(", jobsmallcd２ = ?");
-		sql.append(", jobsmallcd３ = ?");
+		sql.append(", jobsmallcd1 = ?");
+		sql.append(", jobsmallcd2 = ?");
+		sql.append(", jobsmallcd3 = ?");
 		sql.append(", joblargecd1 = ?");
 		sql.append(", joblargecd2 = ?");
 		sql.append(", joblargecd3 = ?");
@@ -389,7 +392,7 @@ public class KyujinDao {
 		sql.append(", perioddt = ?");
 		//sql.append(" createedt = ?");
 		//sql.append(" createuserid = ?");
-		//sql.append(" updatedt = ?");
+		sql.append(", updatedt = ?");
 		sql.append(", updateuserid = ?");
 		// sql.append(" deleteflag = ?");
 		sql.append(" where");
@@ -445,10 +448,10 @@ public class KyujinDao {
 			ps.setDate(48, DataCommons.convertToSqlDate(kyujin.getReceptiondt()));
 			ps.setDate(49, DataCommons.convertToSqlDate(kyujin.getPerioddt()));
           //ps.setString(51, "now()");//createdt???
-			ps.setString(50, kyujin.getCreateuserid());
-		  //ps.setString(52, "now()");//updatedt???
+			//ps.setString(50, kyujin.getCreateuserid());
+			ps.setDate(50, DataCommons.convertToSqlDate(date));//updatedt
 			ps.setString(51, kyujin.getUpdateuserid());
-			ps.setString(52, "0");//deleteflag???
+			ps.setString(52, kyujin.getNo());//求人番号
 			// SQL文を実行する(求人票)
 			count = ps.executeUpdate();
 		} catch (SQLException e) {

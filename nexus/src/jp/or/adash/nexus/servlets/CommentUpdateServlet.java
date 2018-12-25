@@ -107,8 +107,8 @@ public class CommentUpdateServlet extends HttpServlet {
 		request.getRequestDispatcher("/commentregist.jsp")
 				.forward(request, response);
 
-
-
 	}
+
+
 
 }

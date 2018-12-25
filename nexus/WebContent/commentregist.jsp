@@ -47,93 +47,97 @@
 </head>
 
 <body>
-<form method="post" action="">
-<div id="container">
+	<form id="form" method="post" action="">
+		<div id="container">
 			<h3>フリーコメント1</h3>
-				<div class="comment">
+			<ul>
+				<c:forEach var="message" items="${ messages }">
+					<li><c:out value="${ message }" /></li>
+				</c:forEach>
+			</ul>
+			<div class="comment">
 				<table class="c1">
-				<tr>
-					<th>企業番号</th>
-					<th>求職者ID</th>
-				</tr>
-				<tr>
-					<td>
-						<input type="text" name="companyno" value="<c:out value="${ comment.companyNo }" />">
-					</td>
-					<td>
-						<input type="text" name="jobseekerid" value="<c:out value="${ comment.jobSeekerId }" />">
-					</td>
-				</tr>
-				<tr>
-					<th>求人番号</th>
-					<th>マッチングID</th>
-				</tr>
-				<tr>
-					<td>
-						<input type="text" name="kyujinno" value="<c:out value="${ comment.kyujinNo }" />">
-					</td>
-					<td>
-						<input type="text" name="matchid" value="<c:out value="${ comment.matchId }" />">
-					</td>
-				</tr>
-				</thead>
-				<tbody>
-				<tr>
-					<th>カテゴリー表示</th>
-					<th>タイトル表示</th>
-				</tr>
-				<tr>
-					<td>
-						<select name="genre">
-							<option value="0">えらんでください</option>
-							<option value="1">求職者</option>
-							<option value="2">企業</option>
-							<option value="3">求人</option>
-							<option value="4">マッチング</option>
-							<option value="9">その他</option>
-						</select>
-					</td>
-				 	 <td>
-				 		 <input type="text" name="title" value="<c:out value="${ comment.title }" />">
-				 	 </td>
-				 	 <td>
-				 	 	<input type="checkbox" name="">重要
-				 	 </td>
-				</tr>
-			</tbody>
-			<tfoot>
-				<tr>
-					<th>カテゴリー表示</th>
-				</tr>
-				<tr>
-					<td>
-						<textarea rows="3" cols="40" name="note">
+					<tr>
+						<th>企業番号</th>
+						<th>求職者ID</th>
+					</tr>
+					<tr>
+						<td><input type="text" name="companyno"
+							value="<c:out value="${ comment.companyNo }" />"></td>
+						<td><input type="text" name="jobseekerid"
+							value="<c:out value="${ comment.jobSeekerId }" />"></td>
+					</tr>
+					<tr>
+						<th>求人番号</th>
+						<th>マッチングID</th>
+					</tr>
+					<tr>
+						<td><input type="text" name="kyujinno"
+							value="<c:out value="${ comment.kyujinNo }" />"></td>
+						<td><input type="text" name="matchid"
+							value="<c:out value="${ comment.matchId }" />"></td>
+					</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th>カテゴリー表示</th>
+							<th>タイトル表示</th>
+						</tr>
+						<tr>
+							<td><select name="genre">
+									<option value="0">えらんでください</option>
+									<option value="1">求職者</option>
+									<option value="2">企業</option>
+									<option value="3">求人</option>
+									<option value="4">マッチング</option>
+									<option value="9">その他</option>
+							</select></td>
+							<td><input type="text" name="title"
+								value="<c:out value="${ comment.title }" />"></td>
+							<td><input type="checkbox" name="">重要</td>
+						</tr>
+					</tbody>
+					<tfoot>
+						<tr>
+							<th>カテゴリー表示</th>
+						</tr>
+						<tr>
+							<td><textarea rows="3" cols="40" name="note">
 							<c:out value="${ comment.note }" />
-						</textarea>
-					</td>
-				</tr>
-				</tfoot>
-		</table>
-       <div class="down">
-		<div class="box">
-			<p>登録ID：<c:out value="${ comment.createUserId }" /></p>
-			<p>更新ID：<c:out value="${ comment.updateUserId }" /></p>
-	  	</div>
- 		<div class="box">
-			<p>登録日:<c:out value="${ comment.createDt }" /></p>
-		  	<p>更新日:<c:out value="${ comment.createDt }" /></p>
-	    </div>
-  </div>
-</div>
-		<input class="main-b" type="submit" id="comment-delete"
-							onclick="PageMoves(this)" value="削除">
-		<input class="main-b" type="submit" id="comment-update"
-							onclick="PageMoves(this)" value="更新">
-		<input class="main-b" type="submit"
-							onclick="" value="戻る">
-		<input class="main-b" type="submit" id="comment-regist"
-							onclick="PageMoves(this)" value="登録">
-</form>
+						</textarea></td>
+						</tr>
+					</tfoot>
+				</table>
+				<div class="down">
+					<div class="box">
+						<p>
+							登録ID：
+							<c:out value="${ comment.createUserId }" />
+						</p>
+						<p>
+							更新ID：
+							<c:out value="${ comment.updateUserId }" />
+						</p>
+					</div>
+					<div class="box">
+						<p>
+							登録日:
+							<c:out value="${ comment.createDt }" />
+						</p>
+						<p>
+							更新日:
+							<c:out value="${ comment.createDt }" />
+						</p>
+					</div>
+				</div>
+			</div>
+			<input class="main-b" type="submit" id="comment-delete"
+				onclick="PageMoves(this)" value="削除"> <input class="main-b"
+				type="submit" id="comment-update" onclick="MovePages(this)"
+				value="更新"> <input class="main-b" type="submit" onclick=""
+				value="戻る"> <input class="main-b" type="submit"
+				id="comment-regist" onclick="MovePages(this)" value="登録">
+	</form>
 
 	<!-- フッター　-->
 	<footer>

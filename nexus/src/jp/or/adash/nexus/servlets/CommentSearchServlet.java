@@ -34,6 +34,8 @@ public class CommentSearchServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		
 		CommentSearchParameter csp = new CommentSearchParameter(1,"","","0001","",-1);
 		CommentService cs = new CommentService();
 		List<Comment> commentList = new ArrayList<>();

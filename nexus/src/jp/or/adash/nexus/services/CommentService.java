@@ -89,12 +89,10 @@ public class CommentService {
 
 			//采番マスタよりデータ取得
 			SaibanDao saidao = new SaibanDao(transaction);
-			int saiban = saidao.getsaiban();
+			int saiban = saidao.getCommentInt();
 
-			//とってきた番号を加工し、Kyujin.noにデータ格納
-			// TODO 採番の処理
-			String str = String.format("A" + "%013d", saiban);
-			// comment.setId(str);
+			// Commentオブジェクトに割り振られたIDをセット
+			comment.setId(saiban);
 
 			CommentDao commentDao = new CommentDao(transaction);
 			int count = commentDao.insertV2(comment);
@@ -121,7 +119,7 @@ public class CommentService {
 			// エラーメッセージをセットする
 			messages.add(MessageCommons.ERR_DB_CONNECT);
 		} finally {
-			// データベース接続をを終了する
+			// データベース接続を終了する
 			transaction.close();
 		}
 

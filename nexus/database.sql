@@ -1,5 +1,4 @@
 use trynexus;
--- ↑ローカルで試すときは自身のuser名に変更
 
 drop table if exists staff;
 drop table if exists jobseeker;
@@ -48,8 +47,13 @@ nearstation varchar(50),
 phone char(20),
 mobile char(20),
 partner char(1),
+<<<<<<< HEAD
+huyou int,
+education varchar(100),
+=======
 huyou int(2),
 education varchar(1),
+>>>>>>> refs/remotes/origin/#197
 career varchar(1000),
 HOPEJOB1 char(6),
 HOPEJOB2 char(6),
@@ -59,14 +63,13 @@ HOPEJOBCATEGORY2 char(3),
 HOPEJOBCATEGORY3 char(3),
 hopeworkplace varchar(100),
 hopekoyoukeitai char(1),
-hopeweekday char(7),
-hopeworkingdate int(1),
-hopebegintime int(4),
-hopeendtime int(4),
-hopesalary int(8),
-hopejikyu int(4),
+hopeworkingdate int,
+hopebegintime int,
+hopeendtime int,
+hopesalary int,
+hopejikyu int,
 hopeetc varchar(200),
-driverlicense char(3),
+driverlicense char(1),
 licenseetc varchar(500),
 pasokonskill varchar(200),
 caution varchar(200),
@@ -90,8 +93,13 @@ age int(3),
 postal char(8),
 nearstation varchar(50),
 partner char(1),
+<<<<<<< HEAD
+huyou int,
+education varchar(100),
+=======
 huyou int(2),
 education varchar(1),
+>>>>>>> refs/remotes/origin/#197
 career varchar(1000),
 HOPEJOB1 char(6),
 HOPEJOB2 char(6),
@@ -108,7 +116,7 @@ hopeendtime int(4),
 hopesalary int(8),
 hopejikyu int(4),
 hopeetc varchar(200),
-driverlicense char(3),
+driverlicense char(1),
 licenseetc varchar(500),
 pasokonskill varchar(200),
 caution varchar(200),
@@ -148,6 +156,9 @@ primary key(jobseekerid)
 
 -- 企業情報 --
 create table company(
+no char(14) not null,
+receptiondt date,
+perioddt date,
 corporatenumber char(13),
 companyno char(13),
 companyname varchar(60),
@@ -159,8 +170,13 @@ companyurl varchar(100),
 jobcategorysmallcd char(3),
 jobcategorymiddlecd char(2),
 jobcategorylargecd char(1),
+<<<<<<< HEAD
+capital long,
+employees varchar(1000),
+=======
 capital bigint(16),
 employees varchar(6),
+>>>>>>> refs/remotes/origin/#197
 establishdt int(4),
 tantouyakushoku varchar(28),
 tantou varchar(14),
@@ -177,12 +193,14 @@ createuserid char(4) not null,
 updatedt timestamp not null default current_timestamp,
 updateuserid char(4) not null,
 deleteflag char(1) not null,
-primary key(companyno)
+primary key(no)
 )charset =utf8;
 
 -- 求人情報 --
 create table kyujin(
 no char(14) not null,
+receptiondt date,
+perioddt date,
 companyno char(13),
 companykana varchar(54),
 postal char(8),
@@ -230,8 +248,8 @@ hiddensex char(1),
 hiddenagemin int(3),
 hiddenagemax int(3),
 hiddenetc varchar(1000),
-receptiondt date,
-perioddt date,
+uketukedate date,
+kigendate date,
 createdt timestamp not null default current_timestamp,
 createuserid char(4) not null,
 updatedt timestamp not null default current_timestamp,
@@ -262,6 +280,8 @@ primary key(id)
 -- 過去求人情報 --
 create table pastkyujin(
 no char(14) not null,
+receptiondt date,
+perioddt date,
 companyno char(13),
 companykana varchar(54),
 postal char(8),
@@ -309,8 +329,8 @@ hiddensex char(1),
 hiddenagemin int(2),
 hiddenagemax int(2),
 hiddenetc varchar(1000),
-receptiondt date,
-perioddt date,
+uketukedate date,
+kigendate date,
 createdt timestamp not null default current_timestamp,
 createuserid char(4) not null,
 updatedt timestamp not null default current_timestamp,

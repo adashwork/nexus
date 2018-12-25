@@ -41,9 +41,7 @@ header > section {
 .mainnavi > li a:hover, .user__name a:hover {
   text-decoration:none;
 }
-.mainnavi > li:first-child {
-  background:#329bcf;
-}
+
 .mainnavi > li i {
   margin-right:10px;
 }

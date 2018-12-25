@@ -19,6 +19,7 @@
 <link href="../css/header.css" rel="stylesheet" type="text/css" />
 <link href="../css/footer.css" rel="stylesheet" type="text/css" />
 <link href="../css/job_seeker.css" rel="stylesheet" type="text/css" />
+<link href="../css/applicant_regist.css" rel="stylesheet" type="text/css" />
 
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css">
@@ -30,9 +31,12 @@
 	src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
 <link rel="stylesheet"
 	href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/Base/jquery-ui.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
+
+<script src="js/kalendae.standalone.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
 <script type="text/javascript" src="../js/common.js"></script>
+<script type="text/javascript" src="../js/applicantregist_tab.js"></script>
 <style>
 #job_seeker {
 	width: 980px;
@@ -93,7 +97,7 @@
 		</section>
 	</header>
 	<main>
-	<h2>求職者詳細情報1</h2>
+	<h2>求職者詳細情報</h2>
 	<ul>
 		<c:forEach var="message" items="${ messages }">
 			<li><c:out value="${ message }" /></li>
@@ -101,8 +105,17 @@
 	</ul>
 	<div id="job_seeker">
 		<form action="/nexus/web/jobseeker-edit" method="post">
-			<table border="0">
 
+		  <div id="tab-controll" class="tab-menu">
+		<ul>
+           <li id="btn1"><a href="#tab1">個人情報</a></li>
+           <li id="btn2"><a href="#tab2">希望業種</a></li>
+           <li id="btn3"><a href="#tab3">その他</a></li>
+        </ul>
+        </div>
+
+	    <div id="controll" class="menu">
+			<table id="tab1" class="page">
 				<tr>
 					<th width="20%">ID</th>
 					<td><input type="hidden" name="id"
@@ -272,23 +285,23 @@
 				</tr>
 				<tr>
 					<th>郵便番号</th>
-					<td><input type="text" name="postal" value="${ info.postal }" /></td>
+					<td><input type="text" name="zip21" class="form_text-small" size="3" maxlength="3"> - <input type="text" name="zip22" class="form_text-small" onKeyUp="AjaxZip3.zip2addr('zip21','zip22','addr21','addr21');" size="4" maxlength="4"></td>
 				</tr>
 				<tr>
 					<th>住所</th>
-					<td><input type="text" name="address" value="${ info.address }" /></td>
+					<td><input type="text" name="address" class="form_text"  value="${ info.address }" size="50" /></td>
 				</tr>
 				<tr>
 					<th>最寄り駅</th>
-					<td><input type="text" name="nearstation" value="${ info.nearstation }" /></td>
+					<td><input type="text" name="nearstation" value="${ info.nearstation }" size="10"/>駅</td>
 				</tr>
-
-
+				</table>
+				<table id="tab2" class="page">
 				<tr>
 				<th>希望業種1</th>
 					<td><select name="HOPEJOBCATEGORY">
+					<option value=""></option>
 					<c:forEach var="jobcategory" items="${ JCLargelist }">
-					<option selected="selected" disabled="disabled"  style='display: none' value=''></option>
 					<option value="${ jobcategory.largecd }" ${ jobcategory.name }
 					<c:if test="${jobcategory.largecd == info.hopejobcategory }">selected</c:if>>${ jobcategory.name }
 								</option>
@@ -298,8 +311,8 @@
 				<tr>
 				<th>希望業種2</th>
 					<td><select name="HOPEJOBCATEGORY2">
-					<c:forEach var="jobcategory2" items="${ JCLargelist }">
-					<option selected="selected" disabled="disabled"  style='display: none' value=''></option>
+					<option value=""></option>
+					<c:forEach var="jobcategory" items="${ JCLargelist }">
 					<option value="${ jobcategory.largecd }" ${ jobcategory.name }
 					<c:if test="${jobcategory.largecd == info.hopejobcategory2 }">selected</c:if>>${ jobcategory.name }
 								</option>
@@ -309,8 +322,8 @@
 				<tr>
 				<th>希望業種3</th>
 					<td><select name="HOPEJOBCATEGORY3">
-					<c:forEach var="jobcategory3" items="${ JCLargelist }">
-					<option selected="selected" disabled="disabled"  style='display: none' value=''></option>
+					<option value=""></option>
+					<c:forEach var="jobcategory" items="${ JCLargelist }">
 					<option value="${ jobcategory.largecd }" ${ jobcategory.name }
 					<c:if test="${jobcategory.largecd == info.hopejobcategory3 }">selected</c:if>>${ jobcategory.name }
 								</option>
@@ -320,8 +333,8 @@
 				<tr>
 					<th>希望職種1</th>
 					<td><select name="HOPEJOB1">
+					<option value=""></option>
 							<c:forEach var="job" items="${ Largelist }">
-							<option selected="selected" disabled="disabled"  style='display: none' value=''></option>
 								<option value="${ job.largecd }" ${ job.name }
 									<c:if test="${job.largecd == info.hopejob1 }">selected</c:if>>${ job.name }
 								</option>
@@ -331,8 +344,8 @@
 				<tr>
 					<th>希望職種2</th>
 					<td><select name="HOPEJOB2">
+					<option value=""></option>
 							<c:forEach var="job" items="${ Largelist }">
-							<option selected="selected" disabled="disabled"  style='display: none' value=''></option>
 								<option value="${ job.largecd }" ${ job.name }
 									<c:if test="${job.largecd == info.hopejob2 }">selected</c:if>>${ job.name }
 								</option>
@@ -342,8 +355,8 @@
 				<tr>
 					<th>希望職種3</th>
 					<td><select name="HOPEJOB3">
+					<option value=""></option>
 							<c:forEach var="job" items="${ Largelist }">
-							<option selected="selected" disabled="disabled"  style='display: none' value=''></option>
 								<option value="${ job.largecd }" ${ job.name }
 									<c:if test="${job.largecd == info.hopejob3 }">selected</c:if>>${ job.name }
 								</option>
@@ -353,7 +366,7 @@
 				<tr>
 					<th>希望月給</th>
 					<td><input type="text" name="hopesalary"
-						value="${ info.hopesalary }" /></td>
+						value="${ info.hopesalary }" size="4" />万円</td>
 				</tr>
 				<tr>
 					<th>希望勤務地</th>
@@ -400,19 +413,22 @@
 					<td><input type="text" name="hopeendtime"
 						value="${ info.hopeendtime }" /></td>
 				</tr>
+				</table>
+
+				<table id="tab3" class="page">
 				<tr>
 					<th>その他免許</th>
-					<td><textarea rows="3" cols="90" name="licenseetc"><c:out
+					<td><textarea rows="3" cols="80" name="licenseetc"><c:out
 								value="${ info.licenseetc }" /></textarea></td>
 				</tr>
 				<tr>
 					<th>補足</th>
-					<td><textarea rows="3" cols="90" name="note"><c:out
+					<td><textarea rows="3" cols="80" name="note"><c:out
 								value="${ info.note }" /></textarea></td>
 				</tr>
 				<tr>
 					<th>職歴・経歴</th>
-					<td><textarea rows="3" cols="90" name="career"><c:out
+					<td><textarea rows="3" cols="80" name="career"><c:out
 								value="${ info.careea }" /></textarea></td>
 				</tr>
 
@@ -426,9 +442,10 @@
 			<input type="submit" value="更新" class="main-b">
 		</form>
 		<input class="main-b" type="button"
-			onclick="location.href='/nexus/web/jobseeker-list'" value="一覧に戻る">
+			onclick="location.href='/nexus/web/jobseeker-regist'" value="登録">
 		<input class="main-b" type="button"
-			onclick="location.href='/nexus/web/jobseeker-list'" value="削除">
+			onclick="location.href='/nexus/web/jobseeker-list'" value="一覧に戻る">
+
 	</div>
 	</main>
 	<!-- フッター　-->
@@ -437,7 +454,6 @@
 			Rights Reserved.</small>
 	</footer>
 
-	<script src="js/kalendae.standalone.js" type="text/javascript"
-		charset="utf-8"></script>
+
 </body>
 </html>

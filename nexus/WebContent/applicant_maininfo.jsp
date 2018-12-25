@@ -162,11 +162,6 @@
 					</td>
 				</tr>
 				<tr>
-					<th>職歴・経歴</th>
-					<td><textarea rows="3" cols="80" name="career"><c:out
-								value="${ info.careea }" /></textarea></td>
-				</tr>
-				<tr>
 					<th>配偶者</th>
 					<td><input type="radio" name="partner" value="0"
 						<c:if test="${ info.partner == 0 }"> checked </c:if> /> 無
@@ -309,7 +304,7 @@
 				<table id="tab2" class="page">
 				<tr>
 				<th>希望業種1</th>
-					<td><select name="HOPJOBCATEGORY">
+					<td><select name="HOPEJOBCATEGORY">
 					<c:forEach var="jobcategory" items="${ JCLargelist }">
 					<option value="${ jobcategory.largecd }" ${ jobcategory.name }
 					<c:if test="${jobcategory.largecd == info.hopejobcategory }">selected</c:if>>${ jobcategory.name }
@@ -319,7 +314,7 @@
 				</tr>
 				<tr>
 				<th>希望業種2</th>
-					<td><select name="HOPJOBCATEGORY2">
+					<td><select name="HOPEJOBCATEGORY2">
 					<c:forEach var="jobcategory2" items="${ JCLargelist }">
 					<option value="${ jobcategory.largecd }" ${ jobcategory.name }
 					<c:if test="${jobcategory.largecd == info.hopejobcategory2 }">selected</c:if>>${ jobcategory.name }
@@ -329,7 +324,7 @@
 				</tr>
 				<tr>
 				<th>希望業種3</th>
-					<td><select name="HOPJOBCATEGORY3">
+					<td><select name="HOPEJOBCATEGORY3">
 					<c:forEach var="jobcategory3" items="${ JCLargelist }">
 					<option value="${ jobcategory.largecd }" ${ jobcategory.name }
 					<c:if test="${jobcategory.largecd == info.hopejobcategory3 }">selected</c:if>>${ jobcategory.name }
@@ -339,7 +334,7 @@
 				</tr>
 				<tr>
 					<th>希望職種1</th>
-					<td><select name="HOPJOB1">
+					<td><select name="HOPEJOB1">
 							<c:forEach var="job1" items="${ Largelist }">
 								<option value="${ job.largecd }" ${ job.name }
 									<c:if test="${job.largecd == info.hopejob1 }">selected</c:if>>${ job.name }
@@ -349,7 +344,7 @@
 				</tr>
 				<tr>
 					<th>希望職種2</th>
-					<td><select name="HOPJOB2">
+					<td><select name="HOPEJOB2">
 							<c:forEach var="job2" items="${ Largelist }">
 								<option value="${ job.largecd }" ${ job.name }
 									<c:if test="${job.largecd == info.hopejob2 }">selected</c:if>>${ job.name }
@@ -359,7 +354,7 @@
 				</tr>
 				<tr>
 					<th>希望職種3</th>
-					<td><select name="HOPJOB3">
+					<td><select name="HOPEJOB3">
 							<c:forEach var="job3" items="${ Largelist }">
 								<option value="${ job.largecd }" ${ job.name }
 									<c:if test="${job.largecd == info.hopejob3 }">selected</c:if>>${ job.name }
@@ -430,48 +425,19 @@
 					<td><textarea rows="3" cols="80" name="note"><c:out
 								value="${ info.note }" /></textarea></td>
 				</tr>
-
-<!--				<tr>
+				<tr>
+					<th>職歴・経歴</th>
+					<td><textarea rows="3" cols="80" name="career"><c:out
+								value="${ info.careea }" /></textarea></td>
+				</tr>
+				<tr>
 					<th>担当職業者紹介者ID</th>
 					<td><input type="hidden" name="tantoustaffid"
 						value="<c:out value="${ info.tantoustaffid }" />"> <c:out
 							value="${ info.tantoustaffid }" /></td>
 				</tr>
-								<tr>
-					<th>フリーコメント</th>
-				</tr>
-
-				<tr>
-					<td><textarea rows="2" cols="24" name="title"><c:out
-								value="${ comment.title }" /></textarea></td>
-					<td>重要<br> <input type="checkbox" name="important"
-						value="重要"></td>
-				</tr>
-				<tr>
-					<td><textarea rows="16" cols="74" name="freecomment"><c:out
-								value="${ comment.note }" /></textarea></td>
-				</tr>
-				<tr>
-					<td>登録日<textarea rows="1" cols="20" name="comnetcreatedt"><c:out
-								value="${ comment.createDt }" /></textarea></td>
-					<td>更新日<textarea rows="1" cols="20" name="commentupdatedt"><c:out
-								value="${ comment.updateDt }" /></textarea></td>
-				</tr>
-				<tr>
-					<td>登録者ID<textarea rows="1" cols="20"
-							name="commentregistrationperson"><c:out
-								value="${ comment.createUserId }" /></textarea></td>
-					<td>更新者ID<textarea rows="1" cols="20"
-							name="commentregistrationperson"><c:out
-								value="${ staffNameMap[comment.createUserId] }" /></textarea></td>
-				</tr>
 				</table>
-
-
-
-
-
-				!--<input type="submit" value="更新" class="main-b">  -->
+				<!--<input type="submit" value="更新" class="main-b">  -->
 		</form>
 		<input class="main-b" type="button"
 			onclick="location.href='/nexus/web/jobseeker-list'" value="一覧に戻る">

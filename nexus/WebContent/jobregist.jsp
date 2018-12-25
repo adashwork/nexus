@@ -101,11 +101,13 @@
 				</tr>
 
 				<!-- 1やりたかったメモ：一行テキストボックスはenter押すとすぐに登録なので
-			submit変更かjsとかで制御、日本語入力オン-に -->
+			submit変更かjsとかで制御、日本語入力オン-に（1807生記述） -->
 
 				<tr>
 					<th>産業大分類コード</th>
-					<td><c:out value="${ company.jobCategoryLargeCd }" /></td>
+
+					<td><c:out value="${ company.jobCategoryLargeCd }" />
+					${ jobcategory.name }</td>
 				</tr>
 				<tr>
 					<th>産業細分類コード</th>
@@ -124,15 +126,12 @@
 					<td><c:out value="${ company.employees }" /></td>
 				</tr>
 				<tr>
-					<%--					<th>会社の特徴</th>
+<%--					<th>会社の特徴</th>
 					<td><textarea name="companyfeature" rows="3" cols="40"
 							tabindex="14">
 							<c:out value="${ kyujin.companyfeature }" /></textarea></td>
 				</tr>
 --%>
-
-
-					<!-- selectedのバグを修正するひつようあり -->
 				<tr>
 					<th>職種大分類コード１</th>
 
@@ -280,12 +279,8 @@
 				</tr>
 				<tr>
 					<th>雇用期間の定め</th>
-					<td><input type="radio" name="koyoukikan" value="1"
-						<c:if test="${1 == kyujin.koyoukikan}">checked="checked"</c:if>
-						tabindex="31"> 有り <input type="radio" name="koyoukikan"
-						value="2"
-						<c:if test="${1 != kyujin.koyoukikan}">checked="checked"</c:if>
-						tabindex="32"> 無し</td>
+					<td><input type="text" name="koyoukikan"
+						value="<c:out value="${ kyujin.koyoukikan}" />" size="32" maxlength="30" tabindex="31"></td>
 				</tr>
 				<tr>
 					<th>雇用期間開始年月日</th>

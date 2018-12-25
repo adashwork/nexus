@@ -269,7 +269,7 @@ public class KyujinService {
 			result = false;
 		}
 
-		if (kyujin.getKoyoukikan().equals("1")) {
+		if (!kyujin.getKoyoukikan().equals("なし") && !kyujin.getKoyoukikan().equals("無し") && !kyujin.getKoyoukikan().equals("無")) {
 
 			if (kyujin.getKoyoukikankaishi() == null || kyujin.getKoyoukikanowari() == null) {
 				messages.add("雇用期間の期限を入れてください。");

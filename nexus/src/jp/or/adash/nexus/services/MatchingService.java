@@ -114,9 +114,16 @@ public class MatchingService {
 		}
 
 		//入社日の値が入力されているか
-		if (matching.getEnterdt() == null) {
-			messages.add("入社日が入力されていません。");
-			result = false;
+		if (matching.getAssessment().equals("1")) {
+			if (matching.getEnterdt() == null) {
+				messages.add("入社日が入力されていません。");
+				result = false;
+			}
+			if (matching.getEnterdt().before( matching.getInterviewdt())) {
+				messages.add("入社日が面接日の前です。");
+				result = false;
+			}
+
 		}
 		// 評価の値が入力されているか
 		if (matching.getAssessment().equals("")) {
@@ -261,8 +268,8 @@ public class MatchingService {
 	 * @param id
 	 * @return
 	 */
-	public MatchingCase getMatching(int id) {
-		MatchingCase matching = null;
+	public MatchingSearchResult getMatching(int id) {
+		MatchingSearchResult matching = null;
 //		Comment matchingComment = null;
 
 		try {
@@ -271,7 +278,7 @@ public class MatchingService {
 
 			// idを元にマッチング事例を取得
 			MatchingDao dao = new MatchingDao(transaction);
-			matching = dao.select(id);
+			matching = dao.selectV1(id);
 
 //			// マッチングidを元にマッチングコメントを取得
 //			CommentDao cdao = new CommentDao(transaction);
@@ -309,7 +316,7 @@ public class MatchingService {
 			if(matching.isEmpty() ) {
 				messages.add("一致する項目はありませんでした");
 			}
-			
+
 		} catch (IOException e) {
 			// エラーメッセージをセットする
 			messages.add(MessageCommons.ERR_DB_CONNECT);

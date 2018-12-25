@@ -63,8 +63,7 @@ public class CommentDeleteServlet extends HttpServlet {
 					.forward(request, response);
 
 		}else {
-
-			// 失敗した場合、削除対象だった行をオブジェクトで返す
+		// 失敗した場合、削除対象だった行をオブジェクトで返す
 			String companyNo = request.getParameter("companyno");				// 事業所番号
 			String kyujinNo = request.getParameter("kyujinno");				// 求人番号
 			String jobSeekerId = request.getParameter("jobseekeeid");			// 求職者ID

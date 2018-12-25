@@ -349,6 +349,36 @@ public class CommentDao {
 	}
 
 	/**
+	 * コメントを削除する
+	 * @param id コメントID
+	 * @return count 削除した行数
+	 * @throws IOException
+	 */
+	public int deleteV2(int id) throws IOException {
+		int count = 0;
+
+		// SQL文を生成する
+		StringBuffer sql = new StringBuffer();
+		sql.append(" DELETE");
+
+		sql.append(" FROM");
+		sql.append(" comment");
+
+		sql.append(" WHERE");
+		sql.append(" id = ?");
+
+		try (PreparedStatement ps = this.conn.prepareStatement(sql.toString())) {
+			ps.setInt(1, id);
+			// SQL文を実行する
+			count = ps.executeUpdate();
+		} catch (SQLException e) {
+			throw new IOException(e);
+		}
+
+		return count;
+	}
+
+	/**
 	 * 備考（コメント）の一覧取得のためのメソッド
 	 * 与えられたパラメータから該当するものを検索する
 	 * @param CommentSearchParameter

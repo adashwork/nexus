@@ -42,7 +42,7 @@
 <title>求職者詳細情報</title>
 </head>
 <body>
-<form id="form" method="get" action="">
+
 <c:forEach var="comment" items="${ commentlist }">
 <div id="wrap">
   <div class="comment">
@@ -62,13 +62,13 @@
 		  	<p>更新日:<c:out value="${ comment.updateDt }" /></p>
 	    </div>
   </div>
-
-	<input type="hidden" name="commentid" value="<c:out value="${ comment.id }" />">
-		<input class="main-b" type="submit" id="comment-disp"
-							onclick="MovePages(this)" value="編集">
-
-</c:forEach>
+<form method="get" action="./comment-disp">
+		<button class="main-b" type="submit" name="commentid" value="<c:out value="${ comment.id }" />" >
+		詳細
+		</button>
 </form>
+</c:forEach>
+
 	<footer>
 		<small>Copyright(C) 2009有限責任事業組合 大阪職業教育協働機構(A'ワーク創造館) All
 			Rights Reserved.</small>

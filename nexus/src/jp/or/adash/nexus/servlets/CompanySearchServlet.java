@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import jp.or.adash.nexus.entity.CompanySearch;
 import jp.or.adash.nexus.entity.CompanySearchResult;
@@ -40,6 +41,11 @@ public class CompanySearchServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		//セッションからログインスタッフ情報を取得
+		HttpSession session = request.getSession(true);
+		Staff staff = (Staff) session.getAttribute("UserData");
+
+
 		String companyName = request.getParameter("companyname");
 		String staffId = request.getParameter("staffid");
 		String jobCategory = request.getParameter("jobcategory");
@@ -68,6 +74,8 @@ public class CompanySearchServlet extends HttpServlet {
 		List<CompanySearchResult> companyList = companyService.getCompanyList(cse);
 		request.setAttribute("companylist", companyList);
 		request.setAttribute("messages", companyService.getMessages());
+		request.setAttribute("cse",cse);
+		request.setAttribute("Staff", staff);
 
 		// フォワード
 		request.getRequestDispatcher("/companysearch.jsp").forward(request, response);

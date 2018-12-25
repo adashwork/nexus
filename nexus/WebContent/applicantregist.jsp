@@ -289,7 +289,7 @@
 				</tr>
 				<tr>
 					<th>住所</th>
-					<td><input type="text" name="address" class="form_text"  value="${ info.address }" size="50" /></td>
+					<td><input type="text" name="address" class="form_text"  value="${ info.address }" size="50"></td>
 				</tr>
 				<tr>
 					<th>最寄り駅</th>

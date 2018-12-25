@@ -84,10 +84,16 @@ public class JobSeeker_dao {
 
 		// SQL文を生成する
 		StringBuffer sql = new StringBuffer();
-		sql.append(" select js.id, js.name, js.sex, js.HOPEJOB1, js.HOPEJOB2, js.HOPEJOB3,js.HOPEJOBCATEGORY, js.HOPEJOBCATEGORY2,js.HOPEJOBCATEGORY3,js.hopeworkplace, st.name");
+		sql.append(" select js.id, js.name, zjs.sex,st.name AS staffname,jc.name AS jobcategoryname,jb.name AS jobname,tk.name AS todouhukenname,TIMESTAMPDIFF(YEAR,zjs.birthdt,CURDATE()) AS age");
 		sql.append(" from jobseeker js");
-		sql.append(" left join staff st on js.tantoustaffid = st.id");
+		sql.append(" left join  comment cm on js.id = cm.jobseekerid  ");
+		sql.append(" left join zokuseijobseeker zjs on js.id = zjs.id  ");
+		sql.append(" left join staff st on zjs.tantoustaffid = st.id");
+		sql.append(" left join jobcategory jc on zjs.HOPEJOBCATEGORY = jc.id");
+		sql.append(" left join job jb on zjs.HOPEJOB1 = jb.id");
+		sql.append(" left join todouhuken tk on zjs.hopeworkplace = tk.cd");
 		sql.append(" where js.id = ?");
+		sql.append(" ORDER BY  cm.updatedt DESC ");
 		try (PreparedStatement ps = this.conn.prepareStatement(sql.toString())) {
 			ps.setString(1, js_id);
 
@@ -98,16 +104,12 @@ public class JobSeeker_dao {
 					jobseeker.add(new Jobseeker_simple_entity(
 							rs.getString("js.id"),
 							rs.getString("js.name"),
-						//	rs.getInt("js.age"),
-							rs.getString("js.sex"),
-							rs.getString("js.HOPEJOB1"),
-							rs.getString("js.HOPEJOB2"),
-							rs.getString("js.HOPEJOB3"),
-							rs.getString("js.HOPEJOBCATEGORY"),
-							rs.getString("js.HOPEJOBCATEGORY2"),
-							rs.getString("js.HOPEJOBCATEGORY3"),
-							rs.getString("js.hopeworkplace"),
-							rs.getString("st.name")));
+							rs.getInt("age"),
+							rs.getString("zjs.sex"),
+							rs.getString("jobcategoryname"),
+							rs.getString("jobname"),
+							rs.getString("todouhukenname"),
+							rs.getString("staffname")));
 				}
 			} catch(SQLException e) {
 				throw new IOException(e);
@@ -129,10 +131,16 @@ public class JobSeeker_dao {
 
 		// SQL文を生成する
 		StringBuffer sql = new StringBuffer();
-		sql.append(" select js.id, js.name, js.sex, js.HOPEJOB1, js.HOPEJOB2, js.HOPEJOB3,js.HOPEJOBCATEGORY, js.HOPEJOBCATEGORY2,js.HOPEJOBCATEGORY3, js.hopeworkplace, st.name");
+		sql.append(" select js.id, js.name, zjs.sex, st.name AS staffname,jc.name AS jobcategoryname,jb.name AS jobname,tk.name AS todouhukenname,TIMESTAMPDIFF(YEAR,zjs.birthdt,CURDATE()) AS age");
 		sql.append(" from jobseeker js");
-		sql.append(" left join staff st on js.tantoustaffid = st.id");
+		sql.append(" left join  comment cm on js.id = cm.jobseekerid  ");
+		sql.append(" left join zokuseijobseeker zjs on js.id = zjs.id  ");
+		sql.append(" left join staff st on zjs.tantoustaffid = st.id");
+		sql.append(" left join jobcategory jc on zjs.HOPEJOBCATEGORY = jc.id");
+		sql.append(" left join job jb on zjs.HOPEJOB1 = jb.id");
+		sql.append(" left join todouhuken tk on zjs.hopeworkplace = tk.cd");
 		sql.append(" where st.name = ?");
+		sql.append(" ORDER BY  cm.updatedt DESC ");
 		try (PreparedStatement ps = this.conn.prepareStatement(sql.toString())) {
 			ps.setString(1, st_name);
 
@@ -143,16 +151,12 @@ public class JobSeeker_dao {
 					jobseeker.add(new Jobseeker_simple_entity(
 							rs.getString("js.id"),
 							rs.getString("js.name"),
-						//	rs.getInt("js.age"),
-							rs.getString("js.sex"),
-							rs.getString("js.HOPEJOB1"),
-							rs.getString("js.HOPEJOB2"),
-							rs.getString("js.HOPEJOB3"),
-							rs.getString("js.HOPEJOBCATEGORY"),
-							rs.getString("js.HOPEJOBCATEGORY2"),
-							rs.getString("js.HOPEJOBCATEGORY3"),
-							rs.getString("js.hopeworkplace"),
-							rs.getString("st.name")));
+							rs.getInt("age"),
+							rs.getString("zjs.sex"),
+							rs.getString("jobcategoryname"),
+							rs.getString("jobname"),
+							rs.getString("todouhukenname"),
+							rs.getString("staffname")));
 				}
 			} catch(SQLException e) {
 				throw new IOException(e);
@@ -165,7 +169,7 @@ public class JobSeeker_dao {
 
 	/**
 	 * 求職者ID、求職者かな名、担当紹介者氏名を元に、求職者情報（1件）を取得する
-	 * @auther aihara
+	 * @auther aihara , tanaka
 	 * @throws IOException
 	 */
 	public List<Jobseeker_simple_entity> selectJobSeeker(String js_id,String js_kana,String st_name) throws IOException {
@@ -174,11 +178,18 @@ public class JobSeeker_dao {
 		StringBuffer sql = new StringBuffer();
 
 		// 1.求職者ID、求職者かな名、担当紹介者氏名が入っている場合
-		if(js_id != "" && js_kana != "" && st_name != "") {
-			sql.append(" select js.id, js.name, js.sex, js.HOPEJOB1, js.HOPEJOB2, js.HOPEJOB3,js.HOPEJOBCATEGORY, js.HOPEJOBCATEGORY2,js.HOPEJOBCATEGORY3, js.hopeworkplace, st.name");
+		if(!("".equals(js_id)) && !("".equals(js_kana)) && !("".equals(st_name))) {
+
+			sql.append(" select js.id, js.name, zjs.sex, st.name AS staffname,jc.name AS jobcategoryname,jb.name AS jobname,tk.name AS todouhukenname,TIMESTAMPDIFF(YEAR,zjs.birthdt,CURDATE()) AS age");
 			sql.append(" from jobseeker js");
-			sql.append(" left join staff st on js.tantoustaffid = st.id");
-			sql.append(" where js.id = ? and js.kana = ? and st.name = ?");
+			sql.append(" left join  comment cm on js.id = cm.jobseekerid  ");
+			sql.append(" left join zokuseijobseeker zjs on js.id = zjs.id  ");
+			sql.append(" left join staff st on zjs.tantoustaffid = st.id");
+			sql.append(" left join jobcategory jc on zjs.HOPEJOBCATEGORY = jc.id");
+			sql.append(" left join job jb on zjs.HOPEJOB1 = jb.id");
+			sql.append(" left join todouhuken tk on zjs.hopeworkplace = tk.cd");
+			sql.append(" where js.id = ? and js.kana like concat('%', ?, '%') and st.name = ?");
+			sql.append(" ORDER BY  cm.updatedt DESC ");
 			try (PreparedStatement ps = this.conn.prepareStatement(sql.toString())) {
 				ps.setString(1, js_id);
 				ps.setString(2, js_kana);
@@ -190,16 +201,12 @@ public class JobSeeker_dao {
 						jobseeker.add(new Jobseeker_simple_entity(
 								rs.getString("js.id"),
 								rs.getString("js.name"),
-							//	rs.getInt("js.age"),
-								rs.getString("js.sex"),
-								rs.getString("js.HOPEJOB1"),
-								rs.getString("js.HOPEJOB2"),
-								rs.getString("js.HOPEJOB3"),
-								rs.getString("js.HOPEJOBCATEGORY"),
-								rs.getString("js.HOPEJOBCATEGORY2"),
-								rs.getString("js.HOPEJOBCATEGORY3"),
-								rs.getString("js.hopeworkplace"),
-								rs.getString("st.name")));
+								rs.getInt("age"),
+								rs.getString("zjs.sex"),
+								rs.getString("jobcategoryname"),
+								rs.getString("jobname"),
+								rs.getString("todouhukenname"),
+								rs.getString("staffname")));
 					}
 				} catch(SQLException e) {
 					throw new IOException(e);
@@ -210,11 +217,17 @@ public class JobSeeker_dao {
 			return jobseeker;
 		}
 		// 2.求職者ID、求職者かな名が入っている場合
-		else if(js_id != "" && js_kana != "" && st_name == "") {
-			sql.append(" select js.id, js.name, js.sex, js.HOPEJOB1, js.HOPEJOB2, js.HOPEJOB3,js.HOPEJOBCATEGORY, js.HOPEJOBCATEGORY2,js.HOPEJOBCATEGORY3, js.hopeworkplace, st.name");
+		else if(!("".equals(js_id)) && !("".equals(js_kana)) && "".equals(st_name)) {
+			sql.append(" select js.id, js.name, zjs.sex, st.name AS staffname,jc.name AS jobcategoryname,jb.name AS jobname,tk.name AS todouhukenname,TIMESTAMPDIFF(YEAR,zjs.birthdt,CURDATE()) AS age");
 			sql.append(" from jobseeker js");
-			sql.append(" left join staff st on js.tantoustaffid = st.id");
-			sql.append(" where js.id = ? and js.kana = ?");
+			sql.append(" left join  comment cm on js.id = cm.jobseekerid ");
+			sql.append(" left join zokuseijobseeker zjs on js.id = zjs.id  ");
+			sql.append(" left join staff st on zjs.tantoustaffid = st.id");
+			sql.append(" left join jobcategory jc on zjs.HOPEJOBCATEGORY = jc.id");
+			sql.append(" left join job jb on zjs.HOPEJOB1 = jb.id");
+			sql.append(" left join todouhuken tk on zjs.hopeworkplace = tk.cd");
+			sql.append(" where js.id = ? and js.kana like concat('%', ?, '%')");
+			sql.append(" ORDER BY  cm.updatedt DESC");
 			try (PreparedStatement ps = this.conn.prepareStatement(sql.toString())) {
 				ps.setString(1, js_id);
 				ps.setString(2, js_kana);
@@ -225,16 +238,12 @@ public class JobSeeker_dao {
 						jobseeker.add(new Jobseeker_simple_entity(
 								rs.getString("js.id"),
 								rs.getString("js.name"),
-							//	rs.getInt("js.age"),
-								rs.getString("js.sex"),
-								rs.getString("js.HOPEJOB1"),
-								rs.getString("js.HOPEJOB2"),
-								rs.getString("js.HOPEJOB3"),
-								rs.getString("js.HOPEJOBCATEGORY"),
-								rs.getString("js.HOPEJOBCATEGORY2"),
-								rs.getString("js.HOPEJOBCATEGORY3"),
-								rs.getString("js.hopeworkplace"),
-								rs.getString("st.name")));
+								rs.getInt("age"),
+								rs.getString("zjs.sex"),
+								rs.getString("jobcategoryname"),
+								rs.getString("jobname"),
+								rs.getString("todouhukenname"),
+								rs.getString("staffname")));
 					}
 				} catch(SQLException e) {
 					throw new IOException(e);
@@ -245,11 +254,17 @@ public class JobSeeker_dao {
 			return jobseeker;
 		}
 		// 3.求職者IDが入っている場合
-		else if(js_id != "" && js_kana == "" && st_name == "") {
-			sql.append(" select js.id, js.name, js.sex, js.HOPEJOB1, js.HOPEJOB2, js.HOPEJOB3,js.HOPEJOBCATEGORY, js.HOPEJOBCATEGORY2,js.HOPEJOBCATEGORY3, js.hopeworkplace, st.name");
+		else if(!("".equals(js_id)) && "".equals(js_kana) && "".equals(st_name)) {
+			sql.append(" select js.id, js.name, zjs.sex, st.name AS staffname,jc.name AS jobcategoryname,jb.name AS jobname,tk.name AS todouhukenname,TIMESTAMPDIFF(YEAR,zjs.birthdt,CURDATE()) AS age");
 			sql.append(" from jobseeker js");
-			sql.append(" left join staff st on js.tantoustaffid = st.id");
+			sql.append(" left join  comment cm on js.id = cm.jobseekerid  ");
+			sql.append(" left join zokuseijobseeker zjs on js.id = zjs.id  ");
+			sql.append(" left join staff st on zjs.tantoustaffid = st.id");
+			sql.append(" left join jobcategory jc on zjs.HOPEJOBCATEGORY = jc.id");
+			sql.append(" left join job jb on zjs.HOPEJOB1 = jb.id");
+			sql.append(" left join todouhuken tk on zjs.hopeworkplace = tk.cd");
 			sql.append(" where js.id = ?");
+			sql.append(" ORDER BY  cm.updatedt DESC");
 			try (PreparedStatement ps = this.conn.prepareStatement(sql.toString())) {
 				ps.setString(1, js_id);
 				// SQL文を実行する
@@ -259,16 +274,12 @@ public class JobSeeker_dao {
 						jobseeker.add(new Jobseeker_simple_entity(
 								rs.getString("js.id"),
 								rs.getString("js.name"),
-							//	rs.getInt("js.age"),
-								rs.getString("js.sex"),
-								rs.getString("js.HOPEJOB1"),
-								rs.getString("js.HOPEJOB2"),
-								rs.getString("js.HOPEJOB3"),
-								rs.getString("js.HOPEJOBCATEGORY"),
-								rs.getString("js.HOPEJOBCATEGORY2"),
-								rs.getString("js.HOPEJOBCATEGORY3"),
-								rs.getString("js.hopeworkplace"),
-								rs.getString("st.name")));
+								rs.getInt("age"),
+								rs.getString("zjs.sex"),
+								rs.getString("jobcategoryname"),
+								rs.getString("jobname"),
+								rs.getString("todouhukenname"),
+								rs.getString("staffname")));
 					}
 				} catch(SQLException e) {
 					throw new IOException(e);
@@ -280,11 +291,17 @@ public class JobSeeker_dao {
 		}
 
 		// 4.求職者かな名、担当紹介者氏名が入っている場合
-		else if(js_id == "" && js_kana != "" && st_name != "") {
-			sql.append(" select js.id, js.name, js.sex, js.HOPEJOB1, js.HOPEJOB2, js.HOPEJOB3,js.HOPEJOBCATEGORY, js.HOPEJOBCATEGORY2,js.HOPEJOBCATEGORY3, js.hopeworkplace, st.name");
+		else if("".equals(js_id) && !("".equals(js_kana)) && !("".equals(st_name))) {
+			sql.append(" select js.id, js.name, zjs.sex, st.name AS staffname,jc.name AS jobcategoryname,jb.name AS jobname,tk.name AS todouhukenname,TIMESTAMPDIFF(YEAR,zjs.birthdt,CURDATE()) AS age");
 			sql.append(" from jobseeker js");
-			sql.append(" left join staff st on js.tantoustaffid = st.id");
-			sql.append(" where js.kana = ? and st.name = ?");
+			sql.append(" left join  comment cm on js.id = cm.jobseekerid ");
+			sql.append(" left join zokuseijobseeker zjs on js.id = zjs.id  ");
+			sql.append(" left join staff st on zjs.tantoustaffid = st.id");
+			sql.append(" left join jobcategory jc on zjs.HOPEJOBCATEGORY = jc.id");
+			sql.append(" left join job jb on zjs.HOPEJOB1 = jb.id");
+			sql.append(" left join todouhuken tk on zjs.hopeworkplace = tk.cd");
+			sql.append(" where js.kana like concat('%', ?, '%') and st.name = ?");
+			sql.append(" ORDER BY  cm.updatedt DESC");
 			try (PreparedStatement ps = this.conn.prepareStatement(sql.toString())) {
 				ps.setString(1, js_kana);
 				ps.setString(2, st_name);
@@ -295,16 +312,12 @@ public class JobSeeker_dao {
 						jobseeker.add(new Jobseeker_simple_entity(
 								rs.getString("js.id"),
 								rs.getString("js.name"),
-							//	rs.getInt("js.age"),
-								rs.getString("js.sex"),
-								rs.getString("js.HOPEJOB1"),
-								rs.getString("js.HOPEJOB2"),
-								rs.getString("js.HOPEJOB3"),
-								rs.getString("js.HOPEJOBCATEGORY"),
-								rs.getString("js.HOPEJOBCATEGORY2"),
-								rs.getString("js.HOPEJOBCATEGORY3"),
-								rs.getString("js.hopeworkplace"),
-								rs.getString("st.name")));
+								rs.getInt("age"),
+								rs.getString("zjs.sex"),
+								rs.getString("jobcategoryname"),
+								rs.getString("jobname"),
+								rs.getString("todouhukenname"),
+								rs.getString("staffname")));
 					}
 				} catch(SQLException e) {
 					throw new IOException(e);
@@ -315,11 +328,17 @@ public class JobSeeker_dao {
 			return jobseeker;
 		}
 		// 5.求職者かな名が入っている場合
-		else if(js_id == "" && js_kana != "" && st_name == ""){
-			sql.append(" select js.id, js.name, js.sex, js.HOPEJOB1, js.HOPEJOB2, js.HOPEJOB3,js.HOPEJOBCATEGORY, js.HOPEJOBCATEGORY2,js.HOPEJOBCATEGORY3, js.hopeworkplace, st.name");
+		else if("".equals(js_id) && !("".equals(js_kana)) && "".equals(st_name)){
+			sql.append(" select js.id, js.name, zjs.sex, st.name AS staffname,jc.name AS jobcategoryname,jb.name AS jobname,tk.name AS todouhukenname,TIMESTAMPDIFF(YEAR,zjs.birthdt,CURDATE()) AS age");
 			sql.append(" from jobseeker js");
-			sql.append(" left join staff st on js.tantoustaffid = st.id");
-			sql.append(" where js.kana = ?");
+			sql.append(" left join  comment cm on js.id = cm.jobseekerid ");
+			sql.append(" left join zokuseijobseeker zjs on js.id = zjs.id  ");
+			sql.append(" left join staff st on zjs.tantoustaffid = st.id");
+			sql.append(" left join jobcategory jc on zjs.HOPEJOBCATEGORY = jc.id");
+			sql.append(" left join job jb on zjs.HOPEJOB1 = jb.id");
+			sql.append(" left join todouhuken tk on zjs.hopeworkplace = tk.cd");
+			sql.append(" where js.kana like concat('%', ?, '%')");
+			sql.append(" ORDER BY  cm.updatedt DESC");
 			try (PreparedStatement ps = this.conn.prepareStatement(sql.toString())) {
 				ps.setString(1, js_kana);
 				// SQL文を実行する
@@ -329,16 +348,12 @@ public class JobSeeker_dao {
 						jobseeker.add(new Jobseeker_simple_entity(
 								rs.getString("js.id"),
 								rs.getString("js.name"),
-							//	rs.getInt("js.age"),
-								rs.getString("js.sex"),
-								rs.getString("js.HOPEJOB1"),
-								rs.getString("js.HOPEJOB2"),
-								rs.getString("js.HOPEJOB3"),
-								rs.getString("js.HOPEJOBCATEGORY"),
-								rs.getString("js.HOPEJOBCATEGORY2"),
-								rs.getString("js.HOPEJOBCATEGORY3"),
-								rs.getString("js.hopeworkplace"),
-								rs.getString("st.name")));
+								rs.getInt("age"),
+								rs.getString("zjs.sex"),
+								rs.getString("jobcategoryname"),
+								rs.getString("jobname"),
+								rs.getString("todouhukenname"),
+								rs.getString("staffname")));
 					}
 				} catch(SQLException e) {
 					throw new IOException(e);
@@ -349,11 +364,17 @@ public class JobSeeker_dao {
 			return jobseeker;
 		}
 		// 6.求職者ID、担当紹介者氏名が入っている場合
-		else if(js_id != "" && js_kana == "" && st_name != ""){
-			sql.append(" select js.id, js.name, js.sex, js.HOPEJOB1, js.HOPEJOB2, js.HOPEJOB3,js.HOPEJOBCATEGORY, js.HOPEJOBCATEGORY2,js.HOPEJOBCATEGORY3, js.hopeworkplace, st.name");
+		else if(!("".equals(js_id)) && "".equals(js_kana) && !("".equals(st_name))){
+			sql.append(" select js.id, js.name, zjs.sex, st.name AS staffname,jc.name AS jobcategoryname,jb.name AS jobname,tk.name AS todouhukenname,TIMESTAMPDIFF(YEAR,zjs.birthdt,CURDATE()) AS age");
 			sql.append(" from jobseeker js");
-			sql.append(" left join staff st on js.tantoustaffid = st.id");
+			sql.append(" left join  comment cm on js.id = cm.jobseekerid");
+			sql.append(" left join zokuseijobseeker zjs on js.id = zjs.id  ");
+			sql.append(" left join staff st on zjs.tantoustaffid = st.id");
+			sql.append(" left join jobcategory jc on zjs.HOPEJOBCATEGORY = jc.id");
+			sql.append(" left join job jb on zjs.HOPEJOB1 = jb.id");
+			sql.append(" left join todouhuken tk on zjs.hopeworkplace = tk.cd");
 			sql.append(" where js.id = ? and st.name = ?");
+			sql.append(" ORDER BY  cm.updatedt DESC");
 			try (PreparedStatement ps = this.conn.prepareStatement(sql.toString())) {
 				ps.setString(1, js_id);
 				ps.setString(2, st_name);
@@ -364,16 +385,12 @@ public class JobSeeker_dao {
 						jobseeker.add(new Jobseeker_simple_entity(
 								rs.getString("js.id"),
 								rs.getString("js.name"),
-							//	rs.getInt("js.age"),
-								rs.getString("js.sex"),
-								rs.getString("js.HOPEJOB1"),
-								rs.getString("js.HOPEJOB2"),
-								rs.getString("js.HOPEJOB3"),
-								rs.getString("js.HOPEJOBCATEGORY"),
-								rs.getString("js.HOPEJOBCATEGORY2"),
-								rs.getString("js.HOPEJOBCATEGORY3"),
-								rs.getString("js.hopeworkplace"),
-								rs.getString("st.name")));
+								rs.getInt("age"),
+								rs.getString("zjs.sex"),
+								rs.getString("jobcategoryname"),
+								rs.getString("jobname"),
+								rs.getString("todouhukenname"),
+								rs.getString("staffname")));
 					}
 				} catch(SQLException e) {
 					throw new IOException(e);
@@ -384,11 +401,17 @@ public class JobSeeker_dao {
 			return jobseeker;
 		}
 		// 7.担当紹介者氏名が入っている場合
-		else if(js_id == "" && js_kana == "" && st_name != ""){
-			sql.append(" select js.id, js.name, js.sex, js.HOPEJOB1, js.HOPEJOB2, js.HOPEJOB3,js.HOPEJOBCATEGORY, js.HOPEJOBCATEGORY2,js.HOPEJOBCATEGORY3, js.hopeworkplace, st.name");
+		else if("".equals(js_id) && "".equals(js_kana) && !("".equals(st_name))){
+			sql.append(" select js.id, js.name, zjs.sex, st.name AS staffname,jc.name AS jobcategoryname,jb.name AS jobname,tk.name AS todouhukenname,TIMESTAMPDIFF(YEAR,zjs.birthdt,CURDATE()) AS age");
 			sql.append(" from jobseeker js");
-			sql.append(" left join staff st on js.tantoustaffid = st.id");
+			sql.append(" left join  comment cm on js.id = cm.jobseekerid ");
+			sql.append(" left join zokuseijobseeker zjs on js.id = zjs.id  ");
+			sql.append(" left join staff st on zjs.tantoustaffid = st.id");
+			sql.append(" left join jobcategory jc on zjs.HOPEJOBCATEGORY = jc.id");
+			sql.append(" left join job jb on zjs.HOPEJOB1 = jb.id");
+			sql.append(" left join todouhuken tk on zjs.hopeworkplace = tk.cd");
 			sql.append(" where st.name = ?");
+			sql.append(" ORDER BY  cm.updatedt DESC");
 			try (PreparedStatement ps = this.conn.prepareStatement(sql.toString())) {
 				ps.setString(1, st_name);
 				// SQL文を実行する
@@ -398,17 +421,12 @@ public class JobSeeker_dao {
 						jobseeker.add(new Jobseeker_simple_entity(
 								rs.getString("js.id"),
 								rs.getString("js.name"),
-							//	rs.getInt("js.age"),
-								rs.getString("js.sex"),
-								rs.getString("js.HOPEJOB1"),
-								rs.getString("js.HOPEJOB2"),
-								rs.getString("js.HOPEJOB3"),
-								rs.getString("js.HOPEJOBCATEGORY"),
-								rs.getString("js.HOPEJOBCATEGORY2"),
-								rs.getString("js.HOPEJOBCATEGORY3"),
-								rs.getString("js.hopeworkplace"),
-								rs.getString("st.name")));
-
+								rs.getInt("age"),
+								rs.getString("zjs.sex"),
+								rs.getString("jobcategoryname"),
+								rs.getString("jobname"),
+								rs.getString("todouhukenname"),
+								rs.getString("staffname")));
 					}
 				} catch(SQLException e) {
 					throw new IOException(e);

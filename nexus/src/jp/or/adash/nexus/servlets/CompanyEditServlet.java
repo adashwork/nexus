@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import jp.or.adash.nexus.entity.Comment;
 import jp.or.adash.nexus.entity.Company;
 import jp.or.adash.nexus.entity.JobCategory;
 import jp.or.adash.nexus.entity.Staff;
@@ -19,28 +20,28 @@ import jp.or.adash.nexus.services.JobCategoryService;
 import jp.or.adash.nexus.utils.common.DataCommons;
 
 /**
- * 企業登録サーブレット
- * (※最初に登録ページを表示するサーブレッドではありません)
+ * 企業更新サーブレット
+ * (更新がクリックされたときに呼び出されるサーブレット)
  * @author mmiyamoto
- * Servlet implementation class CompanyRegistServlet
+ * Servlet implementation class CompanyEditServlet
  */
-@WebServlet("/web/company-regist")
-public class CompanyRegistServlet extends HttpServlet {
+@WebServlet("/web/company-edit")
+public class CompanyEditServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public CompanyRegistServlet() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public CompanyEditServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(true);
 		Staff staff = (Staff) session.getAttribute("UserData");
 
@@ -48,8 +49,7 @@ public class CompanyRegistServlet extends HttpServlet {
 
 
 
-		//フォームパラメーターの取得
-
+		//事業所番号の記入がなければ、独自の事業所番号を生成する
 		String companyNo = request.getParameter("companyno");
 
 		String corporateNumber = request.getParameter("corporatenumber");
@@ -76,39 +76,29 @@ public class CompanyRegistServlet extends HttpServlet {
 		String salesRank = request.getParameter("salesrank");
 		String salesNote = request.getParameter("salesnote");
 		Date createDt = null;
-		String createuserId = staff.getId();
+		//String createuserId = staff.getId();
 		Date updateDt = null;
 		String updateUserId = staff.getId();
 		String deletefFag = "0";
 
-		//企業オブジェクト生成
 		Company company = new Company(companyNo, corporateNumber, companyName, companyKana, companyPostal, companyPlace,
 				nearStation, companyUrl, jobCategorySmallCd, jobCategoryMiddleCd, jobCategoryLargeCd, capital, employees, establishDt,
 				tantouYakushoku, tantou, tantouKana, tantouTel, tantouFax, tantouEmail, tantouNote, tantouStaffId,
-				salesRank, salesNote, createDt, createuserId, updateDt, updateUserId, deletefFag);
-
+				salesRank, salesNote, createDt, null, updateDt, updateUserId, deletefFag);
 
 		CompanyService companyService = new CompanyService();
+
 		//エラーが発生しなかった場合のみ登録処理を行う
-		if (companyService.check(company, true)) {
+		if (companyService.check(company, false)) {
 
 			//もし事業所番号が未記入なら、独自の事業所番号を発行する
 			if ("".equals(company.getCompanyNo())) {
 				company.setCompanyNo(companyService.createUniqueCompanyNo());
 			}
 
-			//企業情報を登録する
-			boolean registResult = companyService.insertCompany(company);
-		} else {
-			//エラーが発生したら
-
-			//新規登録中のパラメーターをリクエストに渡す
-			request.setAttribute("status", "regist");
+			//企業情報を更新する
+			boolean registResult = companyService.updateCompany(company);
 		}
-
-
-
-
 
 		// 1.業種分類リストを取得する
 		JobCategoryService JCLservice = new JobCategoryService();
@@ -121,16 +111,22 @@ public class CompanyRegistServlet extends HttpServlet {
 		request.setAttribute("JCMiddleList", JCMlist);
 		request.setAttribute("JCSmallList", JCSlist);
 
+
+
+
+		List<Comment> commentList = companyService.getCompanyCommentList(companyNo);
+
+
 		//処理結果メッセージをリクエストに格納する
 
 		request.setAttribute("company", company);
+		request.setAttribute("commentlist", commentList);
 		request.setAttribute("staff", staff);
 		request.setAttribute("messages", companyService.getMessages());
 
 		// JSPにフォワード
 		request.getRequestDispatcher("/companyregist.jsp")
 				.forward(request, response);
-
 	}
 
 }

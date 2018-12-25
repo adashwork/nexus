@@ -38,7 +38,7 @@ public class JobCategoryService {
 	}
 
 	/**
-	 * 業種大分類リストを取得する
+	 * すべての業種大分類リストを取得する
 	 * @return 業種リスト
 	 */
 	public List<JobCategory> getLargeJobCategoryList() {
@@ -62,8 +62,37 @@ public class JobCategoryService {
 
 		return LargeJobCategoryList;
 	}
+
 	/**
+	 * 指定した業種大分類コードに属する
 	 * 業種小分類リストを取得する
+	 * @param 大分類コード
+	 * @return 業種リスト(中分類コード、名前)
+	 * @author mmiyamoto
+	 */
+	public List<JobCategory> getMiddleJobCategoryList(String largecd) {
+		List<JobCategory> middleJobCategoryList = new ArrayList<JobCategory>();
+
+		try {
+			// データベース接続を開始する
+			transaction.open();
+
+			// 商品リストを取得する
+			JobCategoryDao dao = new JobCategoryDao(transaction);
+			middleJobCategoryList = dao.selectMiddleJobCategoryList(largecd);
+
+		} catch (IOException e) {
+			// エラーメッセージをセットする
+			messages.add(MessageCommons.ERR_DB_CONNECT);
+		} finally {
+			// データベース接続を終了する
+			transaction.close();
+		}
+
+		return middleJobCategoryList;
+	}
+	/**
+	 * すべての業種小分類リストを取得する
 	 * @return 業種リスト
 	 */
 	public List<JobCategory> getSmallJobCategoryList() {
@@ -87,5 +116,36 @@ public class JobCategoryService {
 
 		return SmallJobCategoryList;
 	}
+
+	/**
+	 * 指定した業種中分類コードに属する
+	 * 業種小分類リストを取得する
+	 * @param middleCode 中分類コード
+	 * @return 業種リスト(小分類コード、名前)
+	 * @author mmiyamoto
+	 */
+	public List<JobCategory> getSmallJobCategoryList(String middlecd) {
+		List<JobCategory> SmallJobCategoryList = new ArrayList<JobCategory>();
+
+		try {
+			// データベース接続を開始する
+			transaction.open();
+
+			// 商品リストを取得する
+			JobCategoryDao dao = new JobCategoryDao(transaction);
+			SmallJobCategoryList = dao.selectSmallJobCategoryList(middlecd);
+
+		} catch (IOException e) {
+			// エラーメッセージをセットする
+			messages.add(MessageCommons.ERR_DB_CONNECT);
+		} finally {
+			// データベース接続を終了する
+			transaction.close();
+		}
+
+		return SmallJobCategoryList;
+	}
+
+
 
 }

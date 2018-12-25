@@ -12,18 +12,24 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import jp.or.adash.nexus.entity.Staff;
+/**
+ * 2018/12/14 kitayama
+ * URLの変更
+ * サーブレット名の変更
+ */
+
 
 /**
  * Servlet implementation class MatchingDisServlet
  */
-@WebServlet("/web/match-disp")
-public class MatchingDisplayServlet extends HttpServlet {
+@WebServlet("/web/matching-registdisp")
+public class MatchingRegistDisplayServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MatchingDisplayServlet() {
+    public MatchingRegistDisplayServlet() {
         super();
     }
 
@@ -36,7 +42,7 @@ public class MatchingDisplayServlet extends HttpServlet {
 		Staff staff = (Staff) session.getAttribute("UserData");
 
 		// JSPにフォワードする
-		request.getRequestDispatcher("/matching.jsp").forward(request, response);
+		request.getRequestDispatcher("/matchingregist.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,

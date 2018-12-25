@@ -238,4 +238,61 @@ public class SaibanDao {
 		}
 
 	}
+
+	/**
+	 * 独自のcompanyNoを生成するための
+	 * ユニークな整数を返す
+	 * 値生成と同時に現在の採番データに+1を足す
+	 * @return int saiban 整数
+	 * @throws IOException
+	 */
+	public int getCompanyInt() throws IOException {
+
+		// SQL文を生成する
+		StringBuffer sql = new StringBuffer();
+		sql.append("select companysaiban");
+		sql.append(" from saiban");
+		try (PreparedStatement ps = this.conn.prepareStatement(sql.toString())) {
+
+			int getsaiban = -1;
+			// SQL文を実行する
+			try (ResultSet rs = ps.executeQuery()) {
+				if(rs.next()) {
+					getsaiban = rs.getInt("companysaiban") + 1;
+					// 採番マスタの更新
+					updateCompanySaiban(getsaiban);
+				}
+				return getsaiban;
+
+			} catch (SQLException e) {
+				throw new IOException(e);
+			}
+		} catch (SQLException e) {
+			throw new IOException(e);
+		}
+	}
+
+	/**
+	 * companysaibanを更新する
+	 * @param accountId companysaiban
+	 * @throws IOException
+	 */
+	public void updateCompanySaiban(int currentCompanySaiban) throws IOException {
+
+		// SQL文を生成する
+		StringBuffer sql = new StringBuffer();
+		sql.append("update saiban set companysaiban = ?");
+		//sql
+		try (PreparedStatement ps = this.conn.prepareStatement(sql.toString())) {
+			ps.setInt(1, currentCompanySaiban);
+		// SQL文を実行する
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			throw new IOException(e);
+		}
+
+	}
+
+
+
 }

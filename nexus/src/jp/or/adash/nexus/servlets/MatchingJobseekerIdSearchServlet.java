@@ -20,17 +20,18 @@ import jp.or.adash.nexus.services.JobSeekerService;
  * @author aihara
  * @author pgjavaAT
  */
-@WebServlet("/web/jobseeker-list")
-public class JobSeekerSearchServlet extends HttpServlet {
+@WebServlet("/web/matching-jobseekerid-search")
+public class MatchingJobseekerIdSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private String js_id;
 	private String js_kana;
 	private String st_name;
+	private String js_name;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public JobSeekerSearchServlet() {
+	public MatchingJobseekerIdSearchServlet() {
 		super();
 	}
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -42,42 +43,25 @@ public class JobSeekerSearchServlet extends HttpServlet {
 		HttpSession session = request.getSession(true);
 		Staff staff = (Staff) session.getAttribute("UserData");
 
-
-		// 1.検索する求職者ID、求職者かな名、担当者氏名を取得する
-		this.js_id = request.getParameter("js_id");
+		// 1.検索する求職者名（漢字）、求職者名（かな）、担当者氏名を取得する
+		this.js_name = request.getParameter("js_name");
 		this.js_kana = request.getParameter("js_kana");
 		this.st_name = request.getParameter("st_name");
 
-
-
-		// 2.求職者情報一覧を取得する
+		// 2.求職者情報一覧を取得する（求職者ID、求職者名前（漢字・かな））
 		JobSeekerService service = new JobSeekerService();
 		List<Jobseeker_simple_entity> list = service.getJobSeeker(js_id, js_kana, st_name);
 
 		// 3.担当紹介者氏名を取得する
-		List<StaffName> st_name = service.getTantoStaff();
-
-		// 4.求職者情報を初期化
-		request.removeAttribute("list");
-
+		List<StaffName> staffs = service.getTantoStaff();
 
 		// 5.求職者情報、担当紹介者氏名をリクエストに格納する
 		request.setAttribute("Staff", staff);
 		request.setAttribute("list", list);
-		request.setAttribute("st_name", st_name);
-
-//		request.setAttribute("js_id", js_id);
-//		request.setAttribute("js_kana", js_kana);
-
-
+		request.setAttribute("staffs", staffs);
 
 		// 6.JSPにフォワードする
-		request.getRequestDispatcher("/applicant_list.jsp").forward(request, response);
-
-
-
-
-
+		request.getRequestDispatcher("/matching_jobseekerid_search.jsp").forward(request, response);
 	}
 
 }

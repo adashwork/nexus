@@ -45,7 +45,7 @@ public class CommentDisplayServlet extends HttpServlet {
 		CommentService commentService = new CommentService();
 		comment = commentService.commentSearch2(id);*/
 
-		if(request.getParameter("comment") != null && !(request.getParameter("comment").equals(""))) {
+		if(request.getParameter("commentid") != null && !(request.getParameter("commentid").equals(""))) {
 			int id = Integer.parseInt(request.getParameter("comment"));
 			CommentService commentService = new CommentService();
 			comment = commentService.commentSearch2(id);

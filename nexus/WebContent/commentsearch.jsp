@@ -63,7 +63,7 @@
 	    </div>
   </div>
 
-	<input type="hidden" name="comment" value="<c:out value="${ comment.id }" />">
+	<input type="hidden" name="commentid" value="<c:out value="${ comment.id }" />">
 		<input class="main-b" type="submit" id="comment-disp"
 							onclick="MovePages(this)" value="編集">
 

@@ -162,11 +162,11 @@ public class CommentService {
 	}
 
 	/**
-	 * コメントをDBに登録する
+	 * コメントを更新する
 	 * @param comment コメントオブジェクト
 	 * @return result 更新に成功すればtrue、失敗すればfalseを返す
 	 */
-	public boolean commentUpdate(Comment comment) {
+	public boolean updateComment(Comment comment) {
 		boolean result = false;
 
 		try {
@@ -204,6 +204,51 @@ public class CommentService {
 		}
 
 		return result;
+	}
+
+	/**
+	 * コメントを削除する
+	 * @param id コメントID
+	 * @return true:成功時  false:失敗時
+	 */
+	public boolean commentDelete(int id) {
+		boolean result = false; // 処理結果
+		try {
+			// データベース接続を開始する
+			transaction.open();
+
+			// トランザクションを開始する
+			transaction.beginTrans();
+
+			CommentDao commentDao = new CommentDao(transaction);
+			int count = commentDao.deleteV2(id);
+
+			if (count > 0) {
+				// 完了メッセージをセットする
+				messages.add("コメントが削除されました");
+				result = true;
+			} else {
+				// エラーメッセージをセットする
+				messages.add("コメントを削除できませんでした");
+				result = false;
+			}
+
+			// トランザクションをコミットする
+			transaction.commit();
+
+		} catch (IOException e) {
+			// トランザクションをロールバックする
+			transaction.rollback();
+
+			// エラーメッセージをセットする
+			messages.add(MessageCommons.ERR_DB_CONNECT);
+		} finally {
+			// データベース接続をを終了する
+			transaction.close();
+		}
+
+		return result;
+
 	}
 
 	/**

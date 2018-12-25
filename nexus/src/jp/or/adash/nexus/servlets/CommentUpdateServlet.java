@@ -95,7 +95,7 @@ public class CommentUpdateServlet extends HttpServlet {
 		// コメントをDBに登録
 		CommentService service = new CommentService();
 		if(service.checkComment(comment)) {
-			service.commentUpdate(comment);
+			service.updateComment(comment);
 		}
 
 		// requsetにパラメータを格納

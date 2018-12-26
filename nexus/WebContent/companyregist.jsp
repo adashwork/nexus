@@ -260,7 +260,7 @@
 	</div>
 
 	<c:if test="${ status != 'regist' }">
-	<%@ include file="/commentsearch_flame.jsp"%> </main>
+	<%@ include file="/commentsearch_frame.jsp"%> </main>
 	</c:if>
 	<!-- フッター　-->
 	<footer>

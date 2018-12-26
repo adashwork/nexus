@@ -61,7 +61,7 @@ public class JobSeekerEditServlet extends HttpServlet {
 				&& request.getParameter("age") != null) {
 			age = Integer.parseInt(request.getParameter("age"));
 		}*/
-		String postal = request.getParameter("postal");
+		String zip21 = request.getParameter("zip21");
 		String address = request.getParameter("addr21");
 		String seekermail = request.getParameter("seekermail");
 		String nearstation = request.getParameter("nearstation");
@@ -126,7 +126,7 @@ public class JobSeekerEditServlet extends HttpServlet {
 		String deleteflag = request.getParameter("deleteflag");
 
 		//求人情報のオブジェクトを作成
-		JobSeekerMain seeker = new JobSeekerMain(id, name, kana, sex, birthdt, postal,
+		JobSeekerMain seeker = new JobSeekerMain(id, name, kana, sex, birthdt, zip21,
 				address, seekermail, nearstation, phone, mobile, partner, huyou,
 				education, career, HOPEJOB1, HOPEJOB2, HOPEJOB3, HOPEJOBCATEGORY, HOPEJOBCATEGORY2, HOPEJOBCATEGORY3,
 				hopeworkplace, hopekoyoukeitai, hopeweekday, hopeworkingdate, hopebegintime, hopeendtime,

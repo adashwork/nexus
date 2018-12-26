@@ -229,24 +229,24 @@ public class JobSeekerService {
 		messages.add(errMsg);
 		 */
 		// 郵便番号の値が入力されているか
-		if (seeker.getPostal().equals("")) {
+		if (seeker.getzip21().equals("")) {
 			messages.add("郵便番号が入力されていません。");
 			result = false;
 		}
 
-		errMsg = DataCommons.chkZipcode(seeker.getPostal());
+		errMsg = DataCommons.chkZipcode(seeker.getzip21());
 		messages.add(errMsg);
 
-		errMsg = DataCommons.chksDigits(seeker.getPostal(), 8);
+		errMsg = DataCommons.chksDigits(seeker.getzip21(), 8);
 		messages.add(errMsg);
 
 		// 住所の値が入力されているか
-		if (seeker.getAddress().equals("")) {
+		if (seeker.getAddr21().equals("")) {
 			messages.add("住所が入力されていません。");
 			result = false;
 		}
 
-		errMsg = DataCommons.chksDigits(seeker.getAddress(), 50);
+		errMsg = DataCommons.chksDigits(seeker.getAddr21(), 50);
 		messages.add(errMsg);
 
 		/*
@@ -517,13 +517,13 @@ public class JobSeekerService {
 		messages.add(errMsg);
 	 */
 		// 郵便番号の値が入力されているか
-		if (seeker.getPostal().equals("")) {
+		if (seeker.getzip21().equals("")) {
 			messages.add("郵便番号が入力されていません。");
 			result = false;
 		}
 
 		// 郵便番号の値が正しいか
-		errMsg = DataCommons.chkZipcode(seeker.getPostal());
+		errMsg = DataCommons.chkZipcode(seeker.getzip21());
 		messages.add(errMsg);
 
 /*
@@ -533,13 +533,13 @@ public class JobSeekerService {
 		messages.add(errMsg);
 */
 		// 住所の値が入力されているか
-		if (seeker.getAddress().equals("")) {
+		if (seeker.getAddr21().equals("")) {
 			messages.add("住所が入力されていません。");
 			result = false;
 		}
 
 		// 住所の桁数が正しいか
-		errMsg = DataCommons.chksDigits(seeker.getAddress(), 50);
+		errMsg = DataCommons.chksDigits(seeker.getAddr21(), 50);
 		messages.add(errMsg);
 
 		/*

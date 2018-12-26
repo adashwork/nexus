@@ -45,8 +45,8 @@ public class JobSeekerDao {
 		// SQL文を生成する
 		StringBuffer sql = new StringBuffer();
 		sql.append("insert into jobseeker(");
-		sql.append("id, name, kana, birthdt, sex, postal,");
-		sql.append("address, seekermail, nearstation, phone, mobile, partner, huyou, education, career");
+		sql.append("id, name, kana, birthdt, sex, zip21,");
+		sql.append("addr21, seekermail, nearstation, phone, mobile, partner, huyou, education, career");
 		sql.append("HOPEJOB1, HOPEJOB2, HOPEJOB3, HOPEJOBCATEGORY, HOPEJOBCATEGORY2, HOPEJOBCATEGORY3, hopeworkplace,");
 		sql.append("hopekoyoukeitai, hopeweekday, hopeworkingdate, hopebegintime, hopeendtime,");
 		sql.append("hopesalary, hopejikyu, hopeetc, driverlicense,licenseetc,");
@@ -68,8 +68,8 @@ public class JobSeekerDao {
 			ps.setDate(4, DataCommons.convertToSqlDate(seeker.getBirthdt()));
 			ps.setString(5, seeker.getSex());
 //			ps.setInt(6, seeker.getAge());
-			ps.setString(6, seeker.getPostal());
-			ps.setString(7, seeker.getAddress());
+			ps.setString(6, seeker.getzip21());
+			ps.setString(7, seeker.getAddr21());
 			ps.setString(8, seeker.getSeekermail());
 			ps.setString(9, seeker.getNearstation());
 			ps.setString(10, seeker.getPhone());
@@ -174,7 +174,7 @@ public class JobSeekerDao {
 			ps.setString(1, seeker.getId());
 			ps.setString(2, seeker.getName());
 			ps.setString(3, seeker.getKana());
-			ps.setString(4, seeker.getAddress());
+			ps.setString(4, seeker.getAddr21());
 			ps.setString(5, seeker.getSeekermail());
 			ps.setString(6, seeker.getPhone());
 			ps.setString(7, seeker.getMobile());
@@ -250,7 +250,7 @@ public class JobSeekerDao {
 			ps.setString(1, seeker.getId());
 			ps.setDate(  2, DataCommons.convertToSqlDate(seeker.getBirthdt()));
 			ps.setString(3, seeker.getSex());
-			ps.setString(4, seeker.getPostal());
+			ps.setString(4, seeker.getzip21());
 			ps.setString(5, seeker.getNearstation());
 			ps.setString(6, seeker.getPartner());
 			ps.setInt(   7, seeker.getHuyou());
@@ -574,8 +574,8 @@ public class JobSeekerDao {
 			ps.setDate(3, DataCommons.convertToSqlDate(seeker.getBirthdt()));
 			ps.setString(4, seeker.getSex());
 		//	ps.setInt(5, seeker.getAge());
-			ps.setString(6, seeker.getPostal());
-			ps.setString(7, seeker.getAddress());
+			ps.setString(6, seeker.getzip21());
+			ps.setString(7, seeker.getAddr21());
 			ps.setString(8, seeker.getSeekermail());
 			ps.setString(9, seeker.getNearstation());
 			ps.setString(10, seeker.getPhone());

@@ -65,7 +65,7 @@ public class JobSeekerRegistServlet extends HttpServlet {
 			age = Integer.parseInt(request.getParameter("age"));
 		}*/
 //		int age = Integer.parseInt(request.getParameter("age"));
-		String postal = request.getParameter("postal");
+		String postal = request.getParameter("zip21");
 		String address = request.getParameter("address");
 		String seekermail = request.getParameter("seekermail");
 		String nearstation = request.getParameter("nearstation");

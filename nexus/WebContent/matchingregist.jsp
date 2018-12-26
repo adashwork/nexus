@@ -30,11 +30,7 @@
 </head>
 
 <body>
-<<<<<<< HEAD
-<%-- 	<%@ include file="/header.jsp" %> --%>
-=======
 	<%@ include file="/header.jsp" %>
->>>>>>> refs/remotes/origin/#196
 
 <!-- 	<header> -->
 <!--  		<section> -->
@@ -42,34 +38,6 @@
 <!-- 				<a href="/nexus/web/staff-top"><img src="../css/TryNexus-Logo.png" width="97" height="70" alt="TryNexus" /></a> -->
 <!-- 			</h1> -->
 
-<<<<<<< HEAD
- 			<nav>
-				<ul class="mainnavi">
-					<li><a href="/nexus/web/job-search"><i class="fas fa-home"></i>検索</a></li>
-					<li><a href="/nexus/web/jobseeker-list"><i class="fas fa-search"></i>登録&amp;閲覧</a>
-						<ul class="drop-menu">
-							<li><a href="/nexus/web/kyujin-disp">求人情報<i class="fas fa-angle-right"></i></a></li>
-							<li><a href="/nexus/web/jobseeker-list">求職者情報<i class="fas fa-angle-right"></i></a></li>
-							<li><a href="/nexus/web/matching-registdisp">マッチング登録<i class="fas fa-angle-right"></i></a></li>
-						</ul>
-					</li>
-					<c:if test="${Staff.authority == 1}">
-					<li><a href="/nexus/web/account-list"><i class="far fa-bookmark"></i>管理</a></li></c:if>
-				</ul>
-			</nav>
-			<div class="user">
-				<div class="user__wrapper">
-					<div class="user__name">
-						<a href="#"><c:out value="${ Staff.name }" /><i class="fas fa-ellipsis-v"></i></a>
-						<ul class="drop-menu">
-							<li><a href="/nexus/web/logout">ログアウト<i class="fas fa-angle-right"></i></a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</section>
-	</header>
-=======
 <!--  			<nav> -->
 <!-- 				<ul class="mainnavi"> -->
 <!-- 					<li><a href="/nexus/web/job-search"><i class="fas fa-home"></i>検索</a></li> -->
@@ -96,7 +64,6 @@
 <!-- 			</div> -->
 <!-- 		</section> -->
 <!-- 	</header> -->
->>>>>>> refs/remotes/origin/#196
 
 	<main> <!-- body部分　-->
 
@@ -172,7 +139,8 @@
 					職業紹介者ID
 				</th>
 				<td>
-					<input type="text" name="staffid" size="4" maxlength="4"
+					<input type="text" name="staffid" size="4" maxlength="4" onkeyup="if(event.keyCode==9||event.keyCode==16) return;
+        				this.value=this.value.replace(/[^0-9]+/i,'');"
 						<c:if test="${ matching.staffid == null }">value="<fmt:formatNumber value="${ Staff.id }" pattern="0000" />"</c:if>
 						<c:if test='${ matching.staffid != null }'>value="<fmt:formatNumber value='${ matching.staffid }' pattern='0000' />"</c:if>
 					>
@@ -238,7 +206,7 @@
 			<tr>									<!-- komukai　2018/12/18 タイトル・重要度追加 -->
 				<td align="left" width="60%">
 					<span>タイトル</span>
-					<input type="text" size="30" name="title" value="<c:out value="${ comment.title }" />">
+					<input type="text" size="30" name="title" value="<c:out value="${ comment.title }" />" maxlength="60">
 				</td>
 				<td align="left" width="40%">
 					<span>重要</span>
@@ -252,7 +220,7 @@
 			</tr>
 			<tr>
 				<td colspan="2">
-					<textarea name="note" style="width:100%" ><c:out value="${ comment.note }" /></textarea>
+					<textarea name="note" style="width:100%" maxlength="4000"><c:out value="${ comment.note }" /></textarea>
 				</td>
 			</tr>
 

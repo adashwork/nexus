@@ -7,14 +7,15 @@
 function getMiddleCategory() {
 	// jobcategory APIから分類を取得する
 	$.ajax({
-		url : "http://localhost:8080/trynexusapi/webapi/jobcategory/getjobcategory", // リクエストURL
+//		url : "http://localhost:8080/trynexusapi/webapi/jobcategory/getjobcategory", // リクエストURL（開発用）
+		url : "http://172.20.76.254:8080/trynexusapi/webapi/jobcategory/getjobcategory", // リクエストURL
 		type : "GET", // HTTPメソッド
 		dataType : "json", // データ形式
 		data : {
 			"largecode" : $('#largecd').val()
 		}
 	}).done(function(data) {
-		callback(data);
+		callbackMiddle(data);
 	} // 成功時の処理
 	).fail(function(xhr, status, error) {
 		alert('APIアクセスに失敗しました。');
@@ -24,7 +25,7 @@ function getMiddleCategory() {
 
 // コールバック時に呼び出されるメソッド
 // jobcategoryをセットする
-function callback(data) {
+function callbackMiddle(data) {
 	$('select#middlecd option').remove();
 	$('select#smallcd option').remove();
 	$('#middlecd').append("<option value=\"\"></option>");
@@ -46,7 +47,8 @@ $(function() {
 function getSmallCategory() {
 	// jobcategory APIから分類を取得する
 	$.ajax({
-		url : "http://localhost:8080/trynexusapi/webapi/jobcategory/getjobcatagory2", // リクエストURL
+//		url : "http://localhost:8080/trynexusapi/webapi/jobcategory/getjobcatagory2", // リクエストURL（開発用）
+		url : "http://172.20.76.254:8080/trynexusapi/webapi/jobcategory/getjobcatagory2", // リクエストURL
 		type : "GET", // HTTPメソッド
 		dataType : "json", // データ形式
 		data : {

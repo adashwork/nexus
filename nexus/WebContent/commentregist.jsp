@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <script src="build/kalendae.standalone.js" type="text/javascript"
 	charset="utf-8"></script>
+
 <link rel="stylesheet" href="css/kalendae.css" type="text/css" />
 <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css"
 	rel="stylesheet" type="text/css" />
@@ -19,7 +20,7 @@
 <link href="../css/header.css" rel="stylesheet" type="text/css" />
 <link href="../css/footer.css" rel="stylesheet" type="text/css" />
 <link href="../css/job_seeker.css" rel="stylesheet" type="text/css" />
-<link href="../css/commentregist.css" rel="stylesheet" type="text/css" />
+<link href="../css/applicant_regist.css" rel="stylesheet" type="text/css" />
 
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css">
@@ -36,76 +37,122 @@
 <script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
 <script type="text/javascript" src="../js/common.js"></script>
+<script type="text/javascript" src="../js/applicantregist_tab.js"></script>
+
+<style>
+
+
+</style>
+<title>求職者詳細情報</title>
 </head>
+
 <body>
-<div class="wrap1">
-		<div class="comment1">
-		  	<h3>フリーコメント1</h3>
-			   <div class="first">
-			  	 <div class="comment-name1">
-					<p>企業番号</p>
-					<label class="label"></label>
-					<input type="text" size="10">
-				  </div>
-				  <div class="comment-name1">
-					<p>求職者ID</p>
-					<label class="label"></label>
-					<input type="text" size="10">
-				  </div>
-				  <div class="comment-name1">
-					<p>求人番号</p>
-					<label class="label"></label>
-					<input type="text" size="10">
-				  </div>
-					<div class="comment-name1">
-					<p>マッチングID</p>
-					<label class="label"></label>
-					<input type="text" size="10">
-				  </div>
-			  <div class="second">
-				  <div class="comment-name2">
-					<p>カテゴリー</p>
-					<select name="choice">
-					<option value="0" selected="selected">選択</option>
-					<option value="1">あ</option>
-					<option value="2">い</option>
-					<option value="3">う</option>
-				　 　<option value="3">え</option>
-					</select>
-				  </div>
-				  <div class="comment-name2">
-					<p>タイトル</p>
-					<label class="label"></label>
-					<input type="text">
-				  </div>
-					<div class="comment-name2">
-					<p class="important">重要</p>
-					<label class="label"></label>
-					<input type="checkbox" >
+	<form id="form" method="post" action="">
+		<div id="container">
+			<!-- 必要なパラメータをhiddenで持たせる -->
+			<input type="hidden" name="commentid" value="<c:out value="${ comment.id }" />">
+			<h3>フリーコメント1</h3>
+			<ul>
+				<c:forEach var="message" items="${ messages }">
+					<li><c:out value="${ message }" /></li>
+				</c:forEach>
+			</ul>
+			<div class="comment">
+				<table class="c1">
+					<tr>
+						<th>企業番号</th>
+						<th>求職者ID</th>
+					</tr>
+					<tr>
+						<td><input type="text" name="companyno"
+							value="<c:out value="${ comment.companyNo }" />"></td>
+						<td><input type="text" name="jobseekerid"
+							value="<c:out value="${ comment.jobSeekerId }" />"></td>
+					</tr>
+					<tr>
+						<th>求人番号</th>
+						<th>マッチングID</th>
+					</tr>
+					<tr>
+						<td><input type="text" name="kyujinno"
+							value="<c:out value="${ comment.kyujinNo }" />"></td>
+						<td><input type="text" name="matchid"
+							value="<c:out value="${ comment.matchId }" />"></td>
+					</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th>カテゴリー表示</th>
+							<th>タイトル表示</th>
+						</tr>
+						<tr>
+							<td><select name="genre">
+									<option value="0">えらんでください</option>
+									<option value="1">求職者</option>
+									<option value="2">企業</option>
+									<option value="3">求人</option>
+									<option value="4">マッチング</option>
+									<option value="9">その他</option>
+							</select></td>
+							<td><input type="text" name="title"
+								value="<c:out value="${ comment.title }" />"></td>
+							<td>
+								<input type="checkbox" name="important" value="1">重要
+							</td>
+						</tr>
+					</tbody>
+					<tfoot>
+						<tr>
+							<th>カテゴリー表示</th>
+						</tr>
+						<tr>
+							<td>
+								<textarea rows="3" cols="40" name="note"><c:out value="${ comment.note }" /></textarea>
+							</td>
+						</tr>
+					</tfoot>
+				</table>
+				<div class="down">
+					<div class="box">
+						<p>
+							登録ID：
+							<c:out value="${ comment.createUserId }" />
+						</p>
+						<p>
+							更新ID：
+							<c:out value="${ comment.updateUserId }" />
+						</p>
 					</div>
-			  <div class="textbox">
-				<p>内容</p>
-				<label class="label"></label>
-				<textarea rows="10" cols="60"></textarea>
-			  </div>
-	<div class="down">
-	 <div class="box">
-	  <p>登録ID：</p>
-	  <p>更新ID：</p>
-	 </div>
-	<div class="box">
-	  <p>登録日:</p>
-	  <p>更新日：</p>
-	</div>
-  </div>
-</div>
-<form action="" method="post">
-  <input class="main-d" type="button"
-							onclick="location.href=''" value="削除">
-  <input class="main-d" type="button"
-						onclick="location.href=''" value="更新">
-  <input class="main-d" type="button"
-						onclick="location.href=''" value="戻る">
-</form>
+					<div class="box">
+						<p>
+							登録日:
+							<c:out value="${ comment.createDt }" />
+						</p>
+						<p>
+							更新日:
+							<c:out value="${ comment.createDt }" />
+						</p>
+					</div>
+				</div>
+			</div>
+
+			<c:if test="${ !empty comment.id }">
+				<input class="main-b"type="submit" id="comment-update" onclick="MovePages(this)"value="更新">
+				<input class="main-b" type="submit" id="comment-delete"onclick="MovePages(this)" value="削除">
+			</c:if>
+			<c:if test="${ empty comment.id }">
+				<input class="main-b" type="submit" id="comment-regist" onclick="MovePages(this)" value="登録">
+			</c:if>
+			<input class="main-b" type="submit" onclick="" value="戻る">
+
+		</form>
+
+	<!-- フッター　-->
+	<footer>
+		<small>Copyright(C) 2009有限責任事業組合 大阪職業教育協働機構(A'ワーク創造館) All
+			Rights Reserved.</small>
+	</footer>
+
+
 </body>
 </html>

@@ -167,8 +167,10 @@ public class MatchingService {
 
 			SaibanDao sdao = new SaibanDao(transaction);
 			int id = sdao.getMatching();
+			int commentid = sdao.getCommentInt();
 			matching.setId(id);
 			comment.setMatchId(id);									// 追加 2018/12/18 T.Ikeda
+			comment.setId(commentid);
 
 			// マッチング事例をDBに登録する
 			MatchingDao dao = new MatchingDao(transaction);

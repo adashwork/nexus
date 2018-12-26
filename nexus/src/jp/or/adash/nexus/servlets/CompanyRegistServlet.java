@@ -12,9 +12,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import jp.or.adash.nexus.entity.Comment;
+import jp.or.adash.nexus.entity.CommentSearchParameter;
 import jp.or.adash.nexus.entity.Company;
 import jp.or.adash.nexus.entity.JobCategory;
 import jp.or.adash.nexus.entity.Staff;
+import jp.or.adash.nexus.services.CommentService;
 import jp.or.adash.nexus.services.CompanyService;
 import jp.or.adash.nexus.services.JobCategoryService;
 import jp.or.adash.nexus.utils.common.DataCommons;
@@ -105,10 +108,17 @@ public class CompanyRegistServlet extends HttpServlet {
 
 
 		CompanyService companyService = new CompanyService();
-		//エラーが発生しなかった場合のみ登録処理を行う
+		//エラーが発生しなかった場合のみ登録処理および、コメントの取得処理を行う
 		if (companyService.check(company, true) && parameterGetError) {
 			//企業情報を登録する
 			boolean registResult = companyService.insertCompany(company);
+
+			//コメントの取得
+			CommentService commentService = new CommentService();
+			CommentSearchParameter commentSearchParameter = new CommentSearchParameter(null, company.getCompanyNo(), null, null, null, null);
+			List<Comment> commentList =  commentService.commentSearch(commentSearchParameter);
+			//コメントリストをリクエストに格納する
+			request.setAttribute("commentlist", commentList);
 		} else {
 			//エラーが発生したら
 

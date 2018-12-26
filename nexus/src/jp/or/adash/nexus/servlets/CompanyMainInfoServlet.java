@@ -2,7 +2,6 @@ package jp.or.adash.nexus.servlets;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,12 +11,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import jp.or.adash.nexus.entity.Comment;
+import jp.or.adash.nexus.entity.CommentSearchParameter;
 import jp.or.adash.nexus.entity.Company;
 import jp.or.adash.nexus.entity.JobCategory;
 import jp.or.adash.nexus.entity.Staff;
+import jp.or.adash.nexus.services.CommentService;
 import jp.or.adash.nexus.services.CompanyService;
 import jp.or.adash.nexus.services.JobCategoryService;
-import jp.or.adash.nexus.services.StaffService;
 
 /**
  * 企業の詳細情報を表示するサーブレット
@@ -66,18 +66,16 @@ public class CompanyMainInfoServlet extends HttpServlet {
 		request.setAttribute("JCMiddleList", JCMlist);
 		request.setAttribute("JCSmallList", JCSlist);
 
-		//コメントリストに存在するスタッフidを列挙したMapを生成してリクエストに格納する
-		List<Comment> commentList = companyService.getCompanyCommentList(companyNo);
-		StaffService staffService = new StaffService();
-		Map<String, String> staffMap = staffService.getCommentStaffIdMap(commentList);
+		//企業情報をリクエストに格納
+		request.setAttribute("company", company);
+
+		//コメントの取得
+		CommentService commentService = new CommentService();
+		CommentSearchParameter commentSearchParameter = new CommentSearchParameter(null, companyNo, null, null, null, null);
+		List<Comment> commentList =  commentService.commentSearch(commentSearchParameter);
+		//コメントリストをリクエストに格納する
 		request.setAttribute("commentlist", commentList);
 
-
-		//スタッフIDと名前がセットになったMapをJSPに埋め込む
-		Map<String, String> staffNameMap = staffService.getStaffNameMap(staffMap);
-		request.setAttribute("staffNameMap", staffNameMap);
-
-		request.setAttribute("company", company);
 
 
 		request.setAttribute("Staff", staff);

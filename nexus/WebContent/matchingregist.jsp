@@ -27,6 +27,8 @@
 <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/Base/jquery-ui.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
 <script type="text/javascript" src="../js/common.js"></script>
+<script type="text/javascript" src="../js/matching_idsearch.js"></script>
+
 </head>
 
 <body>
@@ -100,12 +102,13 @@
 				</th>
 				<td>
 																	<!-- komukai　2018/12/17 ID検索ボタン内編集 -->
-					<input type="text" name="companyNo" size="10" maxlength="13" value="<c:out value="${ matching.companyNo }" />">
-					<input type="button" value="企業ID検索"
-						onclick="window.open('/nexus/web/matching-companyid-search','','width=750,height=*,resizeable=yes')">
+					<input type="text" name="companyNo" size="10" maxlength="13" id="company_id"
+						value="<c:out value="${ matching.companyNo }" />">
+					<input type="button" value="企業ID検索" id="company_sb">
 
 				</td>
 				<td>
+					<input id="company_name" type="text" />
 				</td>
 			</tr>
 			<tr>
@@ -114,11 +117,12 @@
 				</th>
 				<td>
 																	<!-- komukai　2018/12/17 ID検索ボタン内編集 -->
-					<input type="text" name="kyujinno" size="10" maxlength="14" value="<c:out value="${ matching.kyujinno }" />">
-					<input type="button" value="求人ID検索"
-						onclick="window.open('/nexus/web/matching-kyujinid-search','','width=750,height=*,resizeable=yes')">
+					<input type="text" name="kyujinno" size="10" maxlength="14" id="kyujin_id"
+						value="<c:out value="${ matching.kyujinno }" />">
+					<input type="button" value="求人ID検索" id="kyujin_sb">
 				</td>
 				<td>
+					<input id="kyujin_job" type="text" />
 				</td>
 			</tr>
 			<tr>
@@ -127,11 +131,12 @@
 				</th>
 				<td>
 																	<!-- komukai　2018/12/18 ID検索ボタン内編集 -->
-					<input type="text" name="jobseekerid" size="10" maxlength="8" value="<c:out value="${ matching.jobseekerid }" />">
-					<input type="button" value="求職者ID検索"
-						onclick="window.open('/nexus/web/matching-jobseekerid-search','','width=750,height=*,resizeable=yes,scrollbars=yes')">
+					<input type="text" name="jobseekerid" size="10" maxlength="8" id="jobseeker_id"
+						value="<c:out value="${ matching.jobseekerid }" />">
+					<input type="button" value="求職者ID検索" id="jobseeker_sb" />
 				</td>
 				<td>
+					<input id="jobseeker_name" type="text" />
 				</td>
 			</tr>
 			<tr>

@@ -138,9 +138,9 @@
 				<tr>
 					<th>性別</th>
 					<td>
-					<input type="radio" name="sex" value="${ info.sex  }"
+					<input type="radio" name="sex" value="1"
 						<c:if test="${ info.sex == 1 }">checked</c:if> />男
-					<input type="radio" name="sex" value="${ info.sex }"
+					<input type="radio" name="sex" value="2"
 						<c:if test="${ info.sex == 2 }">checked</c:if> />女</td>
 				</tr>
 				<tr>
@@ -283,6 +283,7 @@
 				</tr>
 				<tr>
 					<th>最終学歴</th>
+
 					<td><input type="radio" name="education" value="1"
 						<c:if test="${ info.education == 1 }">checked</c:if> />中学
 						<input type="radio" name="education" value="2"

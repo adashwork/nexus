@@ -8,14 +8,17 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import jp.or.adash.nexus.entity.Comment;
+import jp.or.adash.nexus.entity.Staff;
 import jp.or.adash.nexus.services.CommentService;
 
 /**
- * Servlet implementation class CommentRegistServlet
+ * コメントを新規登録するためのサーブレット
+ * TODO jspの作成が完了していなかったためパラメータ名は未設定
  */
-@WebServlet("/CommentRegistServlet")
+@WebServlet("/web/comment-regist")
 public class CommentRegistServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -31,24 +34,29 @@ public class CommentRegistServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+
+		HttpSession session = request.getSession(true);
+		Staff staff = (Staff) session.getAttribute("UserData");
+
 		// 入力されたパラメータ等の取得
 		Integer id = 0;											// 備考ID
-		String companyNo = request.getParameter("");			// 事業所番号
-		String kyujinNo = request.getParameter("");			// 求人NO
-		String jobSeekerId = request.getParameter("");			// 求職者ID
-		String staffId = request.getParameter("");				// 職業紹介者ID
+		String companyNo = request.getParameter("companyno");			// 事業所番号
+		String kyujinNo = request.getParameter("kyujinno");			// 求人NO
+		String jobSeekerId = request.getParameter("jobseekerid");		// 求職者ID
+		String staffId = staff.getId();									// 職業紹介者ID
 		Integer matchId = -1;								// マッチング事例ID
-		String genre = request.getParameter("");				// 内容分類
-		String important = request.getParameter("");			// 重要アラート
-		String title = request.getParameter("");				// 件名
-		String note = request.getParameter("");					// 備考
+		String genre = request.getParameter("genre");					// 内容分類
+		String important = request.getParameter("important");			// 重要アラート
+		String title = request.getParameter("title");					// 件名
+		String note = request.getParameter("note");						// 備考
 		Date createDt = null;									// 新規登録日
-		String createUserId = request.getParameter("");		// 新規登録ユーザー
+		String createUserId = staff.getId();	// 新規登録ユーザー
 		Date updateDt = null;									// 最終更新日
-		String updateUserId = request.getParameter("");		// 最終更新ユーザー
+		String updateUserId = staff.getId();	// 最終更新ユーザー
 
-		if(request.getParameter("マッチングID") != null && !request.getParameter("マッチングID").equals("")) {
-			matchId = Integer.parseInt(request.getParameter("マッチングID"));
+		// マッチングIDは初期値-1。入力されたマッチングIDがあればIntegerに変換して代入
+		if(request.getParameter("matchid") != null && !request.getParameter("matchid").equals("")) {
+			matchId = Integer.parseInt(request.getParameter("matchid"));
 		}
 
 		// コメントオブジェクト作成
@@ -75,10 +83,10 @@ public class CommentRegistServlet extends HttpServlet {
 		// trueならIDも返す、falseならIDは返さない
 		request.setAttribute("comment", comment);
 		request.setAttribute("messages", commentService.getMessages());
+		request.setAttribute("Staff", staff);
 
 		// JSPにフォワード
-		request.getRequestDispatcher("/companyregist.jsp")
-				.forward(request, response);
+		request.getRequestDispatcher("/commentregist.jsp").forward(request, response);
 
 	}
 

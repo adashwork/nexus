@@ -40,6 +40,7 @@ public class CommentService {
 	 * 入力チェック
 	 * @param comment
 	 * @return checkResult true or false
+	 * @author mosco(2018/12/21 完了確認)
 	 */
 	public boolean checkComment(Comment comment) {
 		boolean checkResult = true;
@@ -88,22 +89,21 @@ public class CommentService {
 
 			//采番マスタよりデータ取得
 			SaibanDao saidao = new SaibanDao(transaction);
-			int saiban = saidao.getsaiban();
+			int saiban = saidao.getCommentInt();
 
-			//とってきた番号を加工し、Kyujin.noにデータ格納
-			String str = String.format("A" + "%013d", saiban);
-			// comment.setId(str);
+			// Commentオブジェクトに割り振られたIDをセット
+			comment.setId(saiban);
 
 			CommentDao commentDao = new CommentDao(transaction);
 			int count = commentDao.insertV2(comment);
 
 			if (count > 0) {
 				// 完了メッセージをセットする
-				messages.add("登録が完了しました");
+				messages.add(MessageCommons.MSG_REGIST_COMPLETE);
 
 			} else {
 				// エラーメッセージをセットする
-				messages.add("登録に失敗しました");
+				messages.add(MessageCommons.MSG_REGIST_FAILURE);
 				// 登録に失敗した場合は備考IDを返さない
 				comment.setId(null);
 
@@ -117,9 +117,9 @@ public class CommentService {
 			transaction.rollback();
 
 			// エラーメッセージをセットする
-			messages.add("データベースアクセスに失敗しました。");
+			messages.add(MessageCommons.ERR_DB_CONNECT);
 		} finally {
-			// データベース接続をを終了する
+			// データベース接続を終了する
 			transaction.close();
 		}
 
@@ -128,8 +128,10 @@ public class CommentService {
 
 	/**
 	 * 求人・企業・求職者各画面からコメント（備考）一覧を取得する
+	 * パラメータを受け取るのは各呼び出し元のServletにて指定
 	 * @param CommentSearchParameter
 	 * @return commentList
+	 * @author mosco
 	 */
 	public List<Comment> commentSearch(CommentSearchParameter csp){
 		List<Comment> commentList = new ArrayList<>();
@@ -141,7 +143,7 @@ public class CommentService {
 			transaction.open();
 			// DBから企業情報を取得し、Dao内のメソッドでListに詰め、そのListを返してもらう
 			dao = new CommentDao(transaction);
-			// commentList = dao.selectCommentList(csp);
+			commentList = dao.selectCommentList(csp);
 
 		} catch (IOException e) {
 			// DB接続が失敗した場合、例外をキャッチする
@@ -158,4 +160,129 @@ public class CommentService {
 
 		return commentList;
 	}
+
+	/**
+	 * コメントを更新する
+	 * @param comment コメントオブジェクト
+	 * @return result 更新に成功すればtrue、失敗すればfalseを返す
+	 */
+	public boolean updateComment(Comment comment) {
+		boolean result = false;
+
+		try {
+			// データベース接続を開始する
+			transaction.open();
+
+			// トランザクションを開始する
+			transaction.beginTrans();
+
+			CommentDao commentDao = new CommentDao(transaction);
+			int count = commentDao.updateV2(comment);
+
+			if (count > 0) {
+				// 完了メッセージをセットする
+				messages.add(MessageCommons.MSG_UPDATE_COMPLETE);
+				result = true;
+			} else {
+				// エラーメッセージをセットする
+				messages.add(MessageCommons.MSG_UPDATE_FAILURE);
+				result = false;
+			}
+
+			// トランザクションをコミットする
+			transaction.commit();
+
+		} catch (IOException e) {
+			// トランザクションをロールバックする
+			transaction.rollback();
+
+			// エラーメッセージをセットする
+			messages.add(MessageCommons.ERR_DB_CONNECT);
+		} finally {
+			// データベース接続を終了する
+			transaction.close();
+		}
+
+		return result;
+	}
+
+	/**
+	 * コメントを削除する
+	 * @param id コメントID
+	 * @return true:成功時  false:失敗時
+	 */
+	public boolean commentDelete(int id) {
+		boolean result = false; // 処理結果
+		try {
+			// データベース接続を開始する
+			transaction.open();
+
+			// トランザクションを開始する
+			transaction.beginTrans();
+
+			CommentDao commentDao = new CommentDao(transaction);
+			int count = commentDao.deleteV2(id);
+
+			if (count > 0) {
+				// 完了メッセージをセットする
+				messages.add("コメントが削除されました");
+				result = true;
+			} else {
+				// エラーメッセージをセットする
+				messages.add("コメントを削除できませんでした");
+				result = false;
+			}
+
+			// トランザクションをコミットする
+			transaction.commit();
+
+		} catch (IOException e) {
+			// トランザクションをロールバックする
+			transaction.rollback();
+
+			// エラーメッセージをセットする
+			messages.add(MessageCommons.ERR_DB_CONNECT);
+		} finally {
+			// データベース接続を終了する
+			transaction.close();
+		}
+
+		return result;
+
+	}
+
+	/**
+	 * 備考IDでコメントを一件取得する
+	 * @param id
+	 * @return comment
+	 * @author mosco(2018/12/21完了)
+	 */
+	public Comment commentSearch2(int id){
+		Comment comment = null;
+
+		Transaction transaction = new Transaction();
+		CommentDao dao;
+		try {
+			// データベース接続を開く
+			transaction.open();
+			// DBから企業情報を取得し、Dao内のメソッドでListに詰め、そのListを返してもらう
+			dao = new CommentDao(transaction);
+			comment = dao.selectComment(id);
+
+		} catch (IOException e) {
+			// DB接続が失敗した場合、例外をキャッチする
+			messages.add(MessageCommons.ERR_DB_CONNECT);
+		} finally {
+			try {
+				// DB接続の終了
+				dao = null;
+				transaction.close();
+			} catch (Exception e) {
+				transaction = null;
+			}
+		}
+
+		return comment;
+	}
+
 }

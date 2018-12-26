@@ -9,7 +9,7 @@
 			<ul class="mainnavi">
 				<li><a href="#"><i class="fas fa-home"></i>検索</a>
 					<ul class="drop-menu">
-						<li><a href="/nexus/web/companysearch">企業検索 <i
+						<li><a href="/nexus/web/company-search">企業検索 <i
 								class="fas fa-angle-right"></i></a></li>
 						<li><a href="/nexus/web/job-search">求人検索<i
 								class="fas fa-angle-right"></i></a></li>

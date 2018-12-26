@@ -24,7 +24,7 @@ import jp.or.adash.nexus.services.JobCategoryService;
  * Servlet implementation class CompanySearch
  * @author mosco
  */
-@WebServlet("/web/companysearch")
+@WebServlet("/web/company-search")
 public class CompanySearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

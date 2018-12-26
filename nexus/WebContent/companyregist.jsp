@@ -244,7 +244,7 @@
 
 
 			<button type="button" class="main-b"
-				onClick="location.href='./companysearch'" tabindex="62">企業検索に戻る</button>
+				onClick="location.href='./company-search'" tabindex="62">企業検索に戻る</button>
 
 			<c:if test="${ status == 'regist' }">
 				<button type="submit" id="company-regist" class="main-b"

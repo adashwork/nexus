@@ -2,7 +2,7 @@
  *
  * ボタン押したらコメントのページのウィンドウが画面中央に開く
  */
-function WindowOpen(){
+function WindowOpen(commentid){
 
 	   var subw = 1500;   // サブウインドウの横幅
 	   var subh = 700;   // サブウインドウの高さ
@@ -14,7 +14,11 @@ function WindowOpen(){
 	   // サブウインドウのオプション文字列を作る
 	   var SubWinOpt = "width=" + subw + ",height=" + subh + ",top=" + suby + ",left=" + subx;
 	   // サブウインドウを表示
+	   if(commentid != ""){
+		   subp += "?commentid=" + commentid;
+	   }
 	   window.open(subp,subn ,SubWinOpt);
+	   return false;
 }
 
 /**

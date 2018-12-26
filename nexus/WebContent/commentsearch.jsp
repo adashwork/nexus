@@ -38,11 +38,12 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
 <script type="text/javascript" src="../js/common.js"></script>
 <script type="text/javascript" src="../js/applicantregist_tab.js"></script>
+<script type="text/javascript" src="../js/comment.js"></script>
 
 <title>求職者詳細情報</title>
 </head>
 <body>
-
+<div>
 <c:forEach var="comment" items="${ commentlist }">
 <div id="wrap">
   <div class="comment">
@@ -63,11 +64,22 @@
 	    </div>
   </div>
 <form method="get" action="./comment-disp">
-		<button class="main-b" type="submit" name="commentid" value="<c:out value="${ comment.id }" />" >
+		<button class="main-b" type="button" name="commentid" value="<c:out value="${ comment.id }" />"
+				onclick="WindowOpen(this.value)" >
 		詳細
 		</button>
 </form>
 </c:forEach>
+</div>
+
+<!-- TODO CSS側で位置を調整する -->
+<div style="clear:both;">
+<form name="commentregist" action="./comment-disp">
+	<button class="main-b" type="button" name="commentregist" value="" onclick="WindowOpen(this.value)">
+	コメント新規登録
+	</button>
+</form>
+</div>
 
 	<footer>
 		<small>Copyright(C) 2009有限責任事業組合 大阪職業教育協働機構(A'ワーク創造館) All

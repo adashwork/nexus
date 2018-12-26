@@ -136,10 +136,14 @@ public class CompanyService {
 		//産業大分類コード
 
 		//資本金
+
 		//オーバーフローしている場合を考慮して、上限値も含む
 		if (company.getCapital() != null) {
-			if (company.getCapital() >= 2147483647) {
+			if (company.getCapital() >= 2147483647 ) {
 				messages.add("資本金は2147483647万までしか入力できません");
+				checkResult = false;
+			} else if(company.getCapital() < 0) {
+				messages.add("資本金にマイナスの値は入力できません");
 				checkResult = false;
 			}
 		}
@@ -176,10 +180,16 @@ public class CompanyService {
 		if (company.getTantouTel().length() > 20) {
 			messages.add("担当者TELは20文字以内でお願いします");
 			checkResult = false;
+		} else if(company.getTantouTel().matches("^-.*$")) {
+			messages.add("担当者TELにマイナスの値は入力できません");
+			checkResult = false;
 		}
 		//担当者FAX
 		if (company.getTantouFax().length() > 20) {
 			messages.add("担当者FAXは20文字以内でお願いします");
+			checkResult = false;
+		} else if(company.getTantouFax().matches("^-.*$") ) {
+			messages.add("担当者FAXにマイナスの値は入力できません");
 			checkResult = false;
 		}
 		//担当者email
@@ -361,10 +371,9 @@ public class CompanyService {
 	}
 
 	/**
-	 * ※コメント機能はコメントサービスに統合されるため
-	 * このメソッドは使わなくなりました。
 	 *
 	 * 企業のコメント一覧を取得する
+	 * @deprecated コメントに関する処理はCommentサービスに統合しました。
 	 * @param companyNo
 	 * @return Commentオブジェクト
 	 */

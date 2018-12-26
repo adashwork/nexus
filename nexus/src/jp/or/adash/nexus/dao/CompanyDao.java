@@ -430,13 +430,15 @@ public class CompanyDao {
 		// SQL文の作成
 		StringBuilder sqlSearchCompany = new StringBuilder();
 		sqlSearchCompany.append("SELECT cmp.companyno, cmp.companyname,jbc.name,cmp.companyplace,cmp.tantou");
-		sqlSearchCompany.append(" from company cmp left join jobcategory jbc");
+		sqlSearchCompany.append(" from company cmp left join (select * from jobcategory WHERE middlecd = '0' and smallcd = '0') jbc");
 		sqlSearchCompany.append(" on cmp.jobcategorylargecd = jbc.largecd");
-		sqlSearchCompany.append(" WHERE  deleteflag = 0 and jbc.middlecd = '0' and jbc.smallcd = '0'");
+		sqlSearchCompany.append(" WHERE  deleteflag = 0 "); // and jbc.middlecd = '0' and jbc.smallcd = '0'
 		if (setFlag != 0) {
 			sqlSearchCompany.append(" and ");
 			sqlSearchCompany.append(String.join(" and ", whereStr));
 		}
+		sqlSearchCompany.append(" ORDER BY companykana ASC");
+
 
 		// TODO 18/12/17改ページ用にSQLを書き換える
 

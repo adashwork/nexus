@@ -143,25 +143,25 @@
 					<th scope="col">年齢制限</th>
 					<th scope="col">基本給</th>
 				</tr>
-				<c:forEach var="SimpleKyujin" items="${ kyujin }">
+				<c:forEach var="kyujin" items="${ kyujinlist }">
 
 					<tr>
 						<td>
 							<form method="get" action="/nexus/web/kyujin-disp">
-								<input type="hidden" name="no" value="${ SimpleKyujin.no }">
+								<input type="hidden" name="no" value="${ kyujin.no }">
 									<input type="submit" value="詳細">
 							</form>
 						</td>
-						<td><c:out value="${ SimpleKyujin.no }" /></td>
-						<td><c:out value="${ SimpleKyujin.companyname }" /></td>
-						<td><c:out value="${ SimpleKyujin.address }" /></td>
-						<td><c:out value="${ SimpleKyujin.nearstation }" /></td>
-						<td><c:out value="${ SimpleKyujin.job }" /></td>
-						<td><c:out value="${ SimpleKyujin.koyoukeitaicd }" /></td>
-						<td><c:out value="${ SimpleKyujin.agemin }" />歳 ～ <c:out
-								value="${ SimpleKyujin.agemax }" />歳</td>
-						<td><c:out value="${ SimpleKyujin.salarymin }" />円 ～ <c:out
-								value="${ SimpleKyujin.salarymax }" />円</td>
+						<td><c:out value="${ kyujin.no }" /></td>
+						<td><c:out value="${ companyMap[kyujin.companyno].companyName }" /></td>
+						<td><c:out value="${ kyujin.address }" /></td>
+						<td><c:out value="${ kyujin.nearstation }" /></td>
+						<td><c:out value="${ kyujin.job }" /></td>
+						<td><c:out value="${ kyujin.koyoukeitaicd }" /></td>
+						<td><c:out value="${ kyujin.agemin }" />歳 ～ <c:out
+								value="${ kyujin.agemax }" />歳</td>
+						<td><c:out value="${ kyujin.salarymin }" />円 ～ <c:out
+								value="${ kyujin.salarymax }" />円</td>
 
 					</tr>
 				</c:forEach>

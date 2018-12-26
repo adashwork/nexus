@@ -112,12 +112,32 @@ public class MatchingService {
 			messages.add("面接日が入力されていません。");
 			result = false;
 		}
+//		else {
+//			errMsg = DataCommons.chkDate(matching.getInterviewdt().toString());
+//			messages.add(errMsg);
+//			result = false;
+//		}
 
 		//入社日の値が入力されているか
-		if (matching.getEnterdt() == null) {
-			messages.add("入社日が入力されていません。");
-			result = false;
+		if (matching.getAssessment().equals("1")) {
+			if (matching.getEnterdt() == null) {
+				messages.add("入社日が入力されていません。");
+				result = false;
+
+			}else if(matching.getEnterdt().before( matching.getInterviewdt())) {
+				messages.add("入社日が面接日の前です。");
+				result = false;
+			}
+
+		// {
+//			errMsg = DataCommons.chkDate(matching.getEnterdt().toString());
+//			messages.add(errMsg);
+//			result = false;
+//
+//			}
+
 		}
+
 		// 評価の値が入力されているか
 		if (matching.getAssessment().equals("")) {
 			messages.add("評価が入力されていません。");
@@ -125,7 +145,7 @@ public class MatchingService {
 		}
 
 		// 備考の値が入力されているか
-		errMsg = DataCommons.chksDigits(matching.getNote(), 200);
+		errMsg = DataCommons.chksDigits(matching.getNote(), 4000);
 		messages.add(errMsg);
 
 		return result;
@@ -261,8 +281,8 @@ public class MatchingService {
 	 * @param id
 	 * @return
 	 */
-	public MatchingCase getMatching(int id) {
-		MatchingCase matching = null;
+	public MatchingSearchResult getMatching(int id) {
+		MatchingSearchResult matching = null;
 //		Comment matchingComment = null;
 
 		try {
@@ -271,7 +291,7 @@ public class MatchingService {
 
 			// idを元にマッチング事例を取得
 			MatchingDao dao = new MatchingDao(transaction);
-			matching = dao.select(id);
+			matching = dao.selectV1(id);
 
 //			// マッチングidを元にマッチングコメントを取得
 //			CommentDao cdao = new CommentDao(transaction);
@@ -309,7 +329,7 @@ public class MatchingService {
 			if(matching.isEmpty() ) {
 				messages.add("一致する項目はありませんでした");
 			}
-			
+
 		} catch (IOException e) {
 			// エラーメッセージをセットする
 			messages.add(MessageCommons.ERR_DB_CONNECT);

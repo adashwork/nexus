@@ -1,6 +1,7 @@
 package jp.or.adash.nexus.servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -44,9 +45,10 @@ public class CompanyRegistServlet extends HttpServlet {
 		HttpSession session = request.getSession(true);
 		Staff staff = (Staff) session.getAttribute("UserData");
 
-
-
-
+		//エラーが発生すればfalseにする
+		boolean parameterGetError = true;
+		//後でエラーメッセージにaddAllする
+		List<String> parameterErrorMessage = new ArrayList<>();
 
 		//フォームパラメーターの取得
 
@@ -62,9 +64,21 @@ public class CompanyRegistServlet extends HttpServlet {
 		String jobCategorySmallCd = request.getParameter("jobcategorysmallcd");
 		String jobCategoryMiddleCd = request.getParameter("jobcategorymiddlecd");
 		String jobCategoryLargeCd = request.getParameter("jobcategorylargecd");
-		Integer capital = DataCommons.parseInteger(request.getParameter("capital"));
+		Integer capital = null;
+		try {
+			capital = DataCommons.parseInteger(request.getParameter("capital"));
+		} catch (NumberFormatException e) {
+			parameterGetError = false;
+			parameterErrorMessage.add("資本金は半角数字で入力してください");
+		}
 		String employees = request.getParameter("employees");
-		Integer establishDt = DataCommons.parseInteger(request.getParameter("establishdt"));
+		Integer establishDt = null;
+		try {
+			establishDt = DataCommons.parseInteger(request.getParameter("establishdt"));
+		} catch (NumberFormatException e) {
+			parameterGetError = false;
+			parameterErrorMessage.add("創設年は半角数字4文字で入力してください");
+		}
 		String tantouYakushoku = request.getParameter("tantouyakushoku");
 		String tantou = request.getParameter("tantou");
 		String tantouKana = request.getParameter("tantoukana");
@@ -72,7 +86,7 @@ public class CompanyRegistServlet extends HttpServlet {
 		String tantouFax = request.getParameter("tantoufax");
 		String tantouEmail = request.getParameter("tantouemail");
 		String tantouNote = request.getParameter("tantounote");
-		String tantouStaffId = request.getParameter("tantoustaffid");
+		String tantouStaffId = request.getParameter("tantoustaff_id");
 		String salesRank = request.getParameter("salesrank");
 		String salesNote = request.getParameter("salesnote");
 		Date createDt = null;
@@ -87,16 +101,9 @@ public class CompanyRegistServlet extends HttpServlet {
 				tantouYakushoku, tantou, tantouKana, tantouTel, tantouFax, tantouEmail, tantouNote, tantouStaffId,
 				salesRank, salesNote, createDt, createuserId, updateDt, updateUserId, deletefFag);
 
-
 		CompanyService companyService = new CompanyService();
 		//エラーが発生しなかった場合のみ登録処理を行う
-		if (companyService.check(company, true)) {
-
-			//もし事業所番号が未記入なら、独自の事業所番号を発行する
-			if ("".equals(company.getCompanyNo())) {
-				company.setCompanyNo(companyService.createUniqueCompanyNo());
-			}
-
+		if (companyService.check(company, true) && parameterGetError) {
 			//企業情報を登録する
 			boolean registResult = companyService.insertCompany(company);
 		} else {
@@ -105,10 +112,6 @@ public class CompanyRegistServlet extends HttpServlet {
 			//新規登録中のパラメーターをリクエストに渡す
 			request.setAttribute("status", "regist");
 		}
-
-
-
-
 
 		// 1.業種分類リストを取得する
 		JobCategoryService JCLservice = new JobCategoryService();
@@ -125,7 +128,8 @@ public class CompanyRegistServlet extends HttpServlet {
 
 		request.setAttribute("company", company);
 		request.setAttribute("staff", staff);
-		request.setAttribute("messages", companyService.getMessages());
+		parameterErrorMessage.addAll(companyService.getMessages());
+		request.setAttribute("messages", parameterErrorMessage);
 
 		// JSPにフォワード
 		request.getRequestDispatcher("/companyregist.jsp")

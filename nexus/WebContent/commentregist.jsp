@@ -194,12 +194,11 @@
 			<c:if test="${ !empty comment.id }">
 				<input class="main-b"type="submit" id="comment-update" onclick="MovePages(this)"value="更新">
 				<input class="main-b" type="submit" id="comment-delete"onclick="MovePages(this)" value="削除">
-				<input class="main-b" type="button" id="comment-search" onclick="CloseWindow()" value="戻る">
 			</c:if>
 			<c:if test="${ empty comment.id }">
 				<input class="main-b" type="submit" id="comment-regist" onclick="MovePages(this)" value="登録">
-				<input class="main-b" type="button" id="comment-search" onclick="CloseWindow()" value="戻る">
 			</c:if>
+			<input class="main-b" type="button" id="comment-search" onclick="CloseWindow()" value="戻る">
 
 		</form>
 

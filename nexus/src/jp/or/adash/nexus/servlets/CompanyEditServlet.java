@@ -13,9 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import jp.or.adash.nexus.entity.Comment;
+import jp.or.adash.nexus.entity.CommentSearchParameter;
 import jp.or.adash.nexus.entity.Company;
 import jp.or.adash.nexus.entity.JobCategory;
 import jp.or.adash.nexus.entity.Staff;
+import jp.or.adash.nexus.services.CommentService;
 import jp.or.adash.nexus.services.CompanyService;
 import jp.or.adash.nexus.services.JobCategoryService;
 import jp.or.adash.nexus.utils.common.DataCommons;
@@ -121,7 +123,12 @@ public class CompanyEditServlet extends HttpServlet {
 		request.setAttribute("JCMiddleList", JCMlist);
 		request.setAttribute("JCSmallList", JCSlist);
 
-		List<Comment> commentList = companyService.getCompanyCommentList(companyNo);
+		//コメントの取得
+		CommentService commentService = new CommentService();
+		CommentSearchParameter commentSearchParameter = new CommentSearchParameter(null,company.getCompanyNo(), null, null, null, null);
+		List<Comment> commentList =  commentService.commentSearch(commentSearchParameter);
+
+
 
 		//処理結果メッセージをリクエストに格納する
 

@@ -294,5 +294,59 @@ public class SaibanDao {
 	}
 
 
+	/**
+	 * 備考コメントにIDを振る
+	 * 値生成と同時に現在の採番データに+1を足す
+	 * @return int saiban 整数
+	 * @throws IOException
+	 */
+	public int getCommentInt() throws IOException {
+
+		// SQL文を生成する
+		StringBuffer sql = new StringBuffer();
+		sql.append("select commentsaiban");
+		sql.append(" from saiban");
+		try (PreparedStatement ps = this.conn.prepareStatement(sql.toString())) {
+
+			int getsaiban = -1;
+			// SQL文を実行する
+			try (ResultSet rs = ps.executeQuery()) {
+				if(rs.next()) {
+					getsaiban = rs.getInt("commentsaiban") + 1;
+					// 採番マスタの更新
+					updateCommentSaiban(getsaiban);
+				}
+				return getsaiban;
+
+			} catch (SQLException e) {
+				throw new IOException(e);
+			}
+		} catch (SQLException e) {
+			throw new IOException(e);
+		}
+	}
+
+	/**
+	 * commentsaibanを更新する
+	 * @param accountId companysaiban
+	 * @throws IOException
+	 */
+	public void updateCommentSaiban(int currentCommentSaiban) throws IOException {
+
+		// SQL文を生成する
+		StringBuffer sql = new StringBuffer();
+		sql.append("update saiban set commentsaiban = ?");
+		//sql
+		try (PreparedStatement ps = this.conn.prepareStatement(sql.toString())) {
+			ps.setInt(1, currentCommentSaiban);
+		// SQL文を実行する
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			throw new IOException(e);
+		}
+
+	}
+
+
 
 }

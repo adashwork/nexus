@@ -748,61 +748,12 @@ public class Kyujin {
 	}
 
 	/**
-	 * 創業設立年を返す
-	 * @return establishdt
-
-	public Integer getEstablishdt() {
-		return establishdt;
-	}*/
-
-	/**
-	 * 資本金を返す
-	 * @return capital
-
-	public long getCapital() {
-		return capital;
-	} */
-
-	/**
 	 * 会社の特長を返す
 	 * @return companyfeature
 
 		public String getCompanyfeature() {
 			return companyfeature;
 		} */
-
-	/**
-	 * 選考担当者課係名/役職名を返す
-	 * @return tantouyakushoku
-
-	public String getTantouyakushoku() {
-		return tantouyakushoku;
-	}*/
-
-	/**
-	 * 選考担当者名（カナ）を返す
-	 * @return tantoukana
-
-	public String getTantoukana() {
-		return tantoukana;
-	} */
-
-	/**
-	 * 選考担当者名を返す
-	 * @return tantou
-
-	public String getTantou() {
-		return tantou;
-	}*/
-
-	/**
-	 * 担当職業紹介者IDを返す
-	 * @return tantoustaff_id
-
-	public String getTantoustaff_id() {
-		return tantoustaff_id;
-	}*/
-
 
 	/**
 	 * 応募書類を返す

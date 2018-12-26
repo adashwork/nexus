@@ -14,7 +14,7 @@ function WindowOpen(commentid){
 	   // サブウインドウのオプション文字列を作る
 	   var SubWinOpt = "width=" + subw + ",height=" + subh + ",top=" + suby + ",left=" + subx;
 	   // サブウインドウを表示
-	   if(commentid != ""){
+	   if(!isNaN(commentid)){
 		   subp += "?commentid=" + commentid;
 	   }
 	   window.open(subp,subn ,SubWinOpt);
@@ -28,3 +28,5 @@ function WindowOpen(commentid){
 function CloseWindow(){
 	window.open('about:blank','_self').close();
 }
+
+

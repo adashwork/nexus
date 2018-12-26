@@ -64,6 +64,7 @@ public class MatchingRegistServlet extends HttpServlet {
 		//		request.getParameter("enterdt");
 		String assessment = request.getParameter("assessment");
 		String note = request.getParameter("note");
+		String noteM = "";
 		Date createDt = null;
 		Date updateDt = null;
 
@@ -72,12 +73,14 @@ public class MatchingRegistServlet extends HttpServlet {
 		Integer matchId = 0;									// 追加 2018/12/18 T.Ikeda
 		String genre = "4";	 // 1:求職者情報　2:企業情報　3:求人情報　4:マッチング情報    追加,修正 2018/12/17,18 T.Ikeda
 		String important = request.getParameter("important");	// 追加,修正 2018/12/17,18 T.Ikeda
+		if (important == null) {
+			important = "0";
+		}
 		String title = request.getParameter("title");			// 追加,修正 2018/12/17,18 T.Ikeda
 
 		//1.2 マッチング結果オブジェクトを作成
-		matching = new MatchingCase(0, companyNo, kyujinNo, jobSeekerId, staffId, interviewDt, enterdt, assessment, note,
-				createDt,
-				createUserId, updateDt, updateUserId);    		// 追加・修正 2018/12/11.12 T.Ikeda
+		matching = new MatchingCase(0, companyNo, kyujinNo, jobSeekerId, staffId, interviewDt, enterdt, assessment,
+				noteM, createDt, createUserId, updateDt, updateUserId);    		// 追加・修正 2018/12/11.12 T.Ikeda
 		// マッチングコメントオブジェクトを作成                 // 追加 2018/12/14 T.Ikeda
 		comment = new Comment(0, companyNo, kyujinNo, jobSeekerId, staffId, matchId,
 				genre, important, title, note, createDt, createUserId,

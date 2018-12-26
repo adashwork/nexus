@@ -65,9 +65,9 @@
 						<th>求職者ID</th>
 					</tr>
 					<tr>
-						<td><input type="text" name="companyno"
+						<td><input type="text" name="companyno" id="companyno"
 							value="<c:out value="${ comment.companyNo }" />"></td>
-						<td><input type="text" name="jobseekerid"
+						<td><input type="text" name="jobseekerid" id="jobseekerid"
 							value="<c:out value="${ comment.jobSeekerId }" />"></td>
 					</tr>
 					<tr>
@@ -75,9 +75,9 @@
 						<th>マッチングID</th>
 					</tr>
 					<tr>
-						<td><input type="text" name="kyujinno"
+						<td><input type="text" name="kyujinno" id="kyujinno"
 							value="<c:out value="${ comment.kyujinNo }" />"></td>
-						<td><input type="text" name="matchid"
+						<td><input type="text" name="matchid" id="matchid"
 							value="<c:out value="${ comment.matchId }" />"></td>
 					</tr>
 					</thead>
@@ -87,7 +87,7 @@
 							<th>タイトル表示</th>
 						</tr>
 						<tr>
-							<td><select name="genre">
+							<td><select name="genre" id ="genre" >
 									<option value="0">えらんでください</option>
 									<option value="1">求職者</option>
 									<option value="2">企業</option>

@@ -28,3 +28,45 @@ function WindowOpen(commentid){
 function CloseWindow(){
 	window.open('about:blank','_self').close();
 }
+
+
+
+$(function() {
+$('#genre').change(function() {
+    var r = $('option:selected').val();
+    	if(r ==1){
+    		$('#jobseekerid').attr('required','1');
+    		$('#companyno').removeAttr('required','1');
+    		$('#kyujinno').removeAttr('required','1');
+    		$('#matchid').removeAttr('required','1');
+    	}else if(r == 2){
+    			$('#companyno').attr('required','1');
+    			$('#matchid').removeAttr('required','1');
+    			$('#jobseekerid').removeAttr('required','1');
+    			$('#kyujinno').removeAttr('required','1');
+    		}else if(r == 3){
+    			$('#kyujinno').attr('required','1');
+    			$('#jobseekerid').removeAttr('required','1');
+    			$('#companyno').removeAttr('required','1');
+    			$('#matchid').removeAttr('required','1');
+    			}else if(r == 4){
+    				$('#matchid').attr('required','1');
+    				$('#jobseekerid').removeAttr('required','1');
+    				$('#companyno').removeAttr('required','1');
+    				$('#kyujinno').removeAttr('required','1');
+    			}else if(r == 9){
+    				$('#matchid').removeAttr('required','1');
+    				$('#jobseekerid').removeAttr('required','1');
+    				$('#companyno').removeAttr('required','1');
+    				$('#kyujinno').removeAttr('required','1');
+    			}else if(r == 0){
+    				$('#matchid').removeAttr('required','1');
+    				$('#jobseekerid').removeAttr('required','1');
+    				$('#companyno').removeAttr('required','1');
+    				$('#kyujinno').removeAttr('required','1');
+
+    	}
+})
+});
+
+

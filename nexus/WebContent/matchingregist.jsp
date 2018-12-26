@@ -108,7 +108,7 @@
 
 				</td>
 				<td>
-					<input id="company_name" type="text" />
+					<span>企業名</span><input id="company_name" type="text" size="15" />
 				</td>
 			</tr>
 			<tr>
@@ -122,7 +122,7 @@
 					<input type="button" value="求人ID検索" id="kyujin_sb">
 				</td>
 				<td>
-					<input id="kyujin_job" type="text" />
+					<span>職種</span><input id="kyujin_job" type="text" size="15" />
 				</td>
 			</tr>
 			<tr>
@@ -136,7 +136,7 @@
 					<input type="button" value="求職者ID検索" id="jobseeker_sb" />
 				</td>
 				<td>
-					<input id="jobseeker_name" type="text" />
+					<span>求職者名</span><input id="jobseeker_name" type="text" size="15" />
 				</td>
 			</tr>
 			<tr>

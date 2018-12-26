@@ -14,7 +14,7 @@ public class Company {
 	* nearStation	最寄駅
 	* companyUrl	事業所URL
 	* jobCategorySmallCd	産業小分類コード
-	* jobCategoryMiddleCd	産業中分類コード
+	* jobCategoryMiddleCd   産業中分類コード
 	* jobCategoryLargeCd	産業大分類コード
 	* capital	資本金
 	* employees	従業員数
@@ -67,7 +67,8 @@ public class Company {
 	private String deletefFag;
 
 	public Company(String companyNo, String corporateNumber, String companyName, String companyKana,
-			String companyPostal, String companyPlace, String nearStation, String companyUrl, String jobCategorySmallCd, String jobCategoryMiddleCd,
+			String companyPostal, String companyPlace, String nearStation, String companyUrl, String jobCategorySmallCd,
+			String jobCategoryMiddleCd,
 			String jobCategoryLargeCd, Integer capital, String employees, Integer establishDt, String tantouYakushoku,
 			String tantou, String tantouKana, String tantouTel, String tantouFax, String tantouEmail, String tantouNote,
 			String tantouStaffId, String salesRank, String salesNote, Date createDt, String createuserId, Date updateDt,
@@ -102,7 +103,6 @@ public class Company {
 		this.updateUserId = updateUserId;
 		this.deletefFag = deletefFag;
 	}
-
 
 	/**
 	 * 事業所番号を取得する
@@ -178,7 +178,7 @@ public class Company {
 
 	/**
 	 * 産業中分類コードを取得する
-	 * @return jobCategorySmallCd
+	 * @return jobCategoryMiddleCd
 	 */
 	public String getJobCategoryMiddleCd() {
 		return jobCategoryMiddleCd;
@@ -196,6 +196,7 @@ public class Company {
 	 * 資本金を取得する
 	 * @return capital
 	 */
+
 	public Integer getCapital() {
 		return capital;
 	}
@@ -258,7 +259,7 @@ public class Company {
 
 	/**
 	 * 担当者emailを取得する
-	 * @return tantouEmail
+	 * @return tantouMail
 	 */
 	public String getTantouMail() {
 		return tantouMail;
@@ -337,7 +338,6 @@ public class Company {
 		return deletefFag;
 	}
 
-
 	/**
 	 * 事業所番号を登録する
 	 * @param companyNo 事業所番号
@@ -345,8 +345,5 @@ public class Company {
 	public void setCompanyNo(String companyNo) {
 		this.companyNo = companyNo;
 	}
-
-
-
 
 }

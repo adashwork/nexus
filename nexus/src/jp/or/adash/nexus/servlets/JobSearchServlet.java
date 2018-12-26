@@ -3,6 +3,7 @@ package jp.or.adash.nexus.servlets;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import jp.or.adash.nexus.entity.Company;
 import jp.or.adash.nexus.entity.SimpleKyujin;
 import jp.or.adash.nexus.entity.Staff;
 import jp.or.adash.nexus.entity.Todouhuken;
@@ -107,15 +109,23 @@ public class JobSearchServlet extends HttpServlet {
 				joblargecd3,
 				jobcategorysmallcd,jobcategorylargecd,
 				koyoukeitaicd,salarymin, salarymax);
+
+		//企業情報リストを取得する
+		Map<String, Company> companyMap = service.getCompanyMap(kyujinlist);
+
+
 		// 1.都道府県リストを取得する
 		TodouhukenService todouhukenservice = new TodouhukenService();
 		List<Todouhuken> todouhukenlist = todouhukenservice.getTodouhukenList();
 
 
+
+
 		// 1.3 リクエストに求人票情報をセットする
 
 		request.setAttribute("Staff", staff);
-		request.setAttribute("kyujin", kyujinlist);
+		request.setAttribute("kyujinlist", kyujinlist);
+		request.setAttribute("companyMap", companyMap);
 		request.setAttribute("todouhukenlist",todouhukenlist);
 		// 1.4 JSPにフォワードする
 		request.getRequestDispatcher("/jobsearch.jsp")

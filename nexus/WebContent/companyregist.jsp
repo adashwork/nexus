@@ -68,10 +68,11 @@
 
 
 				<tr>
-					<th>事業所番号</th>
+					<th>事業所番号(ハイフンあり) [必須] </th>
+
 					<td><c:if test="${ status == 'regist' }">
 							<input type="text" name="companyno"
-								value="${ company.companyNo }" />
+								value="${ company.companyNo }"   />
 						</c:if> <c:if test="${ status != 'regist' }">
 
 							<c:out value="${ company.companyNo }" />
@@ -87,17 +88,18 @@
 				</tr>
 
 				<tr>
-					<th>事業所名</th>
+					<th>事業所名 [必須]</th>
 					<td><input type="text" name="companyname"
 						value="${ company.companyName }" /></td>
 				</tr>
 				<tr>
-					<th>事業所名(カナ)</th>
+					<th>事業所名(カナ) [必須]</th>
 					<td><input type="text" name="companykana"
 						value="${ company.companyKana }" /></td>
 				</tr>
 				<tr>
-					<th>事業所郵便番号</th>
+					<th>事業所郵便番号 (123-4567)</th>
+
 					<td><input id="postal" type="text" name="companypostal"
 						value="${ company.companyPostal }" /></td>
 				</tr>
@@ -133,10 +135,9 @@
 				<tr>
 					<th>産業中分類コード</th>
 					<td><select id="middlecd" name="jobcategorymiddlecd">
-
+							<option value=""></option>
 							<c:forEach var="JCM" items="${ JCMiddleList }">
-
-								<option value="${ JCM.largecd }"
+								<option value="${ JCM.middlecd }"
 									<c:if test="${company.jobCategoryMiddleCd == JCM.middlecd }">
 									selected
 									</c:if>>${ JCM.name }</option>
@@ -146,10 +147,9 @@
 				<tr>
 					<th>産業小分類コード</th>
 					<td><select id="smallcd" name="jobcategorysmallcd">
-
+							<option value=""></option>
 							<c:forEach var="JCS" items="${ JCSmallList }">
-
-								<option value="${ JCS.largecd }"
+								<option value="${ JCS.smallcd }"
 									<c:if test="${company.jobCategorySmallCd == JCS.smallcd }">
 									selected
 									</c:if>>${ JCS.name }</option>
@@ -161,7 +161,7 @@
 				<tr>
 					<th>資本金</th>
 					<td><input type="text" name="capital"
-						value="${ company.capital }" /></td>
+						value="${ company.capital }" />万円</td>
 				</tr>
 				<tr>
 					<th>従業員数</th>
@@ -179,9 +179,9 @@
 					</select></td>
 				</tr>
 				<tr>
-					<th>創業設立年</th>
+					<th>創業設立年 </th>
 					<td><input type="text" name="establishdt"
-						value="${ company.establishDt }" /></td>
+						value="${ company.establishDt }" />年</td>
 				</tr>
 				<tr>
 					<th>担当者課係名/役職名</th>
@@ -221,15 +221,7 @@
 				<tr>
 					<th>担当開拓者ID</th>
 					<td><input type="text" name="tantoustaff_id"
-						<c:if test="${company.companyNo == null}">
-							value="${Staff.id }"
-						</c:if>
-						<c:if test="${company.companyNo != null}">
-							value="${ company.tantouStaffId }"
-						</c:if> />
-
-
-					</td>
+							value="${ company.tantouStaffId }" /></td>
 				</tr>
 				<tr>
 					<th>営業評価ランクABC</th>

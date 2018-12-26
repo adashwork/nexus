@@ -113,9 +113,9 @@ public class MatchingService {
 			result = false;
 		}
 //		else {
-//			errMsg = DataCommons.chkDate(matching.getInterviewdt().toString());
+//			String iDate = new SimpleDateFormat("yyyy/MM/dd").format(matching.getInterviewdt());
+//			errMsg = DataCommons.chkDate(iDate);
 //			messages.add(errMsg);
-//			result = false;
 //		}
 
 		//入社日の値が入力されているか
@@ -129,11 +129,10 @@ public class MatchingService {
 				result = false;
 			}
 
-		// {
-//			errMsg = DataCommons.chkDate(matching.getEnterdt().toString());
-//			messages.add(errMsg);
-//			result = false;
-//
+//			else {
+//				String eDate = new SimpleDateFormat("yyyy/MM/dd").format(matching.getEnterdt());
+//				errMsg = DataCommons.chkDate(eDate);
+//				messages.add(errMsg);
 //			}
 
 		}

@@ -33,7 +33,7 @@
 
 
 		<p>※２単語以上入力する際は間にスペースを入れてください。</p>
-		<form action="/nexus/web/companysearch" method="get" name="search">
+		<form action="/nexus/web/company-search" method="get" name="search">
 
 			<div class="listbox2">
 				<h4 class="word">企業名</h4>
@@ -134,7 +134,7 @@
 	<footer> <small>Copyright(C) 2009有限責任事業組合
 		大阪職業教育協働機構(A'ワーク創造館) All Rights Reserved.</small> </footer>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<!--  <script type="text/javascript" src="../js/common.js"></script> -->
+<script type="text/javascript" src="../js/common.js"></script>
 		 <script type="text/javascript" src="../js/companysearch.js"></script>
 </body>
 </html>

@@ -146,7 +146,7 @@
 								value="<c:out value="${ comment.title }" />"></td>
 							<td>
 								<c:choose>
-									<c:when test="${ comment.important == 1 }">
+									<c:when test="${ comment.important == '1' }">
 										<input type="checkbox" name="important" value="1" chekced>重要
 									</c:when>
 									<c:otherwise>

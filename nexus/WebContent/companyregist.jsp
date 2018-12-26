@@ -52,51 +52,8 @@
 }
 </style>
 <title>企業情報</title>
-</head>
 <body>
-	<!-- ヘッダー　-->
-	<header>
-		<section>
-			<h1 class="logo">
-				<a href="/nexus/web/staff-top"><img
-					src="../css/TryNexus-Logo.png" width="97" height="70"
-					alt="TryNexus" /></a>
-			</h1>
-			/*
-			<nav>
-				<ul class="mainnavi">
-					<li><a href="/nexus/web/job-search"><i class="fas fa-home"></i>検索</a></li>
-					<li><a href="/nexus/web/jobseeker-list"><i
-							class="fas fa-search"></i>登録&amp;閲覧</a>
-						<ul class="drop-menu">
-							<li><a href="/nexus/web/kyujin-disp">求人情報<i
-									class="fas fa-angle-right"></i></a></li>
-							<li><a href="/nexus/web/jobseeker-list">求職者情報<i
-									class="fas fa-angle-right"></i></a></li>
-							<li><a href="/nexus/web/match-disp">マッチング登録<i
-									class="fas fa-angle-right"></i></a></li>
-						</ul></li>
-					<c:if test="${Staff.authority == 1}">
-						<li><a href="/nexus/web/account-list"><i
-								class="far fa-bookmark"></i>管理</a></li>
-					</c:if>
-				</ul>
-			</nav>
-			*/
-			<div class="user">
-				<div class="user__wrapper">
-					<div class="user__name">
-						<a href="#"><c:out value="${ Staff.name }" /><i
-							class="fas fa-ellipsis-v"></i></a>
-						<ul class="drop-menu">
-							<li><a href="/nexus/web/logout">ログアウト<i
-									class="fas fa-angle-right"></i></a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</section>
-	</header>
+	<%@ include file="/header.jsp"%>
 	<main>
 	<h2>企業情報</h2>
 	<ul>
@@ -111,11 +68,11 @@
 
 
 				<tr>
-					<th>事業所番号</th>
-					<td><c:if test="${ company.companyNo == null }">
+					<th>事業所番号(ハイフンあり)</th>
+					<td><c:if test="${ status == 'regist' }">
 							<input type="text" name="companyno"
 								value="${ company.companyNo }" />
-						</c:if> <c:if test="${ company.companyNo != null }">
+						</c:if> <c:if test="${ status != 'regist' }">
 
 							<c:out value="${ company.companyNo }" />
 							<input type="hidden" name="companyno"
@@ -130,17 +87,17 @@
 				</tr>
 
 				<tr>
-					<th>事業所名</th>
+					<th>事業所名 [必須]</th>
 					<td><input type="text" name="companyname"
 						value="${ company.companyName }" /></td>
 				</tr>
 				<tr>
-					<th>事業所名(カナ)</th>
+					<th>事業所名(カナ) [必須]</th>
 					<td><input type="text" name="companykana"
 						value="${ company.companyKana }" /></td>
 				</tr>
 				<tr>
-					<th>事業所郵便番号</th>
+					<th>事業所郵便番号 (123-4567)</th>
 					<td><input id="postal" type="text" name="companypostal"
 						value="${ company.companyPostal }" /></td>
 				</tr>
@@ -163,7 +120,7 @@
 				<tr>
 					<th>産業大分類コード</th>
 					<td><select id="largecd" name="jobcategorylargecd">
-						<option value=""></option>
+							<option value=""></option>
 							<c:forEach var="JCL" items="${ JCLargeList }">
 
 								<option value="${ JCL.largecd }"
@@ -175,11 +132,10 @@
 				</tr>
 				<tr>
 					<th>産業中分類コード</th>
-					<td><select  id="middlecd"  name="jobcategorymiddlecd">
-
+					<td><select id="middlecd" name="jobcategorymiddlecd">
+							<option value=""></option>
 							<c:forEach var="JCM" items="${ JCMiddleList }">
-
-								<option value="${ JCM.largecd }"
+								<option value="${ JCM.middlecd }"
 									<c:if test="${company.jobCategoryMiddleCd == JCM.middlecd }">
 									selected
 									</c:if>>${ JCM.name }</option>
@@ -190,9 +146,9 @@
 					<th>産業小分類コード</th>
 					<td><select id="smallcd" name="jobcategorysmallcd">
 
+							<option value=""></option>
 							<c:forEach var="JCS" items="${ JCSmallList }">
-
-								<option value="${ JCS.largecd }"
+								<option value="${ JCS.smallcd }"
 									<c:if test="${company.jobCategorySmallCd == JCS.smallcd }">
 									selected
 									</c:if>>${ JCS.name }</option>
@@ -204,7 +160,7 @@
 				<tr>
 					<th>資本金</th>
 					<td><input type="text" name="capital"
-						value="${ company.capital }" /></td>
+						value="${ company.capital }" />万円</td>
 				</tr>
 				<tr>
 					<th>従業員数</th>
@@ -224,7 +180,7 @@
 				<tr>
 					<th>創業設立年</th>
 					<td><input type="text" name="establishdt"
-						value="${ company.establishDt }" /></td>
+						value="${ company.establishDt }" />年</td>
 				</tr>
 				<tr>
 					<th>担当者課係名/役職名</th>
@@ -264,15 +220,7 @@
 				<tr>
 					<th>担当開拓者ID</th>
 					<td><input type="text" name="tantoustaff_id"
-						<c:if test="${company.companyNo == null}">
-							value="${Staff.id }"
-						</c:if>
-						<c:if test="${company.companyNo != null}">
-							value="${ company.tantouStaffId }"
-						</c:if> />
-
-
-					</td>
+						value="${ company.tantouStaffId }" /></td>
 				</tr>
 				<tr>
 					<th>営業評価ランクABC</th>
@@ -295,13 +243,13 @@
 
 
 			<button type="button" class="main-b"
-				onClick="location.href='./job-search'" tabindex="62">求人一覧に戻る</button>
+				onClick="location.href='./company-search'" tabindex="62">企業検索に戻る</button>
 
-			<c:if test="${ company.companyNo == null }">
+			<c:if test="${ status == 'regist' }">
 				<button type="submit" id="company-regist" class="main-b"
 					onclick="MovePages(this)" tabindex="61">登録</button>
 			</c:if>
-			<c:if test="${ company.companyNo != null }">
+			<c:if test="${ status != 'regist' }">
 				<button type="submit" id="company-edit" class="main-b"
 					onclick="MovePages(this)" tabindex="61">更新</button>
 				<button type="submit" id="company-delete" class="main-b2"
@@ -312,48 +260,11 @@
 	</div>
 
 
-
-
-
-	<div id="comment">
-		<c:forEach var="comment" items="${ commentlist }">
-			<li><c:out value="${ message }" /></li>
-			<table>
-				<tr>
-					<th>フリーコメント</th>
-				</tr>
-
-				<tr>
-					<td><textarea rows="2" cols="24" name="title"><c:out
-								value="${ comment.title }" /></textarea></td>
-					<td>重要<br> <input type="checkbox" name="important"
-						value="重要"></td>
-				</tr>
-				<tr>
-					<td><textarea rows="16" cols="74" name="freecomment"><c:out
-								value="${ comment.note }" /></textarea></td>
-				</tr>
-				<tr>
-					<td>作成日<textarea rows="1" cols="20" name="comnetcreatedt"><c:out
-								value="${ comment.createDt }" /></textarea></td>
-					<td>最終更新日<textarea rows="1" cols="20" name="commentupdatedt"><c:out
-								value="${ comment.updateDt }" /></textarea></td>
-				</tr>
-				<tr>
-					<td>作成者ID<textarea rows="1" cols="20"
-							name="commentregistrationperson"><c:out
-								value="${ comment.createUserId }" /></textarea></td>
-					<td>作成者<textarea rows="1" cols="20"
-							name="commentregistrationperson"><c:out
-								value="${ staffNameMap[comment.createUserId] }" /></textarea></td>
-					<td>最終更新者ID<textarea rows="1" cols="20"
-							name="commentupdateperson"><c:out
-								value="${ comment.updateUserId }" /></textarea></td>
-				</tr>
-			</table>
-		</c:forEach>
-	</div>
+	<c:if test="${ status != 'regist' }">
+	<%@ include file="/commentsearch_frame.jsp"%>
+	</c:if>
 	</main>
+
 	<!-- フッター　-->
 	<footer>
 		<small>Copyright(C) 2009有限責任事業組合 大阪職業教育協働機構(A'ワーク創造館) All
@@ -361,7 +272,8 @@
 	</footer>
 	<script src="js/kalendae.standalone.js" type="text/javascript"
 		charset="utf-8"></script>
-	<script src="../js/jobcategorypulldown.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../js/jobcategorypulldown.js" type="text/javascript"
+		charset="utf-8"></script>
 	<script src="../js/postcode.js" type="text/javascript" charset="utf-8"></script>
 </body>
 </html>

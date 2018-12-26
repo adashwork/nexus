@@ -11,13 +11,17 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import jp.or.adash.nexus.entity.Comment;
+import jp.or.adash.nexus.entity.CommentSearchParameter;
 import jp.or.adash.nexus.entity.Company;
 import jp.or.adash.nexus.entity.JobCategory;
 import jp.or.adash.nexus.entity.Staff;
+import jp.or.adash.nexus.services.CommentService;
 import jp.or.adash.nexus.services.CompanyService;
 import jp.or.adash.nexus.services.JobCategoryService;
 
 /**
+ * 企業削除サーブレット
+ * @author mmiyamoto
  * Servlet implementation class CompanyDeleteServlet
  */
 @WebServlet("/web/company-delete")
@@ -59,8 +63,14 @@ public class CompanyDeleteServlet extends HttpServlet {
 		}
 
 		//ここから下は失敗した場合
+		//企業情報を取得する
 		Company company = companyService.getCompanyInfo(companyNo);
-		List<Comment> commentList = companyService.getCompanyCommentList(companyNo);
+
+		//コメントの取得
+		CommentService commentService = new CommentService();
+		CommentSearchParameter commentSearchParameter = new CommentSearchParameter(null, companyNo, null, null, null, null);
+		List<Comment> commentList =  commentService.commentSearch(commentSearchParameter);
+
 
 		//中分類と小分類のリストを取得する
 		List<JobCategory> JCMlist = JCLservice.getMiddleJobCategoryList(company.getJobCategoryLargeCd());
@@ -74,7 +84,6 @@ public class CompanyDeleteServlet extends HttpServlet {
 		//処理結果メッセージをリクエストに格納する
 
 		request.setAttribute("company", company);
-		request.setAttribute("commentlist", commentList);
 		request.setAttribute("staff", staff);
 		request.setAttribute("messages", companyService.getMessages());
 

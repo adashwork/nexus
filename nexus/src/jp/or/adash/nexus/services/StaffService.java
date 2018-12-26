@@ -13,6 +13,12 @@ import jp.or.adash.nexus.entity.Staff;
 import jp.or.adash.nexus.utils.common.MessageCommons;
 import jp.or.adash.nexus.utils.dao.Transaction;
 
+/**
+ * staffテーブルに定義されているStaffに関する処理を定義するクラス
+ *
+ * @author mmiyamoto
+ *
+ */
 public class StaffService {
 
 	/**

@@ -39,7 +39,7 @@ public class CommentRegistServlet extends HttpServlet {
 		Staff staff = (Staff) session.getAttribute("UserData");
 
 		// 入力されたパラメータ等の取得
-		Integer id = 0;													// 備考ID
+		Integer id = null;													// 備考ID
 		String companyNo = request.getParameter("companyno");			// 事業所番号
 		String kyujinNo = request.getParameter("kyujinno");			// 求人NO
 		String jobSeekerId = request.getParameter("jobseekerid");		// 求職者ID

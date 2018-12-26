@@ -14,7 +14,7 @@ function getMiddleCategory() {
 			"largecode" : $('#largecd').val()
 		}
 	}).done(function(data) {
-		callback(data);
+		callbackMiddle(data);
 	} // 成功時の処理
 	).fail(function(xhr, status, error) {
 		alert('APIアクセスに失敗しました。');
@@ -24,7 +24,7 @@ function getMiddleCategory() {
 
 // コールバック時に呼び出されるメソッド
 // jobcategoryをセットする
-function callback(data) {
+function callbackMiddle(data) {
 	$('select#middlecd option').remove();
 	$('select#smallcd option').remove();
 	$('#middlecd').append("<option value=\"\"></option>");

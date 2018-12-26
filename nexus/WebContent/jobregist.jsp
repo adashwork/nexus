@@ -1,4 +1,5 @@
 <!-- @author ??? & pgjavaAT
+	@author kemiyan(18年12月)
 	18/09/30 閉じるボタンをトップへ戻るに変更
  -->
 
@@ -58,7 +59,7 @@
 				<tr>
 					<th>求人No.</th>
 					<td><input type="hidden" name="no"
-						value="<c:out value="${ kyujin.no }" />"> <c:out
+						value="<c:out value="${ kyujin.no }" />"><c:out
 							value="${ kyujin.no }" /></td>
 				</tr>
 				<tr>
@@ -105,9 +106,7 @@
 
 				<tr>
 					<th>産業大分類コード</th>
-
-					<td><c:out value="${ company.jobCategoryLargeCd }" />
-					${ jobcategory.name }</td>
+					<td><c:out value="${ company.jobCategoryLargeCd }" /></td>
 				</tr>
 				<tr>
 					<th>産業細分類コード</th>
@@ -280,7 +279,7 @@
 				<tr>
 					<th>雇用期間の定め</th>
 					<td><input type="text" name="koyoukikan"
-						value="<c:out value="${ kyujin.koyoukikan}" />" size="32" maxlength="30" tabindex="31"></td>
+						value="<c:out value="${ kyujin.koyoukikan}" />" size="40" maxlength="30" tabindex="31"></td>
 				</tr>
 				<tr>
 					<th>雇用期間開始年月日</th>
@@ -429,7 +428,7 @@
 				<tr>
 					<th>年間休日日数</th>
 					<td><input type="text" name="nenkanholiday"
-						value="<c:out value="${ kyujin.nenkanholiday }" />" size="30"
+						value="<c:out value="${ kyujin.nenkanholiday }" />" size="40"
 						maxlength="30" tabindex="59"></td>
 				</tr>
 				<tr>

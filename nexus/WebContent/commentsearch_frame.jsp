@@ -1,4 +1,5 @@
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!-- TODO タイトルと内容を表示している箇所をtable等を使った形にする -->
 
 <div>
@@ -9,9 +10,9 @@
 <div id="wrap">
   <div class="comment">
 		<p>タイトル</p>
-		<input class="comment-title" type="text" name="title" value="<c:out value="${ comment.title }"/>" >
+		<input class="comment-title" type="text" name="title" value="<c:out value="${ comment.title }"/>" readonly >
 		<p>内容</p>
-		<textarea rows="4" cols="50" wrap="hard"><c:out value="${ comment.note }"/></textarea>
+		<textarea rows="4" cols="50" wrap="hard" readonly><c:out value="${ comment.note }"/></textarea>
 	</div>
   <div class="down">
 		<div class="box">

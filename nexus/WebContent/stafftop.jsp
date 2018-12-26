@@ -34,7 +34,7 @@
 				<ul class="mainnavi">
 					<li><a href="/nexus/web/job-search"><i class="fas fa-home"></i>検索</a>
 					<ul class="drop-menu">
-							<li><a href="/nexus/web/companysearch">企業検索
+							<li><a href="/nexus/web/company-search">企業検索
 							<i class="fas fa-angle-right"></i></a></li>
 							<li><a href="/nexus/web/job-search">求人検索<i
 									class="fas fa-angle-right"></i></a></li>
@@ -88,7 +88,7 @@
 					<th><label>検索</label></th>
 				</tr>
 				<tr>
-					<td><a href="/nexus/web/companysearch">■企業検索</a></td>
+					<td><a href="/nexus/web/company-search">■企業検索</a></td>
 
 				</tr>
 				<tr>

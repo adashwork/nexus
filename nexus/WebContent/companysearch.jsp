@@ -19,42 +19,7 @@
 </head>
 <body>
 	<!-- ヘッダー　-->
-	<header> <section>
-	<h1 class="logo">
-		<a href="/nexus/web/staff-top"><img src="../css/TryNexus-Logo.png"
-			width="97" height="70" alt="TryNexus" /></a>
-	</h1>
-	<nav>
-	<ul class="mainnavi">
-		<li><a href="/nexus/web/job-search"><i class="fas fa-home"></i>検索</a></li>
-		<li><a href="/nexus/web/jobseeker-list"><i
-				class="fas fa-search"></i>登録&amp;閲覧</a>
-			<ul class="drop-menu">
-				<li><a href="/nexus/web/kyujin-disp">求人情報<i
-						class="fas fa-angle-right"></i></a></li>
-				<li><a href="/nexus/web/jobseeker-list">求職者情報<i
-						class="fas fa-angle-right"></i></a></li>
-				<li><a href="/nexus/web/match-disp">マッチング登録<i
-						class="fas fa-angle-right"></i></a></li>
-			</ul></li>
-		<!-- <c:if test="${Staff.authority == 1}"><li><a href="/nexus/web/account-list"><i
-				class="far fa-bookmark"></i>管理</a></li></c:if> -->
-	</ul>
-	</nav>
-	<div class="user">
-		<div class="user__wrapper">
-			<div class="user__name">
-				<a href="#"> <!-- <c:out value="${ Staff.name }" /> --> <i
-					class="fas fa-ellipsis-v"></i>
-				</a>
-				<ul class="drop-menu">
-					<li><a href="/nexus/web/logout">ログアウト<i
-							class="fas fa-angle-right"></i></a></li>
-				</ul>
-			</div>
-		</div>
-	</div>
-	</section> </header>
+	<%@ include file="/header.jsp" %>
 	<main> <!--　企業検索項目 -->
 	<div id="company_search">
 
@@ -68,17 +33,15 @@
 
 
 		<p>※２単語以上入力する際は間にスペースを入れてください。</p>
-		<form action="/nexus/web/companysearch" method="get" name="search">
+		<form action="/nexus/web/company-search" method="get" name="search">
 
 			<div class="listbox2">
-				<!--  CSSファイルなので跡で設定する -->
 				<h4 class="word">企業名</h4>
 				<input id="companyname" class="word" name="companyname" type="text" value="<c:out value="${ cse.companyName }" />"
 					placeholder="企業名を入れてください（カナ対応）" tabindex="1" />
 			</div>
 
 			<div class="listbox2">
-				<!--  CSSファイルなので跡で設定する -->
 				<h4 class="word">事業所所在地・最寄り駅</h4>
 				<input class="word" name="companyplace" type="text" value="<c:out value="${ cse.companyPlace }" />"
 					placeholder="事業所所在地・最寄り駅を入れてください。" tabindex="1" />
@@ -171,7 +134,7 @@
 	<footer> <small>Copyright(C) 2009有限責任事業組合
 		大阪職業教育協働機構(A'ワーク創造館) All Rights Reserved.</small> </footer>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<!--  <script type="text/javascript" src="../js/common.js"></script> -->
+<!-- <script type="text/javascript" src="../js/common.js"></script> -->
 		 <script type="text/javascript" src="../js/companysearch.js"></script>
 </body>
 </html>

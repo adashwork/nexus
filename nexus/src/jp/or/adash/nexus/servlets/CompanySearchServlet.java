@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import jp.or.adash.nexus.entity.CompanySearch;
 import jp.or.adash.nexus.entity.CompanySearchResult;
@@ -23,7 +24,7 @@ import jp.or.adash.nexus.services.JobCategoryService;
  * Servlet implementation class CompanySearch
  * @author mosco
  */
-@WebServlet("/web/companysearch")
+@WebServlet("/web/company-search")
 public class CompanySearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -39,6 +40,11 @@ public class CompanySearchServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttSpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		//セッションからログインスタッフ情報を取得
+		HttpSession session = request.getSession(true);
+		Staff staff = (Staff) session.getAttribute("UserData");
+
 
 		String companyName = request.getParameter("companyname");
 		String staffId = request.getParameter("staffid");
@@ -69,6 +75,7 @@ public class CompanySearchServlet extends HttpServlet {
 		request.setAttribute("companylist", companyList);
 		request.setAttribute("messages", companyService.getMessages());
 		request.setAttribute("cse",cse);
+		request.setAttribute("Staff", staff);
 
 		// フォワード
 		request.getRequestDispatcher("/companysearch.jsp").forward(request, response);

@@ -44,7 +44,7 @@
 
 
 </style>
-<title>求職者詳細情報</title>
+<title>コメント情報</title>
 </head>
 
 <body>
@@ -52,7 +52,7 @@
 		<div id="container">
 			<!-- 必要なパラメータをhiddenで持たせる -->
 			<input type="hidden" name="commentid" value="<c:out value="${ comment.id }" />">
-			<h3>フリーコメント1</h3>
+			<h3>コメント情報</h3>
 			<ul>
 				<c:forEach var="message" items="${ messages }">
 					<li><c:out value="${ message }" /></li>
@@ -91,7 +91,7 @@
 							<!-- genreの値でselectedを分岐させる -->
 								<select name="genre">
 									<c:choose>
-										<c:when test="${ comment.genre == 1 }">
+										<c:when test="${ comment.genre == '1' }">
 											<option value="0">えらんでください</option>
 											<option value="1" selected>求職者</option>
 											<option value="2">企業</option>
@@ -99,7 +99,7 @@
 											<option value="4">マッチング</option>
 											<option value="9">その他</option>
 										</c:when>
-										<c:when test="${ comment.genre == 2 }">
+										<c:when test="${ comment.genre == '2' }">
 											<option value="0">えらんでください</option>
 											<option value="1">求職者</option>
 											<option value="2" selected>企業</option>
@@ -107,7 +107,7 @@
 											<option value="4">マッチング</option>
 											<option value="9">その他</option>
 										</c:when>
-										<c:when test="${ comment.genre == 3 }">
+										<c:when test="${ comment.genre == '3' }">
 											<option value="0">えらんでください</option>
 											<option value="1">求職者</option>
 											<option value="2">企業</option>
@@ -115,7 +115,7 @@
 											<option value="4">マッチング</option>
 											<option value="9">その他</option>
 										</c:when>
-										<c:when test="${ comment.genre == 4 }">
+										<c:when test="${ comment.genre == '4' }">
 											<option value="0">えらんでください</option>
 											<option value="1">求職者</option>
 											<option value="2">企業</option>
@@ -123,7 +123,7 @@
 											<option value="4" selected>マッチング</option>
 											<option value="9">その他</option>
 										</c:when>
-										<c:when test="${ comment.genre == 9 }">
+										<c:when test="${ comment.genre == '9' }">
 											<option value="0">えらんでください</option>
 											<option value="1">求職者</option>
 											<option value="2">企業</option>
@@ -133,7 +133,7 @@
 										</c:when>
 										<c:otherwise>
 											<option value="0">えらんでください</option>
-											<option value="1" selected>求職者</option>
+											<option value="1">求職者</option>
 											<option value="2">企業</option>
 											<option value="3">求人</option>
 											<option value="4">マッチング</option>

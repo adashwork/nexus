@@ -2,9 +2,12 @@ package jp.or.adash.nexus.services;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import jp.or.adash.nexus.dao.JobSearchDao;
+import jp.or.adash.nexus.entity.Company;
 import jp.or.adash.nexus.entity.SimpleKyujin;
 import jp.or.adash.nexus.utils.dao.Transaction;
 
@@ -55,10 +58,11 @@ public class JobSearchService {
 	 *
 	 * @return 求人リスト
 	 */
-	public List<SimpleKyujin> getKyujin(String job, String addresscd,String jobsmallcd1, String jobsmallcd2, String jobsmallcd3, String joblargecd1,
+	public List<SimpleKyujin> getKyujin(String job, String addresscd, String jobsmallcd1, String jobsmallcd2,
+			String jobsmallcd3, String joblargecd1,
 			String joblargecd2, String joblargecd3,
 			String jobcategorysmallcd, String jobcategorylargecd,
-			String koyoukeitaicd,int salarymin, int salarymax) {
+			String koyoukeitaicd, int salarymin, int salarymax) {
 		List<SimpleKyujin> kyujinlist = new ArrayList<SimpleKyujin>();
 
 		try {
@@ -68,12 +72,12 @@ public class JobSearchService {
 			// 1.求人票を取得する
 			JobSearchDao dao = new JobSearchDao(transaction);
 
-			kyujinlist = dao.selectKyujin(job, addresscd,jobsmallcd1, jobsmallcd2, jobsmallcd3,
-					joblargecd1,joblargecd2, joblargecd3,
-					jobcategorysmallcd,jobcategorylargecd,
-					koyoukeitaicd,salarymin, salarymax);
+			kyujinlist = dao.selectKyujin(job, addresscd, jobsmallcd1, jobsmallcd2, jobsmallcd3,
+					joblargecd1, joblargecd2, joblargecd3,
+					jobcategorysmallcd, jobcategorylargecd,
+					koyoukeitaicd, salarymin, salarymax);
 
-		} catch(IOException e) {
+		} catch (IOException e) {
 			// 1.エラーメッセージをセットする
 		} finally {
 			// 1.データベース接続をを終了する
@@ -81,5 +85,31 @@ public class JobSearchService {
 		}
 
 		return kyujinlist;
+	}
+
+	/**
+	 * 事業所番号をKeyとした企業情報のマップを返す
+	 * @param simpleKyujinList
+	 * @return 企業情報のマップ
+	 */
+	public Map<String, Company> getCompanyMap(List<SimpleKyujin> simpleKyujinList) {
+		Map<String, Company> companyMap = new HashMap<String, Company>();
+
+		for (SimpleKyujin simpleKyujin : simpleKyujinList) {
+			String companyNo = simpleKyujin.getCompanyno();
+
+			//事業所番号が空っぽならcontinue
+			if ("".equals(companyNo) || companyNo == null) {
+				continue;
+			}
+
+			//企業情報の取得
+			CompanyService companyService = new CompanyService();
+			Company company = companyService.getCompanyInfo(companyNo);
+			//マップに格納
+			companyMap.put(companyNo, company);
+		}
+
+		return companyMap;
 	}
 }

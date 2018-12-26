@@ -44,20 +44,6 @@ public class MatchingRegistServlet extends HttpServlet {
 		Comment comment = null;								// 追加 2018/12/14 T.Ikead
 		MatchingService service = new MatchingService();
 
-		//idが入力されていた場合、そのidのマッチング事例を表示する。
-		if(request.getParameter("id") != null && request.getParameter("id") != "") {
-			Integer id = Integer.parseInt(request.getParameter("id"));
-
-			matching = service.getMatching(id);
-			//処理結果メッセージをリクエストに格納する
-			request.setAttribute("Staff", staff);
-			request.setAttribute("matching", matching);
-			request.setAttribute("messages", service.getMessages());
-
-			//1.8 JSPにフォワード
-			request.getRequestDispatcher("/matchingregist.jsp")
-			.forward(request, response);
-		}
 		String companyNo = request.getParameter("companyNo");		// 追加・修正 2018/12/11.12 T.Ikeda
 		String kyujinNo = request.getParameter("kyujinno");
 		String jobSeekerId = request.getParameter("jobseekerid");
@@ -78,20 +64,23 @@ public class MatchingRegistServlet extends HttpServlet {
 		//		request.getParameter("enterdt");
 		String assessment = request.getParameter("assessment");
 		String note = request.getParameter("note");
+		String noteM = "";
 		Date createDt = null;
 		Date updateDt = null;
 
 		String createUserId = staff.getId();
 		String updateUserId = staff.getId();
 		Integer matchId = 0;									// 追加 2018/12/18 T.Ikeda
-		String genre = null;									// 追加 2018/12/17 T.Ikeda
-		String important = null;								// 追加 2018/12/17 T.Ikeda
-		String title = null;									// 追加 2018/12/17 T.Ikeda
+		String genre = "4";	 // 1:求職者情報　2:企業情報　3:求人情報　4:マッチング情報    追加,修正 2018/12/17,18 T.Ikeda
+		String important = request.getParameter("important");	// 追加,修正 2018/12/17,18 T.Ikeda
+		if (important == null) {
+			important = "0";
+		}
+		String title = request.getParameter("title");			// 追加,修正 2018/12/17,18 T.Ikeda
 
 		//1.2 マッチング結果オブジェクトを作成
-		matching = new MatchingCase(0, companyNo, kyujinNo, jobSeekerId, staffId, interviewDt, enterdt, assessment, note,
-				createDt,
-				createUserId, updateDt, updateUserId);    		// 追加・修正 2018/12/11.12 T.Ikeda
+		matching = new MatchingCase(0, companyNo, kyujinNo, jobSeekerId, staffId, interviewDt, enterdt, assessment,
+				noteM, createDt, createUserId, updateDt, updateUserId);    		// 追加・修正 2018/12/11.12 T.Ikeda
 		// マッチングコメントオブジェクトを作成                 // 追加 2018/12/14 T.Ikeda
 		comment = new Comment(0, companyNo, kyujinNo, jobSeekerId, staffId, matchId,
 				genre, important, title, note, createDt, createUserId,
@@ -101,6 +90,7 @@ public class MatchingRegistServlet extends HttpServlet {
 			//入力チェックでエラーがあった場合、エラーメッセージをセット
 			request.setAttribute("Staff", staff);
 			request.setAttribute("matching", matching);
+			request.setAttribute("comment", comment);
 			request.setAttribute("messages", service.getMessages());
 
 			//JSPにフォワード
@@ -115,6 +105,7 @@ public class MatchingRegistServlet extends HttpServlet {
 		//処理結果メッセージをリクエストに格納する
 		request.setAttribute("Staff", staff);
 		request.setAttribute("matching", matching);
+		request.setAttribute("comment", comment);
 		request.setAttribute("messages", service.getMessages());
 
 		//1.8 JSPにフォワード

@@ -15,6 +15,7 @@ import jp.or.adash.nexus.utils.dao.Transaction;
  * 求人データアクセスクラス
  * @author ???
  * @author pgjavaAT
+ * @author mmiyamoto
  *
  */
 public class JobSearchDao {
@@ -121,8 +122,9 @@ public class JobSearchDao {
 		StringBuilder sqlSearchJob = new StringBuilder();
 		sqlSearchJob.append("select no, companyno,addresscd, jobsmallcd1,jobsmallcd2,jobsmallcd3,");
 		sqlSearchJob.append("joblargecd1,joblargecd2,joblargecd3,");
-		sqlSearchJob.append("jobcategorysmallcd,jobcategorylargecd,");
-		sqlSearchJob.append("companyname,address,addresscd,nearstation,job,koyoukeitaicd, ");
+		//企業情報のため次の3項目を削除 jobcategorysmallcd,jobcategorylargecd,companyname,
+		//sqlSearchJob.append("jobcategorysmallcd,jobcategorylargecd, ");
+		sqlSearchJob.append("address,addresscd,nearstationkj,job,koyoukeitaicd, ");
 		sqlSearchJob.append("agemin,agemax,salarymin,salarymax,deleteflag ");
 		sqlSearchJob.append(" from kyujin");
 		sqlSearchJob.append(" where deleteflag like '0'");
@@ -182,9 +184,12 @@ public class JobSearchDao {
 									rs.getString("jobsmallcd3"),
 									rs.getString("joblargecd1"), rs.getString("joblargecd2"),
 									rs.getString("joblargecd3"),
-									rs.getString("jobcategorysmallcd"),rs.getString("jobcategorylargecd"),
-									rs.getString("companyname"), rs.getString("address"), rs.getString("addresscd"),
-									rs.getString("nearstation"), rs.getString("job"), rs.getString("koyoukeitaicd"),
+									//企業情報のため次の3項目を削除 jobcategorysmallcd,jobcategorylargecd,companyname,
+									//rs.getString("jobcategorysmallcd"),rs.getString("jobcategorylargecd"),
+									//rs.getString("companyname"),
+									null, null, null,
+									rs.getString("address"), rs.getString("addresscd"),
+									rs.getString("nearstationkj"), rs.getString("job"), rs.getString("koyoukeitaicd"),
 									rs.getInt("agemin"), rs.getInt("agemax"), rs.getInt("salarymin"),
 									rs.getInt("salarymax"), rs.getString("deleteflag")));
 				}

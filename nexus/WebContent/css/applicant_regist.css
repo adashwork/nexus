@@ -37,3 +37,35 @@ th {
 .main-b {
 	margin-bottom: 10px;
 }
+
+#wrap .comment-title{
+	width:50%;
+	height:20px;
+	margin-right: 40px;
+	border:1px solid #000;
+}
+
+
+#wrap textarea {
+	width:600px;
+	height:200px;
+	border:1px solid #000;
+	margin-top: 10px;
+}
+
+.box {
+	float: left;
+
+}
+
+.box p{
+	padding-right:240px;
+	border-bottom: 1px solid #000;
+}
+
+.up1,.up2,.up3 {
+	clear: both;
+	padding-top: 50px;
+}
+
+

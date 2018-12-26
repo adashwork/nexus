@@ -55,6 +55,7 @@ public class Comment {
 	 * @param updateDt
 	 * @param updateUserId
 	 */
+
 	public Comment(Integer id, String companyNo, String kyujinNo, String jobSeekerId, String staffId, Integer matchId,
 			String genre, String important, String title, String note, Date createDt, String createUserId,
 			Date updateDt, String updateUserId) {
@@ -83,6 +84,17 @@ public class Comment {
 	}
 
 	/**
+<<<<<<< HEAD
+	 * 備考IDに値をセットする
+	 * @param id
+	 */
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	/**
+=======
+>>>>>>> refs/remotes/origin/#196
 	 * 事業所番号を取得する
 	 * @return companyNo
 	 */

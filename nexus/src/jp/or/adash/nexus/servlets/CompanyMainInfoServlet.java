@@ -48,6 +48,12 @@ public class CompanyMainInfoServlet extends HttpServlet {
 		String companyNo = request.getParameter("companyno");
 		CompanyService companyService = new CompanyService();
 		Company company = companyService.getCompanyInfo(companyNo);
+		//存在しない企業番号なら新規登録ページリダイレクト
+		if(company == null) {
+			response.sendRedirect("/nexus/web/company-registdisp");
+			return;
+		}
+
 
 		// 1.業種分類リストを取得する
 		JobCategoryService JCLservice = new JobCategoryService();

@@ -27,6 +27,7 @@
 <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/Base/jquery-ui.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
 <script type="text/javascript" src="../js/common.js"></script>
+<script type="text/javascript" src="../js/matcing_idsearch.js"></script>
 </head>
 
 <body>
@@ -51,10 +52,6 @@
 		<form action="/nexus/web/matching-companyid-search" method="post">
 			<div class="m_div">
 				<p class="m_p">
-					企業名漢字<br/>
-					<input type="text" name="conpany_kanji" size=13  value="">
-				</p>
-				<p class="m_p">
 					企業名かな<br/>
 					<input type="text" name="conpany_kana" size=13  value="">
 				</p>
@@ -78,17 +75,16 @@
 			<th>企業名</th>
 			<th>担当紹介者</th>
 		</tr>
-		<c:forEach var="jobseeker" items="${ list }">
+		<c:forEach var="company" items="${ companylist }">
 			<tr>
 				<td>
-					<form action="/nexus/web/matching-companyid-search" method="post">		<!-- TODO: ■要変更 -->
-						<button class="mini_b mini_b_applilist" name="js_id"
-							value="<c:out value="${ jobseeker.id }" />">入力</button>
-					</form>
+					<input name="id_name_input" type="button" value="入力" onclick='clickFire()'/>
+					<input type="hidden" value="<c:out value="${ company.companyNo }" />" />
+					<input type="hidden" value="<c:out value="${ company.tantou }" />" />
 				</td>
-				<td><fmt:formatNumber value="${ jobseeker.id }" pattern="00000000"/></td>	<!-- TODO: ■要変更 -->
-				<td><c:out value="${ jobseeker.js_name }" /></td>
-				<td><c:out value="${ jobseeker.st_name }" /></td>
+				<td><c:out value="${ company.companyNo }" /></td>
+				<td><c:out value="${ company.companyName }" /></td>
+				<td><c:out value="${ company.tantou }" /></td>
 			</tr>
 		</c:forEach>
 	</table>

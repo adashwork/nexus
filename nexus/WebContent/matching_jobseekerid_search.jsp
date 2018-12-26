@@ -27,6 +27,7 @@
 <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/Base/jquery-ui.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
 <script type="text/javascript" src="../js/common.js"></script>
+<script type="text/javascript" src="../js/matcing_idsearch.js"></script>
 </head>
 
 <body>
@@ -81,13 +82,14 @@
 		<c:forEach var="jobseeker" items="${ list }">
 			<tr>
 				<td>
-					<form action="/nexus/web/matching-jobseekerid-search" method="post">
-						<button class="mini_b mini_b_applilist" name="js_id"
-							value="<c:out value="${ list.id }" />">入力</button>
-					</form>
+					<input name="id_name_input" type="button" value="入力" onclick='clickFire()'/>
+					<input type="hidden" value="<c:out value="${ list.js_id }" />" />
+					<input type="hidden" value="<c:out value="${ list.js_name }" />" />
 				</td>
-				<td><fmt:formatNumber value="${ list.js_id }" pattern="00000000"/></td>
-				<td><c:out value="${ list.js_name }" /></td>
+				<td>
+					<fmt:formatNumber value="${ list.js_id }" pattern="00000000"/>
+				</td>
+				<td ><c:out value="${ list.js_name }" /></td>
 				<td><c:out value="${ list.st_name }" /></td>
 			</tr>
 		</c:forEach>

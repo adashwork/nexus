@@ -218,7 +218,7 @@ public class CommentDao {
 
 
 	/**
-	 * 2018/12/20 kitayama 新規作成
+	 * 2018/12/20 kitayama 既存のメソッドに依存しているクラスへの影響を防ぐため新規作成
 	 * コメントを登録する
 	 * @param comment コメントオブジェクト
 	 * @return	count 登録行数
@@ -292,7 +292,7 @@ public class CommentDao {
 	}
 
 	/**
-	 * 2018/12/20 kitayama 新規作成
+	 * 2018/12/20 kitayama 既存のメソッドに依存しているクラスへの影響を防ぐため新規作成
 	 * コメントを更新する
 	 * @param comment コメントオブジェクト
 	 * @return count 更新した行数

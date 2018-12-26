@@ -38,6 +38,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
 <script type="text/javascript" src="../js/common.js"></script>
 <script type="text/javascript" src="../js/applicantregist_tab.js"></script>
+<script type="text/javascript" src="../js/comment.js"></script>
 
 <style>
 
@@ -143,7 +144,7 @@
 			<c:if test="${ empty comment.id }">
 				<input class="main-b" type="submit" id="comment-regist" onclick="MovePages(this)" value="登録">
 			</c:if>
-			<input class="main-b" type="submit" onclick="" value="戻る">
+			<input class="main-b" type="button" id="comment-search" onclick="CloseWindow()" value="戻る">
 
 		</form>
 

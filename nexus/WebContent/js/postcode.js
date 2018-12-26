@@ -5,11 +5,17 @@
 
 // 住所を検索する
 function searchAddress(){
-    // 入力チェック
-    if ($('#postal').val().length != 7) {
-        // 7桁でない場合、処理終了
-        return false;
+
+    //入力チェックおよび、値取得
+	var zipCode;
+	if($('#postal').val().length == 7){
+		zipCode = $('#postal').val();
+	} else if($('#postal').val().match(/[0-9]{3}-[0-9]{4}/)){
+        zipCode =  $('#postal').val().replace(/-/,'');
+    } else {
+       return false;
     }
+
 
     // YahooDevelopers郵便番号検索APIから住所取得
     $.ajax({
@@ -18,7 +24,7 @@ function searchAddress(){
         dataType: 'jsonp',                                              // データの種類
         data: {                                                                 // パラメータ
             appid: 'dj00aiZpPUhnOVlkSmJ4NmQwVSZzPWNvbnN1bWVyc2VjcmV0Jng9MGU-',  // アプリケーションID
-            query: $('#postal').val(),                                                         // 検索条件
+            query: zipCode,                                                         // 検索条件
             output: 'json',                                                     // データの種類
             callback: 'callback'                                                // コールバック関数名
         },

@@ -87,24 +87,78 @@
 							<th>タイトル表示</th>
 						</tr>
 						<tr>
-							<td><select name="genre">
-									<option value="0">えらんでください</option>
-									<option value="1">求職者</option>
-									<option value="2">企業</option>
-									<option value="3">求人</option>
-									<option value="4">マッチング</option>
-									<option value="9">その他</option>
-							</select></td>
+							<td>
+							<!-- genreの値でselectedを分岐させる -->
+								<select name="genre">
+									<c:choose>
+										<c:when test="${ comment.genre == 1 }">
+											<option value="0">えらんでください</option>
+											<option value="1" selected>求職者</option>
+											<option value="2">企業</option>
+											<option value="3">求人</option>
+											<option value="4">マッチング</option>
+											<option value="9">その他</option>
+										</c:when>
+										<c:when test="${ comment.genre == 2 }">
+											<option value="0">えらんでください</option>
+											<option value="1">求職者</option>
+											<option value="2" selected>企業</option>
+											<option value="3">求人</option>
+											<option value="4">マッチング</option>
+											<option value="9">その他</option>
+										</c:when>
+										<c:when test="${ comment.genre == 3 }">
+											<option value="0">えらんでください</option>
+											<option value="1">求職者</option>
+											<option value="2">企業</option>
+											<option value="3" selected>求人</option>
+											<option value="4">マッチング</option>
+											<option value="9">その他</option>
+										</c:when>
+										<c:when test="${ comment.genre == 4 }">
+											<option value="0">えらんでください</option>
+											<option value="1">求職者</option>
+											<option value="2">企業</option>
+											<option value="3">求人</option>
+											<option value="4" selected>マッチング</option>
+											<option value="9">その他</option>
+										</c:when>
+										<c:when test="${ comment.genre == 9 }">
+											<option value="0">えらんでください</option>
+											<option value="1">求職者</option>
+											<option value="2">企業</option>
+											<option value="3">求人</option>
+											<option value="4">マッチング</option>
+											<option value="9" selected>その他</option>
+										</c:when>
+										<c:otherwise>
+											<option value="0">えらんでください</option>
+											<option value="1" selected>求職者</option>
+											<option value="2">企業</option>
+											<option value="3">求人</option>
+											<option value="4">マッチング</option>
+											<option value="9">その他</option>
+										</c:otherwise>
+									</c:choose>
+								</select>
+							</td>
 							<td><input type="text" name="title"
 								value="<c:out value="${ comment.title }" />"></td>
 							<td>
-								<input type="checkbox" name="important" value="1">重要
+								<c:choose>
+									<c:when test="${ comment.important == 1 }">
+										<input type="checkbox" name="important" value="1" chekced>重要
+									</c:when>
+									<c:otherwise>
+										<input type="checkbox" name="important" value="1">重要
+									</c:otherwise>
+								</c:choose>
 							</td>
 						</tr>
 					</tbody>
 					<tfoot>
 						<tr>
-							<th>カテゴリー表示</th>
+							<th>内容</th>
 						</tr>
 						<tr>
 							<td>

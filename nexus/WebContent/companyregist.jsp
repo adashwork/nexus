@@ -259,9 +259,12 @@
 
 	</div>
 
+
 	<c:if test="${ status != 'regist' }">
-	<%@ include file="/commentsearch_frame.jsp"%> </main>
+	<%@ include file="/commentsearch_frame.jsp"%>
 	</c:if>
+	</main>
+
 	<!-- フッター　-->
 	<footer>
 		<small>Copyright(C) 2009有限責任事業組合 大阪職業教育協働機構(A'ワーク創造館) All

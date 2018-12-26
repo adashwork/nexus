@@ -78,7 +78,7 @@
 						<td><input type="text" name="kyujinno"
 							value="<c:out value="${ comment.kyujinNo }" />"></td>
 						<td><input type="text" name="matchid"
-							value="<c:out value="${ comment.matchId }" />"></td>
+							value="<c:if test="${ comment.matchId >=0 }"><c:out value="${ comment.matchId }" /></c:if>"></td>
 					</tr>
 					</thead>
 					<tbody>

@@ -1,5 +1,5 @@
 function disp(url){
-   window.open(url,'','width=750,height=*,resizeable=yes,scrollbars=yes');
+   window.open(url,'','width=750, ,resizeable=yes,scrollbars=yes');
 }
 
 // '/nexus/web/matching-jobseekerid-search'

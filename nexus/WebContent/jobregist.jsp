@@ -200,7 +200,7 @@
 				</tr>
 				<tr>
 					<th>就業場所郵便番号</th>
-					<td><input type="text" name="postal"
+					<td><input type="text" name="postal" id="postal"
 						value="<c:out value="${ kyujin.postal }" />" size="10"
 						maxlength="8" tabindex="21"></td>
 				</tr>
@@ -218,7 +218,7 @@
 				</tr>
 				<tr>
 					<th>就業場所住所 [必須]</th>
-					<td><input type="text" name="address"
+					<td><input type="text" name="address" id="address"
 						value="<c:out value="${ kyujin.address }" />" size="40"
 						maxlength="90" tabindex="23"></td>
 				</tr>
@@ -570,5 +570,6 @@
  				<script src="../js/jobcd.js" type="text/javascript"
 		charset="utf-8"></script>
 --%>
+<script src="../js/postcode.js" type="text/javascript" charset="utf-8"></script>
 </body>
 </html>

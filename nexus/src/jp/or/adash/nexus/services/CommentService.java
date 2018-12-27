@@ -73,8 +73,9 @@ public class CommentService {
 
 	/**
 	 * コメントの登録
-	 * @param Comment
-	 * @return true:成功時  false:失敗時
+	 * @param Comment コメントオブジェクト
+	 * @return 登録に成功した時：登録したコメントオブジェクトを、
+	 * 登録に失敗した時：備考IDにnullを格納したコメントオブジェクトを返す
 	 */
 	public Comment insertComment(Comment comment) {
 		// TODO ここでIDを入れなおす

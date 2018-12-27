@@ -53,6 +53,7 @@ public class MatchingRegistDisplayServlet extends HttpServlet {
 			//処理結果メッセージをリクエストに格納する
 			request.setAttribute("matching", matching);
 			request.setAttribute("comment", comment);
+			request.setAttribute("Staff", staff);
 		}
 
 		// JSPにフォワードする

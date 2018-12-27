@@ -83,8 +83,8 @@
 					</thead>
 					<tbody>
 						<tr>
-							<th>カテゴリー表示</th>
-							<th>タイトル表示</th>
+							<th>カテゴリー</th>
+							<th>タイトル</th>
 						</tr>
 						<tr>
 							<td>
@@ -145,16 +145,7 @@
 							</td>
 							<td><input type="text" name="title"
 								value="<c:out value="${ comment.title }" />"></td>
-							<td>
-								<c:choose>
-									<c:when test="${ comment.important == '1' }">
-										<input type="checkbox" name="important" value="1" checked>重要
-									</c:when>
-									<c:otherwise>
-										<input type="checkbox" name="important" value="1">重要
-									</c:otherwise>
-								</c:choose>
-							</td>
+
 						</tr>
 					</tbody>
 					<tfoot>
@@ -164,6 +155,16 @@
 						<tr>
 							<td>
 								<textarea rows="3" cols="40" name="note"><c:out value="${ comment.note }" /></textarea>
+							</td>
+							<td>
+								<c:choose>
+									<c:when test="${ comment.important == '1' }">
+										<input type="checkbox" name="important" value="1" checked>重要
+									</c:when>
+									<c:otherwise>
+										<input type="checkbox" name="important" value="1">重要
+									</c:otherwise>
+								</c:choose>
 							</td>
 						</tr>
 					</tfoot>
@@ -194,13 +195,17 @@
 
 			<!-- ボタン -->
 			<c:if test="${ !empty comment.id }">
+			<input class="main-b" type="button" id="comment-search" onclick="CloseWindow()" value="戻る">
+			<input class="main-b" type="submit" id="comment-delete"onclick="MovePages(this)" value="削除">
 				<input class="main-b"type="submit" id="comment-update" onclick="MovePages(this)"value="更新">
-				<input class="main-b" type="submit" id="comment-delete"onclick="MovePages(this)" value="削除">
+
+
 			</c:if>
 			<c:if test="${ empty comment.id }">
+							<input class="main-b" type="button" id="comment-search" onclick="CloseWindow()" value="戻る">
 				<input class="main-b" type="submit" id="comment-regist" onclick="MovePages(this)" value="登録">
+
 			</c:if>
-			<input class="main-b" type="button" id="comment-search" onclick="CloseWindow()" value="戻る">
 
 		</form>
 

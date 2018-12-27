@@ -344,7 +344,7 @@ public class KyujinService {
 			messages.add("基本給に" + msg);
 			result = false;
 		}
-		msg = DataCommons.chkiDigits(kyujin.getSalarymin(), 7);
+		msg = DataCommons.chkiDigits(kyujin.getSalarymin(), 8);
 		if (msg != null) {
 			messages.add("基本給が" + msg);
 			result = false;
@@ -354,7 +354,7 @@ public class KyujinService {
 			messages.add("基本給に" + msg);
 			result = false;
 		}
-		msg = DataCommons.chkiDigits(kyujin.getSalarymax(), 7);
+		msg = DataCommons.chkiDigits(kyujin.getSalarymax(), 8);
 		if (msg != null) {
 			messages.add("基本給が" + msg);
 			result = false;

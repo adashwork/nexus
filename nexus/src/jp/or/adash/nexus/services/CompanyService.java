@@ -172,8 +172,8 @@ public class CompanyService {
 
 		//担当者名(かな)
 
-		if (!company.getTantouKana().matches("^[ぁ-ん]{0,28}$")) {
-			messages.add("担当者名(かな)は全角ひらがな28文字以内で入力してください");
+		if (!company.getTantouKana().matches("^[ぁ-ん, ,　]{0,28}$")) {
+			messages.add("担当者名(かな)はひらがな28文字以内で入力してください");
 			checkResult = false;
 		}
 		//担当者TEL

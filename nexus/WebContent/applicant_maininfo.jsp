@@ -100,7 +100,7 @@
 			</div>
 		</section>
 	</header>
-	<main>
+<main>
 	<h2>求職者詳細情報</h2>
 	<ul>
 		<c:forEach var="message" items="${ messages }">
@@ -125,6 +125,7 @@
 				<td><input type="hidden" name="id"
 						value="<c:out value="${ info.id }" />">
 				<fmt:formatNumber value="${ info.id }" pattern="00000000"/></td>
+
 				</tr>
 				<tr>
 					<th>求職者氏名</th>

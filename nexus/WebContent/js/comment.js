@@ -4,7 +4,7 @@
  */
 function WindowOpen(commentid){
 
-	   var subw = 980;   // サブウインドウの横幅
+	   var subw = 1020;   // サブウインドウの横幅
 	   var subh = 650;   // サブウインドウの高さ
 	   var subp = "/nexus/web/comment-disp";   // 表示するページ(URL)
 	   var subn = "commentregist";   // サブウインドウの名称

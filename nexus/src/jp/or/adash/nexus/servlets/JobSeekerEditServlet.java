@@ -48,6 +48,7 @@ public class JobSeekerEditServlet extends HttpServlet {
 		String id = request.getParameter("id");
 		String name = request.getParameter("name");
 		String kana = request.getParameter("kana");
+		//Date  birthdt= request.getParameter("birthdt");
 		Date birthdt = null;
 		try {
 			birthdt = sdf.parse(request.getParameter("birthdt"));
@@ -60,8 +61,8 @@ public class JobSeekerEditServlet extends HttpServlet {
 				&& request.getParameter("age") != null) {
 			age = Integer.parseInt(request.getParameter("age"));
 		}*/
-		String postal = request.getParameter("postal");
-		String address = request.getParameter("addr21");
+		String zip21 = request.getParameter("zip21");
+		String addr21 = request.getParameter("addr21");
 		String seekermail = request.getParameter("seekermail");
 		String nearstation = request.getParameter("nearstation");
 		String phone = request.getParameter("phone");
@@ -115,18 +116,19 @@ public class JobSeekerEditServlet extends HttpServlet {
 		String caution = request.getParameter("caution");
 		//String tantoustaffname = request.getParameter("tantoustaffname");
 		String tantoustaffid = request.getParameter("tantoustaffid");
-		String password = request.getParameter("password");
+		//String password = request.getParameter("password");
+		String password = null;
 		String note = request.getParameter("note");
 		Date createdt = null;
 		String createuserid = request.getParameter("createuserid");
-
 		Date updatedt = null;
 		String updateuserid = request.getParameter("updateuerid");
-		String deleteflag = request.getParameter("deleteflag");
+		//String deleteflag = request.getParameter("deleteflag");
+		String deleteflag = null;
 
 		//求人情報のオブジェクトを作成
-		JobSeekerMain seeker = new JobSeekerMain(id, name, kana, sex, birthdt, postal,
-				address, seekermail, nearstation, phone, mobile, partner, huyou,
+		JobSeekerMain seeker = new JobSeekerMain(id, name, kana, sex, birthdt, zip21,
+				addr21, seekermail, nearstation, phone, mobile, partner, huyou,
 				education, career, HOPEJOB1, HOPEJOB2, HOPEJOB3, HOPEJOBCATEGORY, HOPEJOBCATEGORY2, HOPEJOBCATEGORY3,
 				hopeworkplace, hopekoyoukeitai, hopeweekday, hopeworkingdate, hopebegintime, hopeendtime,
 				hopesalary, hopejikyu, hopeetc, driverlicense, licenseetc, pasokonskill,

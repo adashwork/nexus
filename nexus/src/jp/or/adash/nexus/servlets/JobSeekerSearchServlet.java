@@ -17,7 +17,8 @@ import jp.or.adash.nexus.services.JobSeekerService;
 
 /**
  * Servlet implementation class JobSeekerSearchServlet
- * @author aihara
+ * @author aihara tanaka
+ * 追記　入力した検索条件が検索後も残るように修正
  * @author pgjavaAT
  */
 @WebServlet("/web/jobseeker-list")

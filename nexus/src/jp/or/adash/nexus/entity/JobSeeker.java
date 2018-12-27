@@ -15,8 +15,8 @@ public class JobSeeker {
 	* birthdt 生年月日
 	* sex 性別
 	//* age 年齢
-	* postal 自宅郵便番号
-	* address 自宅住所
+	* zip21 自宅郵便番号
+	* addr21 自宅住所
 	* seekermail メールアドレス
 	* nearstation 最寄り駅
 	* phone 自宅TEL
@@ -58,8 +58,8 @@ public class JobSeeker {
 	private Date birthdt;
 	private String sex;
 //	private Integer age;
-	private String postal;
-	private String address;
+	private String zip21;
+	private String addr21;
 	private String seekermail; //最新更新箇所
 	private String nearstation;
 	private String phone;
@@ -97,8 +97,8 @@ public class JobSeeker {
 	private String updateuserid;//最新更新箇所
 	private String deleteflag;
 
-	public JobSeeker(String id, String name, String kana, Date birthdt, String sex,  String postal,
-			String address, String seekermail,String nearstation, String phone, String mobile, String partner, Integer huyou,
+	public JobSeeker(String id, String name, String kana, Date birthdt, String sex,  String zip21,
+			String addr21, String seekermail,String nearstation, String phone, String mobile, String partner, Integer huyou,
 			String education,String career, String HOPEJOB1, String HOPEJOB2, String HOPEJOB3, String HOPEJOBCATEGORY, String HOPEJOBCATEGORY2, String HOPEJOBCATEGORY3,
 			String hopeworkplace, String hopekoyoukeitai, String hopeweekday, Integer hopeworkingdate, Integer hopebegintime, Integer hopeendtime,
 			Integer hopesalary, Integer hopejikyu, String hopeetc, String driverlicense, String licenseetc, String pasokonskill,
@@ -111,8 +111,8 @@ public class JobSeeker {
 		this.birthdt = birthdt;
 		this.sex = sex;
 //		this.age = age;
-		this.postal = postal;
-		this.address = address;
+		this.zip21 = zip21;
+		this.addr21 = addr21;
 		this.seekermail = seekermail;
 		this.nearstation = nearstation;
 		this.phone = phone;
@@ -203,16 +203,16 @@ public class JobSeeker {
 	 * 自宅郵便番号を返す
 	 * @return postal
 	 */
-	public String getPostal() {
-		return postal;
+	public String getzip21() {
+		return zip21;
 	}
 
 	/**
 	 * 自宅住所を返す
 	 * @return address
 	 */
-	public String getAddress() {
-		return address;
+	public String getAddr21() {
+		return addr21;
 	}
 
 	/**
@@ -264,7 +264,7 @@ public class JobSeeker {
 	}
 
 	/**
-	 * 学歴を返す
+	 * 最終学歴を返す
 	 * @return education
 	 */
 	public String getEducation() {

@@ -182,15 +182,13 @@ public class JobSeekerService {
 	 * @author Y.Okamura & T.Uchi
 	 */
 	public boolean check(JobSeeker seeker) {
-		//テストとして強制的にエラーを出力
-		if(true) {
-			messages.add("強制的にデータチェックエラーを発生させています");
-			return  false;
-		}
 
 
 
 
+
+
+		@SuppressWarnings("unused")
 		boolean result = true; // チェック結果
 
 		// 求職者IDの値が入力されているか

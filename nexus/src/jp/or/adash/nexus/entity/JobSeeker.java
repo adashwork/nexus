@@ -264,7 +264,7 @@ public class JobSeeker {
 	}
 
 	/**
-	 * 学歴を返す
+	 * 最終学歴を返す
 	 * @return education
 	 */
 	public String getEducation() {

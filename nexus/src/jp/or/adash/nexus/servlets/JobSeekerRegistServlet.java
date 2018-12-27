@@ -45,10 +45,16 @@ public class JobSeekerRegistServlet extends HttpServlet {
 		HttpSession session = request.getSession(true);
 		Staff staff = (Staff) session.getAttribute("UserData");
 
+/*		//エラーが発生すればfalseにする
+		boolean parameterGetError = true;
+		//後でエラーメッセージにaddAllする
+		List<String> parameterErrorMessage = new ArrayList<>();*/
+
 		CommonsService service = new CommonsService();
 		//入力された情報を登録する
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
+		//フォームパラメーターの取得
 		String id = request.getParameter("id");
 		String name = request.getParameter("name");
 		String kana = request.getParameter("kana");
@@ -65,8 +71,8 @@ public class JobSeekerRegistServlet extends HttpServlet {
 			age = Integer.parseInt(request.getParameter("age"));
 		}*/
 //		int age = Integer.parseInt(request.getParameter("age"));
-		String postal = request.getParameter("zip21");
-		String address = request.getParameter("addr21");
+		String zip21 = request.getParameter("zip21");
+		String addr21 = request.getParameter("addr21");
 		String seekermail = request.getParameter("seekermail");
 		String nearstation = request.getParameter("nearstation");
 		String phone = request.getParameter("phone");
@@ -125,20 +131,20 @@ public class JobSeekerRegistServlet extends HttpServlet {
 		String pasokonskill = request.getParameter("pasokonskill");
 		String caution = request.getParameter("caution");
 		String tantoustaffid = request.getParameter("tantoustaffid");
-		String password = request.getParameter("password");
+		String password = null;
 		String note = request.getParameter("note");
 		Date createdt = null;
 		String createuserid = staff.getId();
 		Date updatedt = null;
 		String updateuserid = staff.getId();
-		String deleteflag = request.getParameter("deleteflag");
+		String deleteflag = "0";
 
 		// 担当職業紹介者IDから担当職業紹介者の名前を取得する
 		//String tantoustaffname = cservice.checkStaffName(tantoustaffid);
 
 		//求人情報のオブジェクトを作成
-		JobSeeker seeker = new JobSeeker(id, name, kana, birthdt, sex, postal,
-				address, seekermail, nearstation, phone, mobile, partner, huyou,
+		JobSeeker seeker = new JobSeeker(id, name, kana, birthdt, sex, zip21,
+				addr21, seekermail, nearstation, phone, mobile, partner, huyou,
 				education, career, HOPEJOB1, HOPEJOB2, HOPEJOB3, HOPEJOBCATEGORY, HOPEJOBCATEGORY2, HOPEJOBCATEGORY3,
 				hopeworkplace, hopekoyoukeitai, hopeweekday, hopeworkingdate, hopebegintime, hopeendtime,
 				hopesalary, hopejikyu, hopeetc, driverlicense, licenseetc, pasokonskill,
@@ -150,7 +156,7 @@ public class JobSeekerRegistServlet extends HttpServlet {
 		JobSeekerService jobseekerService = new JobSeekerService();
 			if(!jobseekerService.check(seeker)) {
 				//入力チェックでエラーがあった場合、エラーメッセージをセット
-				request.setAttribute("seeker", seeker);
+				request.setAttribute("info", seeker);
 				request.setAttribute("messages", jobseekerService.getMessages());
 
 				//JSPにフォワード
@@ -167,7 +173,9 @@ public class JobSeekerRegistServlet extends HttpServlet {
 
 			request.setAttribute("Staff", staff);
 			request.setAttribute("info", seeker);
-			request.setAttribute("messages", jobseekerService.getMessages());
+			//request.setAttribute("messages", jobseekerService.getMessages());
+			//parameterErrorMessage.addAll(jobseekerService.getMessages());
+			//request.setAttribute("messages", parameterErrorMessage);
 
 			// JSPにフォワード
 			request.getRequestDispatcher("/applicant_maininfo.jsp")

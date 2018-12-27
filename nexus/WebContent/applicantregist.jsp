@@ -130,23 +130,23 @@
 					</tr>
 					<tr>
 						<th>求職者氏名</th>
-						<td><input type="text" name="name" value="${ info.name }" /></td>
+						<td><input type="text" name="name" value="${ info.Name }" /></td>
 					</tr>
 					<tr>
 						<th>氏名(かな)</th>
-						<td><input type="text" name="kana" value="${ info.kana }" /></td>
+						<td><input type="text" name="kana" value="${ info.Kana }" /></td>
 					</tr>
 					<tr>
 						<th>生年月日</th>
 						<td><input type="text" class="datepicker" name="birthdt"
-							value="<fmt:formatDate value="${ info.birthdt }" pattern="yyyy-MM-dd"/>"></td>
+							value="<fmt:formatDate value="${ info.Birthdt }" pattern="yyyy-MM-dd"/>"></td>
 					</tr>
 					<tr>
 						<th>性別</th>
 						<td><input type="radio" name="sex" value="1"
-							<c:if test="${ info.sex == 1 }">checked</c:if> />男 <input
+							<c:if test="${ info.Sex == 1 }">checked</c:if> />男 <input
 							type="radio" name="sex" value="2"
-							<c:if test="${ info.sex == 2 }">checked</c:if> />女</td>
+							<c:if test="${ info.Sex == 2 }">checked</c:if> />女</td>
 					</tr>
 					<tr>
 						<th>郵便番号</th>
@@ -159,159 +159,160 @@
 					<tr>
 						<th>住所</th>
 						<td><input type="text" name="addr21" class="form_text"
-							value="${ info.address }" size="50"></td>
+							value="${ info.Addr21 }" size="50"></td>
 					</tr>
 					<tr>
 						<th>メールアドレス</th>
 						<td><input type="text" name="seekermail"
-							value="${ info.seekermail }" /></td>
+							value="${ info.Seekermail }" /></td>
 					</tr>
 					<tr>
 						<th>最寄り駅</th>
 						<td><input type="text" name="nearstation"
-							value="${ info.nearstation }" size="10" />駅</td>
+							value="${ info.Nearstation }" size="10" />駅</td>
 					</tr>
 					<tr>
 						<th>自宅電話番号</th>
-						<td><input type="text" name="phone" value="${ info.phone }" /></td>
+						<td><input type="text" name="phone" value="${ info.Phone }" /></td>
 					</tr>
 					<tr>
 						<th>携帯電話番号</th>
-						<td><input type="text" name="mobile" value="${ info.mobile }" /></td>
+						<td><input type="text" name="mobile" value="${ info.Mobile }" /></td>
 					</tr>
 					<tr>
 						<th>配偶者</th>
 						<td><input type="radio" name="partner" value="0"
-							<c:if test="${ info.partner == 0 }"> checked </c:if> /> 無 <input
+							<c:if test="${ info.Partner == 0 }"> checked </c:if> /> 無 <input
 							type="radio" name="partner" value="1"
-							<c:if test="${ info.partner == 1 }"> checked </c:if> /> 有</td>
+							<c:if test="${ info.Partner == 1 }"> checked </c:if> /> 有</td>
 					</tr>
 					<tr>
 						<th>扶養家族人数</th>
 						<td><select name="huyou">
 								<option value="">-</option>
 								<option value="0"
-									<c:if test="${ info.huyou == 0 }">selected</c:if>>0</option>
+									<c:if test="${ info.Huyou == 0 }">selected</c:if>>0</option>
 								<option value="1"
-									<c:if test="${ info.huyou == 1 }">selected</c:if>>1</option>
+									<c:if test="${ info.Huyou == 1 }">selected</c:if>>1</option>
 								<option value="2"
-									<c:if test="${ info.huyou == 2 }">selected</c:if>>2</option>
+									<c:if test="${ info.Huyou == 2 }">selected</c:if>>2</option>
 								<option value="3"
-									<c:if test="${ info.huyou == 3 }">selected</c:if>>3</option>
+									<c:if test="${ info.Huyou == 3 }">selected</c:if>>3</option>
 								<option value="4"
-									<c:if test="${ info.huyou == 4 }">selected</c:if>>4</option>
+									<c:if test="${ info.Huyou == 4 }">selected</c:if>>4</option>
 								<option value="5"
-									<c:if test="${ info.huyou == 5 }">selected</c:if>>5</option>
+									<c:if test="${ info.Huyou == 5 }">selected</c:if>>5</option>
 								<option value="6"
-									<c:if test="${ info.huyou == 6 }">selected</c:if>>6</option>
+									<c:if test="${ info.Huyou == 6 }">selected</c:if>>6</option>
 								<option value="7"
-									<c:if test="${ info.huyou == 7 }">selected</c:if>>7</option>
+									<c:if test="${ info.Huyou == 7 }">selected</c:if>>7</option>
 								<option value="8"
-									<c:if test="${ info.huyou == 8 }">selected</c:if>>8</option>
+									<c:if test="${ info.Huyou == 8 }">selected</c:if>>8</option>
 								<option value="9"
-									<c:if test="${ info.huyou == 9 }">selected</c:if>>9</option>
+									<c:if test="${ info.Huyou == 9 }">selected</c:if>>9</option>
 								<option value="10"
-									<c:if test="${ info.huyou == 10 }">selected</c:if>>10</option>
+									<c:if test="${ info.Huyou == 10 }">selected</c:if>>10</option>
 								<option value="11"
-									<c:if test="${ info.huyou == 11 }">selected</c:if>>11</option>
+									<c:if test="${ info.Huyou == 11 }">selected</c:if>>11</option>
 								<option value="12"
-									<c:if test="${ info.huyou == 12 }">selected</c:if>>12</option>
+									<c:if test="${ info.Huyou == 12 }">selected</c:if>>12</option>
 								<option value="13"
-									<c:if test="${ info.huyou == 13 }">selected</c:if>>13</option>
+									<c:if test="${ info.Huyou == 13 }">selected</c:if>>13</option>
 								<option value="14"
-									<c:if test="${ info.huyou == 14 }">selected</c:if>>14</option>
+									<c:if test="${ info.Huyou == 14 }">selected</c:if>>14</option>
 								<option value="15"
-									<c:if test="${ info.huyou == 15 }">selected</c:if>>15</option>
+									<c:if test="${ info.Huyou == 15 }">selected</c:if>>15</option>
 								<option value="16"
-									<c:if test="${ info.huyou == 16 }">selected</c:if>>16</option>
+									<c:if test="${ info.Huyou == 16 }">selected</c:if>>16</option>
 								<option value="17"
-									<c:if test="${ info.huyou == 17 }">selected</c:if>>17</option>
+									<c:if test="${ info.Huyou == 17 }">selected</c:if>>17</option>
 								<option value="18"
-									<c:if test="${ info.huyou == 18 }">selected</c:if>>18</option>
+									<c:if test="${ info.Huyou == 18 }">selected</c:if>>18</option>
 								<option value="19"
-									<c:if test="${ info.huyou == 19 }">selected</c:if>>19</option>
+									<c:if test="${ info.Huyou == 19 }">selected</c:if>>19</option>
 								<option value="20"
-									<c:if test="${ info.huyou == 20 }">selected</c:if>>20</option>
+									<c:if test="${ info.Huyou == 20 }">selected</c:if>>20</option>
 								<option value="21"
-									<c:if test="${ info.huyou == 21 }">selected</c:if>>21</option>
+									<c:if test="${ info.Huyou == 21 }">selected</c:if>>21</option>
 								<option value="22"
-									<c:if test="${ info.huyou == 22 }">selected</c:if>>22</option>
+									<c:if test="${ info.Huyou == 22 }">selected</c:if>>22</option>
 								<option value="23"
-									<c:if test="${ info.huyou == 23 }">selected</c:if>>23</option>
+									<c:if test="${ info.Huyou == 23 }">selected</c:if>>23</option>
 								<option value="24"
-									<c:if test="${ info.huyou == 24 }">selected</c:if>>24</option>
+									<c:if test="${ info.Huyou == 24 }">selected</c:if>>24</option>
 								<option value="25"
-									<c:if test="${ info.huyou == 25 }">selected</c:if>>25</option>
+									<c:if test="${ info.Huyou == 25 }">selected</c:if>>25</option>
 								<option value="26"
-									<c:if test="${ info.huyou == 26 }">selected</c:if>>26</option>
+									<c:if test="${ info.Huyou == 26 }">selected</c:if>>26</option>
 								<option value="27"
-									<c:if test="${ info.huyou == 27 }">selected</c:if>>27</option>
+									<c:if test="${ info.Huyou == 27 }">selected</c:if>>27</option>
 								<option value="28"
-									<c:if test="${ info.huyou == 28 }">selected</c:if>>28</option>
+									<c:if test="${ info.Huyou == 28 }">selected</c:if>>28</option>
 								<option value="29"
-									<c:if test="${ info.huyou == 29 }">selected</c:if>>29</option>
+									<c:if test="${ info.Huyou == 29 }">selected</c:if>>29</option>
 								<option value="30"
-									<c:if test="${ info.huyou == 30 }">selected</c:if>>30</option>
+									<c:if test="${ info.Huyou == 30 }">selected</c:if>>30</option>
 								<option value="31"
-									<c:if test="${ info.huyou == 31 }">selected</c:if>>31</option>
+									<c:if test="${ info.Huyou == 31 }">selected</c:if>>31</option>
 								<option value="32"
-									<c:if test="${ info.huyou == 32 }">selected</c:if>>32</option>
+									<c:if test="${ info.Huyou == 32 }">selected</c:if>>32</option>
 								<option value="33"
-									<c:if test="${ info.huyou == 33 }">selected</c:if>>33</option>
+									<c:if test="${ info.Huyou == 33 }">selected</c:if>>33</option>
 								<option value="34"
-									<c:if test="${ info.huyou == 34 }">selected</c:if>>34</option>
+									<c:if test="${ info.Huyou == 34 }">selected</c:if>>34</option>
 								<option value="35"
-									<c:if test="${ info.huyou == 35 }">selected</c:if>>35</option>
+									<c:if test="${ info.Huyou == 35 }">selected</c:if>>35</option>
 								<option value="36"
-									<c:if test="${ info.huyou == 36 }">selected</c:if>>36</option>
+									<c:if test="${ info.Huyou == 36 }">selected</c:if>>36</option>
 								<option value="37"
-									<c:if test="${ info.huyou == 37 }">selected</c:if>>37</option>
+									<c:if test="${ info.Huyou == 37 }">selected</c:if>>37</option>
 								<option value="38"
-									<c:if test="${ info.huyou == 38 }">selected</c:if>>38</option>
+									<c:if test="${ info.Huyou == 38 }">selected</c:if>>38</option>
 								<option value="39"
-									<c:if test="${ info.huyou == 39 }">selected</c:if>>39</option>
+									<c:if test="${ info.Huyou == 39 }">selected</c:if>>39</option>
 								<option value="40"
-									<c:if test="${ info.huyou == 40 }">selected</c:if>>40</option>
+									<c:if test="${ info.Huyou == 40 }">selected</c:if>>40</option>
 								<option value="41"
-									<c:if test="${ info.huyou == 41 }">selected</c:if>>41</option>
+									<c:if test="${ info.Huyou == 41 }">selected</c:if>>41</option>
 								<option value="42"
-									<c:if test="${ info.huyou == 42 }">selected</c:if>>42</option>
+									<c:if test="${ info.Huyou == 42 }">selected</c:if>>42</option>
 								<option value="43"
-									<c:if test="${ info.huyou == 43 }">selected</c:if>>43</option>
+									<c:if test="${ info.Huyou == 43 }">selected</c:if>>43</option>
 								<option value="44"
-									<c:if test="${ info.huyou == 44 }">selected</c:if>>44</option>
+									<c:if test="${ info.Huyou == 44 }">selected</c:if>>44</option>
 								<option value="45"
-									<c:if test="${ info.huyou == 45 }">selected</c:if>>45</option>
+									<c:if test="${ info.Huyou == 45 }">selected</c:if>>45</option>
 								<option value="46"
-									<c:if test="${ info.huyou == 46 }">selected</c:if>>46</option>
+									<c:if test="${ info.Huyou == 46 }">selected</c:if>>46</option>
 								<option value="47"
-									<c:if test="${ info.huyou == 47 }">selected</c:if>>47</option>
+									<c:if test="${ info.Huyou == 47 }">selected</c:if>>47</option>
 								<option value="48"
-									<c:if test="${ info.huyou == 48 }">selected</c:if>>48</option>
+									<c:if test="${ info.Huyou == 48 }">selected</c:if>>48</option>
 								<option value="49"
-									<c:if test="${ info.huyou == 49 }">selected</c:if>>49</option>
+									<c:if test="${ info.Huyou == 49 }">selected</c:if>>49</option>
 						</select>人</td>
 					</tr>
 					<tr>
 						<th>最終学歴</th>
 
 						<td><input type="radio" name="education" value="1"
-							<c:if test="${ info.education == 1 }">checked</c:if> />中学 <input
+							<c:if test="${ info.Education == 1 }">checked</c:if> />中学 <input
 							type="radio" name="education" value="2"
-							<c:if test="${ info.education == 2 }">checked</c:if> />高校 <input
+							<c:if test="${ info.Education == 2 }">checked</c:if> />高校 <input
 							type="radio" name="education" value="3"
-							<c:if test="${ info.education == 3 }">checked</c:if> />短大 <input
+							<c:if test="${ info.Education == 3 }">checked</c:if> />短大 <input
 							type="radio" name="education" value="4"
-							<c:if test="${ info.education == 4 }">checked</c:if> />大学 <input
+							<c:if test="${ info.Education == 4 }">checked</c:if> />大学 <input
 							type="radio" name="education" value="5"
-							<c:if test="${ info.education == 5 }">checked</c:if> />専門学校</td>
+							<c:if test="${ info.Education == 5 }">checked</c:if> />専門学校</td>
 					</tr>
 					<tr>
 						<th>職歴・経歴</th>
-						<td><textarea rows="20" cols="80" name="career"><c:out
-									value="${ info.career }" /></textarea></td>
+						<td><textarea rows="20" cols="80" name="career" ><c:out
+									value="${ info.Career }" /></textarea></td>
 					</tr>
 				</table>
+
 				<table id="tab2" class="page">
 					<tr>
 						<th>希望職種1</th>
@@ -319,7 +320,7 @@
 								<option value=""></option>
 								<c:forEach var="job" items="${ Largelist }">
 									<option value="${ job.largecd }" ${ job.name }
-										<c:if test="${job.largecd == info.hopejob1 }">selected</c:if>>${ job.name }
+										<c:if test="${job.largecd == info.HOPEJOB1 }">selected</c:if>>${ job.name }
 									</option>
 								</c:forEach>
 						</select></td>
@@ -330,7 +331,7 @@
 								<option value=""></option>
 								<c:forEach var="job" items="${ Largelist }">
 									<option value="${ job.largecd }" ${ job.name }
-										<c:if test="${job.largecd == info.hopejob2 }">selected</c:if>>${ job.name }
+										<c:if test="${job.largecd == info.HOPEJOB2 }">selected</c:if>>${ job.name }
 									</option>
 								</c:forEach>
 						</select></td>
@@ -341,7 +342,7 @@
 								<option value=""></option>
 								<c:forEach var="job" items="${ Largelist }">
 									<option value="${ job.largecd }" ${ job.name }
-										<c:if test="${job.largecd == info.hopejob3 }">selected</c:if>>${ job.name }
+										<c:if test="${job.largecd == info.HOPEJOB3 }">selected</c:if>>${ job.name }
 									</option>
 								</c:forEach>
 						</select></td>
@@ -352,7 +353,7 @@
 								<option value=""></option>
 								<c:forEach var="jobcategory" items="${ JCLargelist }">
 									<option value="${ jobcategory.largecd }" ${ jobcategory.name }
-										<c:if test="${jobcategory.largecd == info.hopejobcategory }">selected</c:if>>${ jobcategory.name }
+										<c:if test="${jobcategory.largecd == info.HOPEJOBCATEGORY }">selected</c:if>>${ jobcategory.name }
 									</option>
 								</c:forEach>
 						</select></td>
@@ -363,7 +364,7 @@
 								<option value=""></option>
 								<c:forEach var="jobcategory" items="${ JCLargelist }">
 									<option value="${ jobcategory.largecd }" ${ jobcategory.name }
-										<c:if test="${jobcategory.largecd == info.hopejobcategory2 }">selected</c:if>>${ jobcategory.name }
+										<c:if test="${jobcategory.largecd == info.HOPEJOBCATEGORY2 }">selected</c:if>>${ jobcategory.name }
 									</option>
 								</c:forEach>
 						</select></td>
@@ -374,7 +375,7 @@
 								<option value=""></option>
 								<c:forEach var="jobcategory" items="${ JCLargelist }">
 									<option value="${ jobcategory.largecd }" ${ jobcategory.name }
-										<c:if test="${jobcategory.largecd == info.hopejobcategory3 }">selected</c:if>>${ jobcategory.name }
+										<c:if test="${jobcategory.largecd == info.HOPEJOBCATEGORY3 }">selected</c:if>>${ jobcategory.name }
 									</option>
 								</c:forEach>
 						</select></td>
@@ -384,7 +385,7 @@
 						<td><select name="hopeworkplace">
 								<c:forEach var="todouhuken" items="${ Todouhukenlist }">
 									<option value="${ todouhuken.cd }"
-										<c:if test="${todouhuken.cd == info.hopeworkplace }">selected</c:if>>${ todouhuken.name }
+										<c:if test="${todouhuken.cd == info.Hopeworkplace }">selected</c:if>>${ todouhuken.name }
 									</option>
 								</c:forEach>
 						</select></td>
@@ -410,22 +411,22 @@
 					<tr>
 						<th>希望勤務日数</th>
 						<td><input type="text" name="hopeworkingdate"
-							value="${ info.hopeworkingdate }" /></td>
+							value="${ info.Hopeworkingdate }" /></td>
 					</tr>
 					<tr>
 						<th>希望勤務時間(開始)</th>
 						<td><input type="text" name="hopebegintime"
-							value="${ info.hopebegintime }" /></td>
+							value="${ info.Hopebegintime }" /></td>
 					</tr>
 					<tr>
 						<th>希望勤務時間(終了)</th>
 						<td><input type="text" name="hopeendtime"
-							value="${ info.hopeendtime }" /></td>
+							value="${ info.Hopeendtime }" /></td>
 					</tr>
 					<tr>
 						<th>希望月給</th>
 						<td><input type="text" name="hopesalary"
-							value="${ info.hopesalary }" size="4" />万円</td>
+							value="${ info.Hopesalary }" size="4" />万円</td>
 					</tr>
 					<tr>
 						<th>希望時間給</th>
@@ -434,13 +435,13 @@
 					</tr>
 					<tr>
 						<th>その他希望</th>
-						<td><textarea rows="3" cols="80" name="hopeetc"><c:out
-									value="${ info.hopeetc }" /></textarea></td>
+						<td><textarea rows="3" cols="80" name="hopeetc"  ><c:out
+									value="${ info.Hopeetc }" /></textarea></td>
 					</tr>
 					<tr>
 						<th>自動車免許</th>
 						<td><input type="text" name="driverlicense"
-							value="${ info.driverlicense }" /></td>
+							value="${ info.Driverlicense }" /></td>
 					</tr>
 
 
@@ -450,35 +451,51 @@
 
 					<tr>
 						<th>その他資格</th>
-						<td><textarea rows="3" cols="80" name="licenseetc"><c:out
-									value="${ info.licenseetc }" /></textarea></td>
+						<td><textarea rows="3" cols="80" name="licenseetc" ><c:out
+									value="${ info.Licenseetc }" /></textarea></td>
 					</tr>
 					<tr>
 						<th>パソコンスキル</th>
-						<td><textarea rows="5" cols="80" name="pasokonskill"><c:out
-									value="${ info.pasokonskill }" /></textarea></td>
+						<td><textarea rows="5" cols="80" name="pasokonskill" ><c:out
+									value="${ info.Pasokonskill }" /></textarea></td>
 					</tr>
 					<tr>
 						<th>留意点</th>
-						<td><textarea rows="5" cols="80" name="caution"><c:out
-									value="${ info.caution }" /></textarea></td>
+						<td><textarea rows="5" cols="80" name="caution" ><c:out
+									value="${ info.Caution }" /></textarea></td>
 					</tr>
 					<tr>
 						<th>担当職業者紹介者ID</th>
 						<td><input type="hidden" name="tantoustaffid"
-							value="<c:out value="${ info.tantoustaffid }" />"> <c:out
-								value="${ info.tantoustaffid }" /></td>
+							value="<c:out value="${ info.Tantoustaffid }" />"> <c:out
+								value="${ info.Tantoustaffid }" /></td>
 					</tr>
 					<tr>
 						<th>補足</th>
-						<td><textarea rows="3" cols="80" name="note"><c:out
-									value="${ info.note }" /></textarea></td>
+						<td><textarea rows="3" cols="80" name="note" ><c:out
+									value="${ info.Note }" /></textarea></td>
 					</tr>
 
 				</table>
+
 				<input class="main-b" type="submit" value="登録"> <input
 					class="main-b" type="button"
 					onclick="location.href='/nexus/web/jobseeker-list'" value="一覧に戻る">
+
+					<!-- <button type="button" class="main-b"
+				onClick="location.href='./companysearch'" tabindex="62">企業検索に戻る</button>
+
+			<c:if test="${ status == 'regist' }">
+				<button type="submit" id="company-regist" class="main-b"
+					onclick="MovePages(this)" tabindex="61">登録</button>
+			</c:if>
+			<c:if test="${ status != 'regist' }">
+				<button type="submit" id="company-edit" class="main-b"
+					onclick="MovePages(this)" tabindex="61">更新</button>
+				<button type="submit" id="company-delete" class="main-b2"
+					onclick="MovePages(this)" tabindex="63">削除</button>
+			</c:if> -->
+
 		</form>
 	</div>
 	</main>

@@ -39,7 +39,7 @@ public class CommentUpdateServlet extends HttpServlet {
 		HttpSession session = request.getSession(true);
 		Staff staff = (Staff) session.getAttribute("UserData");
 
-
+		// TODO 利用しない、取得できないパラメータを取得しないようにする
 		// 各パラメータの取得
 		Integer id = Integer.parseInt(request.getParameter("commentid"));	// コメントID
 		String companyNo = request.getParameter("companyno");				// 事業所番号
@@ -62,6 +62,7 @@ public class CommentUpdateServlet extends HttpServlet {
 		}
 
 		// createdt, updatedtをDate型に変換
+		// requestに格納されていないパラメータ
 		try {
 			createDt = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("createdt"));
 		}catch(Exception e) {

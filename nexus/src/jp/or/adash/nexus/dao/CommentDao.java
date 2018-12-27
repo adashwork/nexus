@@ -255,18 +255,18 @@ public class CommentDao {
 		// VALUE句
 		sql.append(" VALUES (");
 
-		sql.append(" ?");				// id
-		sql.append(",NULLIF(?, '')");	// companyno
-		sql.append(",NULLIF(?, '')");	// kyujinno
-		sql.append(",NULLIF(?, '')");	// jobseekerid
-		sql.append(",NULLIF(?, '')");	// staffid
-		sql.append(",NULLIF(?, -1)");	// matchid
-		sql.append(",NULLIF(?, '')");	// genre
-		sql.append(",NULLIF(?, '')");	// important
-		sql.append(",NULLIF(?, '')");	// title
-		sql.append(",NULLIF(?, '')");	// note
-		sql.append(",NULLIF(?, '')");	// createuserid
-		sql.append(",NULLIF(?, '')");	// updateuserid
+		sql.append(" ?");				// 備考ID
+		sql.append(",NULLIF(?, '')");	// 事業所番号
+		sql.append(",NULLIF(?, '')");	// 求人No
+		sql.append(",NULLIF(?, '')");	// 求職者ID
+		sql.append(",NULLIF(?, '')");	// 職業紹介者ID
+		sql.append(",NULLIF(?, -1)");	// マッチング事例ID
+		sql.append(",NULLIF(?, '')");	// 内容分類
+		sql.append(",NULLIF(?, '')");	// 重要アラート
+		sql.append(",NULLIF(?, '')");	// タイトル
+		sql.append(",NULLIF(?, '')");	// 備考
+		sql.append(",NULLIF(?, '')");	// 新規登録ユーザー
+		sql.append(",NULLIF(?, '')");	// 最終更新ユーザー
 
 		sql.append(")");
 

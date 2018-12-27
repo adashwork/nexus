@@ -100,11 +100,11 @@
 				<th width="30%">
 					事業所番号
 				</th>
-				<td width="35%">
+				<td align="left" width="35%">
 																	<!-- komukai　2018/12/26 ID検索ボタン内編集 -->
 					<input type="text" name="companyNo" size="10" maxlength="13" id="company_id"
 						value="<c:out value="${ matching.companyNo }" />">
-					<input type="button" value="企業ID検索" id="company_sb">
+					<input type="button" value="事業所番号検索" id="company_sb">
 
 				</td>
 				<td align="right" width="35%">
@@ -115,11 +115,11 @@
 				<th width="30%">
 					求人No
 				</th>
-				<td width="35%">
+				<td align="left" width="35%">
 																	<!-- komukai　2018/12/26 ID検索ボタン内編集 -->
 					<input type="text" name="kyujinno" size="10" maxlength="14" id="kyujin_id"
 						value="<c:out value="${ matching.kyujinno }" />">
-					<input type="button" value="求人ID検索" id="kyujin_sb">
+					<input type="button" value="求人No検索" id="kyujin_sb">
 				</td>
 				<td align="right" width="35%">
 					<span>職種</span><input id="kyujin_job" type="text" size="15" placeholder="読み取り専用" readonly />
@@ -129,7 +129,7 @@
 				<th width="30%">
 					求職者ID
 				</th>
-				<td width="35%">
+				<td align="left" width="35%">
 																	<!-- komukai　2018/12/26 ID検索ボタン内編集 -->
 					<input type="text" name="jobseekerid" size="10" maxlength="8" id="jobseeker_id"
 						value="<c:out value="${ matching.jobseekerid }" />">

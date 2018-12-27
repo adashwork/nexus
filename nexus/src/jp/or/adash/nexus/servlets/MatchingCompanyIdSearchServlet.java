@@ -20,9 +20,9 @@ import jp.or.adash.nexus.services.CompanyService;
 import jp.or.adash.nexus.services.JobCategoryService;
 
 /**
- * Servlet implementation class JobSeekerSearchServlet
- * @author aihara
- * @author pgjavaAT
+ * マッチング登録画面：【事業所番号検索】に関するサーブレット
+ * Servlet implementation class MatchingCompanyIdSearchServlet
+ * @author komukai 2018.12月作成
  */
 @WebServlet("/web/matching-companyid-search")
 public class MatchingCompanyIdSearchServlet extends HttpServlet {
@@ -38,6 +38,8 @@ public class MatchingCompanyIdSearchServlet extends HttpServlet {
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
+// 2018.12月 komukai　-ここから：企業検索引用-
 
 		//セッションからログインスタッフ情報を取得
 		HttpSession session = request.getSession(true);
@@ -74,6 +76,8 @@ public class MatchingCompanyIdSearchServlet extends HttpServlet {
 		request.setAttribute("messages", companyService.getMessages());
 		request.setAttribute("cse",cse);
 		request.setAttribute("Staff", staff);
+
+// 2018.12月 komukai　-ここまで：企業検索引用-
 
 		// 6.JSPにフォワードする
 		request.getRequestDispatcher("/matching_companyid_search.jsp").forward(request, response);

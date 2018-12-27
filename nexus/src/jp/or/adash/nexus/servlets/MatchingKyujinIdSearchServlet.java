@@ -20,9 +20,9 @@ import jp.or.adash.nexus.services.JobSearchService;
 import jp.or.adash.nexus.services.TodouhukenService;
 
 /**
- * Servlet implementation class JobSeekerSearchServlet
- * @author aihara
- * @author pgjavaAT
+ * マッチング登録画面：【求人No検索】に関するサーブレット
+ * Servlet implementation class MatchingKyujinIdSearchServlet
+ * @author komukai 2018.12月作成
  */
 @WebServlet("/web/matching-kyujinid-search")
 public class MatchingKyujinIdSearchServlet extends HttpServlet {
@@ -31,13 +31,14 @@ public class MatchingKyujinIdSearchServlet extends HttpServlet {
 	private String conpany_kana;
 	private String st_name;
 
-
-
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
+// 2018.12月 komukai　-ここから：求人検索引用-
+
 		HttpSession session = request.getSession(true);
 		Staff staff = (Staff) session.getAttribute("UserData");
 
@@ -78,7 +79,6 @@ public class MatchingKyujinIdSearchServlet extends HttpServlet {
 		String jobcategory = null;
 		jobcategory = request.getParameter("jobcategory");
 
-
 		// 1.11 雇用形態コードを取得
 		String koyoukeitaicd = null;
 		koyoukeitaicd = request.getParameter("koyoukeitaicd");
@@ -99,7 +99,6 @@ public class MatchingKyujinIdSearchServlet extends HttpServlet {
 		String addresscd = null;
 		addresscd = request.getParameter("addresscd");
 
-
 		// 2.求人票の取得
 
 		List<SimpleKyujin> kyujinlist = new ArrayList<SimpleKyujin>();
@@ -112,13 +111,9 @@ public class MatchingKyujinIdSearchServlet extends HttpServlet {
 		//企業情報リストを取得する
 		Map<String, Company> companyMap = service.getCompanyMap(kyujinlist);
 
-
 		// 1.都道府県リストを取得する
 		TodouhukenService todouhukenservice = new TodouhukenService();
 		List<Todouhuken> todouhukenlist = todouhukenservice.getTodouhukenList();
-
-
-
 
 		// 1.3 リクエストに求人票情報をセットする
 
@@ -126,6 +121,8 @@ public class MatchingKyujinIdSearchServlet extends HttpServlet {
 		request.setAttribute("kyujinlist", kyujinlist);
 		request.setAttribute("companyMap", companyMap);
 		request.setAttribute("todouhukenlist",todouhukenlist);
+
+// 2018.12月 komukai　-ここまで：求人検索引用-
 
 		// 6.JSPにフォワードする
 		request.getRequestDispatcher("/matching_kyujinid_search.jsp").forward(request, response);

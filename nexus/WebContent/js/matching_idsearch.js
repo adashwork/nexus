@@ -2,12 +2,12 @@ function disp(url){
    window.open(url,'','width=750, ,resizeable=yes,scrollbars=yes');
 }
 
-// '/nexus/web/matching-jobseekerid-search'
-// '/nexus/web/matching-companyid-search'
-
 var parantExistanceFlag = true;
 
-//企業ＩＤ
+/**
+ * 事業所番号検索
+ *
+ */
 function clickEnterCompany(company){
 
     //ウィンドウオブジェクトが存在していない時警告してフラグをfalseに
@@ -36,7 +36,10 @@ $(function() {
 
   });
 
-//求人ＩＤ
+/**
+ * 求人No検索
+ *
+ */
 function clickEnterKyujin(kyujin){
 
     //ウィンドウオブジェクトが存在していない時警告してフラグをfalseに
@@ -65,8 +68,10 @@ $(function() {
 
   });
 
-
-//求職者ＩＤ
+/**
+ * 求職者ID検索
+ *
+ */
 function clickEnter(obj){
 
     //ウィンドウオブジェクトが存在していない時警告してフラグをfalseに

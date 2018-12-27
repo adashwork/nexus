@@ -100,7 +100,6 @@ public class CommentUpdateServlet extends HttpServlet {
 		CommentService service = new CommentService();
 		if(service.checkComment(comment)) {
 			service.updateComment(comment);
-
 	}
 
 		// requsetにパラメータを格納

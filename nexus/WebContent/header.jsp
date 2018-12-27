@@ -7,7 +7,8 @@
 		</h1>
 		<nav>
 			<ul class="mainnavi">
-				<li><a href="#"><i class="fas fa-home"></i>検索</a>
+				<li><a href="#"><i
+						class="fas fa-search"></i>検索</a>
 					<ul class="drop-menu">
 						<li><a href="/nexus/web/company-search">企業検索 <i
 								class="fas fa-angle-right"></i></a></li>
@@ -20,8 +21,7 @@
 					</ul></li>
 
 
-				<li><a href="#"><i
-						class="fas fa-search"></i>登録&amp;閲覧</a>
+				<li><a href="#"><i class="fas fa-save"></i>登録</a>
 					<ul class="drop-menu">
 						<li><a href="/nexus/web/company-registdisp">企業登録<i
 								class="fas fa-angle-right"></i></a></li>

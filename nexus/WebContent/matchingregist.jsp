@@ -98,7 +98,7 @@
 			</tr>
 			<tr>
 				<th width="30%">
-					企業ID
+					事業所番号
 				</th>
 				<td width="35%">
 																	<!-- komukai　2018/12/26 ID検索ボタン内編集 -->
@@ -113,7 +113,7 @@
 			</tr>
 			<tr>
 				<th width="30%">
-					求人ID
+					求人No
 				</th>
 				<td width="35%">
 																	<!-- komukai　2018/12/26 ID検索ボタン内編集 -->

@@ -47,14 +47,14 @@ public class KyujinRegistDisplayServlet extends HttpServlet {
 		Staff staff = (Staff) session.getAttribute("UserData");
 
 		// 1.1 リクエストから求人コードを取得
-		String no = null;
+		String no = null; // 求人No（Primary Key）
 
 		if (!"".equals(request.getParameter("no"))
 				&& request.getParameter("no") != null) {
 			no = (request.getParameter("no"));
 		}
 
-		// 1.2 求人コードがある場合、商品情報を取得
+		// 1.2 求人コードがある場合、求人情報を取得
 		Kyujin kyujin = null;
 		Company company = null;
 		if (no != null) {
@@ -104,12 +104,9 @@ public class KyujinRegistDisplayServlet extends HttpServlet {
 		// 2.職種小分類リストをリクエストに格納する
 		request.setAttribute("Smalllist", Slist);
 
-
 		// 1.4 JSPにフォワードする
 		request.getRequestDispatcher("/jobregist.jsp")
 			.forward(request, response);
-
-
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

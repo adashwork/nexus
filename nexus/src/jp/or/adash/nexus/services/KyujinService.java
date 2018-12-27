@@ -68,7 +68,6 @@ public class KyujinService {
 			// データベース接続を終了する
 			transaction.close();
 		}
-
 		return kyujin;
 	}
 
@@ -94,7 +93,6 @@ public class KyujinService {
 			// データベース接続を終了する
 			transaction.close();
 		}
-
 		return kyujinList;
 	}
 
@@ -108,20 +106,48 @@ public class KyujinService {
 		String msg = null;
 		String stdate = null;
 
-		// 事業所番号の長さが適切か
+		// 受付年月日（西暦）の日付が妥当かチェック
+		if (kyujin.getReceptiondt() == null) {
+			messages.add("受付年月日を入力してください。");
+			result = false;
+		} else {
+			stdate = new SimpleDateFormat("yyyy/MM/dd").format(kyujin.getReceptiondt());
+			msg = DataCommons.chkDate(stdate);
+			if (msg != null) {
+				messages.add(msg);
+				result = false;
+			}
+		}
 
+		// 求人有効年月日が妥当かチェック
+		if (kyujin.getPerioddt() == null) {
+			messages.add("求人有効年月日を入力してください。");
+			result = false;
+		} else {
+			stdate = new SimpleDateFormat("yyyy/MM/dd").format(kyujin.getPerioddt());
+			msg = DataCommons.chkDate(stdate);
+			if (msg != null) {
+				messages.add(msg);
+				result = false;
+			}
+		}
+
+		// getBytesでlength <= 0にしているところは入力必須
+		// 必須でなくすには別の書式か length < 0
+
+		// 事業所番号の長さが適切か
 		int length = DataCommons.getBytes(kyujin.getCompanyno());
 		if (length <= 0 || length > 13) {
 			messages.add("事業所番号が不当です。");
 			result = false;
 		}
-
 		msg = DataCommons.chkCompanyno(kyujin.getCompanyno());
 		if (msg != null) {
 			messages.add(msg);
 			result = false;
 		}
 
+		// この項目は企業登録に移行
 		/*		// 事業所名（全角カナ）の長さが適切か
 						length = DataCommons.getBytes(kyujin.getCompanykana());
 						if (length < 0 || length > 54) {
@@ -137,60 +163,7 @@ public class KyujinService {
 							result = false;
 						}
 
-						// 事業所名の長さが適切か
-						length = DataCommons.getBytes(kyujin.getCompanyname());
-						if (length <= 0 || length > 54) {
-							messages.add("事業所名が不当です。");
-							result = false;
-						}
-
-						// 事業所郵便番号の長さが適切か
-						length = DataCommons.getBytes(kyujin.getCompanypostal());
-						if (length > 8) {
-							messages.add("郵便番号が長すぎます。");
-							result = false;
-						}
-						if (!kyujin.getCompanypostal().equals(""))
-							msg = DataCommons.chkZipcode(kyujin.getCompanypostal());
-						if (msg != null) {
-							messages.add(msg);
-							result = false;
-						}
-
-						// 事業所所在地の長さが適切か
-						length = DataCommons.getBytes(kyujin.getCompanyplace());
-						if (length > 75) {
-							messages.add("事業所所在地が長すぎます。");
-							result = false;
-						}
-
-						// 事業所URLの長さが適切か
-						length = DataCommons.getBytes(kyujin.getCompanyurl());
-						if (length > 100) {
-							messages.add("事業所URLが長すぎます。");
-							result = false;
-						}
-
-						//資本金チェック
-						msg = DataCommons.chklDigits(kyujin.getCapital(), 16);
-						if (msg != null) {
-							messages.add(msg);
-							result = false;
-						}
-						msg = DataCommons.chkLong(kyujin.getCapital());
-						if (msg != null) {
-							messages.add(msg);
-							result = false;
-						}
-
-						// 従業員数チェック
-						msg = DataCommons.chksDigits(kyujin.getEmployees(), 6);
-						if (msg != null) {
-							messages.add(msg);
-							result = false;
-						}
-
-						//創業設立年チェック
+						// 創業設立年チェック
 						if (kyujin.getEstablishdt() != 0) {
 							Date date = new Date();
 							SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
@@ -205,7 +178,7 @@ public class KyujinService {
 								messages.add(msg);
 								result = false;
 							}
-							//578 は日本最古の創業年
+							// 578 は日本最古の創業年
 							if (kyujin.getEstablishdt() > year || kyujin.getEstablishdt() < 578) {
 								messages.add("創業設立年が不当な値です。");
 								result = false;
@@ -213,9 +186,12 @@ public class KyujinService {
 						}
 				*/
 
+
+		// TODO 郵便番号から就業場所住所・都道府県の引き込みと、正誤判定を行うようにする
+
 		// 就業場所郵便番号の長さが適切か
 		length = DataCommons.getBytes(kyujin.getPostal());
-		if (length <= 0 || length > 8) {
+		if (length < 0 || length > 8) {
 			messages.add("就業場所郵便番号が不適切です。");
 			result = false;
 		}
@@ -225,6 +201,12 @@ public class KyujinService {
 				messages.add(msg);
 				result = false;
 			}
+		}
+
+		// 都道府県選択必須
+		if ("".equals(kyujin.getAddresscd())) {
+			messages.add("就業場所の都道府県を入力してください");
+			result = false;
 		}
 
 		// 就業場所の長さが適切か
@@ -262,13 +244,14 @@ public class KyujinService {
 			result = false;
 		}
 
-		//雇用期間の定め
-		length = DataCommons.getBytes(kyujin.getKoyoukikan());
-		if (length < 0 || length > 90) {
+		// 雇用期間の定め
+		msg = DataCommons.chksDigits(kyujin.getKoyoukikan(), 30);
+		if (msg != null) {
 			messages.add("雇用期間の定めは30字以内にしてください。");
 			result = false;
 		}
 
+		// 雇用期間が下記if条件以外なら雇用期限入力
 		if (!kyujin.getKoyoukikan().equals("") && !kyujin.getKoyoukikan().equals("なし")
 				&& !kyujin.getKoyoukikan().equals("無し") && !kyujin.getKoyoukikan().equals("無")) {
 
@@ -307,25 +290,27 @@ public class KyujinService {
 		//		}
 
 		// 学歴の内容の長さが適切か
-		length = DataCommons.getBytes(kyujin.getEducation());
-		if (length < 0 || length > 192) {
+		msg = DataCommons.chksDigits(kyujin.getEducation(), 64);
+		if (msg != null) {
 			messages.add("学歴は64字以内にしてください。");
 			result = false;
 		}
 
 		// 必要な経験等の長さが適切か
-		length = DataCommons.getBytes(kyujin.getExperience());
-		if (length < 0 || length > 252) {
+		msg = DataCommons.chksDigits(kyujin.getExperience(), 84);
+		if (msg != null) {
 			messages.add("必要な経験等は84字以内にしてください。");
 			result = false;
 		}
 
 		// 必要な免許・資格等の内容の長さが適切か
-		length = DataCommons.getBytes(kyujin.getLicense());
-		if (length < 0 || length > 252) {
+		msg = DataCommons.chksDigits(kyujin.getLicense(), 84);
+		if (msg != null) {
 			messages.add("必要な免許・資格等は84字以内にしてください。");
 			result = false;
 		}
+
+		// TODO 以下、年齢など数字入力のところがマイナス入力可能なのでそれをチェック
 
 		// 年齢の下限・上限の値が適切か
 		msg = DataCommons.chkInt(String.valueOf(kyujin.getAgemin().toString()));
@@ -380,22 +365,22 @@ public class KyujinService {
 		}
 
 		// 賞与の内容の長さが適切か
-		length = DataCommons.getBytes(kyujin.getBonus());
-		if (length < 0 || length > 150) {
+		msg = DataCommons.chksDigits(kyujin.getBonus(), 50);
+		if (msg != null) {
 			messages.add("賞与は50字以内にしてください。");
 			result = false;
 		}
 
 		// 通勤手当の長さが適切か
-		length = DataCommons.getBytes(kyujin.getKoutuhi());
-		if (length < 0 || length > 90) {
+		msg = DataCommons.chksDigits(kyujin.getKoutuhi(), 30);
+		if (msg != null) {
 			messages.add("通勤手当は30字以内にしてください。");
 			result = false;
 		}
 
 		// 諸手当の内容の長さが適切か
-		length = DataCommons.getBytes(kyujin.getTeate());
-		if (length < 0 || length > 90) {
+		msg = DataCommons.chksDigits(kyujin.getTeate(), 30);
+		if (msg != null) {
 			messages.add("諸手当は30字以内にしてください。");
 			result = false;
 		}
@@ -429,14 +414,6 @@ public class KyujinService {
 			messages.add(msg);
 			result = false;
 		}
-		// chkTime()メソッドを追加したためコメントアウト、後ほど削除予定－1807期生コメ
-		//			sttime = String.format("%04d", kyujin.getEndtime());
-		//			p = Pattern.compile("^([0-1][0-9]|[2][0-3])[0-5][0-9]$");
-		//			m = p.matcher(sttime);
-		//			if ( !m.find() ) {
-		//				messages.add("就業時間・就業を時間で入れてください。");
-		//				result = false;
-		//			}
 
 		// 夜勤で日付またいだ時間を入力することも有り得るのでコメントアウト－1810期生コメ
 		//		if (kyujin.getBegintime() > kyujin.getEndtime()) {
@@ -451,66 +428,69 @@ public class KyujinService {
 		//			result = false;
 		//		}
 
-		//シフト制の長さチェック
+		// シフト制の長さチェック
 		msg = DataCommons.chksDigits(kyujin.getShift(), 60);
 		if (msg != null) {
 			messages.add("シフト制は60字以内にしてください");
 			result = false;
 		}
-		//フレックスタイム制の長さチェック
+
+		// フレックスタイム制の長さチェック
 		msg = DataCommons.chksDigits(kyujin.getFlex(), 60);
 		if (msg != null) {
 			messages.add("フレックスタイム制は60字以内にしてください");
 			result = false;
 		}
+
 		// 時間外労働の値が適切か
 		msg = DataCommons.chkiDigits(kyujin.getJikangai(), 2);
 		if (msg != null) {
 			messages.add("時間外労働は2桁以内にしてください");
 			result = false;
 		}
+
 		// 試用期間の値が適切か
 		msg = DataCommons.chkiDigits(kyujin.getSiyoukikan(), 1);
 		if (msg != null) {
 			messages.add("試用期間は1桁にしてください");
 			result = false;
 		}
+
 		// 週所定労働日数の値が適切か
 		msg = DataCommons.chkiDigits(kyujin.getWorkdays(), 1);
 		if (msg != null) {
 			messages.add("週所定労働日数は1桁にしてください");
 			result = false;
 		}
+
 		// 年間休日日数の値が適切か
 		msg = DataCommons.chksDigits(kyujin.getNenkanholiday(), 30);
 		if (msg != null) {
 			messages.add("年間休日日数は30字以内にしてください");
 			result = false;
 		}
-		//応募書類の長さチェック
+
+		// 応募書類の長さチェック
 		msg = DataCommons.chksDigits(kyujin.getApplicationform(), 500);
 		if (msg != null) {
 			messages.add("応募書類は500字以内にしてください");
 			result = false;
 		}
-		//応募書類の長さチェック
-		msg = DataCommons.chksDigits(kyujin.getApplicationform(), 500);
-		if (msg != null) {
-			messages.add("応募書類は500字以内にしてください");
-			result = false;
-		}
-		//募集背景の長さチェック
+
+		// 募集背景の長さチェック
 		msg = DataCommons.chksDigits(kyujin.getBackground(), 1000);
 		if (msg != null) {
 			messages.add("募集背景は1000字以内にしてください");
 			result = false;
 		}
-		//募集人員の長さチェック
+
+		// 募集人数の長さチェック
 		msg = DataCommons.chksDigits(kyujin.getBosyunumbers(), 4);
 		if (msg != null) {
 			messages.add("募集人員は4桁以内にしてください");
 			result = false;
 		}
+
 		// （求職者非公開）年齢の下限・上限の値が適切か
 		msg = DataCommons.chkInt(String.valueOf(kyujin.getHiddenagemin().toString()));
 		if (msg != null) {
@@ -536,36 +516,12 @@ public class KyujinService {
 			messages.add("年齢の範囲が間違ってます。");
 			result = false;
 		}
-		//その他非公開情報の長さチェック
+
+		// その他非公開情報の長さチェック
 		msg = DataCommons.chksDigits(kyujin.getHiddenetc(), 1000);
 		if (msg != null) {
 			messages.add("その他非公開情報は1000字以内にしてください");
 			result = false;
-		}
-		// 受付年月日（西暦）の日付が妥当かチェック
-		if (kyujin.getReceptiondt() == null) {
-			messages.add("受付年月日を入力してください。");
-			result = false;
-		} else {
-			stdate = new SimpleDateFormat("yyyy/MM/dd").format(kyujin.getReceptiondt());
-			msg = DataCommons.chkDate(stdate);
-			if (msg != null) {
-				messages.add(msg);
-				result = false;
-			}
-		}
-
-		// 求人有効年月日が妥当かチェック
-		if (kyujin.getPerioddt() == null) {
-			messages.add("求人有効年月日を入力してください。");
-			result = false;
-		} else {
-			stdate = new SimpleDateFormat("yyyy/MM/dd").format(kyujin.getPerioddt());
-			msg = DataCommons.chkDate(stdate);
-			if (msg != null) {
-				messages.add(msg);
-				result = false;
-			}
 		}
 		return result;
 	}
@@ -621,7 +577,6 @@ public class KyujinService {
 			// データベース接続を終了する
 			transaction.close();
 		}
-
 		return result;
 	}
 
@@ -640,15 +595,15 @@ public class KyujinService {
 			// トランザクションを開始する
 			transaction.beginTrans();
 
-			//採番マスタよりデータ取得
+			// 採番マスタよりデータ取得
 			SaibanDao saidao = new SaibanDao(transaction);
 			int saiban = saidao.getsaiban();
 
-			//とってきた番号を加工し、Kyujin.noにデータ格納
+			// とってきた番号を加工し、Kyujin.noにデータ格納
 			String str = String.format("A" + "%013d", saiban);
 			kyujin.setNo(str);
 
-			//
+			// 求人マスタよりデータ取得
 			KyujinDao dao = new KyujinDao(transaction);
 			int count = dao.insertKyujin(kyujin);
 
@@ -732,7 +687,6 @@ public class KyujinService {
 			// データベース接続を終了する
 			transaction.close();
 		}
-
 		return result;
 	}
 

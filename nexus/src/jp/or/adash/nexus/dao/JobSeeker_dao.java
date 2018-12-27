@@ -75,7 +75,12 @@ public class JobSeeker_dao {
 	*/
 	/**
 	 * 求職者IDを元に、求職者情報（1件）を取得する
-	 * @auther aihara
+	 * 追記 jobseekerテーブルの分裂に対応。
+	 * 		コメントの更新日時順に表示されるように変更。
+	 * 		年齢を生年月日から計算して表示されるように修正。
+	 * 		希望業種、希望職種、希望勤務地が番号表示になっていたため、正しい表示に修正
+	 *
+	 * @auther aihara tanaka
 	 * @throws IOException
 	 */
 
@@ -122,6 +127,10 @@ public class JobSeeker_dao {
 
 	/**
 	 * 担当紹介者を元に、求職者情報（1件）を取得する
+	 * 	 * 追記 jobseekerテーブルの分裂に対応。
+	 * 		    コメントの更新日時順に表示されるように変更。
+	 * 		    年齢を生年月日から計算して表示されるように修正。
+	 * 		    希望業種、希望職種、希望勤務地が番号表示になっていたため、正しい表示に修正
 	 * @auther aihara
 	 * @throws IOException
 	 */
@@ -170,6 +179,10 @@ public class JobSeeker_dao {
 	/**
 	 * 求職者ID、求職者かな名、担当紹介者氏名を元に、求職者情報（1件）を取得する
 	 * @auther aihara , tanaka
+	 * 	 * 追記 jobseekerテーブルの分裂に対応。
+	 * 		    コメントの更新日時順に表示されるように変更。
+	 * 		    年齢を生年月日から計算して表示されるように修正。
+	 * 		    希望業種、希望職種、希望勤務地が番号表示になっていたため、正しい表示に修正
 	 * @throws IOException
 	 */
 	public List<Jobseeker_simple_entity> selectJobSeeker(String js_id,String js_kana,String st_name) throws IOException {

@@ -131,7 +131,7 @@ public class JobSeeker_dao {
 	 * 		    コメントの更新日時順に表示されるように変更。
 	 * 		    年齢を生年月日から計算して表示されるように修正。
 	 * 		    希望業種、希望職種、希望勤務地が番号表示になっていたため、正しい表示に修正
-	 * @auther aihara
+	 * @auther aihara,tanaka
 	 * @throws IOException
 	 */
 

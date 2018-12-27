@@ -16,7 +16,7 @@ import jp.or.adash.nexus.utils.dao.Transaction;
  * 求人情報に関する処理を定義するクラス
  * @author m.kashiwagi
  * @author pgjavaAT 時間チェック部分をリファクタリング 18/09/29
- * @author kemiyan 18/12/14～
+ * @author kemiyan 18/12/14～28
  */
 public class KyujinService {
 
@@ -132,8 +132,8 @@ public class KyujinService {
 			}
 		}
 
-		// getBytesでlength <= 0にしているところは入力必須
-		// 必須でなくすには別の書式か length < 0
+		// getBytesで「length <= 0」にしているところは入力必須
+		// 必須でなくすには、「length < 0」にするか別の書式にする
 
 		// 事業所番号の長さが適切か
 		int length = DataCommons.getBytes(kyujin.getCompanyno());
@@ -187,7 +187,7 @@ public class KyujinService {
 				*/
 
 
-		// TODO 郵便番号から就業場所住所・都道府県の引き込みと、正誤判定を行うようにする
+		// TODO 郵便番号から都道府県の引き込みと、正誤判定を行うようにする
 
 		// 就業場所郵便番号の長さが適切か
 		length = DataCommons.getBytes(kyujin.getPostal());
@@ -203,7 +203,7 @@ public class KyujinService {
 			}
 		}
 
-		// 都道府県選択必須
+		// 都道府県選択必須化
 		if ("".equals(kyujin.getAddresscd())) {
 			messages.add("就業場所の都道府県を入力してください");
 			result = false;
@@ -457,6 +457,7 @@ public class KyujinService {
 		}
 
 		// 週所定労働日数の値が適切か
+		// TODO 6までしか入力できないようにする
 		msg = DataCommons.chkiDigits(kyujin.getWorkdays(), 1);
 		if (msg != null) {
 			messages.add("週所定労働日数は1桁にしてください");

@@ -1,4 +1,4 @@
-use komukai;
+use trynexus;
 -- ↑ローカルで試すときは自身のuser名に変更
 
 drop table if exists staff;
@@ -208,8 +208,8 @@ license varchar(84),
 agemin int(2),
 agemax int(2),
 salaryformcd varchar(1),
-salarymin int(7),
-salarymax int(7),
+salarymin int(8),
+salarymax int(8),
 bonus varchar(10),
 koutuhi varchar(30),
 teate varchar(30),
@@ -286,8 +286,8 @@ license varchar(84),
 agemin int(2),
 agemax int(2),
 salaryformcd varchar(1),
-salarymin int(7),
-salarymax int(7),
+salarymin int(8),
+salarymax int(8),
 bonus varchar(10),
 koutuhi varchar(30),
 teate varchar(30),

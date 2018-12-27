@@ -221,6 +221,7 @@ public class CompanyService {
 			transaction.beginTrans();
 
 			if ("".equals(company.getCompanyNo())) {
+				//独自事業所番号を発行する
 				company.setCompanyNo(createUniqueCompanyNo());
 			}
 			CompanyDao companyDao = new CompanyDao(transaction);
@@ -240,6 +241,8 @@ public class CompanyService {
 			transaction.commit();
 
 		} catch (IOException e) {
+			//独自事業所番号を破棄する
+			company.setCompanyNo(null);
 			// トランザクションをロールバックする
 			transaction.rollback();
 

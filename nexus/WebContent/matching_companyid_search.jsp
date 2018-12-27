@@ -47,7 +47,7 @@
 	</header>
 <main>
 
-	<h2>企業ID情報検索 &darr;</h2>
+	<h2>事業所番号情報検索 &darr;</h2>
 
 		<form action="/nexus/web/matching-companyid-search" method="get" name="search">
 			<div class="m_div">
@@ -75,7 +75,7 @@
 	<table class="list_table">
 		<tr>
 			<th></th>
-			<th>企業ID</th>
+			<th>事業所番号</th>
 			<th>企業名</th>
 		</tr>
 		<c:forEach var="company" items="${ companylist }">

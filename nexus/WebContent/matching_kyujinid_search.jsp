@@ -47,8 +47,8 @@
 	</header>
 	<main>
 
-	<h2>求人ID検索 &darr;</h2>
-		<form action="/nexus/web/matching-kyujinid-search" method="post">
+	<h2>求人No検索 &darr;</h2>
+		<form action="/nexus/web/matching-kyujinid-search" method="get">
 			<div class="m_div">
 				<p class="m_p">
 					職種をフリーワード検索<br/>
@@ -67,7 +67,7 @@
 	<table class="list_table">
 		<tr>
 			<th></th>
-			<th>求人ID</th>
+			<th>求人No</th>
 			<th>職種</th>
 		</tr>
 				<c:forEach var="kyujin" items="${ kyujinlist }">

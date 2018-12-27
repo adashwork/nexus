@@ -47,6 +47,9 @@ public class CommentRegistServlet extends HttpServlet {
 		Integer matchId = -1;								// マッチング事例ID
 		String genre = request.getParameter("genre");					// 内容分類
 		String important = request.getParameter("important");			// 重要アラート
+		if (important == null) {
+			important = "0";
+		}
 		String title = request.getParameter("title");					// 件名
 		String note = request.getParameter("note");						// 備考
 		Date createDt = null;									// 新規登録日

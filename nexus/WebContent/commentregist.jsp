@@ -61,7 +61,7 @@
 			<div class="comment">
 				<table class="c1">
 					<tr>
-						<th>企業番号</th>
+						<th>事業所番号</th>
 						<th>求職者ID</th>
 					</tr>
 					<tr>
@@ -71,7 +71,7 @@
 							value="<c:out value="${ comment.jobSeekerId }" />"></td>
 					</tr>
 					<tr>
-						<th>求人番号</th>
+						<th>求人No</th>
 						<th>マッチングID</th>
 					</tr>
 					<tr>

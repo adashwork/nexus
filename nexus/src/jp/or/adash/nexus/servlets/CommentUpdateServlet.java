@@ -22,7 +22,7 @@ import jp.or.adash.nexus.services.CommentService;
 @WebServlet("/web/comment-update")
 public class CommentUpdateServlet extends HttpServlet {
 	 static final long serialVersionUID = 1L;
-       
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -49,6 +49,9 @@ public class CommentUpdateServlet extends HttpServlet {
 		Integer matchId = -1;												// マッチングID
 		String genre = request.getParameter("genre");						// 内容分類
 		String important = request.getParameter("important");				// 重要度
+		if (important == null) {
+			important = "0";
+		}
 		String title = request.getParameter("title");						// 件名
 		String note = request.getParameter("note");							// 備考
 		Date createDt = null;												// 新規登録日
@@ -97,7 +100,7 @@ public class CommentUpdateServlet extends HttpServlet {
 		CommentService service = new CommentService();
 		if(service.checkComment(comment)) {
 			service.updateComment(comment);
-			
+
 	}
 
 		// requsetにパラメータを格納

@@ -107,8 +107,10 @@ public class JobSeekerService {
 			transaction.open();
 
 			// 商品単価を取得する
-			JobSeeker_dao dao = new JobSeeker_dao(transaction);
-			jobseeker = dao.selectJobseekermaininfo(js_id);
+			/*			JobSeeker_dao dao = new JobSeeker_dao(transaction);
+						jobseeker = dao.selectJobseekermaininfo(js_id);*/
+			JobSeekerDao jobSeekerDao = new JobSeekerDao(transaction);
+			jobseeker = jobSeekerDao.selectJobSeeker(js_id);
 
 		} catch (IOException e) {
 			// エラーメッセージをセットする
@@ -180,6 +182,15 @@ public class JobSeekerService {
 	 * @author Y.Okamura & T.Uchi
 	 */
 	public boolean check(JobSeeker seeker) {
+		//テストとして強制的にエラーを出力
+		if(true) {
+			messages.add("強制的にデータチェックエラーを発生させています");
+			return  false;
+		}
+
+
+
+
 		boolean result = true; // チェック結果
 
 		// 求職者IDの値が入力されているか
@@ -216,7 +227,7 @@ public class JobSeekerService {
 		}
 
 		// 年齢の値が入力されているか
-		if (seeker.getAge() == -1) {
+		/*if (seeker.getAge() == -1) {
 			messages.add("年齢が入力されていません。");
 			result = false;
 		}
@@ -225,26 +236,26 @@ public class JobSeekerService {
 
 		errMsg = DataCommons.chkiDigits(seeker.getAge(), 3);
 		messages.add(errMsg);
-
+		 */
 		// 郵便番号の値が入力されているか
-		if (seeker.getPostal().equals("")) {
+		if (seeker.getzip21().equals("")) {
 			messages.add("郵便番号が入力されていません。");
 			result = false;
 		}
 
-		errMsg = DataCommons.chkZipcode(seeker.getPostal());
+		errMsg = DataCommons.chkZipcode(seeker.getzip21());
 		messages.add(errMsg);
 
-		errMsg = DataCommons.chksDigits(seeker.getPostal(), 8);
+		errMsg = DataCommons.chksDigits(seeker.getzip21(), 8);
 		messages.add(errMsg);
 
 		// 住所の値が入力されているか
-		if (seeker.getAddress().equals("")) {
+		if (seeker.getAddr21().equals("")) {
 			messages.add("住所が入力されていません。");
 			result = false;
 		}
 
-		errMsg = DataCommons.chksDigits(seeker.getAddress(), 50);
+		errMsg = DataCommons.chksDigits(seeker.getAddr21(), 50);
 		messages.add(errMsg);
 
 		/*
@@ -388,8 +399,10 @@ public class JobSeekerService {
 		*/
 
 		// 希望月給の値が正しいか
-		errMsg = DataCommons.chkInt(String.valueOf(seeker.getHopesalary().toString()));
-		messages.add(errMsg);
+		if (seeker.getHopesalary() != null) {
+			errMsg = DataCommons.chkInt(String.valueOf(seeker.getHopesalary().toString()));
+			messages.add(errMsg);
+		}
 
 		/*
 		// 希望時間給の値が入力されているか
@@ -400,9 +413,10 @@ public class JobSeekerService {
 		*/
 
 		// 希望時間給が正しいか
-		errMsg = DataCommons.chkInt(String.valueOf(seeker.getHopejikyu().toString()));
-		messages.add(errMsg);
-
+		if (seeker.getHopejikyu() != null) {
+			errMsg = DataCommons.chkInt(String.valueOf(seeker.getHopejikyu().toString()));
+			messages.add(errMsg);
+		}
 		//その他希望が入力されているかどうか
 		errMsg = DataCommons.chksDigits(seeker.getHopeetc(), 200);
 		messages.add(errMsg);
@@ -504,40 +518,40 @@ public class JobSeekerService {
 		}
 
 		// 年齢の値が入力されているか
-		if (seeker.getAge() == -1) {
-			messages.add("年齢が入力されていません。");
-			result = false;
-		}
-		errMsg = DataCommons.chkInt(String.valueOf(seeker.getAge().toString()));
-		messages.add(errMsg);
+		/*	if (seeker.getAge() == -1) {
+				messages.add("年齢が入力されていません。");
+				result = false;
+			}
+			errMsg = DataCommons.chkInt(String.valueOf(seeker.getAge().toString()));
+			messages.add(errMsg);
 
-		errMsg = DataCommons.chkiDigits(seeker.getAge(), 3);
-		messages.add(errMsg);
-
+			errMsg = DataCommons.chkiDigits(seeker.getAge(), 3);
+			messages.add(errMsg);
+		 */
 		// 郵便番号の値が入力されているか
-		if (seeker.getPostal().equals("")) {
+		if (seeker.getzip21().equals("")) {
 			messages.add("郵便番号が入力されていません。");
 			result = false;
 		}
 
 		// 郵便番号の値が正しいか
-		errMsg = DataCommons.chkZipcode(seeker.getPostal());
+		errMsg = DataCommons.chkZipcode(seeker.getzip21());
 		messages.add(errMsg);
 
-/*
- * TODO 後ほど削除するか確認
- * chkZipcodeを呼び出しているため、不要と思われる。18/09/29 pgjavaAT
-		errMsg = DataCommons.chksDigits(seeker.getPostal(), 8);
-		messages.add(errMsg);
-*/
+		/*
+		 * TODO 後ほど削除するか確認
+		 * chkZipcodeを呼び出しているため、不要と思われる。18/09/29 pgjavaAT
+				errMsg = DataCommons.chksDigits(seeker.getPostal(), 8);
+				messages.add(errMsg);
+		*/
 		// 住所の値が入力されているか
-		if (seeker.getAddress().equals("")) {
+		if (seeker.getAddr21().equals("")) {
 			messages.add("住所が入力されていません。");
 			result = false;
 		}
 
 		// 住所の桁数が正しいか
-		errMsg = DataCommons.chksDigits(seeker.getAddress(), 50);
+		errMsg = DataCommons.chksDigits(seeker.getAddr21(), 50);
 		messages.add(errMsg);
 
 		/*
@@ -572,14 +586,16 @@ public class JobSeekerService {
 			result = false;
 		}
 
+
 		// 扶養家族の値が入力されているか
 		if (seeker.getHuyou() == -1) {
 			messages.add("扶養家族が入力されていません。");
 			result = false;
 		}
-
-		errMsg = DataCommons.chkInt(String.valueOf(seeker.getHuyou().toString()));
-		messages.add(errMsg);
+		if (seeker.getHuyou() != null) {
+			errMsg = DataCommons.chkInt(String.valueOf(seeker.getHuyou().toString()));
+			messages.add(errMsg);
+		}
 
 		errMsg = DataCommons.chkiDigits(seeker.getHuyou(), 2);
 		messages.add(errMsg);
@@ -659,8 +675,8 @@ public class JobSeekerService {
 		*/
 
 		// 希望勤務日時の値が入力されているか
-		if (seeker.getHopeworkingDate() != -1) {
-			messages.add(DataCommons.chkTime(seeker.getHopeworkingDate()));
+		if (seeker.getHopeworkingdate() != -1) {
+			messages.add(DataCommons.chkTime(seeker.getHopeworkingdate()));
 		}
 
 		/*
@@ -764,7 +780,7 @@ public class JobSeekerService {
 	 * 求職者情報をデータベースに登録する
 	 * @param seeker 求職者情報
 	 * @return 処理結果（true:成功、false:失敗）
-	 * @author Y.Okamura & T.Uchi
+	 * @author Y.Okamura & T.Uchi & mmiyamoto
 	 */
 	public boolean insertJobSeeker(JobSeeker seeker) {
 		boolean result = false; // 処理結果
@@ -786,9 +802,10 @@ public class JobSeekerService {
 
 			// DBに求職者情報を取得する
 			JobSeekerDao dao = new JobSeekerDao(transaction);
-			int count = dao.insert(seeker);
+			int count = dao.insertPrivateData(seeker);
+			count += dao.insertZokuseiData(seeker);
 
-			if (count > 0) {
+			if (count > 1) {
 				// 完了メッセージをセットする
 				messages.add("登録完了");
 				result = true;

@@ -146,8 +146,8 @@ public class MatchingDao {
 		sql.append(" id = ?");
 		try (PreparedStatement ps = this.conn.prepareStatement(sql.toString())) {
 
-			ps.setString(1, matching.getKyujinno());
-			ps.setString(2, matching.getCompanyNo());
+			ps.setString(1, matching.getCompanyNo());
+			ps.setString(2, matching.getKyujinno());
 			ps.setString(3, matching.getJobseekerid());
 			ps.setString(4, matching.getStaffid());
 			ps.setDate(5, DataCommons.convertToSqlDate(matching.getInterviewdt()));

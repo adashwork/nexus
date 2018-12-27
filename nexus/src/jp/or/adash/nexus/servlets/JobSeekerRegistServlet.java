@@ -45,7 +45,7 @@ public class JobSeekerRegistServlet extends HttpServlet {
 		HttpSession session = request.getSession(true);
 		Staff staff = (Staff) session.getAttribute("UserData");
 
-		CommonsService cservice = new CommonsService();
+		CommonsService service = new CommonsService();
 		//入力された情報を登録する
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -59,14 +59,15 @@ public class JobSeekerRegistServlet extends HttpServlet {
 			birthdt = null;
 		}
 		String sex = request.getParameter("sex");
-		int age = -1;
+		/*int age = -1;
 		if (!"".equals(request.getParameter("age"))
 				&& request.getParameter("age") != null) {
 			age = Integer.parseInt(request.getParameter("age"));
-		}
+		}*/
 //		int age = Integer.parseInt(request.getParameter("age"));
-		String postal = request.getParameter("postal");
-		String address = request.getParameter("address");
+		String postal = request.getParameter("zip21");
+		String address = request.getParameter("addr21");
+		String seekermail = request.getParameter("seekermail");
 		String nearstation = request.getParameter("nearstation");
 		String phone = request.getParameter("phone");
 		String mobile = request.getParameter("mobile");
@@ -78,16 +79,20 @@ public class JobSeekerRegistServlet extends HttpServlet {
 		}
 //		int huyou = Integer.parseInt(request.getParameter("huyou"));
 		String education = request.getParameter("education");
-		String hopejob1 = request.getParameter("hopejob1");
-		String hopejob2 = request.getParameter("hopejob2");
-		String hopejob3 = request.getParameter("hopejob3");
-		String hopejobcategory = request.getParameter("hopejobcategory");
+		String career = request.getParameter("career");
+		String HOPEJOB1 = request.getParameter("HOPEJOB1");
+		String HOPEJOB2 = request.getParameter("HOPEJOB2");
+		String HOPEJOB3 = request.getParameter("HOPEJOB3");
+		String HOPEJOBCATEGORY = request.getParameter("HOPEJOBCATEGORY");
+		String HOPEJOBCATEGORY2 = request.getParameter("HOPEJOBCATEGORY2");
+		String HOPEJOBCATEGORY3 = request.getParameter("HOPEJOBCATEGORY3");
 		String hopeworkplace = request.getParameter("hopeworkplace");
 		String hopekoyoukeitai = request.getParameter("hopekoyoukeitai");
-		Integer hopeworkingDate = null;
-		if (!"".equals(request.getParameter("hopeworkingDate"))
-				&& request.getParameter("hopeworkingDate") != null) {
-			hopeworkingDate = Integer.parseInt(request.getParameter("hopeworkingDate"));
+		String hopeweekday = request.getParameter("hopeweekday");
+		Integer hopeworkingdate = null;
+		if (!"".equals(request.getParameter("hopeworkingdate"))
+				&& request.getParameter("hopeworkingdate") != null) {
+			hopeworkingdate = Integer.parseInt(request.getParameter("hopeworkingdate"));
 		}
 //		int hopeworkingDate = Integer.parseInt(request.getParameter("hopeworkingdate"));
 		Integer hopebegintime = null;
@@ -121,31 +126,32 @@ public class JobSeekerRegistServlet extends HttpServlet {
 		String caution = request.getParameter("caution");
 		String tantoustaffid = request.getParameter("tantoustaffid");
 		String password = request.getParameter("password");
+		String note = request.getParameter("note");
 		Date createdt = null;
 		String createuserid = staff.getId();
-		Date upDatedt = null;
-		String upDateuserid = staff.getId();
+		Date updatedt = null;
+		String updateuserid = staff.getId();
 		String deleteflag = request.getParameter("deleteflag");
 
 		// 担当職業紹介者IDから担当職業紹介者の名前を取得する
-		String tantoustaffname = cservice.checkStaffName(tantoustaffid);
+		//String tantoustaffname = cservice.checkStaffName(tantoustaffid);
 
 		//求人情報のオブジェクトを作成
-		JobSeeker seeker = new JobSeeker(id, name, kana, birthdt, sex, age, postal,
-				address,  nearstation, phone, mobile, partner, huyou,
-				education, hopejob1, hopejob2, hopejob3, hopejobcategory,
-				hopeworkplace, hopekoyoukeitai, hopeworkingDate, hopebegintime, hopeendtime,
+		JobSeeker seeker = new JobSeeker(id, name, kana, birthdt, sex, postal,
+				address, seekermail, nearstation, phone, mobile, partner, huyou,
+				education, career, HOPEJOB1, HOPEJOB2, HOPEJOB3, HOPEJOBCATEGORY, HOPEJOBCATEGORY2, HOPEJOBCATEGORY3,
+				hopeworkplace, hopekoyoukeitai, hopeweekday, hopeworkingdate, hopebegintime, hopeendtime,
 				hopesalary, hopejikyu, hopeetc, driverlicense, licenseetc, pasokonskill,
-				caution,  tantoustaffname, tantoustaffid,  password, createdt, createuserid,
-				upDatedt,  upDateuserid,  deleteflag);
+				caution, tantoustaffid,  password, note, createdt, createuserid,
+				updatedt,  updateuserid,  deleteflag);
 
 
 		//入力チェック
-		JobSeekerService service = new JobSeekerService();
-			if(!service.check(seeker)) {
+		JobSeekerService jobseekerService = new JobSeekerService();
+			if(!jobseekerService.check(seeker)) {
 				//入力チェックでエラーがあった場合、エラーメッセージをセット
 				request.setAttribute("seeker", seeker);
-				request.setAttribute("messages", service.getMessages());
+				request.setAttribute("messages", jobseekerService.getMessages());
 
 				//JSPにフォワード
 				request.getRequestDispatcher("/applicantregist.jsp")
@@ -155,13 +161,13 @@ public class JobSeekerRegistServlet extends HttpServlet {
 			}
 
 				//求人者idが使用されてない場合情報を登録する
-				service.insertJobSeeker(seeker);
+				jobseekerService.insertJobSeeker(seeker);
 
 			//処理結果メッセージをリクエストに格納する
 
 			request.setAttribute("Staff", staff);
 			request.setAttribute("info", seeker);
-			request.setAttribute("messages", service.getMessages());
+			request.setAttribute("messages", jobseekerService.getMessages());
 
 			// JSPにフォワード
 			request.getRequestDispatcher("/applicant_maininfo.jsp")
@@ -169,3 +175,4 @@ public class JobSeekerRegistServlet extends HttpServlet {
 	}
 
 }
+

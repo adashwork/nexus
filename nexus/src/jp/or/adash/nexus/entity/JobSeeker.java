@@ -14,21 +14,25 @@ public class JobSeeker {
 	* kana 氏名（カナ）
 	* birthdt 生年月日
 	* sex 性別
-	* age 年齢
-	* postal 自宅郵便番号
-	* address 自宅住所
+	//* age 年齢
+	* zip21 自宅郵便番号
+	* addr21 自宅住所
+	* seekermail メールアドレス
 	* nearstation 最寄り駅
 	* phone 自宅TEL
 	* mobile 携帯TEL
 	* partner 配偶者
 	* huyou 扶養家族
 	* education 学歴
-	* hopejob1 希望職種１
-	* hopejob2 希望職種２
-	* hopejob3 希望職種３
-	* hopejobcategory 希望業種
+	* HOPEJOB1 希望職種１
+	* HOPEJOB2 希望職種２
+	* HOPEJOB3 希望職種３
+	* HOPEJOBCATEGORY 希望業種
+	* HOPEJOBCATEGORY2 希望業種2
+	* HOPEJOBCATEGORY3 希望業種3
 	* hopeworkplace 希望勤務地
 	* hopekoyoukeitai 希望雇用形態
+	* hopeweekday 希望勤務曜日
 	* hopeworkingdate 希望勤務日時
 	* hopebegintime 希望勤務時間（開始）
 	* hopeendtime 希望勤務時間（終了）
@@ -53,22 +57,27 @@ public class JobSeeker {
 	private String kana;
 	private Date birthdt;
 	private String sex;
-	private Integer age;
-	private String postal;
-	private String address;
+//	private Integer age;
+	private String zip21;
+	private String addr21;
+	private String seekermail; //最新更新箇所
 	private String nearstation;
 	private String phone;
 	private String mobile;
 	private String partner;
 	private Integer huyou;
 	private String education;
-	private String hopejob1;
-	private String hopejob2;
-	private String hopejob3;
-	private String hopejobcategory;
+	private String career;//最新更新箇所
+	private String HOPEJOB1;//最新更新箇所
+	private String HOPEJOB2;//最新更新箇所
+	private String HOPEJOB3;//最新更新箇所
+	private String HOPEJOBCATEGORY;
+	private String HOPEJOBCATEGORY2;//最新更新箇所
+	private String HOPEJOBCATEGORY3;//最新更新箇所
 	private String hopeworkplace;
 	private String hopekoyoukeitai;
-	private Integer hopeworkingDate;
+	private String hopeweekday;//最新更新箇所
+	private Integer hopeworkingdate;//最新更新箇所
 	private Integer hopebegintime;
 	private Integer hopeendtime;
 	private Integer hopesalary;
@@ -78,44 +87,50 @@ public class JobSeeker {
 	private String licenseetc;
 	private String pasokonskill;
 	private String caution;
-	private String tantoustaffname;
+//	private String tantoustaffname;
 	private String tantoustaffid;
 	private String password;
+	private String note;//最新更新箇所
 	private Date createdt;
 	private String createuserid;
-	private Date upDatedt;
-	private String upDateuserid;
+	private Date updatedt;//最新更新箇所
+	private String updateuserid;//最新更新箇所
 	private String deleteflag;
 
-	public JobSeeker(String id, String name, String kana, Date birthdt, String sex, Integer age, String postal,
-			String address, String nearstation, String phone, String mobile, String partner, Integer huyou,
-			String education, String hopejob1, String hopejob2, String hopejob3, String hopejobcategory,
-			String hopeworkplace, String hopekoyoukeitai, Integer hopeworkingDate, Integer hopebegintime, Integer hopeendtime,
+	public JobSeeker(String id, String name, String kana, Date birthdt, String sex,  String zip21,
+			String addr21, String seekermail,String nearstation, String phone, String mobile, String partner, Integer huyou,
+			String education,String career, String HOPEJOB1, String HOPEJOB2, String HOPEJOB3, String HOPEJOBCATEGORY, String HOPEJOBCATEGORY2, String HOPEJOBCATEGORY3,
+			String hopeworkplace, String hopekoyoukeitai, String hopeweekday, Integer hopeworkingdate, Integer hopebegintime, Integer hopeendtime,
 			Integer hopesalary, Integer hopejikyu, String hopeetc, String driverlicense, String licenseetc, String pasokonskill,
-			String caution, String tantoustaffname, String tantoustaffid, String password, Date createdt, String createuserid,
-			Date upDatedt, String upDateuserid, String deleteflag) {
+			String caution,  String tantoustaffid, String password, String note, Date createdt, String createuserid,
+			Date updatedt, String updateuserid, String deleteflag) {
 
 		this.id = id;
 		this.name = name;
 		this.kana = kana;
 		this.birthdt = birthdt;
 		this.sex = sex;
-		this.age = age;
-		this.postal = postal;
-		this.address = address;
+//		this.age = age;
+		this.zip21 = zip21;
+		this.addr21 = addr21;
+		this.seekermail = seekermail;
 		this.nearstation = nearstation;
 		this.phone = phone;
 		this.mobile = mobile;
 		this.partner = partner;
 		this.huyou = huyou;
 		this.education = education;
-		this.hopejob1 = hopejob1;
-		this.hopejob2 = hopejob2;
-		this.hopejob3 = hopejob3;
-		this.hopejobcategory = hopejobcategory;
+		this.career = career;
+		this.HOPEJOB1 = HOPEJOB1;
+		this.HOPEJOB2 = HOPEJOB2;
+		this.HOPEJOB3 = HOPEJOB3;
+		this.HOPEJOBCATEGORY = HOPEJOBCATEGORY;
+		this.HOPEJOBCATEGORY2 = HOPEJOBCATEGORY2;
+		this.HOPEJOBCATEGORY3 = HOPEJOBCATEGORY3;
+		this.hopeweekday = hopeweekday;
 		this.hopeworkplace = hopeworkplace;
 		this.hopekoyoukeitai = hopekoyoukeitai;
-		this.hopeworkingDate = hopeworkingDate;
+		this.hopeworkingdate = hopeworkingdate;
 		this.hopebegintime = hopebegintime;
 		this.hopeendtime = hopeendtime;
 		this.hopesalary = hopesalary;
@@ -125,13 +140,14 @@ public class JobSeeker {
 		this.licenseetc = licenseetc;
 		this.pasokonskill = pasokonskill;
 		this.caution = caution;
-		this.tantoustaffname = tantoustaffname;
+//		this.tantoustaffname = tantoustaffname;
 		this.tantoustaffid = tantoustaffid;
 		this.password = password;
+		this.note = note;
 		this.createdt = createdt;
 		this.createuserid = createuserid;
-		this.upDatedt = upDatedt;
-		this.upDateuserid = upDateuserid;
+		this.updatedt = updatedt;
+		this.updateuserid = updateuserid;
 		this.deleteflag = deleteflag;
 	}
 
@@ -178,25 +194,33 @@ public class JobSeeker {
 	/**
 	 * 年齢を返す
 	 * @return age
-	 */
+
 	public Integer getAge() {
 		return age;
 	}
-
+	 */
 	/**
 	 * 自宅郵便番号を返す
 	 * @return postal
 	 */
-	public String getPostal() {
-		return postal;
+	public String getzip21() {
+		return zip21;
 	}
 
 	/**
 	 * 自宅住所を返す
 	 * @return address
 	 */
-	public String getAddress() {
-		return address;
+	public String getAddr21() {
+		return addr21;
+	}
+
+	/**
+	 * メールアドレスを返す
+	 * @return seekermail
+	 */
+	public String getSeekermail() {
+		return seekermail;
 	}
 
 	/**
@@ -248,36 +272,61 @@ public class JobSeeker {
 	}
 
 	/**
-	 * 希望職種１を返す
-	 * @return hopejob1
+	 * 職歴・経歴を返す
+	 * @return career
 	 */
-	public String getHopejob1() {
-		return hopejob1;
+	public String getCareer() {
+		return career;
+	}
+
+	/**
+	 * 希望職種１を返す
+	 * @return HOPEJOB1
+	 */
+	public String getHOPEJOB1() {
+		return HOPEJOB1;
 	}
 
 	/**
 	 * 希望職種２を返す
-	 * @return hopejob2
+	 * @return HOPEJOB2
 	 */
-	public String getHopejob2() {
-		return hopejob2;
+	public String getHOPEJOB2() {
+		return HOPEJOB2;
 	}
 
 	/**
 	 * 希望職種３を返す
-	 * @return hopejob3
+	 * @return HOPEJOB3
 	 */
-	public String getHopejob3() {
-		return hopejob3;
+	public String getHOPEJOB3() {
+		return HOPEJOB3;
 	}
 
 	/**
-	 * 希望業種を返す
-	 * @return hopejobcategory
+	 * 希望業種1を返す
+	 * @return HOPEJOBCATEGORY
 	 */
-	public String getHopejobcategory() {
-		return hopejobcategory;
+	public String getHOPEJOBCATEGORY() {
+		return HOPEJOBCATEGORY;
 	}
+
+	/**
+	 * 希望業種2を返す
+	 * @return HOPEJOBCATEGORY2
+	 */
+	public String getHOPEJOBCATEGORY2() {
+		return HOPEJOBCATEGORY2;
+	}
+
+	/**
+	 * 希望業種3を返す
+	 * @return HOPEJOBCATEGORY3
+	 */
+	public String getHOPEJOBCATEGORY3() {
+		return HOPEJOBCATEGORY3;
+	}
+
 
 	/**
 	 * 希望勤務地を返す
@@ -296,11 +345,19 @@ public class JobSeeker {
 	}
 
 	/**
-	 * 希望勤務日時を返す
-	 * @return hopeworkingDate
+	 * 希望勤務曜日を返す
+	 * @return hopeweekday
 	 */
-	public Integer getHopeworkingDate() {
-		return hopeworkingDate;
+	public String getHopeweekday() {
+		return hopeweekday;
+	}
+
+	/**
+	 * 希望勤務日数を返す
+	 * @return hopeworkingdate
+	 */
+	public Integer getHopeworkingdate() {
+		return hopeworkingdate;
 	}
 
 	/**
@@ -379,9 +436,9 @@ public class JobSeeker {
 	 * 担当職業紹介者名を返す
 	 * @return tantoustaffname
 	 */
-	public String getTantoustaffname() {
+	/*public String getTantoustaffname() {
 		return tantoustaffname;
-	}
+	}*/
 
 	/**
 	 * 担当職業紹介者IDを返す
@@ -397,6 +454,14 @@ public class JobSeeker {
 	 */
 	public String getPassword() {
 		return password;
+	}
+
+	/**
+	 * 補足を返す
+	 * @return note
+	 */
+	public String getNote() {
+		return note;
 	}
 
 	/**
@@ -417,25 +482,25 @@ public class JobSeeker {
 
 	/**
 	 * 最終更新日を返す
-	 * @return upDatedt
+	 * @return updatedt
 	 */
-	public Date getUpDatedt() {
-		return upDatedt;
+	public Date getUpdatedt() {
+		return updatedt;
 	}
 
 	/**
 	 * 最終更新ユーザーを返す
-	 * @return upDateuserid
+	 * @return updateuserid
 	 */
-	public String getUpDateuserid() {
-		return upDateuserid;
+	public String getUpdateuserid() {
+		return updateuserid;
 	}
 
 	/**
 	 * 削除フラグを返す
 	 * @return deleteflag
 	 */
-	public String getDeleteflag() {
+	public String getdeleteflag() {
 		return deleteflag;
 	}
 

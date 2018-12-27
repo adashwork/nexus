@@ -42,10 +42,13 @@ public class JobSeekerSearchServlet extends HttpServlet {
 		HttpSession session = request.getSession(true);
 		Staff staff = (Staff) session.getAttribute("UserData");
 
+
 		// 1.検索する求職者ID、求職者かな名、担当者氏名を取得する
 		this.js_id = request.getParameter("js_id");
 		this.js_kana = request.getParameter("js_kana");
 		this.st_name = request.getParameter("st_name");
+
+
 
 		// 2.求職者情報一覧を取得する
 		JobSeekerService service = new JobSeekerService();
@@ -57,13 +60,24 @@ public class JobSeekerSearchServlet extends HttpServlet {
 		// 4.求職者情報を初期化
 		request.removeAttribute("list");
 
+
 		// 5.求職者情報、担当紹介者氏名をリクエストに格納する
 		request.setAttribute("Staff", staff);
 		request.setAttribute("list", list);
 		request.setAttribute("st_name", st_name);
 
+//		request.setAttribute("js_id", js_id);
+//		request.setAttribute("js_kana", js_kana);
+
+
+
 		// 6.JSPにフォワードする
 		request.getRequestDispatcher("/applicant_list.jsp").forward(request, response);
+
+
+
+
+
 	}
 
 }

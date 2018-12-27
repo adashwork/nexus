@@ -22,7 +22,7 @@ import jp.or.adash.nexus.services.CommentService;
 @WebServlet("/web/comment-update")
 public class CommentUpdateServlet extends HttpServlet {
 	 static final long serialVersionUID = 1L;
-
+       
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -99,7 +99,7 @@ public class CommentUpdateServlet extends HttpServlet {
 			service.updateComment(comment);
 
 		}
-
+			
 		// requsetにパラメータを格納
 		request.setAttribute("Staff", staff);
 		request.setAttribute("comment", comment);
@@ -110,7 +110,5 @@ public class CommentUpdateServlet extends HttpServlet {
 				.forward(request, response);
 
 	}
-
-
 
 }

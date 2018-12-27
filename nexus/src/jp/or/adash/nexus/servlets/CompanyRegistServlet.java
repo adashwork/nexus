@@ -48,8 +48,6 @@ public class CompanyRegistServlet extends HttpServlet {
 		HttpSession session = request.getSession(true);
 		Staff staff = (Staff) session.getAttribute("UserData");
 
-
-
 		//エラーが発生すればfalseにする
 		boolean parameterGetError = true;
 		//後でエラーメッセージにaddAllする
@@ -70,17 +68,17 @@ public class CompanyRegistServlet extends HttpServlet {
 		String jobCategoryMiddleCd = request.getParameter("jobcategorymiddlecd");
 		String jobCategoryLargeCd = request.getParameter("jobcategorylargecd");
 		Integer capital = null;
-		try{
+		try {
 			capital = DataCommons.parseInteger(request.getParameter("capital"));
-		}catch(NumberFormatException e) {
+		} catch (NumberFormatException e) {
 			parameterGetError = false;
 			parameterErrorMessage.add("資本金は半角数字で入力してください");
 		}
 		String employees = request.getParameter("employees");
 		Integer establishDt = null;
-		try{
+		try {
 			establishDt = DataCommons.parseInteger(request.getParameter("establishdt"));
-		}catch(NumberFormatException e) {
+		} catch (NumberFormatException e) {
 			parameterGetError = false;
 			parameterErrorMessage.add("創設年は半角数字4文字で入力してください");
 		}
@@ -106,7 +104,6 @@ public class CompanyRegistServlet extends HttpServlet {
 				tantouYakushoku, tantou, tantouKana, tantouTel, tantouFax, tantouEmail, tantouNote, tantouStaffId,
 				salesRank, salesNote, createDt, createuserId, updateDt, updateUserId, deletefFag);
 
-
 		CompanyService companyService = new CompanyService();
 		//エラーが発生しなかった場合のみ登録処理および、コメントの取得処理を行う
 		if (companyService.check(company, true) && parameterGetError) {
@@ -125,10 +122,6 @@ public class CompanyRegistServlet extends HttpServlet {
 			//新規登録中のパラメーターをリクエストに渡す
 			request.setAttribute("status", "regist");
 		}
-
-
-
-
 
 		// 1.業種分類リストを取得する
 		JobCategoryService JCLservice = new JobCategoryService();

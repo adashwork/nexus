@@ -55,13 +55,14 @@ public class JobSeekerEditServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		String sex = request.getParameter("sex");
-		int age = -1;
+		/*int age = -1;
 		if (!"".equals(request.getParameter("age"))
 				&& request.getParameter("age") != null) {
 			age = Integer.parseInt(request.getParameter("age"));
-		}
+		}*/
 		String postal = request.getParameter("postal");
-		String address = request.getParameter("address");
+		String address = request.getParameter("addr21");
+		String seekermail = request.getParameter("seekermail");
 		String nearstation = request.getParameter("nearstation");
 		String phone = request.getParameter("phone");
 		String mobile = request.getParameter("mobile");
@@ -72,16 +73,20 @@ public class JobSeekerEditServlet extends HttpServlet {
 			huyou = Integer.parseInt(request.getParameter("huyou"));
 		}
 		String education = request.getParameter("education");
-		String hopejob1 = request.getParameter("hopejob1");
-		String hopejob2 = request.getParameter("hopejob2");
-		String hopejob3 = request.getParameter("hopejob3");
-		String hopejobcategory = request.getParameter("hopejobcategory");
+		String career = request.getParameter("career");
+		String HOPEJOB1 = request.getParameter("HOPEJOB1");
+		String HOPEJOB2 = request.getParameter("HOPEJOB2");
+		String HOPEJOB3 = request.getParameter("HOPEJOB3");
+		String HOPEJOBCATEGORY = request.getParameter("HOPEJOBCATEGORY");
+		String HOPEJOBCATEGORY2 = request.getParameter("HOPEJOBCATEGORY2");
+		String HOPEJOBCATEGORY3 = request.getParameter("HOPEJOBCATEGORY3");
 		String hopeworkplace = request.getParameter("hopeworkplace");
 		String hopekoyoukeitai = request.getParameter("hopekoyoukeitai");
-		int hopeworkingDate = -1;
-		if (!"".equals(request.getParameter("hopeworkingDate"))
-				&& request.getParameter("hopeworkingDate") != null) {
-			hopeworkingDate = Integer.parseInt(request.getParameter("hopeworkingDate"));
+		String hopeweekday = request.getParameter("hopeweekday");
+		int hopeworkingdate = -1;
+		if (!"".equals(request.getParameter("hopeworkingdate"))
+				&& request.getParameter("hopeworkingdate") != null) {
+			hopeworkingdate = Integer.parseInt(request.getParameter("hopeworkingdate"));
 		}
 		int hopebegintime = -1;
 		if (!"".equals(request.getParameter("hopebegintime"))
@@ -108,24 +113,25 @@ public class JobSeekerEditServlet extends HttpServlet {
 		String licenseetc = request.getParameter("licensetc");
 		String pasokonskill = request.getParameter("pasokonskill");
 		String caution = request.getParameter("caution");
-		String tantoustaffname = request.getParameter("tantoustaffname");
+		//String tantoustaffname = request.getParameter("tantoustaffname");
 		String tantoustaffid = request.getParameter("tantoustaffid");
 		String password = request.getParameter("password");
+		String note = request.getParameter("note");
 		Date createdt = null;
 		String createuserid = request.getParameter("createuserid");
 
-		Date upDatedt = null;
-		String upDateuserid = request.getParameter("upDateuerid");
+		Date updatedt = null;
+		String updateuserid = request.getParameter("updateuerid");
 		String deleteflag = request.getParameter("deleteflag");
 
 		//求人情報のオブジェクトを作成
-		JobSeekerMain seeker = new JobSeekerMain(id, name, kana, sex, birthdt, age, postal,
-				address, nearstation, phone, mobile, partner, huyou,
-				education, hopejob1, hopejob2, hopejob3, hopejobcategory,
-				hopeworkplace, hopekoyoukeitai, hopeworkingDate, hopebegintime, hopeendtime,
+		JobSeekerMain seeker = new JobSeekerMain(id, name, kana, sex, birthdt, postal,
+				address, seekermail, nearstation, phone, mobile, partner, huyou,
+				education, career, HOPEJOB1, HOPEJOB2, HOPEJOB3, HOPEJOBCATEGORY, HOPEJOBCATEGORY2, HOPEJOBCATEGORY3,
+				hopeworkplace, hopekoyoukeitai, hopeweekday, hopeworkingdate, hopebegintime, hopeendtime,
 				hopesalary, hopejikyu, hopeetc, driverlicense, licenseetc, pasokonskill,
-				caution, tantoustaffname, tantoustaffid, password, createdt, createuserid,
-				upDatedt, upDateuserid, deleteflag);
+				caution, tantoustaffid, password, note, createdt, createuserid,
+				updatedt, updateuserid, deleteflag);
 
 		//入力チェック
 		JobSeekerService service = new JobSeekerService();

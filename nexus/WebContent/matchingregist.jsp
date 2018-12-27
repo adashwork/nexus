@@ -27,42 +27,45 @@
 <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/Base/jquery-ui.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
 <script type="text/javascript" src="../js/common.js"></script>
+<script type="text/javascript" src="../js/matching_idsearch.js"></script>
+
 </head>
 
 <body>
+	<%@ include file="/header.jsp" %>
 
-	<header>
- 		<section>
-  			<h1 class="logo">
-				<a href="/nexus/web/staff-top"><img src="../css/TryNexus-Logo.png" width="97" height="70" alt="TryNexus" /></a>
-			</h1>
+<!-- 	<header> -->
+<!--  		<section> -->
+<!--   			<h1 class="logo"> -->
+<!-- 				<a href="/nexus/web/staff-top"><img src="../css/TryNexus-Logo.png" width="97" height="70" alt="TryNexus" /></a> -->
+<!-- 			</h1> -->
 
- 			<nav>
-				<ul class="mainnavi">
-					<li><a href="/nexus/web/job-search"><i class="fas fa-home"></i>検索</a></li>
-					<li><a href="/nexus/web/jobseeker-list"><i class="fas fa-search"></i>登録&amp;閲覧</a>
-						<ul class="drop-menu">
-							<li><a href="/nexus/web/kyujin-disp">求人情報<i class="fas fa-angle-right"></i></a></li>
-							<li><a href="/nexus/web/jobseeker-list">求職者情報<i class="fas fa-angle-right"></i></a></li>
-							<li><a href="/nexus/web/matching-registdisp">マッチング登録<i class="fas fa-angle-right"></i></a></li>
-						</ul>
-					</li>
-					<c:if test="${Staff.authority == 1}">
-					<li><a href="/nexus/web/account-list"><i class="far fa-bookmark"></i>管理</a></li></c:if>
-				</ul>
-			</nav>
-			<div class="user">
-				<div class="user__wrapper">
-					<div class="user__name">
-						<a href="#"><c:out value="${ Staff.name }" /><i class="fas fa-ellipsis-v"></i></a>
-						<ul class="drop-menu">
-							<li><a href="/nexus/web/logout">ログアウト<i class="fas fa-angle-right"></i></a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</section>
-	</header>
+<!--  			<nav> -->
+<!-- 				<ul class="mainnavi"> -->
+<!-- 					<li><a href="/nexus/web/job-search"><i class="fas fa-home"></i>検索</a></li> -->
+<!-- 					<li><a href="/nexus/web/jobseeker-list"><i class="fas fa-search"></i>登録&amp;閲覧</a> -->
+<!-- 						<ul class="drop-menu"> -->
+<!-- 							<li><a href="/nexus/web/kyujin-disp">求人情報<i class="fas fa-angle-right"></i></a></li> -->
+<!-- 							<li><a href="/nexus/web/jobseeker-list">求職者情報<i class="fas fa-angle-right"></i></a></li> -->
+<!-- 							<li><a href="/nexus/web/matching-registdisp">マッチング登録<i class="fas fa-angle-right"></i></a></li> -->
+<!-- 						</ul> -->
+<!-- 					</li> -->
+<%-- 					<c:if test="${Staff.authority == 1}"> --%>
+<%-- 					<li><a href="/nexus/web/account-list"><i class="far fa-bookmark"></i>管理</a></li></c:if> --%>
+<!-- 				</ul> -->
+<!-- 			</nav> -->
+<!-- 			<div class="user"> -->
+<!-- 				<div class="user__wrapper"> -->
+<!-- 					<div class="user__name"> -->
+<%-- 						<a href="#"><c:out value="${ Staff.name }" /><i class="fas fa-ellipsis-v"></i></a> --%>
+<!-- 						<ul class="drop-menu"> -->
+<!-- 							<li><a href="/nexus/web/logout">ログアウト<i class="fas fa-angle-right"></i></a></li> -->
+<!-- 						</ul> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 		</section> -->
+<!-- 	</header> -->
 
 	<main> <!-- body部分　-->
 
@@ -81,98 +84,102 @@
 		<table border="0">
 
 			<tr>
-				<th>
+				<th width="30%">
 					マッチングID
 				</th>
-				<td>	<!-- komukai 2018/12/19 マッチングID欄：コメントアウト -->
+				<td width="35%">	<!-- komukai 2018/12/19 マッチングID欄：コメントアウト -->
 <!-- 					<input type="text" name="no" size="10" value="">  -->
-<!--  	 			<input type="hidden" name="nohidden" value="<c:out value="${ matching.id }" />"> -->
+	  	 			<input type="hidden" name="nohidden" value="<c:out value="${ matching.id }" />">
 					<fmt:formatNumber value="${ matching.id }" pattern="00000000"/>
 				</td>
-				<td>
+				<td width="35%">
 
 				</td>
 			</tr>
 			<tr>
-				<th>
-					企業ID
+				<th width="30%">
+					事業所番号
 				</th>
-				<td>
-																	<!-- komukai　2018/12/17 ID検索ボタン内編集 -->
-					<input type="text" name="companyNo" size="10" value="<c:out value="${ matching.companyNo }" />">
-					<input type="button" value="企業ID検索"
-						onclick="window.open('/nexus/web/matching-companyid-search','','width=750,height=*,resizeable=yes')">
+				<td width="35%">
+																	<!-- komukai　2018/12/26 ID検索ボタン内編集 -->
+					<input type="text" name="companyNo" size="10" maxlength="13" id="company_id"
+						value="<c:out value="${ matching.companyNo }" />">
+					<input type="button" value="企業ID検索" id="company_sb">
 
 				</td>
-				<td>
+				<td align="right" width="35%">
+					<span>企業名</span><input id="company_name" type="text" size="15" placeholder="読み取り専用" readonly />
 				</td>
 			</tr>
 			<tr>
-				<th>
-					求人ID
+				<th width="30%">
+					求人No
 				</th>
-				<td>
-																	<!-- komukai　2018/12/17 ID検索ボタン内編集 -->
-					<input type="text" name="kyujinno" size="10" value="<c:out value="${ matching.kyujinno }" />">
-					<input type="button" value="求人ID検索"
-						onclick="window.open('/nexus/web/matching-kyujinid-search','','width=750,height=*,resizeable=yes')">
+				<td width="35%">
+																	<!-- komukai　2018/12/26 ID検索ボタン内編集 -->
+					<input type="text" name="kyujinno" size="10" maxlength="14" id="kyujin_id"
+						value="<c:out value="${ matching.kyujinno }" />">
+					<input type="button" value="求人ID検索" id="kyujin_sb">
 				</td>
-				<td>
+				<td align="right" width="35%">
+					<span>職種</span><input id="kyujin_job" type="text" size="15" placeholder="読み取り専用" readonly />
 				</td>
 			</tr>
 			<tr>
-				<th>
+				<th width="30%">
 					求職者ID
 				</th>
-				<td>
-																	<!-- komukai　2018/12/18 ID検索ボタン内編集 -->
-					<input type="text" name="jobseekerid" size="10" value="<c:out value="${ list.js_id }" />">
-					<input type="button" value="求職者ID検索"
-						onclick="window.open('/nexus/web/matching-jobseekerid-search','','width=750,height=*,resizeable=yes,scrollbars=yes')">
+				<td width="35%">
+																	<!-- komukai　2018/12/26 ID検索ボタン内編集 -->
+					<input type="text" name="jobseekerid" size="10" maxlength="8" id="jobseeker_id"
+						value="<c:out value="${ matching.jobseekerid }" />">
+					<input type="button" value="求職者ID検索" id="jobseeker_sb" />
 				</td>
-				<td>
+				<td align="right" width="35%">
+					<span>求職者名</span><input id="jobseeker_name" type="text" size="15" placeholder="読み取り専用" readonly />
 				</td>
 			</tr>
 			<tr>
-				<th>
+				<th width="30%">
 					職業紹介者ID
 				</th>
-				<td>
-					<input type="text" name="staffid" size="4"
+				<td width="35%">
+					<input type="text" name="staffid" size="4" maxlength="4" onkeyup="if(event.keyCode==9||event.keyCode==16) return;
+        				this.value=this.value.replace(/[^0-9]+/i,'');"
 						<c:if test="${ matching.staffid == null }">value="<fmt:formatNumber value="${ Staff.id }" pattern="0000" />"</c:if>
-						<c:if test='${ matching.staffid != null }'>value="<fmt:formatNumber value='${ matchinig.staffid }' pattern='0000' />"</c:if>
+						<c:if test='${ matching.staffid != null }'>value="<fmt:formatNumber value='${ matching.staffid }' pattern='0000' />"</c:if>
 					>
 				</td>
-				<td>
+				<td width="35%">
 				</td>
 			</tr>
+<!-- 			<tr> -->
+<!-- 				<th> -->
+<!-- 					履歴書送付日 -->
+<!-- 				</th> -->
+<!-- 				<td> -->
+<!-- 					<input type="text" class="datepicker" size="10" name="interviewdt" -->
+<%-- 					value="<fmt:formatDate value="${ matching.interviewdt }" pattern="yyyy-MM-dd"/>"> --%>
+<!-- 				</td> -->
+<!-- 				<td> -->
+<!-- 				</td> -->
+<!-- 			</tr> -->
 			<tr>
-				<th>
-					履歴書送付日
-				</th>
-				<td>
-					<input type="text" class="datepicker" size="10" name="interviewdt"
-					value="<fmt:formatDate value="${ matching.interviewdt }" pattern="yyyy-MM-dd"/>">
-				</td>
-				<td>
-				</td>
-			</tr>
-			<tr>
-				<th>
+				<th width="30%">
 					面接日
 				</th>
-				<td>
+				<td width="35%">
 					<input type="text" class="datepicker" size="10" name="interviewdt"
 					value="<fmt:formatDate value="${ matching.interviewdt }" pattern="yyyy-MM-dd"/>">
 				</td>
-				<td>
+				<td width="35%">
 				</td>
 			</tr>
 			<tr>
-				<th>
+				<th width="30%">
 					選考結果						<!-- TODO：採用不採用に変換してOKか -->
 				</th>
-				<td>
+				<td width="35%">
 					<input name="assessment" type="radio" value="0"
 					<c:if test="${ 1 != matching.assessment && 2 != matching.assessment }">checked="checked"</c:if>> 確認中
 					<input name="assessment" type="radio" value="1"
@@ -180,18 +187,18 @@
 					<input name="assessment" type="radio" value="2"
 					<c:if test="${ 2 == matching.assessment }">checked="checked"</c:if>> 不採用
 				</td>
-				<td>
+				<td width="35%">
 				</td>
 			</tr>
 			<tr>
-				<th>
+				<th width="30%">
 					入社日
 				</th>
-				<td>
+				<td width="35%">
 					<input type="text" class="datepicker" size="10" name="enterdt"
 					value="<fmt:formatDate value="${ matching.enterdt }" pattern="yyyy-MM-dd"/>">
 				</td>
-				<td>
+				<td width="35%">
 				</td>
 			</tr>
 			</table>
@@ -204,16 +211,21 @@
 			<tr>									<!-- komukai　2018/12/18 タイトル・重要度追加 -->
 				<td align="left" width="60%">
 					<span>タイトル</span>
-					<input type="text" size="30" name="title"></textarea>
+					<input type="text" size="30" name="title" value="<c:out value="${ comment.title }" />" maxlength="60">
 				</td>
 				<td align="left" width="40%">
 					<span>重要</span>
-					<input type="checkbox" name="inportant" value=""></textarea>
+					<c:if test="${ comment.important == 1 }">
+						<input type="checkbox" name="important" value="1" checked>
+					</c:if>
+					<c:if test="${ comment.important == 0 || comment.important == null }">
+						<input type="checkbox" name="important" value="1">
+					</c:if>
 				</td>
 			</tr>
 			<tr>
 				<td colspan="2">
-					<textarea name="note" style="width:100%"></textarea>
+					<textarea name="note" style="width:100%" maxlength="4000"><c:out value="${ comment.note }" /></textarea>
 				</td>
 			</tr>
 
@@ -221,7 +233,7 @@
 
 		<button type="button" class="main-b" onClick="location.href='./matching-search'">検索画面に戻る</button>
 		<button type="button" class="main-b" onClick="location.href='./staff-top'">トップに戻る</button>
-		<c:if test="${ matching.id == null }">
+		<c:if test="${ matching.id == null || matching.id == 0 }">
 				<button type="submit" id="matching-regist" class="main-b" onclick="MovePages(this)">登録</button>
 		</c:if>
 		<c:if test="${ matching.id != null && matching.id != 0 }">

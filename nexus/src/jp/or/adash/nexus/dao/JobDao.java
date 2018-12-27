@@ -87,7 +87,7 @@ public class JobDao {
 			try (ResultSet rs = ps.executeQuery()) {
 				// 取得結果をリストに格納する
 				while (rs.next()) {
-					SmallJobList.add(new Job(rs.getString("smallcd"),
+					SmallJobList.add(new Job(null, null, null, rs.getString("smallcd"),
 							rs.getString("name")));
 				}
 			} catch (SQLException e) {

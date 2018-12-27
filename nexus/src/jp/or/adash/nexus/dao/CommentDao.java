@@ -89,26 +89,25 @@ public class CommentDao {
 		sql.append(" kyujinno = ?,");
 		sql.append(" jobseekerid = ?,");
 		sql.append(" staffid = ?,");
-		sql.append(" matchid = ?,");
 		sql.append(" genre = ?,");
 		sql.append(" important = ?,");
 		sql.append(" title = ?,");
 		sql.append(" note = ?,");
 		sql.append(" updateuserid = ?");
 		sql.append(" where");
-		sql.append(" id = ?");
+		sql.append(" matchid = ?");
 		try (PreparedStatement ps = this.conn.prepareStatement(sql.toString())) {
 
 			ps.setString(1, comment.getCompanyNo());
 			ps.setString(2, comment.getKyujinNo());
 			ps.setString(3, comment.getJobSeekerId());
 			ps.setString(4, comment.getStaffId());
-			ps.setInt(5, comment.getMatchId());
-			ps.setString(6, comment.getGenre());
-			ps.setString(7, comment.getImportant());
-			ps.setString(8, comment.getTitle());
-			ps.setString(9, comment.getNote());
-			ps.setInt(10, comment.getId());
+			ps.setString(5, comment.getGenre());
+			ps.setString(6, comment.getImportant());
+			ps.setString(7, comment.getTitle());
+			ps.setString(8, comment.getNote());
+			ps.setString(9, comment.getUpdateUserId());
+			ps.setInt(10, comment.getMatchId());
 
 			// SQL文を実行する
 			count = ps.executeUpdate();
@@ -374,7 +373,7 @@ public class CommentDao {
 			ps.setInt(1, id);
 			// SQL文を実行する
 			count = ps.executeUpdate();
-		} catch (SQLException e) {
+		} catch(SQLException e) {
 			throw new IOException(e);
 		}
 

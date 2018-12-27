@@ -53,7 +53,7 @@
 </style>
 <title>企業情報</title>
 <body>
-	<%@ include file="/header.jsp"%>
+	<%@ include file="/header.jsp" %>
 	<main>
 	<h2>企業情報</h2>
 	<ul>
@@ -69,9 +69,10 @@
 
 				<tr>
 					<th>事業所番号(ハイフンあり)</th>
+
 					<td><c:if test="${ status == 'regist' }">
 							<input type="text" name="companyno"
-								value="${ company.companyNo }" />
+								value="${ company.companyNo }"   />
 						</c:if> <c:if test="${ status != 'regist' }">
 
 							<c:out value="${ company.companyNo }" />
@@ -98,6 +99,7 @@
 				</tr>
 				<tr>
 					<th>事業所郵便番号 (123-4567)</th>
+
 					<td><input id="postal" type="text" name="companypostal"
 						value="${ company.companyPostal }" /></td>
 				</tr>
@@ -145,7 +147,6 @@
 				<tr>
 					<th>産業小分類コード</th>
 					<td><select id="smallcd" name="jobcategorysmallcd">
-
 							<option value=""></option>
 							<c:forEach var="JCS" items="${ JCSmallList }">
 								<option value="${ JCS.smallcd }"
@@ -178,7 +179,7 @@
 					</select></td>
 				</tr>
 				<tr>
-					<th>創業設立年</th>
+					<th>創業設立年 </th>
 					<td><input type="text" name="establishdt"
 						value="${ company.establishDt }" />年</td>
 				</tr>
@@ -220,7 +221,7 @@
 				<tr>
 					<th>担当開拓者ID</th>
 					<td><input type="text" name="tantoustaff_id"
-						value="${ company.tantouStaffId }" /></td>
+							value="${ company.tantouStaffId }" /></td>
 				</tr>
 				<tr>
 					<th>営業評価ランクABC</th>

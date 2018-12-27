@@ -44,14 +44,14 @@ public class CommentRegistServlet extends HttpServlet {
 		String kyujinNo = request.getParameter("kyujinno");			// 求人NO
 		String jobSeekerId = request.getParameter("jobseekerid");		// 求職者ID
 		String staffId = staff.getId();									// 職業紹介者ID
-		Integer matchId = -1;											// マッチング事例ID
+		Integer matchId = -1;								// マッチング事例ID
 		String genre = request.getParameter("genre");					// 内容分類
 		String important = request.getParameter("important");			// 重要アラート
 		String title = request.getParameter("title");					// 件名
 		String note = request.getParameter("note");						// 備考
-		Date createDt = null;											// 新規登録日
+		Date createDt = null;									// 新規登録日
 		String createUserId = staff.getId();	// 新規登録ユーザー
-		Date updateDt = null;											// 最終更新日
+		Date updateDt = null;									// 最終更新日
 		String updateUserId = staff.getId();	// 最終更新ユーザー
 
 		// マッチングIDは初期値-1。入力されたマッチングIDがあればIntegerに変換して代入
@@ -90,7 +90,5 @@ public class CommentRegistServlet extends HttpServlet {
 		request.getRequestDispatcher("/commentregist.jsp").forward(request, response);
 
 	}
-
-
 
 }

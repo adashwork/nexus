@@ -21,7 +21,7 @@ import jp.or.adash.nexus.services.CommentService;
 @WebServlet("/web/comment-delete")
 public class CommentDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+       
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -121,7 +121,7 @@ public class CommentDeleteServlet extends HttpServlet {
 			// JSPにフォワード
 			request.getRequestDispatcher("/commentregist.jsp")
 					.forward(request, response);
-		}
+	}
 
 	}
 

@@ -31,39 +31,40 @@
 </head>
 
 <body>
+	<%@ include file="/header.jsp" %>
 
- <header>
-	<section>
-		<h1 class="logo">
-			<a href="/nexus/web/staff-top"><img src="../css/TryNexus-Logo.png" width="97" height="70" alt="TryNexus" /></a>
-		</h1>
+<!--  <header> -->
+<!-- 	<section> -->
+<!-- 		<h1 class="logo"> -->
+<!-- 			<a href="/nexus/web/staff-top"><img src="../css/TryNexus-Logo.png" width="97" height="70" alt="TryNexus" /></a> -->
+<!-- 		</h1> -->
 
-		<nav>
-			<ul class="mainnavi">
-			<li><a href="/nexus/web/job-search"><i class="fas fa-home"></i>検索</a></li>
-			<li><a href="/nexus/web/jobseeker-list"><i class="fas fa-search"></i>登録&amp;閲覧</a>
-				<ul class="drop-menu">
-					<li><a href="/nexus/web/kyujin-disp">求人情報<i class="fas fa-angle-right"></i></a></li>
-					<li><a href="/nexus/web/jobseeker-list">求職者情報<i class="fas fa-angle-right"></i></a></li>
-					<li><a href="/nexus/web/match-disp">マッチング登録<i class="fas fa-angle-right"></i></a></li>
-				</ul>
-			</li>
-			<c:if test="${Staff.authority == 1}">
-     		<li><a href="/nexus/web/account-list"><i class="far fa-bookmark"></i>管理</a></li></c:if>
-   			</ul>
-  		</nav>
-		<div class="user">
-			<div class="user__wrapper">
-				<div class="user__name">
-					<a href="#"><c:out value="${ Staff.name }" /><i class="fas fa-ellipsis-v"></i></a>
-					<ul class="drop-menu">
-						<li><a href="/nexus/web/logout">ログアウト<i class="fas fa-angle-right"></i></a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</section>
-</header>
+<!-- 		<nav> -->
+<!-- 			<ul class="mainnavi"> -->
+<!-- 			<li><a href="/nexus/web/job-search"><i class="fas fa-home"></i>検索</a></li> -->
+<!-- 			<li><a href="/nexus/web/jobseeker-list"><i class="fas fa-search"></i>登録&amp;閲覧</a> -->
+<!-- 				<ul class="drop-menu"> -->
+<!-- 					<li><a href="/nexus/web/kyujin-disp">求人情報<i class="fas fa-angle-right"></i></a></li> -->
+<!-- 					<li><a href="/nexus/web/jobseeker-list">求職者情報<i class="fas fa-angle-right"></i></a></li> -->
+<!-- 					<li><a href="/nexus/web/match-disp">マッチング登録<i class="fas fa-angle-right"></i></a></li> -->
+<!-- 				</ul> -->
+<!-- 			</li> -->
+<%-- 			<c:if test="${Staff.authority == 1}"> --%>
+<%--      		<li><a href="/nexus/web/account-list"><i class="far fa-bookmark"></i>管理</a></li></c:if> --%>
+<!--    			</ul> -->
+<!--   		</nav> -->
+<!-- 		<div class="user"> -->
+<!-- 			<div class="user__wrapper"> -->
+<!-- 				<div class="user__name"> -->
+<%-- 					<a href="#"><c:out value="${ Staff.name }" /><i class="fas fa-ellipsis-v"></i></a> --%>
+<!-- 					<ul class="drop-menu"> -->
+<!-- 						<li><a href="/nexus/web/logout">ログアウト<i class="fas fa-angle-right"></i></a></li> -->
+<!-- 					</ul> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+<!-- 	</section> -->
+<!-- </header> -->
 
 	<main> 													<!-- body部分　-->
 
@@ -93,7 +94,7 @@
 				</p>
 
 				<p class="m_p">
-					企業ID<br/>
+					事業所番号<br/>
 					<input type="text" size=13 name="companyno" value="<c:out value="${ companyno }" />" >
 				</p>
 				<p class="m_p">
@@ -108,7 +109,7 @@
 				</p>			</div>
 			<div class="m_div">
 				<p class="m_p">
-					フリーワード検索<br/>
+					本文検索<br/>
 					<input type="text" name="note" size="50"></textarea>
 				</p>
 				<p class="m_p_right">
@@ -131,7 +132,7 @@
 				<th>企業ID</th>
 				<th>求職者ID</th>
 				<th>合否</th>
-				<th>コメント</th>
+				<th>タイトル</th>
 			</tr>
 
 			<!--  kitayama　2018/12/13 for文追加 -->

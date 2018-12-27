@@ -1,4 +1,4 @@
-use trynexus;
+use komukai;
 -- ↑ローカルで試すときは自身のuser名に変更
 
 drop table if exists staff;

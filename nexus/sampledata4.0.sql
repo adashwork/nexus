@@ -1,6 +1,6 @@
 begin;
 -- ローカルで試す際は自身のuser名に変更
-use trynexus;
+use komukai;
 
  truncate table   staff;
  truncate table   jobseeker;

@@ -167,36 +167,40 @@ public class MatchingService {
 
 			SaibanDao sdao = new SaibanDao(transaction);
 			int id = sdao.getMatching();
+			int commentid = sdao.getCommentInt();
 			matching.setId(id);
 			comment.setMatchId(id);									// 追加 2018/12/18 T.Ikeda
+			comment.setId(commentid);
 
 			// マッチング事例をDBに登録する
 			MatchingDao dao = new MatchingDao(transaction);
 			int count = dao.insert(matching);
 
 			if (count > 0) {
-				// 1完了メッセージをセットする
-				messages.add(MessageCommons.MSG_REGIST_COMPLETE);
-				result = true;
+//				// 1完了メッセージをセットする
+//				messages.add(MessageCommons.MSG_REGIST_COMPLETE);
+//				result = true;
+
+				// コメントをDBに登録する　　　　　　　　　　　　　追加 2018/12/14T.Ikeda
+				CommentDao cdao = new CommentDao(transaction);
+				int countC = cdao.insert(comment);
+
+				if (countC > 0) {
+					// 1完了メッセージをセットする
+					messages.add(MessageCommons.MSG_REGIST_COMPLETE);
+					result = true;
+				} else {
+					// 1エラーメッセージをセットする
+					messages.add(MessageCommons.MSG_REGIST_FAILURE);
+					result = false;
+				}
+
 			} else {
 				// 1エラーメッセージをセットする
 				messages.add(MessageCommons.MSG_REGIST_FAILURE);
 				result = false;
 			}
 
-			// コメントをDBに登録する　　　　　　　　　　　　　追加 2018/12/14T.Ikeda
-			CommentDao cdao = new CommentDao(transaction);
-			int countC = cdao.insert(comment);
-
-			if (countC > 0) {
-				// 1完了メッセージをセットする
-				messages.add(MessageCommons.MSG_REGIST_COMPLETE);
-				result = true;
-			} else {
-				// 1エラーメッセージをセットする
-				messages.add(MessageCommons.MSG_REGIST_FAILURE);
-				result = false;
-			}
 
 			//1 トランザクションをコミットする
 			transaction.commit();
@@ -235,28 +239,30 @@ public class MatchingService {
 			int count = dao.update(matching);
 
 			if (count > 0) {
-				// 1完了メッセージをセットする
-				messages.add(MessageCommons.MSG_UPDATE_COMPLETE);
-				result = true;
+//				// 1完了メッセージをセットする
+//				messages.add(MessageCommons.MSG_UPDATE_COMPLETE);
+//				result = true;
+
+				// 1コメント情報を取得する　　　　　　　　　　　　　追加 2018/12/14T.Ikeda
+				CommentDao cdao = new CommentDao(transaction);
+				int countC = cdao.update(comment);
+
+				if (countC > 0) {
+					// 1完了メッセージをセットする
+					messages.add(MessageCommons.MSG_UPDATE_COMPLETE);
+					result = true;
+				} else {
+					// 1エラーメッセージをセットする
+					messages.add(MessageCommons.MSG_UPDATE_FAILURE);
+					result = false;
+				}
+
 			} else {
 				// 1エラーメッセージをセットする
 				messages.add(MessageCommons.MSG_UPDATE_FAILURE);
 				result = false;
 			}
 
-			// 1コメント情報を取得する　　　　　　　　　　　　　追加 2018/12/14T.Ikeda
-			CommentDao cdao = new CommentDao(transaction);
-			int countC = cdao.update(comment);
-
-			if (countC > 0) {
-				// 1完了メッセージをセットする
-				messages.add(MessageCommons.MSG_UPDATE_COMPLETE);
-				result = true;
-			} else {
-				// 1エラーメッセージをセットする
-				messages.add(MessageCommons.MSG_UPDATE_FAILURE);
-				result = false;
-			}
 
 			//1 トランザクションをコミットする
 			transaction.commit();

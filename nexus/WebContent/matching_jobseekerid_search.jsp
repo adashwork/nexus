@@ -27,6 +27,7 @@
 <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/Base/jquery-ui.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
 <script type="text/javascript" src="../js/common.js"></script>
+<script type="text/javascript" src="../js/matching_idsearch.js"></script>
 </head>
 
 <body>
@@ -51,20 +52,22 @@
 			<form action="/nexus/web/matching-jobseekerid-search" method="post">
 			<div class="m_div">
 				<p class="m_p">
-					求職者名漢字<br/>
-					<input type="text" name="js_name" size=13  value="">
+					<input type="hidden" name="js_id" value="<c:out value="${ param.js_id }" />">
 				</p>
 				<p class="m_p">
 					求職者名かな<br/>
-					<input type="text" name="js_kana" size=13  value="">
+					<input type="text" name="js_kana" value="<c:out value="${ param.js_kana }" />">
 				</p>
 				<p class="m_p">
 					担当紹介者<br/>
 					<select name="st_name">
-							<option></option>
-							<c:forEach var="staff" items="${ staffs }">
-								<option value="${ staff.name }"><c:out value="${ staff.name }" /></option>
-							</c:forEach>
+							<option value=""></option>
+							<c:forEach var="staff" items="${ st_name }">
+							<option value="<c:out value="${ staff.name}" />" <c:if test="${staff.name  == param.st_name }">
+									selected
+									</c:if>><c:out
+								value="${ staff.name }" /></option>
+					</c:forEach>
 					</select>
 				</p>
 				<p class="m_right"><input type="submit" class="main-b" name="send" value="検索"></p>
@@ -81,14 +84,13 @@
 		<c:forEach var="jobseeker" items="${ list }">
 			<tr>
 				<td>
-					<form action="/nexus/web/matching-jobseekerid-search" method="post">
-						<button class="mini_b mini_b_applilist" name="js_id"
-							value="<c:out value="${ list.id }" />">入力</button>
-					</form>
+					<input name="id_name_input" type="button" value="入力" />
+					<input type="hidden" value="<c:out value="${ jobseeker.id }" />" />
+					<input type="hidden" value="<c:out value="${ jobseeker.js_name }" />" />
 				</td>
-				<td><fmt:formatNumber value="${ list.js_id }" pattern="00000000"/></td>
-				<td><c:out value="${ list.js_name }" /></td>
-				<td><c:out value="${ list.st_name }" /></td>
+				<td><c:out value="${ jobseeker.id }" /></td>
+				<td><c:out value="${ jobseeker.js_name }" /></td>
+				<td><c:out value="${ jobseeker.st_name }" /></td>
 			</tr>
 		</c:forEach>
 	</table>

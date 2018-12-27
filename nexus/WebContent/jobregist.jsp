@@ -43,7 +43,6 @@
 		<div id="job_regist">
 			<h2>求人登録</h2>
 
-
 			<div id="message">
 
 				<ul>
@@ -51,25 +50,24 @@
 						<li><c:out value="${ message }" /></li>
 					</c:forEach>
 				</ul>
-
 			</div>
-
-
 			<table>
+				<!-- 企業登録で入力すべき項目は事業所番号で引き込んで表示のみして入力はしない -->
+
 				<tr>
 					<th>求人No.</th>
 					<td><input type="hidden" name="no"
-						value="<c:out value="${ kyujin.no }" />"><c:out
+						value="<c:out value="${ kyujin.no }" />"> <c:out
 							value="${ kyujin.no }" /></td>
 				</tr>
 				<tr>
-					<th>受付年月日</th>
+					<th>受付年月日 [必須]</th>
 					<td><input type="text" class="datepicker" name="receptiondt"
 						value="<fmt:formatDate value="${ kyujin.receptiondt }" pattern="yyyy-MM-dd"/>"
 						size="10" maxlength="10" tabindex="2"></td>
 				</tr>
 				<tr>
-					<th>求人有効年月日</th>
+					<th>求人有効年月日 [必須]</th>
 					<td><input type="text" class="datepicker" name="perioddt"
 						value="<fmt:formatDate value="${ kyujin.perioddt }" pattern="yyyy-MM-dd"/>"
 						size="10" maxlength="10" tabindex="3"></td>
@@ -104,6 +102,8 @@
 				<!-- 1やりたかったメモ：一行テキストボックスはenter押すとすぐに登録なので
 			submit変更かjsとかで制御、日本語入力オン-に（1807生記述） -->
 
+
+				<!-- TODO 産業分類コードで表示されるので業種名で表示されるようにする -->
 				<tr>
 					<th>産業大分類コード</th>
 					<td><c:out value="${ company.jobCategoryLargeCd }" /></td>
@@ -125,7 +125,7 @@
 					<td><c:out value="${ company.employees }" /></td>
 				</tr>
 				<tr>
-<%--					<th>会社の特徴</th>
+					<%--					<th>会社の特徴</th>
 					<td><textarea name="companyfeature" rows="3" cols="40"
 							tabindex="14">
 							<c:out value="${ kyujin.companyfeature }" /></textarea></td>
@@ -199,14 +199,14 @@
 					</select></td>
 				</tr>
 				<tr>
-					<th>就業場所郵便番号 [必須]</th>
+					<th>就業場所郵便番号</th>
 					<td><input type="text" name="postal"
 						value="<c:out value="${ kyujin.postal }" />" size="10"
 						maxlength="8" tabindex="21"></td>
 				</tr>
 
 				<tr>
-					<th>就業場所都道府県</th>
+					<th>就業場所都道府県 [必須]</th>
 					<td><select id="tdhken" name="addresscd" tabindex="22">
 							<option value=""></option>
 							<c:forEach var="todouhuken" items="${ list }">
@@ -279,7 +279,8 @@
 				<tr>
 					<th>雇用期間の定め</th>
 					<td><input type="text" name="koyoukikan"
-						value="<c:out value="${ kyujin.koyoukikan}" />" size="40" maxlength="30" tabindex="31"></td>
+						value="<c:out value="${ kyujin.koyoukikan}" />" size="40"
+						maxlength="30" tabindex="31"></td>
 				</tr>
 				<tr>
 					<th>雇用期間開始年月日</th>

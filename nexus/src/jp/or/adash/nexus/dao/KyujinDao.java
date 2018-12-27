@@ -15,7 +15,7 @@ import jp.or.adash.nexus.utils.dao.Transaction;
 
 /**
  * 求人データアクセスクラス
- * @author ??
+ * @author mori
  * @author pgjavaAT
  *
  */
@@ -447,7 +447,7 @@ public class KyujinDao {
 			ps.setString(47, kyujin.getHiddenetc());
 			ps.setDate(48, DataCommons.convertToSqlDate(kyujin.getReceptiondt()));
 			ps.setDate(49, DataCommons.convertToSqlDate(kyujin.getPerioddt()));
-          //ps.setString(51, "now()");//createdt???
+			//ps.setString(51, "now()");//createdt???
 			//ps.setString(50, kyujin.getCreateuserid());
 			ps.setDate(50, DataCommons.convertToSqlDate(date));//updatedt
 			ps.setString(51, kyujin.getUpdateuserid());

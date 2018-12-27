@@ -33,6 +33,7 @@
 
 <body>
 	<%@ include file="/header.jsp" %>
+	<!-- TODO headerにログイン名が表示されない点の調査　-->
 
 <!-- 	<header> -->
 <!--  		<section> -->

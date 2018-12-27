@@ -74,38 +74,44 @@ public class MatchingService {
 	public boolean check(MatchingCase matching) {
 		boolean result = true; // チェック結果
 
-		// 企業IDの値が入力されているか　　　　　　　　　　　追加 2018/12/12 T.IKead
+		// 事業所番号の値が入力されているか　　　　　　　　　　　追加 2018/12/12 T.IKead
 		if (matching.getCompanyNo().equals("")) {
 			messages.add("企業IDが入力されていません。");
 			result = false;
 		}
+		// TODO "企業IDが入力されていません。"のメッセージを"事業所番号が入力されていません。"に変更する
+		// TODO 登録されていない事業所番号が入力された場合にエラーを表示する
 
-		// 求人IDの値が入力されているか
+		// 求人Noの値が入力されているか
 		if (matching.getKyujinno().equals("")) {
 			messages.add("求人IDが入力されていません。");    // 修正 No→ID 2018/12/12 T.Ikeda
 			result = false;
 		}
-
 		errMsg = DataCommons.chksDigits(matching.getKyujinno(), 14);
 		messages.add(errMsg);
+
+		// TODO "求人IDが入力されていません。"のメッセージを"求人Noが入力されていません。"に変更する
+		// TODO 登録されていない求人Noが入力された場合にエラーを表示する
 
 		// 求職者IDの値が入力されているか
 		if (matching.getJobseekerid().equals("")) {
 			messages.add("求職者IDが入力されていません。");
 			result = false;
 		}
-
 		errMsg = DataCommons.chksDigits(matching.getJobseekerid(), 8);
 		messages.add(errMsg);
+
+		// TODO 登録されていない求職者IDが入力された場合にエラーを表示する
 
 		// 職業紹介者IDの値が入力されているか
 		if (matching.getStaffid().equals("")) {
 			messages.add("職業紹介者IDが入力されていません。");
 			result = false;
 		}
-
 		errMsg = DataCommons.chksDigits(matching.getStaffid(), 4);
 		messages.add(errMsg);
+
+		// TODO 登録されていない職業紹介者IDが入力された場合にエラーを表示する
 
 		//面接日の値が入力されているか
 		if (matching.getInterviewdt() == null) {
@@ -165,6 +171,7 @@ public class MatchingService {
 			// 1トランザクションを開始する
 			transaction.beginTrans();
 
+			// 採番テーブルを元にマッチングIDとコメントIDをセットする
 			SaibanDao sdao = new SaibanDao(transaction);
 			int id = sdao.getMatching();
 			int commentid = sdao.getCommentInt();
@@ -182,6 +189,7 @@ public class MatchingService {
 //				result = true;
 
 				// コメントをDBに登録する　　　　　　　　　　　　　追加 2018/12/14T.Ikeda
+				// TODO コメント一元化処理に変更
 				CommentDao cdao = new CommentDao(transaction);
 				int countC = cdao.insert(comment);
 
@@ -244,6 +252,7 @@ public class MatchingService {
 //				result = true;
 
 				// 1コメント情報を取得する　　　　　　　　　　　　　追加 2018/12/14T.Ikeda
+				// TODO コメント一元化処理に変更
 				CommentDao cdao = new CommentDao(transaction);
 				int countC = cdao.update(comment);
 

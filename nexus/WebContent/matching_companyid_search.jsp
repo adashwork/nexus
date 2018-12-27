@@ -62,9 +62,7 @@
 					<option value=""></option>
 					<c:forEach var="staff" items="${ stafflist }">
 						<option value="<c:out value="${ staff.id }" />" <c:if test="${cse.staffId == staff.id }">
-									selected
-									</c:if>><c:out
-								value="${ staff.name }" /></option>
+							selected</c:if>><c:out value="${ staff.name }" /></option>
 					</c:forEach>
 				</select>
 				</p>

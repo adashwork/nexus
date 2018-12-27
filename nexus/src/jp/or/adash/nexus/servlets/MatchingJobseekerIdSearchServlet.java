@@ -16,9 +16,9 @@ import jp.or.adash.nexus.entity.StaffName;
 import jp.or.adash.nexus.services.JobSeekerService;
 
 /**
- * Servlet implementation class JobSeekerSearchServlet
- * @author aihara
- * @author pgjavaAT
+ * マッチング登録画面：【求職者ID検索】に関するサーブレット
+ * Servlet implementation class MatchingJobseekerIdSearchServlet
+ * @author komukai 2018.12月作成
  */
 @WebServlet("/web/matching-jobseekerid-search")
 public class MatchingJobseekerIdSearchServlet extends HttpServlet {
@@ -40,9 +40,10 @@ public class MatchingJobseekerIdSearchServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+// 2018.12月 komukai　-ここから：求職者検索引用-
+
 		HttpSession session = request.getSession(true);
 		Staff staff = (Staff) session.getAttribute("UserData");
-
 
 		// 1.検索する求職者ID、求職者かな名、担当者氏名を取得する
 		this.js_id = request.getParameter("js_id");
@@ -64,8 +65,9 @@ public class MatchingJobseekerIdSearchServlet extends HttpServlet {
 		request.setAttribute("list", list);
 		request.setAttribute("st_name", st_name);
 
+// 2018.12月 komukai　-ここまで：求職者検索引用-
+
 		// 6.JSPにフォワードする
 		request.getRequestDispatcher("/matching_jobseekerid_search.jsp").forward(request, response);
 	}
-
 }

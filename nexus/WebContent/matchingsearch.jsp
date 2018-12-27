@@ -94,7 +94,7 @@
 				</p>
 
 				<p class="m_p">
-					企業ID<br/>
+					事業所番号<br/>
 					<input type="text" size=13 name="companyno" value="<c:out value="${ companyno }" />" >
 				</p>
 				<p class="m_p">
@@ -109,7 +109,7 @@
 				</p>			</div>
 			<div class="m_div">
 				<p class="m_p">
-					フリーワード検索<br/>
+					本文検索<br/>
 					<input type="text" name="note" size="50"></textarea>
 				</p>
 				<p class="m_p_right">
@@ -132,7 +132,7 @@
 				<th>企業ID</th>
 				<th>求職者ID</th>
 				<th>合否</th>
-				<th>コメント</th>
+				<th>タイトル</th>
 			</tr>
 
 			<!--  kitayama　2018/12/13 for文追加 -->

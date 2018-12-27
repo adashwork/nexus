@@ -47,6 +47,9 @@ public class CommentRegistServlet extends HttpServlet {
 		Integer matchId = -1;								// マッチング事例ID
 		String genre = request.getParameter("genre");					// 内容分類
 		String important = request.getParameter("important");			// 重要アラート
+		if (important == null) {
+			important = "0";
+		}
 		String title = request.getParameter("title");					// 件名
 		String note = request.getParameter("note");						// 備考
 		Date createDt = null;									// 新規登録日
@@ -81,6 +84,7 @@ public class CommentRegistServlet extends HttpServlet {
 			comment = commentService.insertComment(comment);
 		}
 		// trueならIDも返す、falseならIDは返さない
+		// TODO 登録に成功した時はデータベースからその行を取得し、commentオブジェクトをrequestに格納する
 		request.setAttribute("comment", comment);
 		request.setAttribute("messages", commentService.getMessages());
 		request.setAttribute("Staff", staff);

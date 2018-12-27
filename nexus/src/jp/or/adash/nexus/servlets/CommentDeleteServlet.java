@@ -27,7 +27,6 @@ public class CommentDeleteServlet extends HttpServlet {
      */
     public CommentDeleteServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -64,6 +63,7 @@ public class CommentDeleteServlet extends HttpServlet {
 
 		}else {
 		// 失敗した場合、削除対象だった行をオブジェクトで返す
+		// TODO commentSearch2メソッドを利用してcommentオブジェクトを取得する
 			String companyNo = request.getParameter("companyno");				// 事業所番号
 			String kyujinNo = request.getParameter("kyujinno");				// 求人番号
 			String jobSeekerId = request.getParameter("jobseekeeid");			// 求職者ID

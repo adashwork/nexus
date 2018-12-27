@@ -61,7 +61,7 @@
 			<div class="comment">
 				<table class="c1">
 					<tr>
-						<th>企業番号</th>
+						<th>事業所番号</th>
 						<th>求職者ID</th>
 					</tr>
 					<tr>
@@ -71,13 +71,13 @@
 							value="<c:out value="${ comment.jobSeekerId }" />"></td>
 					</tr>
 					<tr>
-						<th>求人番号</th>
+						<th>求人No</th>
 						<th>マッチングID</th>
 					</tr>
 					<tr>
 						<td><input type="text" name="kyujinno" id="kyujinno"
 							value="<c:out value="${ comment.kyujinNo }" />"></td>
-						<td><input type="text" name="matchid" id="matchid"
+						<td><input type="number" name="matchid" id="matchid"
 							value="<c:if test="${ comment.matchId >=0 }"><c:out value="${ comment.matchId }" /></c:if>"></td>
 					</tr>
 					</thead>
@@ -89,6 +89,7 @@
 						<tr>
 							<td>
 							<!-- genreの値でselectedを分岐させる -->
+							<!-- TODO もっと省略して書く -->
 								<select name="genre" id="genre">
 									<c:choose>
 										<c:when test="${ comment.genre == '1' }">
@@ -132,12 +133,12 @@
 											<option value="9" selected>その他</option>
 										</c:when>
 										<c:otherwise>
-									<option value="0">えらんでください</option>
-									<option value="1">求職者</option>
-									<option value="2">企業</option>
-									<option value="3">求人</option>
-									<option value="4">マッチング</option>
-									<option value="9">その他</option>
+											<option value="0">えらんでください</option>
+											<option value="1">求職者</option>
+											<option value="2">企業</option>
+											<option value="3">求人</option>
+											<option value="4">マッチング</option>
+											<option value="9">その他</option>
 										</c:otherwise>
 									</c:choose>
 								</select>
@@ -147,10 +148,10 @@
 							<td>
 								<c:choose>
 									<c:when test="${ comment.important == '1' }">
-										<input type="checkbox" name="important" value="1" chekced>重要
+										<input type="checkbox" name="important" value="1" checked>重要
 									</c:when>
 									<c:otherwise>
-								<input type="checkbox" name="important" value="1">重要
+										<input type="checkbox" name="important" value="1">重要
 									</c:otherwise>
 								</c:choose>
 							</td>
@@ -191,6 +192,7 @@
 				</div>
 			</div>
 
+			<!-- ボタン -->
 			<c:if test="${ !empty comment.id }">
 				<input class="main-b"type="submit" id="comment-update" onclick="MovePages(this)"value="更新">
 				<input class="main-b" type="submit" id="comment-delete"onclick="MovePages(this)" value="削除">

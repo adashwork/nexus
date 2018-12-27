@@ -1,6 +1,7 @@
 package jp.or.adash.nexus.servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -10,10 +11,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import jp.or.adash.nexus.entity.Jobseeker_simple_entity;
+import jp.or.adash.nexus.entity.CompanySearch;
+import jp.or.adash.nexus.entity.CompanySearchResult;
+import jp.or.adash.nexus.entity.JobCategory;
 import jp.or.adash.nexus.entity.Staff;
-import jp.or.adash.nexus.entity.StaffName;
-import jp.or.adash.nexus.services.JobSeekerService;
+import jp.or.adash.nexus.services.AccountListService;
+import jp.or.adash.nexus.services.CompanyService;
+import jp.or.adash.nexus.services.JobCategoryService;
 
 /**
  * Servlet implementation class JobSeekerSearchServlet
@@ -22,10 +26,6 @@ import jp.or.adash.nexus.services.JobSeekerService;
  */
 @WebServlet("/web/matching-companyid-search")
 public class MatchingCompanyIdSearchServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-	private String js_id;
-	private String js_kana;
-	private String st_name;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -39,28 +39,41 @@ public class MatchingCompanyIdSearchServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		//セッションからログインスタッフ情報を取得
 		HttpSession session = request.getSession(true);
 		Staff staff = (Staff) session.getAttribute("UserData");
 
-		// 1.検索する求職者ID、求職者かな名、担当者氏名を取得する
-		this.js_id = request.getParameter("js_id");
-		this.js_kana = request.getParameter("js_kana");
-		this.st_name = request.getParameter("st_name");
 
-		// 2.求職者情報一覧を取得する
-		JobSeekerService service = new JobSeekerService();
-		List<Jobseeker_simple_entity> list = service.getJobSeeker(js_id, js_kana, st_name);
+		String companyName = request.getParameter("companyname");
+		String staffId = request.getParameter("staffid");
+		String jobCategory = request.getParameter("jobcategory");
+		String companyPlace = request.getParameter("companyplace");
 
-		// 3.担当紹介者氏名を取得する
-		List<StaffName> st_name = service.getTantoStaff();
+		// プルダウンで表示する「業種（産業大分類）」を呼び出す
+		// optionのvalueに入れるのはコード、表示するのは業種名
+		List<JobCategory> jobCategoryList = new ArrayList<JobCategory>();
+		JobCategoryService jcs = new JobCategoryService();
+		jobCategoryList = jcs.getLargeJobCategoryList();
+		request.setAttribute("jobcategorylist", jobCategoryList);
 
-		// 4.求職者情報を初期化
-		request.removeAttribute("list");
+		// プルダウンで表示する「担当者」を呼び出す
+		// optionのvalueに入れるのはコード、表示するのは担当者名
+		List<Staff> staffList = new ArrayList<Staff>();
+		AccountListService als = new AccountListService();
+		staffList = als.getAccountList();
+		request.setAttribute("stafflist", staffList);
 
-		// 5.求職者情報、担当紹介者氏名をリクエストに格納する
+
+		// 入力された値をオブジェクトに詰める
+		CompanySearch cse = new CompanySearch(companyName, staffId, jobCategory, companyPlace);
+
+		// CompanyService呼び出し、返されたList<CompanySearchResult>をリクエストに格納してJSPへ
+		CompanyService companyService = new CompanyService();
+		List<CompanySearchResult> companyList = companyService.getCompanyList(cse);
+		request.setAttribute("companylist", companyList);
+		request.setAttribute("messages", companyService.getMessages());
+		request.setAttribute("cse",cse);
 		request.setAttribute("Staff", staff);
-		request.setAttribute("list", list);
-		request.setAttribute("st_name", st_name);
 
 		// 6.JSPにフォワードする
 		request.getRequestDispatcher("/matching_companyid_search.jsp").forward(request, response);

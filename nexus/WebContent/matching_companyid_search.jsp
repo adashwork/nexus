@@ -27,6 +27,7 @@
 <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/Base/jquery-ui.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
 <script type="text/javascript" src="../js/common.js"></script>
+<script type="text/javascript" src="../js/matching_idsearch.js"></script>
 </head>
 
 <body>
@@ -46,26 +47,26 @@
 	</header>
 <main>
 
-	<h2>企業ID情報検索 &darr;</h2>
+	<h2>事業所番号情報検索 &darr;</h2>
 
-		<form action="/nexus/web/matching-companyid-search" method="post">
+		<form action="/nexus/web/matching-companyid-search" method="get" name="search">
 			<div class="m_div">
 				<p class="m_p">
-					企業名漢字<br/>
-					<input type="text" name="conpany_kanji" size=13  value="">
-				</p>
-				<p class="m_p">
-					企業名かな<br/>
-					<input type="text" name="conpany_kana" size=13  value="">
+					企業名カナ<br/>
+				<input id="companyname" class="word" name="companyname" type="text" value="<c:out value="${ cse.companyName }" />"
+					placeholder="企業名を入れてください（カナ対応）" tabindex="1" />
 				</p>
 				<p class="m_p">
 					担当紹介者<br/>
-					<select name="st_name">
-							<option></option>
-							<c:forEach var="staff" items="${ st_name }">
-								<option value="${ staff.name }"><c:out value="${ staff.name }" /></option>
-							</c:forEach>
-					</select>
+				<select name="staffid">
+					<option value=""></option>
+					<c:forEach var="staff" items="${ stafflist }">
+						<option value="<c:out value="${ staff.id }" />" <c:if test="${cse.staffId == staff.id }">
+									selected
+									</c:if>><c:out
+								value="${ staff.name }" /></option>
+					</c:forEach>
+				</select>
 				</p>
 				<p class="m_right"><input type="submit" class="main-b" name="send" value="検索"></p>
 			</div>
@@ -74,21 +75,18 @@
 	<table class="list_table">
 		<tr>
 			<th></th>
-			<th>企業ID</th>
+			<th>事業所番号</th>
 			<th>企業名</th>
-			<th>担当紹介者</th>
 		</tr>
-		<c:forEach var="jobseeker" items="${ list }">
+		<c:forEach var="company" items="${ companylist }">
 			<tr>
 				<td>
-					<form action="/nexus/web/matching-companyid-search" method="post">		<!-- TODO: ■要変更 -->
-						<button class="mini_b mini_b_applilist" name="js_id"
-							value="<c:out value="${ jobseeker.id }" />">入力</button>
-					</form>
+					<input name="id_name_company" type="button" value="入力" />
+					<input type="hidden" value="<c:out value="${ company.companyNo }" />" />
+					<input type="hidden" value="<c:out value="${ company.companyName }" />" />
 				</td>
-				<td><fmt:formatNumber value="${ jobseeker.id }" pattern="00000000"/></td>	<!-- TODO: ■要変更 -->
-				<td><c:out value="${ jobseeker.js_name }" /></td>
-				<td><c:out value="${ jobseeker.st_name }" /></td>
+				<td><c:out value="${ company.companyNo }" /></td>
+				<td><c:out value="${ company.companyName }" /></td>
 			</tr>
 		</c:forEach>
 	</table>

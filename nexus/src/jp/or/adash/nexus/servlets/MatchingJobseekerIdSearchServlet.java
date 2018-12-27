@@ -43,22 +43,26 @@ public class MatchingJobseekerIdSearchServlet extends HttpServlet {
 		HttpSession session = request.getSession(true);
 		Staff staff = (Staff) session.getAttribute("UserData");
 
-		// 1.検索する求職者名（漢字）、求職者名（かな）、担当者氏名を取得する
-		this.js_name = request.getParameter("js_name");
+
+		// 1.検索する求職者ID、求職者かな名、担当者氏名を取得する
+		this.js_id = request.getParameter("js_id");
 		this.js_kana = request.getParameter("js_kana");
 		this.st_name = request.getParameter("st_name");
 
-		// 2.求職者情報一覧を取得する（求職者ID、求職者名前（漢字・かな））
+		// 2.求職者情報一覧を取得する
 		JobSeekerService service = new JobSeekerService();
 		List<Jobseeker_simple_entity> list = service.getJobSeeker(js_id, js_kana, st_name);
 
 		// 3.担当紹介者氏名を取得する
-		List<StaffName> staffs = service.getTantoStaff();
+		List<StaffName> st_name = service.getTantoStaff();
+
+		// 4.求職者情報を初期化
+		request.removeAttribute("list");
 
 		// 5.求職者情報、担当紹介者氏名をリクエストに格納する
 		request.setAttribute("Staff", staff);
 		request.setAttribute("list", list);
-		request.setAttribute("staffs", staffs);
+		request.setAttribute("st_name", st_name);
 
 		// 6.JSPにフォワードする
 		request.getRequestDispatcher("/matching_jobseekerid_search.jsp").forward(request, response);

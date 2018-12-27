@@ -27,6 +27,8 @@
 <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/Base/jquery-ui.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
 <script type="text/javascript" src="../js/common.js"></script>
+<script type="text/javascript" src="../js/matching_idsearch.js"></script>
+
 </head>
 
 <body>
@@ -82,70 +84,73 @@
 		<table border="0">
 
 			<tr>
-				<th>
+				<th width="30%">
 					マッチングID
 				</th>
-				<td>	<!-- komukai 2018/12/19 マッチングID欄：コメントアウト -->
+				<td width="35%">	<!-- komukai 2018/12/19 マッチングID欄：コメントアウト -->
 <!-- 					<input type="text" name="no" size="10" value="">  -->
 	  	 			<input type="hidden" name="nohidden" value="<c:out value="${ matching.id }" />">
 					<fmt:formatNumber value="${ matching.id }" pattern="00000000"/>
 				</td>
-				<td>
+				<td width="35%">
 
 				</td>
 			</tr>
 			<tr>
-				<th>
-					企業ID
+				<th width="30%">
+					事業所番号
 				</th>
-				<td>
-																	<!-- komukai　2018/12/17 ID検索ボタン内編集 -->
-					<input type="text" name="companyNo" size="10" maxlength="13" value="<c:out value="${ matching.companyNo }" />">
-					<input type="button" value="企業ID検索"
-						onclick="window.open('/nexus/web/matching-companyid-search','','width=750,height=*,resizeable=yes')">
+				<td width="35%">
+																	<!-- komukai　2018/12/26 ID検索ボタン内編集 -->
+					<input type="text" name="companyNo" size="10" maxlength="13" id="company_id"
+						value="<c:out value="${ matching.companyNo }" />">
+					<input type="button" value="企業ID検索" id="company_sb">
 
 				</td>
-				<td>
+				<td align="right" width="35%">
+					<span>企業名</span><input id="company_name" type="text" size="15" placeholder="読み取り専用" readonly />
 				</td>
 			</tr>
 			<tr>
-				<th>
-					求人ID
+				<th width="30%">
+					求人No
 				</th>
-				<td>
-																	<!-- komukai　2018/12/17 ID検索ボタン内編集 -->
-					<input type="text" name="kyujinno" size="10" maxlength="14" value="<c:out value="${ matching.kyujinno }" />">
-					<input type="button" value="求人ID検索"
-						onclick="window.open('/nexus/web/matching-kyujinid-search','','width=750,height=*,resizeable=yes')">
+				<td width="35%">
+																	<!-- komukai　2018/12/26 ID検索ボタン内編集 -->
+					<input type="text" name="kyujinno" size="10" maxlength="14" id="kyujin_id"
+						value="<c:out value="${ matching.kyujinno }" />">
+					<input type="button" value="求人ID検索" id="kyujin_sb">
 				</td>
-				<td>
+				<td align="right" width="35%">
+					<span>職種</span><input id="kyujin_job" type="text" size="15" placeholder="読み取り専用" readonly />
 				</td>
 			</tr>
 			<tr>
-				<th>
+				<th width="30%">
 					求職者ID
 				</th>
-				<td>
-																	<!-- komukai　2018/12/18 ID検索ボタン内編集 -->
-					<input type="text" name="jobseekerid" size="10" maxlength="8" value="<c:out value="${ matching.jobseekerid }" />">
-					<input type="button" value="求職者ID検索"
-						onclick="window.open('/nexus/web/matching-jobseekerid-search','','width=750,height=*,resizeable=yes,scrollbars=yes')">
+				<td width="35%">
+																	<!-- komukai　2018/12/26 ID検索ボタン内編集 -->
+					<input type="text" name="jobseekerid" size="10" maxlength="8" id="jobseeker_id"
+						value="<c:out value="${ matching.jobseekerid }" />">
+					<input type="button" value="求職者ID検索" id="jobseeker_sb" />
 				</td>
-				<td>
+				<td align="right" width="35%">
+					<span>求職者名</span><input id="jobseeker_name" type="text" size="15" placeholder="読み取り専用" readonly />
 				</td>
 			</tr>
 			<tr>
-				<th>
+				<th width="30%">
 					職業紹介者ID
 				</th>
-				<td>
+				<td width="35%">
 					<input type="text" name="staffid" size="4" maxlength="4" onkeyup="if(event.keyCode==9||event.keyCode==16) return;
         				this.value=this.value.replace(/[^0-9]+/i,'');"
 						<c:if test="${ matching.staffid == null }">value="<fmt:formatNumber value="${ Staff.id }" pattern="0000" />"</c:if>
 						<c:if test='${ matching.staffid != null }'>value="<fmt:formatNumber value='${ matching.staffid }' pattern='0000' />"</c:if>
 					>
 				</td>
-				<td>
+				<td width="35%">
 				</td>
 			</tr>
 <!-- 			<tr> -->
@@ -160,21 +165,21 @@
 <!-- 				</td> -->
 <!-- 			</tr> -->
 			<tr>
-				<th>
+				<th width="30%">
 					面接日
 				</th>
-				<td>
+				<td width="35%">
 					<input type="text" class="datepicker" size="10" name="interviewdt"
 					value="<fmt:formatDate value="${ matching.interviewdt }" pattern="yyyy-MM-dd"/>">
 				</td>
-				<td>
+				<td width="35%">
 				</td>
 			</tr>
 			<tr>
-				<th>
+				<th width="30%">
 					選考結果						<!-- TODO：採用不採用に変換してOKか -->
 				</th>
-				<td>
+				<td width="35%">
 					<input name="assessment" type="radio" value="0"
 					<c:if test="${ 1 != matching.assessment && 2 != matching.assessment }">checked="checked"</c:if>> 確認中
 					<input name="assessment" type="radio" value="1"
@@ -182,18 +187,18 @@
 					<input name="assessment" type="radio" value="2"
 					<c:if test="${ 2 == matching.assessment }">checked="checked"</c:if>> 不採用
 				</td>
-				<td>
+				<td width="35%">
 				</td>
 			</tr>
 			<tr>
-				<th>
+				<th width="30%">
 					入社日
 				</th>
-				<td>
+				<td width="35%">
 					<input type="text" class="datepicker" size="10" name="enterdt"
 					value="<fmt:formatDate value="${ matching.enterdt }" pattern="yyyy-MM-dd"/>">
 				</td>
-				<td>
+				<td width="35%">
 				</td>
 			</tr>
 			</table>

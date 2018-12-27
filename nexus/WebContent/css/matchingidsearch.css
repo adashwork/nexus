@@ -7,12 +7,20 @@
 
 .inner-button{
     float: left;
-     margin-left: 10px;
+    margin-left: 10px;
 }
+
+
+/*　【子画面用：幅調整】
+	2018.12月 komukai追加　*/
 
 main{
   width:700px;
 }
+
+
+/*　【divタグ】
+	2018.12月 komukai追加　*/
 
 .m_div {
 	font-size:1rem;
@@ -22,7 +30,10 @@ main{
 	padding:10px;
 	}
 
-/*　pタグ　*/
+
+/*　【pタグ】
+	2018.12月 komukai追加　*/
+
 .m_p{
 	float:left;
 	padding:5px 10px 5px 10px;

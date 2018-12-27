@@ -1,22 +1,29 @@
-function disp(url){
-   window.open(url,'','width=750,height=*,resizeable=yes,scrollbars=yes');
-}
+/**
+ *　2018.12月 komukai マッチング登録画面：ID検索用に作成
+ *　備考：検索ボタンを押下時の動作を、変数ではなく
+ *　		事業所番号・求人No・求職者IDそれぞれに分けて作成
+ *			時間があれば、変数に変更要。
+ */
 
-// '/nexus/web/matching-jobseekerid-search'
-// '/nexus/web/matching-companyid-search'
+function disp(url){
+   window.open(url,'','width=750,,resizeable=yes,scrollbars=yes');
+}
 
 var parantExistanceFlag = true;
 
-//企業ＩＤ
+/**
+ * 事業所番号検索
+ *
+ */
 function clickEnterCompany(company){
 
-    //ウィンドウオブジェクトが存在していない時警告してフラグをfalseに
+    // ウィンドウオブジェクトが存在していない時警告してフラグをfalseに
     if ( !window.opener || !Object.keys(window.opener).length ) {
         window.alert('親画面が存在しません')
         parantExistanceFlag = false
     }
 
-    //親画面に値を挿入
+    // 親画面に値を挿入
     if(parantExistanceFlag){
        window.opener.$('#company_id').val(company.next().val());
        window.opener.$('#company_name').val(company.next().next().val());
@@ -36,7 +43,10 @@ $(function() {
 
   });
 
-//求人ＩＤ
+/**
+ * 求人No検索
+ *
+ */
 function clickEnterKyujin(kyujin){
 
     //ウィンドウオブジェクトが存在していない時警告してフラグをfalseに
@@ -65,8 +75,10 @@ $(function() {
 
   });
 
-
-//求職者ＩＤ
+/**
+ * 求職者ID検索
+ *
+ */
 function clickEnter(obj){
 
     //ウィンドウオブジェクトが存在していない時警告してフラグをfalseに

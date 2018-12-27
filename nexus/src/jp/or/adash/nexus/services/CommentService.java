@@ -116,6 +116,9 @@ public class CommentService {
 			// トランザクションをロールバックする
 			transaction.rollback();
 
+			// 登録に失敗した場合は備考IDを返さない
+			comment.setId(null);
+
 			// エラーメッセージをセットする
 			messages.add(MessageCommons.ERR_DB_CONNECT);
 		} finally {

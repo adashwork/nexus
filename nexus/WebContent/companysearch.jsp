@@ -134,7 +134,7 @@
 	<footer> <small>Copyright(C) 2009有限責任事業組合
 		大阪職業教育協働機構(A'ワーク創造館) All Rights Reserved.</small> </footer>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script type="text/javascript" src="../js/common.js"></script>
+<!-- <script type="text/javascript" src="../js/common.js"></script> -->
 		 <script type="text/javascript" src="../js/companysearch.js"></script>
 </body>
 </html>

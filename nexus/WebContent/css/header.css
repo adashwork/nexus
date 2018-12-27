@@ -130,11 +130,9 @@ header > section {
   display:flex;
   align-items:center;
 }
-
 .user .user__wrapper .user__name .drop-menu li a:hover {
   color:#329bcf;
 }
-
 .user .user__wrapper .user__name .drop-menu li i {
   position:absolute;
   right:20px;

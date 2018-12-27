@@ -264,12 +264,13 @@ public class KyujinService {
 
 		//雇用期間の定め
 		length = DataCommons.getBytes(kyujin.getKoyoukikan());
-		if (length < 0 || length > 30) {
-			messages.add("雇用期間は30字以内にしてください。");
+		if (length < 0 || length > 90) {
+			messages.add("雇用期間の定めは30字以内にしてください。");
 			result = false;
 		}
 
-		if (kyujin.getKoyoukikan().equals("1")) {
+		if (!kyujin.getKoyoukikan().equals("") && !kyujin.getKoyoukikan().equals("なし")
+				&& !kyujin.getKoyoukikan().equals("無し") && !kyujin.getKoyoukikan().equals("無")) {
 
 			if (kyujin.getKoyoukikankaishi() == null || kyujin.getKoyoukikanowari() == null) {
 				messages.add("雇用期間の期限を入れてください。");
@@ -450,32 +451,48 @@ public class KyujinService {
 		//			result = false;
 		//		}
 
-		/*		//選考担当者　役職名の長さチェック
-				msg = DataCommons.chksDigits(kyujin.getTantouyakushoku(), 28);
-				if (msg != null) {
-					messages.add(msg);
-					result = false;
-				}
-				//採用担当者名　長さ、ひらがなチェック
-				msg = DataCommons.chksDigits(kyujin.getTantoukana(), 28);
-				if (msg != null) {
-					messages.add(msg);
-					result = false;
-				}
-				if (!kyujin.getTantoukana().equals("")) {
-					msg = DataCommons.chkHiragana(kyujin.getTantoukana());
-					if (msg != null) {
-						messages.add(msg);
-						result = false;
-					}
-				}
-				//選考担当者名　長さチェック
-				msg = DataCommons.chksDigits(kyujin.getTantou(), 14);
-				if (msg != null) {
-					messages.add(msg);
-					result = false;
-				}
-		*/
+		//シフト制の長さチェック
+		msg = DataCommons.chksDigits(kyujin.getShift(), 60);
+		if (msg != null) {
+			messages.add("シフト制は60字以内にしてください");
+			result = false;
+		}
+		//フレックスタイム制の長さチェック
+		msg = DataCommons.chksDigits(kyujin.getFlex(), 60);
+		if (msg != null) {
+			messages.add("フレックスタイム制は60字以内にしてください");
+			result = false;
+		}
+		// 時間外労働の値が適切か
+		msg = DataCommons.chkiDigits(kyujin.getJikangai(), 2);
+		if (msg != null) {
+			messages.add("時間外労働は2桁以内にしてください");
+			result = false;
+		}
+		// 試用期間の値が適切か
+		msg = DataCommons.chkiDigits(kyujin.getSiyoukikan(), 1);
+		if (msg != null) {
+			messages.add("試用期間は1桁にしてください");
+			result = false;
+		}
+		// 週所定労働日数の値が適切か
+		msg = DataCommons.chkiDigits(kyujin.getWorkdays(), 1);
+		if (msg != null) {
+			messages.add("週所定労働日数は1桁にしてください");
+			result = false;
+		}
+		// 年間休日日数の値が適切か
+		msg = DataCommons.chksDigits(kyujin.getNenkanholiday(), 30);
+		if (msg != null) {
+			messages.add("年間休日日数は30字以内にしてください");
+			result = false;
+		}
+		//応募書類の長さチェック
+		msg = DataCommons.chksDigits(kyujin.getApplicationform(), 500);
+		if (msg != null) {
+			messages.add("応募書類は500字以内にしてください");
+			result = false;
+		}
 		//応募書類の長さチェック
 		msg = DataCommons.chksDigits(kyujin.getApplicationform(), 500);
 		if (msg != null) {
@@ -486,6 +503,12 @@ public class KyujinService {
 		msg = DataCommons.chksDigits(kyujin.getBackground(), 1000);
 		if (msg != null) {
 			messages.add("募集背景は1000字以内にしてください");
+			result = false;
+		}
+		//募集人員の長さチェック
+		msg = DataCommons.chksDigits(kyujin.getBosyunumbers(), 4);
+		if (msg != null) {
+			messages.add("募集人員は4桁以内にしてください");
 			result = false;
 		}
 		// （求職者非公開）年齢の下限・上限の値が適切か
@@ -516,7 +539,7 @@ public class KyujinService {
 		//その他非公開情報の長さチェック
 		msg = DataCommons.chksDigits(kyujin.getHiddenetc(), 1000);
 		if (msg != null) {
-			messages.add("非公開年齢の" + msg);
+			messages.add("その他非公開情報は1000字以内にしてください");
 			result = false;
 		}
 		// 受付年月日（西暦）の日付が妥当かチェック
@@ -643,6 +666,7 @@ public class KyujinService {
 			transaction.commit();
 
 		} catch (IOException e) {
+			kyujin.setNo(null);
 			// トランザクションをロールバックする
 			transaction.rollback();
 

@@ -68,7 +68,7 @@
 
 
 				<tr>
-					<th>事業所番号(ハイフンあり) [必須] </th>
+					<th>事業所番号(ハイフンあり)</th>
 
 					<td><c:if test="${ status == 'regist' }">
 							<input type="text" name="companyno"
@@ -261,48 +261,11 @@
 	</div>
 
 
-
-
-
-	<div id="comment">
-		<c:forEach var="comment" items="${ commentlist }">
-			<li><c:out value="${ message }" /></li>
-			<table>
-				<tr>
-					<th>フリーコメント</th>
-				</tr>
-
-				<tr>
-					<td><textarea rows="2" cols="24" name="title"><c:out
-								value="${ comment.title }" /></textarea></td>
-					<td>重要<br> <input type="checkbox" name="important"
-						value="重要"></td>
-				</tr>
-				<tr>
-					<td><textarea rows="16" cols="74" name="freecomment"><c:out
-								value="${ comment.note }" /></textarea></td>
-				</tr>
-				<tr>
-					<td>作成日<textarea rows="1" cols="20" name="comnetcreatedt"><c:out
-								value="${ comment.createDt }" /></textarea></td>
-					<td>最終更新日<textarea rows="1" cols="20" name="commentupdatedt"><c:out
-								value="${ comment.updateDt }" /></textarea></td>
-				</tr>
-				<tr>
-					<td>作成者ID<textarea rows="1" cols="20"
-							name="commentregistrationperson"><c:out
-								value="${ comment.createUserId }" /></textarea></td>
-					<td>作成者<textarea rows="1" cols="20"
-							name="commentregistrationperson"><c:out
-								value="${ staffNameMap[comment.createUserId] }" /></textarea></td>
-					<td>最終更新者ID<textarea rows="1" cols="20"
-							name="commentupdateperson"><c:out
-								value="${ comment.updateUserId }" /></textarea></td>
-				</tr>
-			</table>
-		</c:forEach>
-	</div>
+	<c:if test="${ status != 'regist' }">
+	<%@ include file="/commentsearch_frame.jsp"%>
+	</c:if>
 	</main>
+
 	<!-- フッター　-->
 	<footer>
 		<small>Copyright(C) 2009有限責任事業組合 大阪職業教育協働機構(A'ワーク創造館) All

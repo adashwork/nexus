@@ -38,36 +38,13 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
 <script type="text/javascript" src="../js/common.js"></script>
 <script type="text/javascript" src="../js/applicantregist_tab.js"></script>
+<script type="text/javascript" src="../js/comment.js"></script>
 
 <title>求職者詳細情報</title>
 </head>
 <body>
 
-<c:forEach var="comment" items="${ commentlist }">
-<div id="wrap">
-  <div class="comment">
-		<h3>フリーコメント1</h3>
-		<p>タイトル<p>
-		<input class="comment-title" type="text" name="title" value="<c:out value="${ comment.title }"/>" >
-		<p>内容<p>
-		<textarea rows="4" cols="50" wrap="hard"><c:out value="${ comment.note }"/></textarea>
-	</div>
-  <div class="down">
-		<div class="box">
-			<p>登録ID：<c:out value="${ comment.createUserId }" /></p>
-			<p>更新ID：<c:out value="${ comment.updateUserId }" /></p>
-	  	</div>
- 		<div class="box">
-			<p>登録日:<c:out value="${ comment.createDt }" /></p>
-		  	<p>更新日:<c:out value="${ comment.updateDt }" /></p>
-	    </div>
-  </div>
-<form method="get" action="./comment-disp">
-		<button class="main-b" type="submit" name="commentid" value="<c:out value="${ comment.id }" />" >
-		詳細
-		</button>
-</form>
-</c:forEach>
+<%@ include file="/commentsearch_frame.jsp"%>
 
 	<footer>
 		<small>Copyright(C) 2009有限責任事業組合 大阪職業教育協働機構(A'ワーク創造館) All

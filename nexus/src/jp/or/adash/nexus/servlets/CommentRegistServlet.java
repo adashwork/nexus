@@ -81,6 +81,7 @@ public class CommentRegistServlet extends HttpServlet {
 			comment = commentService.insertComment(comment);
 		}
 		// trueならIDも返す、falseならIDは返さない
+		// TODO 登録に成功した時はデータベースからその行を取得し、commentオブジェクトをrequestに格納する
 		request.setAttribute("comment", comment);
 		request.setAttribute("messages", commentService.getMessages());
 		request.setAttribute("Staff", staff);

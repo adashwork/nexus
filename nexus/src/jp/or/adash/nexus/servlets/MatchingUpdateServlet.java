@@ -74,6 +74,7 @@ public class MatchingUpdateServlet extends HttpServlet {
 		Integer matchId = id;									// 追加 2018/12/20 T.Ikeda
 		String genre = "4";	 // 1:求職者情報　2:企業情報　3:求人情報　4:マッチング情報    追加 2018/12/20 T.Ikeda
 		String important = request.getParameter("important");	// 追加,修正 2018/12/20 T.Ikeda
+		// チェックボックスにチェックがない場合0を取得
 		if (important == null) {
 			important = "0";
 		}
@@ -85,6 +86,7 @@ public class MatchingUpdateServlet extends HttpServlet {
 				assessment, noteM, createDt, createUserId, updateDt, updateUserId);		// companyNo追加・修正 2018/12/11.12 T.Ikeda
 
 		// マッチングコメントオブジェクトを作成                 // 追加 2018/12/20 T.Ikeda
+		// TODO コメント一元化処理に変更
 		comment = new Comment(0, companyNo, kyujinNo, jobseekerId, staffId, matchId,
 				genre, important, title, note, createDt, createUserId,
 				updateDt, updateUserId);

@@ -1,5 +1,5 @@
 /**
- *
+ * @author tanaka
  * ボタン押したらコメントのページのウィンドウが画面中央に開く
  */
 function WindowOpen(commentid){
@@ -22,14 +22,17 @@ function WindowOpen(commentid){
 }
 
 /**
- *
+ * @author tanaka
  * ボタン押したらページを閉じる
  */
 function CloseWindow(){
 	window.open('about:blank','_self').close();
 }
 
-
+/**
+* @author tanaka
+* カテゴリーの選択に応じて、必須入力の指定を変更する。
+*/
 
 $(function() {
 $('#genre').change(function() {

@@ -161,7 +161,7 @@
 				<tr>
 					<th>資本金</th>
 					<td><input type="text" name="capital"
-						value="${ company.capital }" />万円</td>
+						value="${ company.capital }" />百万円</td>
 				</tr>
 				<tr>
 					<th>従業員数</th>

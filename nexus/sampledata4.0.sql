@@ -23,7 +23,7 @@ use trynexus;
 -- 職業紹介者マスタのサンプルデータ
 insert into staff values('0001','藤谷勉','ふじたにつとむ','1','111',current_timestamp,'0001',current_timestamp,'0001',0);
 insert into staff values('0002','森下健三郎','もりしたけんざぶろう','2','222',current_timestamp,'0002',current_timestamp,'0002',0);
-insert into staff values('0003','大西奈央','おおにしなお','2','333',current_timestamp,'0001',current_timestamp,'0002',0);
+insert into staff values('0003','大西奈央','おおにしなお','1','333',current_timestamp,'0001',current_timestamp,'0002',0);
 
 
 -- 求職者マスタのサンプルデータ

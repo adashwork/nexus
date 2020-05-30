@@ -177,7 +177,11 @@ public class JobSeeker_dao {
 	}
 
 	/**
-	 * 求職者ID、求職者かな名、担当紹介者氏名を元に、求職者情報（1件）を取得する
+	 * 求職者ID、求職者かな名、担当紹介者氏名を元に、求職者情報を取得する
+	 * @param js_id 求職者ID
+	 * @param js_kana 求職者かな名
+	 * @param st_name 担当紹介者氏名
+	 * @return 検索結果の求職者情報リスト
 	 * @auther aihara , tanaka
 	 * 	 * 追記 jobseekerテーブルの分裂に対応。
 	 * 		    コメントの更新日時順に表示されるように変更。
@@ -212,10 +216,10 @@ public class JobSeeker_dao {
 					// 取得結果をリストに格納する
 					while(rs.next()) {
 						jobseeker.add(new Jobseeker_simple_entity(
-								rs.getString("js.id"),
-								rs.getString("js.name"),
+								rs.getString("id"),
+								rs.getString("name"),
 								rs.getInt("age"),
-								rs.getString("zjs.sex"),
+								rs.getString("sex"),
 								rs.getString("jobcategoryname"),
 								rs.getString("jobname"),
 								rs.getString("todouhukenname"),

@@ -124,7 +124,9 @@ public class JobSeekerService {
 
 	/**
 	 * 求職者情報を検索する
-	 * @param 求職者ID js_id,求職者かな名 js_kana,担当紹介者氏名 st_name
+	 * @param js_id 求職者ID
+	 * @param js_kana 求職者かな名
+	 * @param st_name 担当紹介者氏名
 	 * @return 求職者情報
 	 * @author aihara
 	 */

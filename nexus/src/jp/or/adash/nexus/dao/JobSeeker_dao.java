@@ -180,7 +180,7 @@ public class JobSeeker_dao {
 	 * 求職者ID、求職者かな名、担当紹介者氏名を元に、求職者情報を取得する
 	 * @param js_id 求職者ID
 	 * @param js_kana 求職者かな名
-	 * @param st_name 担当紹介者氏名
+	 * @param stId 担当紹介者ID
 	 * @return 検索結果の求職者情報リスト
 	 * @auther aihara , tanaka
 	 * 	 * 追記 jobseekerテーブルの分裂に対応。
@@ -189,13 +189,13 @@ public class JobSeeker_dao {
 	 * 		    希望業種、希望職種、希望勤務地が番号表示になっていたため、正しい表示に修正
 	 * @throws IOException
 	 */
-	public List<Jobseeker_simple_entity> selectJobSeeker(String js_id,String js_kana,String st_name) throws IOException {
+	public List<Jobseeker_simple_entity> selectJobSeeker(String js_id,String js_kana,String stId) throws IOException {
 		List<Jobseeker_simple_entity> jobseeker = new ArrayList<Jobseeker_simple_entity>();
 		// SQL文を生成する
 		StringBuffer sql = new StringBuffer();
 
 		// 1.求職者ID、求職者かな名、担当紹介者氏名が入っている場合
-		if(!("".equals(js_id)) && !("".equals(js_kana)) && !("".equals(st_name))) {
+		if(!("".equals(js_id)) && !("".equals(js_kana)) && !("".equals(stId))) {
 
 			sql.append(" select js.id, js.name, zjs.sex, st.name AS staffname,jc.name AS jobcategoryname,jb.name AS jobname,tk.name AS todouhukenname,TIMESTAMPDIFF(YEAR,zjs.birthdt,CURDATE()) AS age");
 			sql.append(" from jobseeker js");
@@ -210,7 +210,7 @@ public class JobSeeker_dao {
 			try (PreparedStatement ps = this.conn.prepareStatement(sql.toString())) {
 				ps.setString(1, js_id);
 				ps.setString(2, js_kana);
-				ps.setString(3, st_name);
+				ps.setString(3, stId);
 				// SQL文を実行する
 				try (ResultSet rs = ps.executeQuery()) {
 					// 取得結果をリストに格納する
@@ -234,7 +234,7 @@ public class JobSeeker_dao {
 			return jobseeker;
 		}
 		// 2.求職者ID、求職者かな名が入っている場合
-		else if(!("".equals(js_id)) && !("".equals(js_kana)) && "".equals(st_name)) {
+		else if(!("".equals(js_id)) && !("".equals(js_kana)) && "".equals(stId)) {
 			sql.append(" select js.id, js.name, zjs.sex, st.name AS staffname,jc.name AS jobcategoryname,jb.name AS jobname,tk.name AS todouhukenname,TIMESTAMPDIFF(YEAR,zjs.birthdt,CURDATE()) AS age");
 			sql.append(" from jobseeker js");
 			sql.append(" left join  comment cm on js.id = cm.jobseekerid ");
@@ -271,7 +271,7 @@ public class JobSeeker_dao {
 			return jobseeker;
 		}
 		// 3.求職者IDが入っている場合
-		else if(!("".equals(js_id)) && "".equals(js_kana) && "".equals(st_name)) {
+		else if(!("".equals(js_id)) && "".equals(js_kana) && "".equals(stId)) {
 			sql.append(" select js.id, js.name, zjs.sex, st.name AS staffname,jc.name AS jobcategoryname,jb.name AS jobname,tk.name AS todouhukenname,TIMESTAMPDIFF(YEAR,zjs.birthdt,CURDATE()) AS age");
 			sql.append(" from jobseeker js");
 			sql.append(" left join  comment cm on js.id = cm.jobseekerid  ");
@@ -308,7 +308,7 @@ public class JobSeeker_dao {
 		}
 
 		// 4.求職者かな名、担当紹介者氏名が入っている場合
-		else if("".equals(js_id) && !("".equals(js_kana)) && !("".equals(st_name))) {
+		else if("".equals(js_id) && !("".equals(js_kana)) && !("".equals(stId))) {
 			sql.append(" select js.id, js.name, zjs.sex, st.name AS staffname,jc.name AS jobcategoryname,jb.name AS jobname,tk.name AS todouhukenname,TIMESTAMPDIFF(YEAR,zjs.birthdt,CURDATE()) AS age");
 			sql.append(" from jobseeker js");
 			sql.append(" left join  comment cm on js.id = cm.jobseekerid ");
@@ -321,7 +321,7 @@ public class JobSeeker_dao {
 			sql.append(" ORDER BY  cm.updatedt DESC");
 			try (PreparedStatement ps = this.conn.prepareStatement(sql.toString())) {
 				ps.setString(1, js_kana);
-				ps.setString(2, st_name);
+				ps.setString(2, stId);
 				// SQL文を実行する
 				try (ResultSet rs = ps.executeQuery()) {
 					// 取得結果をリストに格納する
@@ -345,7 +345,7 @@ public class JobSeeker_dao {
 			return jobseeker;
 		}
 		// 5.求職者かな名が入っている場合
-		else if("".equals(js_id) && !("".equals(js_kana)) && "".equals(st_name)){
+		else if("".equals(js_id) && !("".equals(js_kana)) && "".equals(stId)){
 			sql.append(" select js.id, js.name, zjs.sex, st.name AS staffname,jc.name AS jobcategoryname,jb.name AS jobname,tk.name AS todouhukenname,TIMESTAMPDIFF(YEAR,zjs.birthdt,CURDATE()) AS age");
 			sql.append(" from jobseeker js");
 			sql.append(" left join  comment cm on js.id = cm.jobseekerid ");
@@ -381,7 +381,7 @@ public class JobSeeker_dao {
 			return jobseeker;
 		}
 		// 6.求職者ID、担当紹介者氏名が入っている場合
-		else if(!("".equals(js_id)) && "".equals(js_kana) && !("".equals(st_name))){
+		else if(!("".equals(js_id)) && "".equals(js_kana) && !("".equals(stId))){
 			sql.append(" select js.id, js.name, zjs.sex, st.name AS staffname,jc.name AS jobcategoryname,jb.name AS jobname,tk.name AS todouhukenname,TIMESTAMPDIFF(YEAR,zjs.birthdt,CURDATE()) AS age");
 			sql.append(" from jobseeker js");
 			sql.append(" left join  comment cm on js.id = cm.jobseekerid");
@@ -394,7 +394,7 @@ public class JobSeeker_dao {
 			sql.append(" ORDER BY  cm.updatedt DESC");
 			try (PreparedStatement ps = this.conn.prepareStatement(sql.toString())) {
 				ps.setString(1, js_id);
-				ps.setString(2, st_name);
+				ps.setString(2, stId);
 				// SQL文を実行する
 				try (ResultSet rs = ps.executeQuery()) {
 					// 取得結果をリストに格納する
@@ -418,7 +418,7 @@ public class JobSeeker_dao {
 			return jobseeker;
 		}
 		// 7.担当紹介者氏名が入っている場合
-		else if("".equals(js_id) && "".equals(js_kana) && !("".equals(st_name))){
+		else if("".equals(js_id) && "".equals(js_kana) && !("".equals(stId))){
 			sql.append(" select js.id, js.name, zjs.sex, st.name AS staffname,jc.name AS jobcategoryname,jb.name AS jobname,tk.name AS todouhukenname,TIMESTAMPDIFF(YEAR,zjs.birthdt,CURDATE()) AS age");
 			sql.append(" from jobseeker js");
 			sql.append(" left join  comment cm on js.id = cm.jobseekerid ");
@@ -430,7 +430,7 @@ public class JobSeeker_dao {
 			sql.append(" where st.name = ?");
 			sql.append(" ORDER BY  cm.updatedt DESC");
 			try (PreparedStatement ps = this.conn.prepareStatement(sql.toString())) {
-				ps.setString(1, st_name);
+				ps.setString(1, stId);
 				// SQL文を実行する
 				try (ResultSet rs = ps.executeQuery()) {
 					// 取得結果をリストに格納する

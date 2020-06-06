@@ -126,6 +126,30 @@ public class StaffService {
 		return staffIdMap;
 	}
 
+	/**
+	 * スタッフリストを取得する（全件）
+	 * @return スタッフのリスト
+	 */
+	public List<Staff> getStaffList() {
+		List<Staff> staffList = null;
 
+		try {
+			// データベース接続を開始する
+			transaction.open();
+
+			// スタッフリストを取得する
+			StaffDao staffDao = new StaffDao(transaction);
+			staffList = staffDao.selectStaffList();
+
+		} catch (IOException e) {
+			// エラーメッセージをセットする
+			messages.add(MessageCommons.ERR_DB_CONNECT);
+		} finally {
+			// データベース接続を終了する
+			transaction.close();
+		}
+
+		return staffList;
+	}
 
 }

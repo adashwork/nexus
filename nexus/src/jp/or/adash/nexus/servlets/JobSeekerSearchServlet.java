@@ -12,8 +12,8 @@ import javax.servlet.http.HttpSession;
 
 import jp.or.adash.nexus.entity.Jobseeker_simple_entity;
 import jp.or.adash.nexus.entity.Staff;
-import jp.or.adash.nexus.entity.StaffName;
 import jp.or.adash.nexus.services.JobSeekerService;
+import jp.or.adash.nexus.services.StaffService;
 
 /**
  * Servlet implementation class JobSeekerSearchServlet
@@ -41,19 +41,20 @@ public class JobSeekerSearchServlet extends HttpServlet {
 		Staff staff = (Staff) session.getAttribute("UserData");
 
 
-		// 1.検索する求職者ID、求職者かな名、担当者氏名を取得する
+		// 1.検索する求職者ID、求職者かな名、担当者IDを取得する
 		String js_id = request.getParameter("js_id");
 		String js_kana = request.getParameter("js_kana");
-		String st_name = request.getParameter("st_name");
+		String stId = request.getParameter("stId");
 
 
 
 		// 2.求職者情報一覧を取得する
 		JobSeekerService service = new JobSeekerService();
-		List<Jobseeker_simple_entity> list = service.getJobSeeker(js_id, js_kana, st_name);
+		List<Jobseeker_simple_entity> list = service.getJobSeeker(js_id, js_kana, stId);
 
-		// 3.担当紹介者氏名を取得する
-		List<StaffName> stName = service.getTantoStaff();
+		// 3.担当紹介者リストを取得する
+		StaffService staffService = new StaffService();
+		List<Staff> staffList = staffService.getStaffList();
 
 		// 4.求職者情報を初期化
 		request.removeAttribute("list");
@@ -62,7 +63,7 @@ public class JobSeekerSearchServlet extends HttpServlet {
 		// 5.求職者情報、担当紹介者氏名をリクエストに格納する
 		request.setAttribute("Staff", staff);
 		request.setAttribute("list", list);
-		request.setAttribute("st_name", stName);
+		request.setAttribute("staffList", staffList);
 
 //		request.setAttribute("js_id", js_id);
 //		request.setAttribute("js_kana", js_kana);

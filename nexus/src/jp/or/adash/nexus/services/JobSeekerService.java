@@ -126,11 +126,11 @@ public class JobSeekerService {
 	 * 求職者情報を検索する
 	 * @param js_id 求職者ID
 	 * @param js_kana 求職者かな名
-	 * @param st_name 担当紹介者氏名
+	 * @param stId 担当紹介者ID
 	 * @return 求職者情報
 	 * @author aihara
 	 */
-	public List<Jobseeker_simple_entity> getJobSeeker(String js_id, String js_kana, String st_name) {
+	public List<Jobseeker_simple_entity> getJobSeeker(String js_id, String js_kana, String stId) {
 		List<Jobseeker_simple_entity> seeker = null;
 
 		try {
@@ -139,7 +139,7 @@ public class JobSeekerService {
 
 			// 商品単価を取得する
 			JobSeeker_dao dao = new JobSeeker_dao(transaction);
-			seeker = dao.selectJobSeeker(js_id, js_kana, st_name);
+			seeker = dao.selectJobSeeker(js_id, js_kana, stId);
 
 		} catch (IOException e) {
 			// エラーメッセージをセットする

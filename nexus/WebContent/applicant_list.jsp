@@ -46,10 +46,10 @@
 
 					<td><p>求職者ID:</p> <input type="text" name="js_id" value="<c:out value="${ param.js_id }" />"></td>
 					<td><p>求職者かな名:</p> <input type="text" name="js_kana" value="<c:out value="${ param.js_kana }" />"></td>
-					<td><p>担当職業紹介者:</p> <select name="st_name"   >
+					<td><p>担当職業紹介者:</p> <select name="stId">
 							<option value=""></option>
-							<c:forEach var="staff" items="${ st_name }">
-							<option value="<c:out value="${ staff.name}" />" <c:if test="${staff.name  == param.st_name }">
+							<c:forEach var="staff" items="${ staffList }">
+							<option value="<c:out value="${ staff.id }" />" <c:if test="${staff.id  == param.stId }">
 									selected
 									</c:if>><c:out
 								value="${ staff.name }" /></option>

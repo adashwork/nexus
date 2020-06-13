@@ -75,7 +75,11 @@ public class StaffDao {
 		return staff;
 	}
 
-
+	/**
+	 *  スタッフ一覧を取得する
+	 * @return スタッフのリスト
+	 * @throws IOException
+	 */
 	public List<Staff> selectStaffList() throws IOException {
 		List<Staff> staffList = new ArrayList<Staff>();
 
@@ -112,7 +116,7 @@ public class StaffDao {
 			throw new IOException(e);
 		}
 
-		return null;
+		return staffList;
 	}
 
 

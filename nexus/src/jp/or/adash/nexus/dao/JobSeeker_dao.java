@@ -205,7 +205,7 @@ public class JobSeeker_dao {
 			sql.append(" left join jobcategory jc on zjs.HOPEJOBCATEGORY = jc.id");
 			sql.append(" left join job jb on zjs.HOPEJOB1 = jb.id");
 			sql.append(" left join todouhuken tk on zjs.hopeworkplace = tk.cd");
-			sql.append(" where js.id = ? and js.kana like concat('%', ?, '%') and st.name = ?");
+			sql.append(" where js.id = ? and js.kana like concat('%', ?, '%') and zjs.tantoustaffid = ?");
 			sql.append(" ORDER BY  cm.updatedt DESC ");
 			try (PreparedStatement ps = this.conn.prepareStatement(sql.toString())) {
 				ps.setString(1, js_id);

@@ -33,46 +33,15 @@ deleteflag char(4) not null,
 primary key(id)
 ) charset =utf8;
 
--- 求職者 --
+-- 求職者の個人情報 --
 create table jobseeker(
 id varchar(8) not null,
 name varchar(100) not null,
 kana varchar(100),
-birthdt date,
-sex char(1),
-age int(3),
-postal char(8),
 address varchar(50),
 seekermail varchar(50),
-nearstation varchar(50),
 phone char(20),
 mobile char(20),
-partner char(1),
-huyou int(2),
-education varchar(1),
-career varchar(1000),
-HOPEJOB1 char(6),
-HOPEJOB2 char(6),
-HOPEJOB3 char(6),
-HOPEJOBCATEGORY char(3),
-HOPEJOBCATEGORY2 char(3),
-HOPEJOBCATEGORY3 char(3),
-hopeworkplace varchar(100),
-hopekoyoukeitai char(1),
-hopeweekday char(7),
-hopeworkingdate int(1),
-hopebegintime int(4),
-hopeendtime int(4),
-hopesalary int(8),
-hopejikyu int(4),
-hopeetc varchar(200),
-driverlicense char(3),
-licenseetc varchar(500),
-pasokonskill varchar(200),
-caution varchar(200),
-tantoustaffid char(4),
-password varchar(50),
-note varchar(200),
 createdt timestamp not null default current_timestamp,
 createuserid char(4) not null,
 updatedt timestamp not null default current_timestamp,
@@ -81,7 +50,7 @@ deleteflag char(1) not null,
 primary key(id)
 )charset =utf8;
 
--- 求職者の属性情報（将来的に個人情報と属性情報とを分離するときに使う） --
+-- 求職者の属性情報 --
 create table zokuseijobseeker(
 id varchar(8) not null,
 birthdt date,

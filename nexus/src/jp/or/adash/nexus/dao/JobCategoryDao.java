@@ -41,10 +41,10 @@ public class JobCategoryDao {
 
 		// SQL文を生成する
 		StringBuffer sql = new StringBuffer();
-		sql.append("select largecd, name");
+		sql.append(" select largecd, name ");
 		sql.append(" from jobcategory");
-		sql.append(" where middlecd = 0 and smallcd = 0");
-		sql.append(" order by largecd");
+		sql.append(" where middlecd = '0' and smallcd = '0' ");
+		sql.append(" order by largecd; ");
 		try (PreparedStatement ps = this.conn.prepareStatement(sql.toString())) {
 			// SQL文を実行する
 			try (ResultSet rs = ps.executeQuery()) {
@@ -75,11 +75,11 @@ public class JobCategoryDao {
 
 		// SQL文を生成する
 		StringBuffer sql = new StringBuffer();
-		sql.append("select middlecd, name");
+		sql.append(" select middlecd, name ");
 		sql.append(" from jobcategory");
 		sql.append(" where  largecd = ? and ");
-		sql.append(" middlecd != 0 and smallcd = 0");
-		sql.append(" order by cast(middlecd as signed)");
+		sql.append(" middlecd != '0' and smallcd = '0' ");
+		sql.append(" order by cast(middlecd as signed); ");
 		try (PreparedStatement ps = this.conn.prepareStatement(sql.toString())) {
 			ps.setString(1, largeCd);
 			// SQL文を実行する
@@ -110,10 +110,10 @@ public class JobCategoryDao {
 
 		// SQL文を生成する
 		StringBuffer sql = new StringBuffer();
-		sql.append("select smallcd, name");
-		sql.append(" from jobcategory");
-		sql.append(" where  middlecd != 0 and smallcd !=0");
-		sql.append(" order by cast(smallcd as signed)");
+		sql.append(" select smallcd, name ");
+		sql.append(" from jobcategory ");
+		sql.append(" where  middlecd != '0' and smallcd != '0' ");
+		sql.append(" order by cast(smallcd as signed); ");
 		try (PreparedStatement ps = this.conn.prepareStatement(sql.toString())) {
 			// SQL文を実行する
 			try (ResultSet rs = ps.executeQuery()) {
@@ -144,11 +144,11 @@ public class JobCategoryDao {
 
 		// SQL文を生成する
 		StringBuffer sql = new StringBuffer();
-		sql.append("select smallcd, name");
+		sql.append(" select smallcd, name");
 		sql.append(" from jobcategory");
 		sql.append(" where  middlecd = ? and ");
-		sql.append(" middlecd != 0 and smallcd !=0");
-		sql.append(" order by cast(smallcd as signed)");
+		sql.append(" middlecd != '0' and smallcd !='0' ");
+		sql.append(" order by cast(smallcd as signed); ");
 		try (PreparedStatement ps = this.conn.prepareStatement(sql.toString())) {
 			ps.setString(1, middleCd);
 			// SQL文を実行する

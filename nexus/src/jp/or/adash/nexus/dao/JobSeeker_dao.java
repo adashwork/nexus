@@ -59,7 +59,7 @@ public class JobSeeker_dao {
 
 		sql.append(" select js.id, js.name, zjs.sex, st.name AS staffname,jc.name AS jobcategoryname,jb.name AS jobname,tk.name AS todouhukenname,TIMESTAMPDIFF(YEAR,zjs.birthdt,CURDATE()) AS age");
 		sql.append(" from jobseeker js");
-		sql.append(" left join  comment cm on js.id = cm.jobseekerid  ");
+		sql.append(" left join comment cm on js.id = cm.jobseekerid  ");
 		sql.append(" left join zokuseijobseeker zjs on js.id = zjs.id  ");
 		sql.append(" left join staff st on zjs.tantoustaffid = st.id");
 		sql.append(" left join jobcategory jc on zjs.HOPEJOBCATEGORY = jc.id");

@@ -45,9 +45,9 @@ public class TodouhukenDao {
 
 		// SQL文を生成する
 		StringBuffer sql = new StringBuffer();
-		sql.append("select cd, name");
-		sql.append(" from todouhuken");
-		sql.append(" where cd = ?");
+		sql.append(" select cd, name ");
+		sql.append(" from todouhuken ");
+		sql.append(" where cd = ?; ");
 		try (PreparedStatement ps = this.conn.prepareStatement(sql.toString())) {
 			ps.setString(0, cd);
 
@@ -79,9 +79,9 @@ public class TodouhukenDao {
 
 		// SQL文を生成する
 		StringBuffer sql = new StringBuffer();
-		sql.append("select cd, name");
-		sql.append(" from todouhuken");
-		sql.append(" order by cast(cd as signed)");
+		sql.append(" select cd, name ");
+		sql.append(" from todouhuken ");
+		sql.append(" order by cast(cd as signed); ");
 		try (PreparedStatement ps = this.conn.prepareStatement(sql.toString())) {
 			// SQL文を実行する
 			try (ResultSet rs = ps.executeQuery()) {

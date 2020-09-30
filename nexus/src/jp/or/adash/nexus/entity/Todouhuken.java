@@ -13,8 +13,8 @@ public class Todouhuken {
 	 */
 	private String cd;
 	private String name;
-	
-	
+
+
 	public Todouhuken() {
 
 	}
@@ -28,7 +28,7 @@ public class Todouhuken {
 	 * 勤務地都道府県コードを返す
 	 * @return cd
 	 */
-	public String getCd() {
+	public String getcd() {
 		return cd;
 	}
 
@@ -36,8 +36,12 @@ public class Todouhuken {
 	 * 都道府県名を返す
 	 * @return name
 	 */
-	public String getName() {
+	public String getname() {
 		return name;
 	}
-
 }
+
+//getName > getname
+//getCd > getcd
+
+

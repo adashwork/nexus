@@ -137,7 +137,7 @@ public class JobSeekerService {
 			// データベース接続を開始する
 			transaction.open();
 
-			// 商品単価を取得する
+			// 求職者情報を取得する
 			JobSeeker_dao dao = new JobSeeker_dao(transaction);
 			seeker = dao.selectJobSeeker(js_id, js_kana, stId);
 
@@ -194,7 +194,7 @@ public class JobSeekerService {
 		boolean result = true; // チェック結果
 
 		// 求職者IDの値が入力されているか
-		if (seeker.getName().equals("")) {
+		if (seeker.getName() == null || seeker.getName().equals("")) {
 			messages.add("名前が入力されていません。");
 			result = false;
 		}
@@ -203,7 +203,7 @@ public class JobSeekerService {
 		messages.add(errMsg);
 
 		// ふりがなの値が入力されているか
-		if (seeker.getKana().equals("")) {
+		if (seeker.getKana() == null || seeker.getKana().equals("")) {
 			messages.add("ふりがなが入力されていません。");
 			result = false;
 		}
@@ -238,19 +238,19 @@ public class JobSeekerService {
 		messages.add(errMsg);
 		 */
 		// 郵便番号の値が入力されているか
-		if (seeker.getzip21().equals("")) {
+		if (seeker.getzip21() == null || seeker.getzip21().equals("") || seeker.getzip22() == null || seeker.getzip22().equals("")) {
 			messages.add("郵便番号が入力されていません。");
 			result = false;
 		}
 
-		errMsg = DataCommons.chkZipcode(seeker.getzip21());
+		errMsg = DataCommons.chkZipcode(seeker.getpostal());
 		messages.add(errMsg);
 
-		errMsg = DataCommons.chksDigits(seeker.getzip21(), 8);
+		errMsg = DataCommons.chksDigits(seeker.getpostal(), 8);
 		messages.add(errMsg);
 
 		// 住所の値が入力されているか
-		if (seeker.getAddr21().equals("")) {
+		if (seeker.getAddr21() == null || seeker.getAddr21().equals("")) {
 			messages.add("住所が入力されていません。");
 			result = false;
 		}
@@ -266,7 +266,7 @@ public class JobSeekerService {
 		}
 		 */
 
-		if (seeker.getNearstation() != ("")) {
+		if (seeker.getNearstation() == null || seeker.getNearstation() != ("")) {
 			errMsg = DataCommons.chksDigits(seeker.getNearstation(), 50);
 			messages.add(errMsg);
 		}
@@ -284,13 +284,13 @@ public class JobSeekerService {
 		*/
 
 		// 配偶者の値が入力されているか
-		if (seeker.getPartner().equals("")) {
+		if (seeker.getPartner() == null || seeker.getPartner().equals("")) {
 			messages.add("配偶者の有無が入力されていません。");
 			result = false;
 		}
 
 		// 扶養家族の値が入力されているか
-		if (seeker.getHuyou() == -1) {
+		if (seeker.getHuyou() == null || seeker.getHuyou() == -1) {
 			messages.add("扶養家族が入力されていません。");
 			result = false;
 		}
@@ -306,9 +306,8 @@ public class JobSeekerService {
 		if (seeker.getEducation().equals("")) {
 			messages.add("学歴が入力されていません。");
 			result = false;
-		}
 		*/
-		if (seeker.getEducation() != ("")) {
+		if ("".equals(seeker.getEducation())){
 			errMsg = DataCommons.chksDigits(seeker.getEducation(), 100);
 			messages.add(errMsg);
 		}

@@ -17,6 +17,7 @@ import jp.or.adash.nexus.entity.Staff;
 import jp.or.adash.nexus.entity.Todouhuken;
 import jp.or.adash.nexus.services.JobCategoryService;
 import jp.or.adash.nexus.services.JobService;
+import jp.or.adash.nexus.services.StaffService;
 import jp.or.adash.nexus.services.TodouhukenService;
 
 /**
@@ -64,9 +65,15 @@ public class JobSeekerRegistDisplay extends HttpServlet {
 		// 2.業種大分類リストをリクエストに格納する
 		request.setAttribute("JCLargelist", JCLlist);
 
+		// 担当紹介者リストを取得する
+		StaffService staffService = new StaffService();
+		List<Staff> staffList = staffService.getStaffList();
+
+
 		// 1.3 リクエストに求職者情報をセットする
 		request.setAttribute("Staff", staff);
 		request.setAttribute("seeker", seeker);
+		request.setAttribute("staffList", staffList);
 
 		// 1.4 JSPにフォワードする
 		request.getRequestDispatcher("/applicantregist.jsp")

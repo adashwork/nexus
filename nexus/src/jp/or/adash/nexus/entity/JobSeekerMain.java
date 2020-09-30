@@ -20,12 +20,12 @@ public class JobSeekerMain{
 	* partner 配偶者
 	* huyou 扶養家族
 	* education 学歴
-	* HOPEJOB1 希望職種１
-	* HOPEJOB2 希望職種２
-	* HOPEJOB3 希望職種３
-	* HOPEJOBCATEGORY 希望業種
-	* HOPEJOBCATEGORY2 希望業種2
-	* HOPEJOBCATEGORY3 希望業種3
+	* hopeJob1 希望職種１
+	* hopeJob2 希望職種２
+	* hopeJob3 希望職種３
+	* hopeJobCategory1 希望業種
+	* hopeJobCategory2 希望業種2
+	* hopeJobCategory3 希望業種3
 	* hopeworkplace 希望勤務地
 	* hopekoyoukeitai 希望雇用形態
 	* hopeweekday 希望勤務曜日
@@ -65,12 +65,12 @@ public class JobSeekerMain{
 	private Integer huyou;
 	private String education;
 	private String career;
-	private String HOPEJOB1;
-	private String HOPEJOB2;
-	private String HOPEJOB3;
-	private String HOPEJOBCATEGORY;
-	private String HOPEJOBCATEGORY2;
-	private String HOPEJOBCATEGORY3;
+	private String hopeJob1;
+	private String hopeJob2;
+	private String hopeJob3;
+	private String hopeJobCategory1;
+	private String hopeJobCategory2;
+	private String hopeJobCategory3;
 	private String hopeworkplace;
 	private String hopekoyoukeitai;
 	private String hopeweekday;
@@ -96,7 +96,7 @@ public class JobSeekerMain{
 
 	public JobSeekerMain(String id, String name, String kana, String sex, Date birthdt, String zip21,
 			String addr21, String seekermail,String nearstation, String phone, String mobile, String partner, Integer huyou,
-			String education, String career,String HOPEJOB1, String HOPEJOB2, String HOPEJOB3, String HOPEJOBCATEGORY,String HOPEJOBCATEGORY2, String HOPEJOBCATEGORY3,
+			String education, String career,String hopeJob1, String hopeJob2, String hopeJob3, String hopeJobCategory1,String hopeJobCategory2, String hopeJobCategory3,
 			String hopeworkplace,  String hopekoyoukeitai, String hopeweekday, Integer hopeworkingdate, Integer hopebegintime, Integer hopeendtime,
 			Integer hopesalary, Integer hopejikyu, String hopeetc, String driverlicense, String licenseetc, String pasokonskill,
 			String caution,  String tantoustaffid, String password, String note, Date createdt, String createuserid,
@@ -118,12 +118,12 @@ public class JobSeekerMain{
 		this.huyou = huyou;
 		this.education = education;
 		this.career = career;
-		this.HOPEJOB1 = HOPEJOB1;
-		this.HOPEJOB2 = HOPEJOB2;
-		this.HOPEJOB3 = HOPEJOB3;
-		this.HOPEJOBCATEGORY = HOPEJOBCATEGORY;
-		this.HOPEJOBCATEGORY2 = HOPEJOBCATEGORY2;
-		this.HOPEJOBCATEGORY3 = HOPEJOBCATEGORY3;
+		this.hopeJob1 = hopeJob1;
+		this.hopeJob2 = hopeJob2;
+		this.hopeJob3 = hopeJob3;
+		this.hopeJobCategory1 = hopeJobCategory1;
+		this.hopeJobCategory2 = hopeJobCategory2;
+		this.hopeJobCategory3 = hopeJobCategory3;
 		this.hopeworkplace = hopeworkplace;
 		this.hopekoyoukeitai = hopekoyoukeitai;
 		this.hopeweekday = hopeweekday;
@@ -278,50 +278,50 @@ public class JobSeekerMain{
 
 	/**
 	 * 希望職種１を返す
-	 * @return hopejob1
+	 * @return hopeJob1
 	 */
-	public String getHOPEJOB1() {
-		return HOPEJOB1;
+	public String gethopeJob1() {
+		return hopeJob1;
 	}
 
 	/**
 	 * 希望職種２を返す
-	 * @return hopejob2
+	 * @return hopeJob2
 	 */
-	public String getHOPEJOB2() {
-		return HOPEJOB2;
+	public String gethopeJob2() {
+		return hopeJob2;
 	}
 
 	/**
 	 * 希望職種３を返す
-	 * @return hopejob3
+	 * @return hopeJob3
 	 */
-	public String getHOPEJOB3() {
-		return HOPEJOB3;
+	public String gethopeJob3() {
+		return hopeJob3;
 	}
 
 	/**
 	 * 希望業種1を返す
-	 * @return HOPEJOBCATEGORY
+	 * @return hopeJobCategory
 	 */
-	public String getHOPEJOBCATEGORY() {
-		return HOPEJOBCATEGORY;
+	public String gethopeJobCategory1() {
+		return hopeJobCategory1;
 	}
 
 	/**
 	 * 希望業種2を返す
-	 * @return hopejobcategory
+	 * @return hopeJobCategory
 	 */
-	public String getHOPEJOBCATEGORY2() {
-		return HOPEJOBCATEGORY2;
+	public String gethopeJobCategory2() {
+		return hopeJobCategory2;
 	}
 
 	/**
 	 * 希望業種3を返す
-	 * @return HOPEJOBCATEGORY3
+	 * @return hopeJobCategory3
 	 */
-	public String getHOPEJOBCATEGORY3() {
-		return HOPEJOBCATEGORY3;
+	public String gethopeJobCategory3() {
+		return hopeJobCategory3;
 	}
 	/**
 	 * 希望勤務地を返す

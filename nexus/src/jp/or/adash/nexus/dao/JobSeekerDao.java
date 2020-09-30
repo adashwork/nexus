@@ -32,113 +32,6 @@ public class JobSeekerDao {
 		this.conn = transaction.getConnection();
 	}
 
-	/**
-	 * 求職者情報を登録する
-	 * @param seeker 登録する求職者の情報
-	 * @return 登録件数
-	 * @throws IOException
-	 * @author Y.Okamura & T.Uchi
-	 */
-	public int insert(JobSeeker seeker) throws IOException {
-		int count = 0;
-
-		// SQL文を生成する
-		StringBuffer sql = new StringBuffer();
-		sql.append("insert into jobseeker(");
-		sql.append("id, name, kana, birthdt, sex, zip21,");
-		sql.append("addr21, seekermail, nearstation, phone, mobile, partner, huyou, education, career");
-		sql.append("HOPEJOB1, HOPEJOB2, HOPEJOB3, HOPEJOBCATEGORY, HOPEJOBCATEGORY2, HOPEJOBCATEGORY3, hopeworkplace,");
-		sql.append("hopekoyoukeitai, hopeweekday, hopeworkingdate, hopebegintime, hopeendtime,");
-		sql.append("hopesalary, hopejikyu, hopeetc, driverlicense,licenseetc,");
-		sql.append("pasokonskill,caution, tantoustaffid, password, note");
-		sql.append("createdt, createuserid, updatedt, updateuserid, deleteflag");
-		sql.append(") values (");
-		sql.append("?, ?, ?, ?, ?, ?, ?,");
-		sql.append("?, ?, ?, ?, ?, ?, ?,");
-		sql.append("?, ?, ?, ?, ?,");
-		sql.append("?, ?, ?, ?,");
-		sql.append("?, ?, ?, ?, ?,");
-		sql.append("?, ?, ?, ?,");
-		sql.append("? ,?, 0");
-		sql.append(")");
-		try (PreparedStatement ps = this.conn.prepareStatement(sql.toString())) {
-			ps.setString(1, seeker.getId());
-			ps.setString(2, seeker.getName());
-			ps.setString(3, seeker.getKana());
-			ps.setDate(4, DataCommons.convertToSqlDate(seeker.getBirthdt()));
-			ps.setString(5, seeker.getSex());
-//			ps.setInt(6, seeker.getAge());
-			ps.setString(6, seeker.getzip21());
-			ps.setString(7, seeker.getAddr21());
-			ps.setString(8, seeker.getSeekermail());
-			ps.setString(9, seeker.getNearstation());
-			ps.setString(10, seeker.getPhone());
-			ps.setString(11, seeker.getMobile());
-			ps.setString(12, seeker.getPartner());
-			ps.setInt(13, seeker.getHuyou());
-			ps.setString(14, seeker.getEducation());
-			ps.setString(15, seeker.getCareer());
-			ps.setString(16, seeker.getHOPEJOB1());
-			ps.setString(17, seeker.getHOPEJOB2());
-			ps.setString(18, seeker.getHOPEJOB3());
-			ps.setString(19, seeker.getHOPEJOBCATEGORY());
-			ps.setString(20, seeker.getHOPEJOBCATEGORY2());
-			ps.setString(21, seeker.getHOPEJOBCATEGORY3());
-			ps.setString(22, seeker.getHopeworkplace());
-			ps.setString(23, seeker.getHopekoyoukeitai());
-			if (seeker.getHopeworkingdate() != null) {
-                ps.setInt(24, seeker.getHopeworkingdate());
-            } else {
-                ps.setNull(25, java.sql.Types.INTEGER);
-            }
-			if (seeker.getHopebegintime() != null) {
-                ps.setInt(26, seeker.getHopebegintime());
-            } else {
-                ps.setNull(27, java.sql.Types.INTEGER);
-            }
-			if (seeker.getHopeendtime() != null) {
-                ps.setInt(28, seeker.getHopeendtime());
-            } else {
-                ps.setNull(29, java.sql.Types.INTEGER);
-            }
-			if (seeker.getHopesalary() != null) {
-                ps.setInt(30, seeker.getHopesalary());
-            } else {
-                ps.setNull(31, java.sql.Types.INTEGER);
-            }
-			if (seeker.getHopejikyu() != null) {
-                ps.setInt(32, seeker.getHopejikyu());
-            } else {
-                ps.setNull(33, java.sql.Types.INTEGER);
-            }
-			//ps.setInt(21, seeker.getHopeworkingDate());
-//			ps.setInt(22, seeker.getHopebegintime());
-//			ps.setInt(23, seeker.getHopeendtime());
-//			ps.setInt(24, seeker.getHopesalary());
-//			ps.setInt(25, seeker.getHopejikyu());
-			ps.setString(34, seeker.getHopeetc());
-			ps.setString(35, seeker.getDriverlicense());
-			ps.setString(36, seeker.getLicenseetc());
-			ps.setString(37, seeker.getPasokonskill());
-			ps.setString(38, seeker.getCaution());
-			ps.setString(39, seeker.getTantoustaffid());
-			ps.setString(40, seeker.getPassword());
-		    ps.setString(41, seeker.getNote());
-		    //ps.setDate(42, (Date) seeker.getCreatedt());
-			ps.setString(42, seeker.getCreateuserid());
-			//ps.setDate(44, (Date) seeker.getUpdatedt());
-			ps.setString(43, seeker.getUpdateuserid());
-			//ps.setString(34, seeker.getDeleteflag());
-
-			// SQL文を実行する
-			count = ps.executeUpdate();
-		} catch (SQLException e) {
-			throw new IOException(e);
-		}
-
-		return count;
-	}
-
 
 	/**
 	 * 求職者の個人情報を登録する
@@ -147,12 +40,13 @@ public class JobSeekerDao {
 	 * @throws IOException
 	 * @author mmiyamoto
 	 */
+
 	public int insertPrivateData(JobSeeker seeker) throws IOException {
 		int count = 0;
 
 		// SQL文を生成する
 		StringBuffer sql = new StringBuffer();
-		sql.append("insert into jobseeker(");
+		sql.append(" insert into jobseeker( ");
 		sql.append(" id, ");
 		sql.append(" name, ");
 		sql.append(" kana, ");
@@ -160,26 +54,33 @@ public class JobSeekerDao {
 		sql.append(" seekermail, ");
 		sql.append(" phone, ");
 		sql.append(" mobile, ");
-		sql.append(" createuserid ");
-		sql.append(" updateuserid ");
+		sql.append(" createdt, ");
+		sql.append(" createuserid, ");
+		sql.append(" updatedt, ");
+		sql.append(" updateuserid, ");
 		sql.append(" deleteflag ");
 
 		sql.append(") values (");
 
-		sql.append("?, ?, ?, ?, ?, ");
-		sql.append("?, ?, ?, ?, ?, ");
-		sql.append("0 ");
-		sql.append(")");
+		//sql.append(" '?', '?', '?', '?', '?', ");
+		//sql.append(" '?', '?', CURRENT_TIMESTAMP(), '?', CURRENT_TIMESTAMP(), ");
+		//sql.append(" '?', '0' ");
+
+		sql.append(" ?, ?, ?, ?, ?, ");
+		sql.append(" ?, ?, CURRENT_TIMESTAMP(), ?, CURRENT_TIMESTAMP(), ");
+		sql.append(" ?, '0' ");
+		sql.append(" );");
 		try (PreparedStatement ps = this.conn.prepareStatement(sql.toString())) {
 			ps.setString(1, seeker.getId());
 			ps.setString(2, seeker.getName());
 			ps.setString(3, seeker.getKana());
-			ps.setString(4, seeker.getAddr21());
+			ps.setString(4, seeker.getAddr21());//address
 			ps.setString(5, seeker.getSeekermail());
 			ps.setString(6, seeker.getPhone());
 			ps.setString(7, seeker.getMobile());
 			ps.setString(8, seeker.getCreateuserid());
 			ps.setString(9, seeker.getUpdateuserid());
+
 			// SQL文を実行する
 			count = ps.executeUpdate();
 		} catch (SQLException e) {
@@ -188,8 +89,8 @@ public class JobSeekerDao {
 		return count;
 	}
 
+
 	/**
-	 * TODO セットパラメーターのあたりはまだ完了していない。mmiyamoto
 	 * 求職者の属性情報を登録する
 	 * @param seeker 登録する求職者の情報
 	 * @return 登録件数
@@ -201,14 +102,15 @@ public class JobSeekerDao {
 
 		// SQL文を生成する
 		StringBuffer sql = new StringBuffer();
-		sql.append("insert into zokuseijobseeker(");
+		sql.append(" insert into zokuseijobseeker( ");
 		sql.append(" id, ");
-		sql.append(" birthdt, ");
+		sql.append(" birthdt, ");//date型
 		sql.append(" sex, ");
+//		sql.append(" age, ");//int型
 		sql.append(" postal, ");
 		sql.append(" nearstation, ");
 		sql.append(" partner, ");
-		sql.append(" huyou, ");
+		sql.append(" huyou, ");//int型
 		sql.append(" education, ");
 		sql.append(" career, ");
 		sql.append(" HOPEJOB1, ");
@@ -220,11 +122,11 @@ public class JobSeekerDao {
 		sql.append(" hopeworkplace, ");
 		sql.append(" hopekoyoukeitai, ");
 		sql.append(" hopeweekday, ");
-		sql.append(" hopeworkingdate, ");
-		sql.append(" hopebegintime, ");
-		sql.append(" hopeendtime, ");
-		sql.append(" hopesalary, ");
-		sql.append(" hopejikyu, ");
+		sql.append(" hopeworkingdate, "); //int型
+		sql.append(" hopebegintime, ");//int型
+		sql.append(" hopeendtime, ");//int型
+		sql.append(" hopesalary, ");//int型
+		sql.append(" hopejikyu, ");//int型
 		sql.append(" hopeetc, ");
 		sql.append(" driverlicense, ");
 		sql.append(" licenseetc, ");
@@ -232,39 +134,42 @@ public class JobSeekerDao {
 		sql.append(" caution, ");
 		sql.append(" tantoustaffid, ");
 		sql.append(" note, ");
+		sql.append(" createdt, ");//timestamp型
 		sql.append(" createuserid, ");
+		sql.append(" updatedt, ");//timestamp型
 		sql.append(" updateuserid, ");
-		sql.append(" deleteflag, ");
+		sql.append(" deleteflag ");
 
-		sql.append(") values (");
+		sql.append(" ) values ( ");
 
-		sql.append("?, ?, ?, ?, ?, ");
-		sql.append("?, ?, ?, ?, ?, ");
-		sql.append("?, ?, ?, ?, ?, ");
-		sql.append("?, ?, ?, ?, ?, ");
-		sql.append("?, ?, ?, ?, ?, ");
-		sql.append("?, ?, ?, ?, ?, ");
-		sql.append("?, ?, 0");
-		sql.append(")");
+		sql.append(" ?, ?, ?, ?, ?, ");
+		sql.append(" ?, ?, ?, ?, ?, ");
+		sql.append(" ?, ?, ?, ?, ?, ");
+		sql.append(" ?, ?, ?, ?, ?, ");
+		sql.append(" ?, ?, ?, ?, ?, ");
+		sql.append(" ?, ?, ?, ?, ?, ");
+		sql.append(" CURRENT_TIMESTAMP(), ?, CURRENT_TIMESTAMP(), ?, '0' ");
+		sql.append(" );");
 		try (PreparedStatement ps = this.conn.prepareStatement(sql.toString())) {
 			ps.setString(1, seeker.getId());
 			ps.setDate(  2, DataCommons.convertToSqlDate(seeker.getBirthdt()));
 			ps.setString(3, seeker.getSex());
-			ps.setString(4, seeker.getzip21());
+			ps.setString(4, seeker.getpostal());
 			ps.setString(5, seeker.getNearstation());
 			ps.setString(6, seeker.getPartner());
 			ps.setInt(   7, seeker.getHuyou());
 			ps.setString(8, seeker.getEducation());
 			ps.setString(9, seeker.getCareer());
-			ps.setString(10, seeker.getHOPEJOB1());
-			ps.setString(11, seeker.getHOPEJOB2());
-			ps.setString(12, seeker.getHOPEJOB3());
-			ps.setString(13, seeker.getHOPEJOBCATEGORY());
-			ps.setString(14, seeker.getHOPEJOBCATEGORY2());
-			ps.setString(15, seeker.getHOPEJOBCATEGORY3());
-			ps.setString(16, seeker.getHopeworkplace());
+			ps.setString(10, seeker.gethopeJob1());
+			ps.setString(11, seeker.gethopeJob2());
+			ps.setString(12, seeker.gethopeJob3());
+			ps.setString(13, seeker.gethopeJobCategory1());
+			ps.setString(14, seeker.gethopeJobCategory2());
+			ps.setString(15, seeker.gethopeJobCategory3());
+			ps.setString(16, seeker.gethopeworkplace());
 			ps.setString(17, seeker.getHopekoyoukeitai());
-			ps.setString(18, seeker.getHopeweekday());
+			ps.setString(18, seeker.gethopeweekday());
+
 			if (seeker.getHopeworkingdate() != null) {
                 ps.setInt(19, seeker.getHopeworkingdate());
             } else {
@@ -298,18 +203,17 @@ public class JobSeekerDao {
 			ps.setString(28, seeker.getCaution());
 			ps.setString(29, seeker.getTantoustaffid());
 		    ps.setString(30, seeker.getNote());
-		    //ps.setDate( , (Date) seeker.getCreatedt());
 			ps.setString(31, seeker.getCreateuserid());
-			//ps.setDate( , (Date) seeker.getUpdatedt());
 			ps.setString(32, seeker.getUpdateuserid());
 
 
-			// SQL文を実行する
+
+			// SQL文を実行し、対象件数を取得
 			count = ps.executeUpdate();
+
 		} catch (SQLException e) {
 			throw new IOException(e);
 		}
-
 		return count;
 	}
 
@@ -326,7 +230,7 @@ public class JobSeekerDao {
 
 		// SQL文を生成する
 		StringBuffer sql = new StringBuffer();
-   sql.append("  select                                                   ");
+   sql.append("   select                                                  ");
    sql.append(" p.id                 as  id                           ,   ");
    sql.append(" p.kana               as  kana                         ,   ");
    sql.append(" z.birthdt            as  birthdt                      ,   ");
@@ -447,7 +351,7 @@ public class JobSeekerDao {
 
 		// SQL文を生成する
 		StringBuffer sql = new StringBuffer();
-		sql.append("select *");
+		sql.append(" select * ");
 		sql.append(" from jobseeker");
 		sql.append(" order by id");
 		try (PreparedStatement ps = this.conn.prepareStatement(sql.toString())) {
@@ -461,9 +365,11 @@ public class JobSeekerDao {
 							rs.getString("kana"),
 							rs.getDate("birthdt"),
 							rs.getString("sex"),
-						//	rs.getInt("age"),
+							//rs.getString("age"),
+							rs.getString("zip21"),
+							rs.getString("zip22"),
 							rs.getString("postal"),
-							rs.getString("address"),
+							rs.getString("address"),//addr21
 							rs.getString("seekermail"),
 							rs.getString("nearstation"),
 							rs.getString("phone"),
@@ -472,12 +378,12 @@ public class JobSeekerDao {
 							rs.getInt("huyou"),
 							rs.getString("education"),
 							rs.getString("career"),
-							rs.getString("HOPEJOB1"),
-							rs.getString("HOPEJOB2"),
-							rs.getString("HOPEJOB3"),
-							rs.getString("HOPEJOBCATEGORY"),
-							rs.getString("HOPEJOBCATEGORY2"),
-							rs.getString("HOPEJOBCATEGORY3"),
+							rs.getString("HOPEJOB1"),//hopeJob1
+							rs.getString("HOPEJOB2"),//hopeJob2
+							rs.getString("HOPEJOB3"),//hopeJob3
+							rs.getString("HOPEJOBCATEGORY"),//hopeJobCategory1
+							rs.getString("HOPEJOBCATEGORY2"),//hopeJobCategory2
+							rs.getString("HOPEJOBCATEGORY3"),//hopeJobCategory3
 							rs.getString("hopeworkplace"),
 							rs.getString("hopekoyoukeitai"),
 							rs.getString("hopekeekday"),
@@ -523,7 +429,7 @@ public class JobSeekerDao {
 
 		// SQL文を生成する
 		StringBuffer sql = new StringBuffer();
-		sql.append("update jobseeker set");
+		sql.append(" update jobseeker set");
 		sql.append(" name = ?,");
 		sql.append(" kana = ?,");
 		sql.append(" birthdt = ?,");
@@ -567,7 +473,7 @@ public class JobSeekerDao {
 		sql.append(" createuserid = ?");
 		sql.append(" deleteflag = ?");
 		sql.append(" where");
-		sql.append(" id = ?");
+		sql.append(" id = ? ;");
 		try (PreparedStatement ps = this.conn.prepareStatement(sql.toString())) {
 			ps.setString(1, seeker.getName());
 			ps.setString(2, seeker.getKana());
@@ -584,12 +490,12 @@ public class JobSeekerDao {
 			ps.setInt(13, seeker.getHuyou());
 			ps.setString(14, seeker.getEducation());
 			ps.setString(15, seeker.getCareer());
-			ps.setString(16, seeker.getHOPEJOB1());
-			ps.setString(17, seeker.getHOPEJOB2());
-			ps.setString(18, seeker.getHOPEJOB3());
-			ps.setString(19, seeker.getHOPEJOBCATEGORY());
-			ps.setString(19, seeker.getHOPEJOBCATEGORY2());
-			ps.setString(19, seeker.getHOPEJOBCATEGORY3());
+			ps.setString(16, seeker.gethopeJob1());
+			ps.setString(17, seeker.gethopeJob2());
+			ps.setString(18, seeker.gethopeJob3());
+			ps.setString(19, seeker.gethopeJobCategory1());
+			ps.setString(19, seeker.gethopeJobCategory2());
+			ps.setString(19, seeker.gethopeJobCategory3());
 			ps.setString(20, seeker.getHopeworkplace());
 			ps.setString(21, seeker.getHopekoyoukeitai());
 			ps.setString(22, seeker.getHopeweekday());
@@ -607,8 +513,6 @@ public class JobSeekerDao {
 			ps.setString(34, seeker.getPassword());
 			ps.setString(35, seeker.getId());
 			ps.setString(36, seeker.getNote());
-
-
 
 			// SQL文を実行する
 			count = ps.executeUpdate();
